@@ -6,6 +6,7 @@ import reduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import registerServiceWorker from './registerServiceWorker';
+import "./index.css";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

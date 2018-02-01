@@ -47,14 +47,14 @@ class LoginForm extends Component {
               type="password"
               component={FormField}
             />
-            <button type="submit" className="btn btn-primary">Login</button>
-            <Link
-              to="/signup"
-              className="btn btn-info"
-              style={{marginLeft: "10px"}}
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{marginBottom: "15px"}}
             >
-              Sign Up
-            </Link>
+              Login
+            </button>
+            <h6>Don't have an account? <Link to="/signup">Sign Up</Link></h6>
           </form>
         </div>
       </div>
