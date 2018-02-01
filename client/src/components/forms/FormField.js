@@ -1,6 +1,6 @@
 import React from "react";
 
-const formField = field => {
+const FormField = field => {
   const { meta: { touched, error } } = field;
   const className = `form-group ${touched && error ? "text-danger" : ""}`;
 
@@ -9,7 +9,7 @@ const formField = field => {
       <label>{field.label}</label>
       <input
         className="form-control"
-        type="text"
+        type={field.type}
         {...field.input}
         autoComplete="off"
       />
@@ -20,4 +20,4 @@ const formField = field => {
   );
 }
 
-export default formField;
+export default FormField;

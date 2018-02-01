@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import FormField from "../components/FormField";
+import FormField from "../components/forms/FormField";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import { Link } from "react-router-dom";
 
 class LoginForm extends Component {
 
@@ -29,15 +30,23 @@ class LoginForm extends Component {
             <Field
               label="Username"
               name="username"
+              type="text"
               component={FormField}
             />
             <Field
               label="Password"
               name="password"
+              type="password"
               component={FormField}
             />
             <button type="submit" className="btn btn-primary">Login</button>
-            <button type="button" className="btn btn-info" style={{marginLeft: "10px"}}>Sign Up</button>
+            <Link
+              to="/signup"
+              className="btn btn-info"
+              style={{marginLeft: "10px"}}
+            >
+              Sign Up
+            </Link>
           </form>
         </div>
       </div>
