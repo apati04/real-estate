@@ -86,6 +86,9 @@ function validate(values) {
   if (!values.lastName) {
     errors.lastName = "Please enter your last name";
   }
+  if (!values.email) {
+    errors.email = "Please enter your email";
+  }
   return errors;
 }
 

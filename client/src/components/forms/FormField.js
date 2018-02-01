@@ -2,18 +2,18 @@ import React from "react";
 
 const FormField = field => {
   const { meta: { touched, error } } = field;
-  const className = `form-group ${touched && error ? "text-danger" : ""}`;
+  const className = `form-control ${touched && error ? "is-invalid" : ""}`;
 
   return (
-    <div className={className}>
+    <div className="form-group">
       <label>{field.label}</label>
       <input
-        className="form-control"
+        className={className}
         type={field.type}
         {...field.input}
         autoComplete="off"
       />
-      <div>
+      <div className="invalid-feedback">
         {touched ? error : ""}
       </div>
     </div>
