@@ -4,20 +4,37 @@ const FormField = field => {
   const { meta: { touched, error } } = field;
   const className = `form-control ${touched && error ? "is-invalid" : ""}`;
 
-  return (
-    <div className="form-group">
-      <label>{field.label}</label>
-      <input
-        className={className}
-        type={field.type}
-        {...field.input}
-        autoComplete="off"
-      />
-      <div className="invalid-feedback">
-        {touched ? error : ""}
+  if (field.type === "radio") {
+    return (
+      <div className="form-group">
+        <input
+          className={className}
+          type={field.type}
+          {...field.input}
+          autoComplete="off"
+        />
+        <label>{field.label}</label>
+        <div className="invalid-feedback">
+          {touched ? error : ""}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="form-group">
+        <label>{field.label}</label>
+        <input
+          className={className}
+          type={field.type}
+          {...field.input}
+          autoComplete="off"
+        />
+        <div className="invalid-feedback">
+          {touched ? error : ""}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default FormField;

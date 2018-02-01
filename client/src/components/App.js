@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="container">
           <Switch>
             <Route path="/home" component={Home}/>
             <Route path="/signup" component={Signup}/>
