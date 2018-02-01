@@ -9,9 +9,8 @@ const FormField = field => {
       <div className="form-group">
         <input
           className={className}
-          type={field.type}
+          type="radio"
           {...field.input}
-          autoComplete="off"
         />
         <label>{field.label}</label>
         <div className="invalid-feedback">
