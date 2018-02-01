@@ -11,6 +11,14 @@ class LoginForm extends Component {
     console.log(values);
   }
 
+  componentDidMount() {
+    console.log("mounted");
+  }
+
+  componentWillUnmount() {
+    console.log("unmounted");
+  }
+
   render() {
     const { handleSubmit } = this.props;
     const style = {
