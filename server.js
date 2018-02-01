@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const PORT = process.env.PORT || 8080;
 const app = express();
+require('./utils/passport');
 
 app.use(express.static("client/public"));
 app.use(session({ secret: "iusdghzvj"}));
