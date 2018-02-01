@@ -40,6 +40,12 @@ class LoginForm extends Component {
               component={FormField}
             />
             <Field
+              label="Confirm Password"
+              name="passwordConfirm"
+              type="password"
+              component={FormField}
+            />
+            <Field
               label="First Name"
               name="firstName"
               type="text"
@@ -80,6 +86,9 @@ function validate(values) {
   if (!values.password) {
     errors.password = "Please enter your password";
   }
+  if (values.password !== values.passwordConfirm) {
+    errors.passwordConfirm = "Password must match";
+  }
   if (!values.firstName) {
     errors.firstName = "Please enter your first name";
   }
@@ -92,4 +101,4 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({ form: "loginInfo", validate })(connect(null, actions)(LoginForm));
+export default reduxForm({ form: "signupInfo", validate })(connect(null, actions)(LoginForm));
