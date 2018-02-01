@@ -18,6 +18,11 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "express": "^4.15.4"
+    "body-parser": "^1.18.2",
+    "express": "^4.15.4",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
