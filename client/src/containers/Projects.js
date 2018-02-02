@@ -13,16 +13,16 @@ class Projects extends Component {
   render() {
     return (
       <div>
-        <Navbar/>
+        <Navbar currentUser={this.props.currentUser.googleId}/>
         <ProjectList/>
       </div>
     );
   }
 }
 
-function mapStateToProps({ userData }) {
+function mapStateToProps({ currentUser }) {
   return {
-    userData
+    currentUser: currentUser.data
   }
 }
 

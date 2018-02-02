@@ -1,9 +1,9 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-      <h1 className="navbar-brand">Welcome, Username</h1>
+      <h1 className="navbar-brand">Welcome, {props.currentUser}</h1>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
