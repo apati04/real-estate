@@ -47,7 +47,7 @@ class LoginForm extends Component {
               >
                 Login
               </button>
-              <Link to="/auth/google"><img className="btn" src={Google} alt="google"/></Link>
+              <a href="/auth/google"><img className="btn" src={Google} alt="google"/></a>
               <h6>Don't have an account? <Link to="/signup">Sign Up</Link></h6>
             </div>
           </form>
