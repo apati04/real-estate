@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Link } from "react-router-dom";
+import Google from "../images/btn_google_signin_dark_pressed_web.png";
 
 class LoginForm extends Component {
 
@@ -39,14 +40,16 @@ class LoginForm extends Component {
               type="password"
               component={FormField}
             />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{marginBottom: "15px"}}
-            >
-              Login
-            </button>
-            <h6>Don't have an account? <Link to="/signup">Sign Up</Link></h6>
+            <div>
+              <button
+                type="submit"
+                className="btn btn-primary"
+              >
+                Login
+              </button>
+              <Link to="/auth/google"><img className="btn" src={Google} alt="google"/></Link>
+              <h6>Don't have an account? <Link to="/signup">Sign Up</Link></h6>
+            </div>
           </form>
         </div>
       </div>
