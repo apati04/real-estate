@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbar">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item py-2">
-            <button className="btn btn-danger">Sign Out</button>
+            <a href="/logout" className="btn btn-danger">Sign Out</a>
           </li>
         </ul>
       </div>
