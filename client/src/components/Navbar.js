@@ -10,7 +10,7 @@ const Navbar = (props) => {
       <div className="collapse navbar-collapse" id="navbar">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item py-2">
-            <a href="/logout" className="btn btn-danger">Sign Out</a>
+            <a href="/api/logout" className="btn btn-danger">Sign Out</a>
           </li>
         </ul>
       </div>
