@@ -13,7 +13,7 @@ class Projects extends Component {
   render() {
     return (
       <div>
-        <Navbar currentUser={this.props.currentUser.googleId}/>
+        <Navbar currentUser={this.props.currentUser.userName}/>
         <ProjectList/>
       </div>
     );
