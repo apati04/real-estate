@@ -12,18 +12,19 @@ class Projects extends Component {
   }
 
   render() {
-    // const jsonData = this.props.propData[Object.keys(this.props.propData)[1]];
-    // console.log(jsonData);
-    //
-    // if (!jsonData) {
-    //   return <div>loading...</div>
-    // }
+    const jsonData = this.props.propData[Object.keys(this.props.propData)[1]];
+
+    if (!jsonData) {
+      return <div>loading...</div>
+    }
+
+    const { response: { results: { result } } } = jsonData;
+    console.log(result);
 
     return (
       <div>
         <Navbar currentUser={this.props.currentUser.userName}/>
         <ProjectList/>
-        {/* <h1>{jsonData.response.results.result.address.street._text}</h1> */}
       </div>
     );
   }
