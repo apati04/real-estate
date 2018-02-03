@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "../containers/Login";
 import Signup from "../containers/Signup";
-import Home from "../containers/Home";
+import Projects from "../containers/Projects";
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Switch>
-            <Route path="/home" component={Home}/>
+            <Route path="/projects" component={Projects}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/" component={Login}/>
           </Switch>
