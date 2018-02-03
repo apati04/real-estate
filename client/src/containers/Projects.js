@@ -8,13 +8,22 @@ class Projects extends Component {
 
   componentDidMount() {
     this.props.fetchCurrentUserData();
+    this.props.fetchPropertyData();
   }
 
   render() {
+    const jsonData = this.props.propData[Object.keys(this.props.propData)[1]];
+    console.log(jsonData);
+
+    if (!jsonData) {
+      return <div>loading...</div>
+    }
+
     return (
       <div>
         <Navbar currentUser={this.props.currentUser.userName}/>
         <ProjectList/>
+        <h1>{jsonData.response.results.result.address.street._text}</h1>
       </div>
     );
   }

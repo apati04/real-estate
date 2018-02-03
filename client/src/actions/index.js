@@ -1,4 +1,6 @@
 import axios from "axios";
+import convert from "xml-js";
+
 import { FETCH_CURRENT_USER_DATA, FETCH_PROPERTY_DATA } from "./types";
 
 const ROOT_URL = "https://www.zillow.com/webservice/GetDeepSearchResults.htm";
@@ -11,11 +13,8 @@ export const fetchCurrentUserData = () => async dispatch => {
 }
 
 export const fetchPropertyData = () => async dispatch => {
-  const request = await axios.get(`${ROOT_URL}?zws-id=${API_KEY}&address=2114 Bigelow ave&citystatezip=Seattle, WA`, {
-    headers: {
-      "Access-Control-Allow-Origin": true
-    }
-  });
+  const request = await axios.get(`${ROOT_URL}?zws-id=${API_KEY}&address=2114 Bigelow ave&citystatezip=Seattle, WA`);
   const { data } = request;
-  dispatch({ type: FETCH_PROPERTY_DATA, payload: data });
+  const result = JSON.parse(convert.xml2json(data, { compact: true }));
+  dispatch({ type: FETCH_PROPERTY_DATA, payload: result });
 }
