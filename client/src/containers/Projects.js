@@ -20,9 +20,10 @@ class Projects extends Component {
   }
 }
 
-function mapStateToProps({ currentUser }) {
+function mapStateToProps({ currentUser, propData }) {
   return {
-    currentUser: currentUser.data
+    currentUser: currentUser.data,
+    propData: propData.data
   }
 }
 
