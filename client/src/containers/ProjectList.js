@@ -10,11 +10,11 @@ class CurrentProjects extends Component {
           {/* map through database to display projectlistItem */}
           <ProjectListItem/>
         </ul>
-        <button className="btn btn-primary" style={{ marginTop: "20px" }}>ADD NEW PROJECT</button>
+        <button className="btn btn-outline-primary" style={{ marginTop: "20px" }}>ADD NEW PROJECT</button>
         <hr/>
         <div className="d-flex justify-content-between">
-          <button className="btn btn-success">SAVE PROJECT</button>
-          <button className="btn btn-danger">DELETE SELECTED PROJECTS</button>
+          <button className="btn btn-outline-success">SAVE PROJECT</button>
+          <button className="btn btn-outline-danger">DELETE SELECTED PROJECTS</button>
         </div>
       </div>
     );
