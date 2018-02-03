@@ -6,7 +6,7 @@ const FormField = field => {
 
   if (field.type === "radio") {
     return (
-      <div className="form-group">
+      <div>
         <input
           className={className}
           type="radio"

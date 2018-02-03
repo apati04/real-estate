@@ -1,13 +1,16 @@
 import React from "react";
 
-const ProjectListItem = () => {
+const ProjectListItem = (props) => {
   return (
-    <div>
-      <li className="list-group-item">Project List Item with Radio Button, Edit & View Map Button 1</li>
-      <li className="list-group-item">Project List Item with Radio Button, Edit & View Map Button 2</li>
-      <li className="list-group-item">Project List Item with Radio Button, Edit & View Map Button 3</li>
-    </div>
-  )
+    <li className="list-group-item d-flex justify-content-between align-items-center">
+      <input type="radio"/>
+      <h6>Project List Item with Radio Button, Edit & View Map Button 1</h6>
+      <div className="d-flex">
+        <button className="btn btn-sm btn-primary">EDIT</button>
+        <button className="btn btn-sm btn-info" style={{marginLeft: "10px"}}>VIEW MAP</button>
+      </div>
+    </li>
+  );
 }
 
 export default ProjectListItem;
