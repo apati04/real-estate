@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import Projects from "../containers/Projects";
-import Map from "../components/Map";
+import Map from "../containers/Map";
 
 class App extends Component {
   render() {
