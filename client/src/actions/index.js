@@ -15,8 +15,8 @@ export const fetchCurrentUserData = () => async dispatch => {
   dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
 }
 
-export const fetchPropertyData = () => async dispatch => {
-  const request = await axios.get(`${ZILLOW_URL}?zws-id=${ZILLOW_KEY}&address=2114 Bigelow ave&citystatezip=Seattle, WA`);
+export const fetchPropertyData = (address, citystatezip) => async dispatch => {
+  const request = await axios.get(`${ZILLOW_URL}?zws-id=${ZILLOW_KEY}&address=${address}&citystatezip=${citystatezip}`);
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
   dispatch({ type: FETCH_PROPERTY_DATA, payload: result });

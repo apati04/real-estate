@@ -5,19 +5,25 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 
 class Search extends Component {
-
-  formSubmit = ({ location }) => {
-    this.props.fetchMapData(location);
+  formSubmit = (value) => {
+    this.props.fetchMapData(`${value.address},${value.citystatezip}`);
+    this.props.fetchPropertyData(value.address, value.citystatezip);
   }
 
   render() {
-
     const { handleSubmit } = this.props
 
     return (
       <form onSubmit={handleSubmit(this.formSubmit)}>
         <Field
-          name="location"
+          label="address"
+          name="address"
+          type="text"
+          component={FormField}
+        />
+        <Field
+          label="city/state/zip"
+          name="citystatezip"
           type="text"
           component={FormField}
         />

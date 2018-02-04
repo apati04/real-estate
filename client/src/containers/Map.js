@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Search from "../components/forms/Search";
+import PropertyDetail from "./PropertyDetail";
 import mapboxgl from "mapbox-gl";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -10,29 +11,34 @@ class Map extends Component {
   componentDidMount() {
     new mapboxgl.Map({
       container: "mapbox",
-      style: "mapbox://styles/mapbox/streets-v9",
+      style: "mapbox://styles/mapbox/outdoors-v10",
       center: [ -73.98, 40.75 ],
-      zoom: 2
+      zoom: 1
     });
   }
 
   componentDidUpdate() {
     const lng = this.props.data.features[0].center[0];
     const lat = this.props.data.features[0].center[1];
+
+    if (!lng || !lat) {
+      return <div>Loading...</div>
+    }
+
     new mapboxgl.Map({
       container: "mapbox",
-      style: "mapbox://styles/mapbox/streets-v9",
+      style: "mapbox://styles/mapbox/outdoors-v10",
       center: [ lng, lat ],
-      zoom: 10
+      zoom: 15
     });
   }
 
   render() {
-    console.log(this.props.data);
     return (
       <div>
         <Search/>
-        <div id="mapbox" style={{height: "50vh", width: "100%", marginTop: "20px"}}/>
+        <div id="mapbox" style={{height: "60vh", width: "100%", marginTop: "20px"}}/>
+        <PropertyDetail/>
       </div>
     )
   }
