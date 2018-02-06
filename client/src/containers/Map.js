@@ -25,12 +25,14 @@ class Map extends Component {
       return <div>Loading...</div>
     }
 
-    new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: "mapbox",
       style: "mapbox://styles/mapbox/outdoors-v10",
       center: [ lng, lat ],
       zoom: 15
     });
+
+    new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
   }
 
   render() {
