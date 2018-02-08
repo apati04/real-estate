@@ -5,7 +5,6 @@ class CurrentProjects extends Component {
   render() {
     return (
       <div style={{ marginTop: "20px" }}>
-        <h1>Current Projects</h1>
         <ul className="list-group list-group-flush">
           {/* map through database to display projectlistItem */}
           <ProjectListItem/>
