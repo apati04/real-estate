@@ -15,8 +15,8 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="container-fluid">
-          <Navbar />
+        <div>
+          <Navbar/>
           <Switch>
             <Route path="/map" component={Map}/>
             <Route path="/projects" component={Projects}/>
