@@ -16,14 +16,14 @@ export const fetchCurrentUserData = () => async dispatch => {
 }
 
 export const fetchPropertyData = (address, citystatezip) => async dispatch => {
-  const request = await axios.get(`${ZILLOW_URL}?zws-id=${ZILLOW_KEY}&address=${address}&citystatezip=${citystatezip}`);
+  const request = await axios.get(`https://cors-anywhere.herokuapp.com/${ZILLOW_URL}?zws-id=${ZILLOW_KEY}&address=${address}&citystatezip=${citystatezip}`);
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
   dispatch({ type: FETCH_PROPERTY_DATA, payload: result });
 }
 
 export const fetchMapData = location => async dispatch => {
-  const request = await axios.get(`${MAPBOX_URL}/${location}.json?access_token=${MAPBOX_TOKEN}`);
+  const request = await axios.get(`https://cors-anywhere.herokuapp.com/${MAPBOX_URL}/${location}.json?access_token=${MAPBOX_TOKEN}`);
   const { data } = request;
   dispatch({ type: FETCH_MAP_DATA, payload: data });
 }

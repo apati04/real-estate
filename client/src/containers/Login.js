@@ -16,7 +16,7 @@ class LoginForm extends Component {
     const { handleSubmit } = this.props;
     const style = {
         container: {
-        height: "100vh",
+        height: "80vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
@@ -26,7 +26,6 @@ class LoginForm extends Component {
     return (
       <div style={style.container}>
         <div>
-          <h1>Real Estate</h1>
           <form onSubmit={handleSubmit(this.formSubmit)}>
             <Field
               label="Username"

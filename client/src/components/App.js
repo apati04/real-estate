@@ -4,12 +4,19 @@ import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
-
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import Navbar from './Navbar';
 class App extends Component {
+
+  componentDidmount(){
+    this.props.fetchCurrentUserData();
+  }
   render() {
     return (
       <BrowserRouter>
-        <div className="container">
+        <div className="container-fluid">
+          <Navbar />
           <Switch>
             <Route path="/map" component={Map}/>
             <Route path="/projects" component={Projects}/>
@@ -22,4 +29,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions)(App);
