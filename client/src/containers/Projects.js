@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "../components/Navbar";
 import ProjectList from "./ProjectList";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -13,7 +12,6 @@ class Projects extends Component {
   render() {
     return (
       <div>
-        <Navbar currentUser={this.props.currentUser.userName}/>
         <ProjectList/>
       </div>
     );
@@ -21,9 +19,7 @@ class Projects extends Component {
 }
 
 function mapStateToProps({ currentUser, propData }) {
-  return {
-    currentUser: currentUser.data
-  }
+  return { currentUser };
 }
 
 export default connect(mapStateToProps, actions)(Projects);
