@@ -13,7 +13,6 @@ class PropertyDetail extends Component {
     }
 
     const { response: { results: { result } } } = jsonData;
-    console.log(result);
 
     if (!result.address) {
       return <h1>Could not find the property detail at this location!</h1>
@@ -25,7 +24,7 @@ class PropertyDetail extends Component {
           <div className="card-header">Address & Geolocation</div>
           <div className="card-body">
             <h6 className="card-title">Address</h6>
-            <p classname="card-text"><small className="text-muted">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
+            <p className="card-text"><small className="text-muted">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
             <h6 className="card-title">Latitude & Longitude</h6>
             <p className="card-text"><small className="text-muted">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
           </div>
@@ -34,7 +33,7 @@ class PropertyDetail extends Component {
           <div className="card-header">About This Property</div>
           <div className="card-body">
             <h6 className="card-title">Year Built</h6>
-            <p classname="card-text"><small className="text-muted">{result.yearBuilt._text}</small></p>
+            <p className="card-text"><small className="text-muted">{result.yearBuilt._text}</small></p>
             <h6 className="card-title">Square FT</h6>
             <p className="card-text"><small className="text-muted">{result.finishedSqFt._text}</small></p>
             <h6 className="card-title">Lot Size Square FT</h6>
@@ -49,7 +48,7 @@ class PropertyDetail extends Component {
           <div className="card-header">Last Transaction</div>
           <div className="card-body">
             <h6 className="card-title">Last Sold Data</h6>
-            <p classname="card-text"><small className="text-muted">{result.lastSoldDate._text}</small></p>
+            <p className="card-text"><small className="text-muted">{result.lastSoldDate._text}</small></p>
             <h6 className="card-title">Last Sold Price</h6>
             <p className="card-text"><small className="text-muted">${result.lastSoldPrice._text}</small></p>
           </div>
@@ -58,7 +57,7 @@ class PropertyDetail extends Component {
           <div className="card-header">Tax Assessment</div>
           <div className="card-body">
             <h6 className="card-title">Year</h6>
-            <p classname="card-text"><small className="text-muted">{result.taxAssessmentYear._text}</small></p>
+            <p className="card-text"><small className="text-muted">{result.taxAssessmentYear._text}</small></p>
             <h6 className="card-title">Price</h6>
             <p className="card-text"><small className="text-muted">${result.taxAssessment._text}</small></p>
           </div>
