@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProjectList from "./ProjectList";
+import ProjectList from "../components/ProjectList";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
@@ -19,7 +19,7 @@ class Projects extends Component {
   }
 }
 
-function mapStateToProps({ currentUser, propData }) {
+function mapStateToProps({ currentUser }) {
   return { currentUser };
 }
 

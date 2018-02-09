@@ -4,7 +4,6 @@ import convert from "xml-js";
 import { FETCH_CURRENT_USER_DATA, FETCH_PROPERTY_DATA, FETCH_MAP_DATA } from "./types";
 import keys from '../config/keys';
 
-
 export const fetchCurrentUserData = () => async dispatch => {
   const request = await axios.get("/api/current_user");
   const { data } = request;
