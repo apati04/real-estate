@@ -40,7 +40,7 @@ class Map extends Component {
     return (
       <div className="container">
         <Search/>
-        <div id="mapbox" style={{height: "60vh", width: "100%", marginTop: "20px"}}/>
+        <div id="mapbox" style={{height: "40vh", width: "100%", marginTop: "20px"}}/>
         <PropertyDetail/>
       </div>
     )

@@ -18,13 +18,11 @@ class Search extends Component {
         <Field
           label="address"
           name="address"
-          type="text"
           component={FormField}
         />
         <Field
           label="city/state/zip"
           name="citystatezip"
-          type="text"
           component={FormField}
         />
         <button className="btn btn-success" type="submit">SEARCH</button>
@@ -34,4 +32,15 @@ class Search extends Component {
   }
 }
 
-export default reduxForm({ form: "location" })(connect(null, actions)(Search));
+function validate(values) {
+  const errors = {};
+  if (!values.address) {
+    errors.address = "Please enter the street address";
+  }
+  if (!values.citystatezip) {
+    errors.citystatezip = "Please enter the city, state and/or zipcode";
+  }
+  return errors;
+}
+
+export default reduxForm({ form: "location", validate })(connect(null, actions)(Search));
