@@ -15,6 +15,7 @@ class Map extends Component {
       center: [ -73.98, 40.75 ],
       zoom: 1
     });
+    this.props.fetchCurrentUserData();
   }
 
   componentDidUpdate() {
@@ -37,7 +38,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div className="container"> 
+      <div className="container">
         <Search/>
         <div id="mapbox" style={{height: "60vh", width: "100%", marginTop: "20px"}}/>
         <PropertyDetail/>

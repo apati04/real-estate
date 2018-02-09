@@ -27,7 +27,8 @@ class Search extends Component {
           type="text"
           component={FormField}
         />
-        <button className="btn btn-success">SEARCH</button>
+        <button className="btn btn-success" type="submit">SEARCH</button>
+        <button className="btn btn-danger float-right" type="button" onClick={() => window.history.back()}>BACK</button>
       </form>
     );
   }
