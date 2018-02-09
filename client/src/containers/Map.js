@@ -9,12 +9,15 @@ mapboxgl.accessToken = "pk.eyJ1IjoiaXNhYWMxMTA0IiwiYSI6ImNqZDgwYjJ5MTI1dXUycWw5M
 
 class Map extends Component {
   componentDidMount() {
-    new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: "mapbox",
       style: "mapbox://styles/mapbox/outdoors-v10",
       center: [ -73.98, 40.75 ],
       zoom: 1
     });
+
+    new mapboxgl.Popup({ closeOnClick: false }).setLngLat([ -73.98, 40.75 ]).setHTML("<h3>Search For A Location</h3>").addTo(map);
+
     this.props.fetchCurrentUserData();
   }
 
