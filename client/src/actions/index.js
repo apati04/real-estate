@@ -1,7 +1,7 @@
 import axios from "axios";
 import convert from "xml-js";
 
-import { FETCH_CURRENT_USER_DATA, FETCH_PROPERTY_DATA, FETCH_MAP_DATA } from "./types";
+import { FETCH_CURRENT_USER_DATA, FETCH_PROPERTY_DATA, FETCH_MAP_DATA, LOADING_DATA } from "./types";
 import keys from '../config/keys';
 
 export const fetchCurrentUserData = () => async dispatch => {
@@ -21,4 +21,11 @@ export const fetchMapData = location => async dispatch => {
   const request = await axios.get(`https://cors-anywhere.herokuapp.com/${keys.mapboxUrl}/${location}.json?access_token=${keys.mapboxToken}`);
   const { data } = request;
   dispatch({ type: FETCH_MAP_DATA, payload: data });
+}
+
+export const loadingData = () => {
+  return {
+    type: LOADING_DATA,
+    payload: true
+  }
 }

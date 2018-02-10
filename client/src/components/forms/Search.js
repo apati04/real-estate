@@ -6,12 +6,13 @@ import * as actions from "../../actions";
 
 class Search extends Component {
   formSubmit = (value) => {
+    this.props.loadingData();
     this.props.fetchMapData(`${value.address},${value.citystatezip}`);
     this.props.fetchPropertyData(value.address, value.citystatezip);
   }
 
   render() {
-    const { handleSubmit } = this.props
+    const { handleSubmit } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.formSubmit)}>
