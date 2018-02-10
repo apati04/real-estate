@@ -15,13 +15,13 @@ class Map extends Component {
         const lng = await position.coords.longitude;
         const lat = await position.coords.latitude;
         const map = new mapboxgl.Map({
-            container: "mapbox",
-            style: "mapbox://styles/mapbox/outdoors-v10",
-            center: [ lng, lat ],
-            zoom: 15
-          });
-          new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
-          this.props.fetchMapData([lng, lat]);
+          container: "mapbox",
+          style: "mapbox://styles/mapbox/outdoors-v10",
+          center: [ lng, lat ],
+          zoom: 15
+        });
+        new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
+        this.props.fetchMapData([ lng, lat ]);
       });
     } else {
       console.log("This browser does not support geolocation.");
@@ -31,15 +31,24 @@ class Map extends Component {
   }
 
   componentDidUpdate() {
-    const lng = this.props.data.features[0].center[0];
-    const lat = this.props.data.features[0].center[1];
-    const map = new mapboxgl.Map({
-      container: "mapbox",
-      style: "mapbox://styles/mapbox/outdoors-v10",
-      center: [ lng, lat ],
-      zoom: 15
-    });
-    new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
+    if (this.props.data.features[0]) {
+      const lng = this.props.data.features[0].center[0];
+      const lat = this.props.data.features[0].center[1];
+      const map = new mapboxgl.Map({
+        container: "mapbox",
+        style: "mapbox://styles/mapbox/outdoors-v10",
+        center: [ lng, lat ],
+        zoom: 15
+      });
+      new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
+    } else {
+      new mapboxgl.Map({
+        container: "mapbox",
+        style: "mapbox://styles/mapbox/outdoors-v10",
+        center: [ -73.98, 40.75 ],
+        zoom: 1
+      });
+    }
   }
 
   renderPropertyDetail = () => {
