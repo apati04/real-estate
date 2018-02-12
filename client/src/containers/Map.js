@@ -10,12 +10,8 @@ mapboxgl.accessToken = "pk.eyJ1IjoiaXNhYWMxMTA0IiwiYSI6ImNqZDgwYjJ5MTI1dXUycWw5M
 
 class Map extends Component {
   componentDidMount() {
-    new mapboxgl.Map({
-      container: "mapbox",
-      style: "mapbox://styles/mapbox/outdoors-v10",
-      center: [ -73.98, 40.75 ],
-      zoom: 1
-    });
+    this.props.fetchCurrentUserData();
+    this.props.fetchMapData([ -73.98, 40.75 ]);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async position => {
@@ -34,8 +30,6 @@ class Map extends Component {
       alert("This browser does not support geolocation.");
       this.props.fetchMapData([ -73.98, 40.75 ]);
     }
-
-    this.props.fetchCurrentUserData();
   }
 
   componentDidUpdate() {
