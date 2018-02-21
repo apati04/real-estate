@@ -8,7 +8,7 @@ class Navbar extends Component {
     if(this.props.currentUser) {
       return [
         <li key="1" className="nav-item py-2">
-          <a href="/api/logout" className="btn btn-danger">Sign Out</a>
+          <a href="/api/logout" className="btn btn-outline-danger">Sign Out</a>
         </li>
       ];
     } else {
@@ -26,7 +26,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav
-        style={{ height: "50px" }}
+        style={{ height: "60px" }}
         className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
       >
         {this.greetUser()}
