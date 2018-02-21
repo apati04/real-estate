@@ -25,7 +25,10 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+      <nav
+        style={{ height: "50px" }}
+        className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
+      >
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
