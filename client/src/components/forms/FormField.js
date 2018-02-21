@@ -21,7 +21,7 @@ const FormField = field => {
   } else {
     return (
       <div className="form-group">
-        <label>{field.label}</label>
+        <label className="lead">{field.label}</label>
         <input
           className={className}
           type={field.type}

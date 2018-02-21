@@ -69,12 +69,15 @@ class Map extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{ marginTop: "20px" }}>
         <Search/>
-        <div id="mapbox" style={{ height: "40vh", width: "100%", marginTop: "20px" }}/>
+        <div
+          id="mapbox"
+          style={{ height: "40vh", width: "100%", marginTop: "20px" }}
+        />
         {this.renderPropertyDetail()}
       </div>
-    )
+    );
   }
 }
 

@@ -43,7 +43,7 @@ class PropertyDetail extends Component {
     return (
       <div className="card-group" style={{marginTop: "10px"}}>
         <div className="card text-white bg-dark">
-          <div className="card-header">Address & Geolocation</div>
+          <div className="card-header">Location</div>
           <div className="card-body">
             <h6 className="card-title">Address</h6>
             <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
