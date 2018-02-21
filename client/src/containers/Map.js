@@ -63,7 +63,12 @@ class Map extends Component {
     } else if (this.props.loading === "") {
       return <div></div>
     } else {
-      return <PropertyDetail/>
+      return (
+        <div>
+          <PropertyDetail/>
+          <hr/>
+        </div>
+      );
     }
   }
 
@@ -71,10 +76,12 @@ class Map extends Component {
     return (
       <div className="container" style={{ marginTop: "20px" }}>
         <Search/>
+        <hr/>
         <div
           id="mapbox"
           style={{ height: "40vh", width: "100%", marginTop: "20px" }}
         />
+        <hr/>
         {this.renderPropertyDetail()}
       </div>
     );
