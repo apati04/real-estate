@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import keys from '../config/keys';
 import Search from "../components/forms/Search";
 import PropertyDetail from "./PropertyDetail";
 import mapboxgl from "mapbox-gl";
@@ -6,7 +7,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import { Dimmer, Loader } from "semantic-ui-react";
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaXNhYWMxMTA0IiwiYSI6ImNqZDgwYjJ5MTI1dXUycWw5M3E5bnpldDcifQ.tRpvJ9X5wq7ke4t9KGd4yg";
+mapboxgl.accessToken = keys.mapboxToken;
 
 class Map extends Component {
   componentDidMount() {
@@ -63,18 +64,28 @@ class Map extends Component {
     } else if (this.props.loading === "") {
       return <div></div>
     } else {
-      return <PropertyDetail/>
+      return (
+        <div>
+          <PropertyDetail/>
+          <hr/>
+        </div>
+      );
     }
   }
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{ marginTop: "20px" }}>
         <Search/>
-        <div id="mapbox" style={{ height: "40vh", width: "100%", marginTop: "20px" }}/>
+        <hr/>
+        <div
+          id="mapbox"
+          style={{ height: "40vh", width: "100%", marginTop: "20px" }}
+        />
+        <hr/>
         {this.renderPropertyDetail()}
       </div>
-    )
+    );
   }
 }
 

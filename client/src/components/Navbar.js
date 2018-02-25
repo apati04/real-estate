@@ -8,7 +8,7 @@ class Navbar extends Component {
     if(this.props.currentUser) {
       return [
         <li key="1" className="nav-item py-2">
-          <a href="/api/logout" className="btn btn-danger">Sign Out</a>
+          <a href="/api/logout" className="btn btn-outline-danger">SIGN OUT</a>
         </li>
       ];
     } else {
@@ -18,14 +18,17 @@ class Navbar extends Component {
 
   greetUser() {
     if (this.props.currentUser) {
-      return <h1 className="navbar-brand">Welcome, {this.props.currentUser.userName}</h1>
+      return <h1 className="navbar-brand">WELCOME, {this.props.currentUser.userName.toUpperCase()}</h1>
     }
-    return <Link to="/"><h1 className="navbar-brand">Real Estate Manager</h1></Link>
+    return <Link to="/"><h1 className="navbar-brand">REAL ESTATE MANAGER</h1></Link>
   }
 
   render() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+      <nav
+        style={{ height: "60px" }}
+        className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
+      >
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

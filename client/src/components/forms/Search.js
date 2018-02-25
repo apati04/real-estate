@@ -17,12 +17,12 @@ class Search extends Component {
     return (
       <form onSubmit={handleSubmit(this.formSubmit)}>
         <Field
-          label="address"
+          label="ADDRESS"
           name="address"
           component={FormField}
         />
         <Field
-          label="city/state/zip"
+          label="CITY/STATE/ZIP"
           name="citystatezip"
           component={FormField}
         />
