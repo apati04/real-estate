@@ -12,7 +12,7 @@ mapboxgl.accessToken = keys.mapboxToken;
 class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    this.props.fetchMapData([ -73.98, 40.75 ]);
+    this.props.fetchMapData([ -77.050, 38.889 ]);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async position => {
@@ -29,7 +29,7 @@ class Map extends Component {
       });
     } else {
       alert("This browser does not support geolocation.");
-      this.props.fetchMapData([ -73.98, 40.75 ]);
+      this.props.fetchMapData([ -77.050, 38.889 ]);
     }
   }
 
