@@ -74,7 +74,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div className="container" style={{ marginTop: '20px' }}>
+      <div className="container-fluid" style={{ marginTop: '20px' }}>
         <Search />
         <hr />
         <div

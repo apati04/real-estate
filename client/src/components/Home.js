@@ -3,8 +3,8 @@ import Sidebar from './Sidebar';
 
 const Home = () => {
   return (
-    <div className="row">
-      <Sidebar/>
+    <div>
+      <h1>Home</h1>
     </div>
   );
 }

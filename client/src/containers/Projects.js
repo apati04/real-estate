@@ -11,7 +11,7 @@ class Projects extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h1>CURRENT PROJECTS</h1>
         <ProjectList/>
       </div>

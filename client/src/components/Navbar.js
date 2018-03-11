@@ -24,9 +24,15 @@ class Navbar extends Component {
   }
 
   render() {
+
+    const style = {
+      height: "60px",
+      zIndex: "2"
+    }
+
     return (
       <nav
-        style={{ height: "60px" }}
+        style={style}
         className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
       >
         {this.greetUser()}
