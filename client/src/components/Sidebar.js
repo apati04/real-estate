@@ -22,7 +22,6 @@ class Sidebar extends Component {
         left: "0",
         zIndex: "1",
         padding: "0",
-        boxShadow: "inset -1px 0 0 rgba(0, 0, 0, .1)"
       },
       sticky: {
         position: "sticky",
@@ -35,7 +34,7 @@ class Sidebar extends Component {
     }
 
     return (
-      <nav className='col-md-2 d-none d-md-block bg-dark' style={style.sidebar}>
+      <nav className='col-md-1 d-none d-md-block bg-dark navbar-expand-lg' style={style.sidebar}>
         <div style={style.sticky}>
           <ul className="nav flex-column">
             {this.renderSidebarItems()}
