@@ -26,8 +26,7 @@ class Navbar extends Component {
   render() {
 
     const style = {
-      height: "60px",
-      zIndex: "2"
+      height: "60px"
     }
 
     return (
@@ -35,6 +34,7 @@ class Navbar extends Component {
         style={style}
         className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
       >
+        <a href="#menu-toggle" className="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
