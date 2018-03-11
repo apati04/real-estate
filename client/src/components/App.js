@@ -20,16 +20,16 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar/>
+          <Sidebar/>
           <Route exact path="/" component={Login}/>
-          <div className='row flex-xl-nowrap'>
-            <Sidebar/>
-            <div className="col-md-10 ml-sm-auto col-lg-11 pt-3 px-4">
-              <Route path="/map" component={Map}/>
-              <Route path="/projects" component={Projects}/>
-              <Route path="/signup" component={Signup}/>
-              <Route path ="/home" component={Home}/>
-            </div>
-          </div>
+          {/* <div className='row flex-xl-nowrap'> */}
+          {/* <div className="col-md-10 ml-sm-auto col-lg-11 pt-3 px-4"> */}
+          <Route path="/map" component={Map}/>
+          <Route path="/projects" component={Projects}/>
+          <Route path="/signup" component={Signup}/>
+          <Route path ="/home" component={Home}/>
+          {/* </div> */}
+          {/* </div> */}
         </div>
       </BrowserRouter>
     );
