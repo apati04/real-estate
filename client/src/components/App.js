@@ -4,6 +4,7 @@ import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
+import Home from "../components/Home";
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Navbar from './Navbar';
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/map" component={Map}/>
           <Route path="/projects" component={Projects}/>
           <Route path="/signup" component={Signup}/>
+          <Route path ="/home" component={Home}/>
         </div>
       </BrowserRouter>
     );
