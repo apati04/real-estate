@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import * as actions from "../actions";
 
 class Navbar extends Component {
+
+  componentDidMount() {
+    this.props.fetchCurrentUserData();
+  }
 
   renderButton() {
     if(this.props.currentUser) {
@@ -34,7 +39,7 @@ class Navbar extends Component {
         style={style}
         className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
       >
-        <a href="#menu-toggle" className="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+        <Link to="#menu-toggle" className="navbar-toggler-icon" id="menu-toggle"></Link>
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -53,4 +58,4 @@ function mapStateToProps({ currentUser}) {
   return { currentUser };
 }
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, actions)(Navbar);

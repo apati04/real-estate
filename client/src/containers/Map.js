@@ -10,7 +10,6 @@ mapboxgl.accessToken = keys.mapboxToken;
 
 class Map extends Component {
   componentDidMount() {
-    this.props.fetchCurrentUserData();
     this.props.fetchMapData([ -77.05, 38.889 ]);
 
     if (navigator.geolocation) {

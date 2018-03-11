@@ -21,7 +21,7 @@ class App extends Component {
         <div>
           <Navbar/>
           <Route exact path="/" component={Login}/>
-          <div id="wrapper">
+          <div id="wrapper" className="toggled">
             <Sidebar/>
             <div id="page-content-wrapper">
               <Route path="/map" component={Map}/>
