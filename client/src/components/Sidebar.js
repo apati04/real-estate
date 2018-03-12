@@ -4,7 +4,7 @@ import SidebarItem from './SidebarItem';
 class Sidebar extends Component {
 
   renderSidebarItems = () => {
-    const items = ['home', 'about', 'map', 'projects'];
+    const items = ['home', 'map', 'projects'];
     return items.map(item => {
       return (
         <SidebarItem key={item} field={item}/>

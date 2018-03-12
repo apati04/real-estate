@@ -9,22 +9,27 @@ import * as actions from '../actions';
 mapboxgl.accessToken = keys.mapboxToken;
 
 class Map extends Component {
+  componentWillUnmount() {
+    console.log("unmounted");
+    return <div id="mapbox"></div>
+  }
+
   componentDidMount() {
     this.props.fetchCurrentUserData();
     this.props.fetchMapData([ -77.05, 38.889 ]);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        const lng = await position.coords.longitude;
-        const lat = await position.coords.latitude;
+        const { coords: { longitude }} = await position;
+        const { coords: { latitude }} = await position;
         const map = new mapboxgl.Map({
           container: 'mapbox',
           style: 'mapbox://styles/mapbox/outdoors-v10',
-          center: [ lng, lat ],
+          center: [ longitude, latitude ],
           zoom: 15
         });
-        new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
-        this.props.fetchMapData([ lng, lat ]);
+        new mapboxgl.Marker().setLngLat([ longitude, latitude ]).addTo(map);
+        this.props.fetchMapData([ longitude, latitude ]);
       });
     } else {
       alert('This browser does not support geolocation.');

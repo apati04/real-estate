@@ -5,7 +5,7 @@ const SidebarItem = ({ field }) => {
   return (
     <li className="nav-item">
       <Link to={'/' + field.toLowerCase()} className="nav-link">
-        {field.toUpperCase()}
+        <i className={`fas fa-${field}`}/> {field.toUpperCase()}
       </Link>
     </li>
   );
