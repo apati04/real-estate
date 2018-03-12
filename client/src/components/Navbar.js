@@ -4,11 +4,6 @@ import { Link } from "react-router-dom";
 import * as actions from "../actions";
 
 class Navbar extends Component {
-
-  componentDidMount() {
-    this.props.fetchCurrentUserData();
-  }
-
   renderButton() {
     if(this.props.currentUser) {
       return [

@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class Projects extends Component {
+
+  componentDidMount() {
+    this.props.fetchCurrentUserData();
+  }
+
   render() {
     return (
       <div className="container">

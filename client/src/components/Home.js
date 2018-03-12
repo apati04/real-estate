@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-const Home = () => {
-  return (
-    <div className='container'>
-      <h1>Home</h1>
-    </div>
-  );
+class Home extends Component {
+
+  componentDidMount() {
+    this.props.fetchCurrentUserData();
+  }
+
+  render() {
+    return (
+      <div className='container'>
+        <h1>Home</h1>
+      </div>
+    );
+  }
 }
 
-export default Home;
+export default connect(null, actions)(Home);
