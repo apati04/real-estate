@@ -26,8 +26,8 @@ class Search extends Component {
           name="citystatezip"
           component={FormField}
         />
-        <button className="btn btn-outline-success" type="submit">SEARCH</button>
-        <button className="btn btn-outline-danger float-right" type="button" onClick={() => window.history.back()}>BACK</button>
+        <button className="btn btn-raised btn-success" type="submit">SEARCH</button>
+        <button className="btn btn-raised btn-danger float-right" type="button" onClick={() => window.history.back()}>BACK</button>
       </form>
     );
   }
