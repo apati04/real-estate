@@ -26,15 +26,22 @@ class Navbar extends Component {
   render() {
 
     const style = {
-      height: "60px"
+      nav: {
+        height: "60px"
+      },
+      button: {
+        marginRight: "10px"
+      }
     }
 
     return (
       <nav
-        style={style}
+        style={style.nav}
         className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
       >
-        <Link to="#menu-toggle" className="navbar-toggler-icon" id="menu-toggle"></Link>
+        <button className="btn navbar-toggler-icon" id="menu-toggle" style={style.button}>
+          <Link to="#menu-toggle"/>
+        </button>
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
