@@ -15,16 +15,15 @@ class Map extends Component {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        const lng = await position.coords.longitude;
-        const lat = await position.coords.latitude;
+        const { coords: { longitude }} = await position;
+        const { coords: { latitude }} = await position;
         const map = new mapboxgl.Map({
           container: 'mapbox',
           style: 'mapbox://styles/mapbox/outdoors-v10',
-          center: [ lng, lat ],
+          center: [ longitude, latitude ],
           zoom: 15
         });
-        new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
-        this.props.fetchMapData([ lng, lat ]);
+        new mapboxgl.Marker().setLngLat([ longitude, latitude ]).addTo(map);
       });
     } else {
       alert('This browser does not support geolocation.');
@@ -66,7 +65,6 @@ class Map extends Component {
       return (
         <div>
           <PropertyDetail />
-          <hr />
         </div>
       );
     }
@@ -74,7 +72,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div className="container" style={{ marginTop: '20px' }}>
+      <div className="container">
         <Search />
         <hr />
         <div

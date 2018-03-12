@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 import React from 'react';
@@ -8,7 +9,7 @@ import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import './styles/sidebar.css';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,6 +18,13 @@ const store = createStore(
   {},
   composeEnhancer(applyMiddleware(reduxThunk))
 );
+
+$(document).ready(function() {
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+});
 
 ReactDOM.render(
   <Provider store={store}>

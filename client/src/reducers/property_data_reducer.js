@@ -1,4 +1,4 @@
-import { FETCH_PROPERTY_DATA, LOADING_DATA } from "../actions/types";
+import { FETCH_PROPERTY_DATA, LOADING_DATA, RESET_PROP_DATA } from "../actions/types";
 
 const initialState = {
   data: {},
@@ -7,6 +7,11 @@ const initialState = {
 
 function propertyDataReducer(state = initialState, action) {
   switch (action.type) {
+    case RESET_PROP_DATA:
+      return {
+        ...state,
+        data: action.payload
+      };
     case LOADING_DATA:
       return {
         ...state,
