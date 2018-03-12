@@ -8,7 +8,7 @@ class Navbar extends Component {
     if(this.props.currentUser) {
       return [
         <li key="1" className="nav-item py-2">
-          <a href="/api/logout" className="btn btn-outline-danger">SIGN OUT</a>
+          <a href="/api/logout" className="btn btn-raised btn-danger">SIGN OUT</a>
         </li>
       ];
     } else {
@@ -39,8 +39,10 @@ class Navbar extends Component {
         style={style.nav}
         className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
       >
-        <button className="btn navbar-toggler-icon" id="menu-toggle" style={style.button}>
-          <Link to="#menu-toggle"/>
+        <button className="btn btn-success bmd-btn-fab" type="button" id="menu-toggle" style={style.button}>
+          <i className="material-icons">
+            <Link to="#menu-toggle"/>
+          </i>
         </button>
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
