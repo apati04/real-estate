@@ -10,8 +10,7 @@ mapboxgl.accessToken = keys.mapboxToken;
 
 class Map extends Component {
   componentWillUnmount() {
-    console.log("unmounted");
-    return <div id="mapbox"></div>
+    this.props.resetPropData();
   }
 
   componentDidMount() {
@@ -29,7 +28,6 @@ class Map extends Component {
           zoom: 15
         });
         new mapboxgl.Marker().setLngLat([ longitude, latitude ]).addTo(map);
-        this.props.fetchMapData([ longitude, latitude ]);
       });
     } else {
       alert('This browser does not support geolocation.');
@@ -71,7 +69,6 @@ class Map extends Component {
       return (
         <div>
           <PropertyDetail />
-          <hr />
         </div>
       );
     }

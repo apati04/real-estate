@@ -1,7 +1,7 @@
 import axios from "axios";
 import convert from "xml-js";
 
-import { FETCH_CURRENT_USER_DATA, FETCH_PROPERTY_DATA, FETCH_MAP_DATA, LOADING_DATA } from "./types";
+import { FETCH_CURRENT_USER_DATA, FETCH_PROPERTY_DATA, FETCH_MAP_DATA, LOADING_DATA, RESET_PROP_DATA } from "./types";
 import keys from '../config/keys';
 
 export const fetchCurrentUserData = () => async dispatch => {
@@ -27,5 +27,12 @@ export const loadingData = () => {
   return {
     type: LOADING_DATA,
     payload: true
+  }
+}
+
+export const resetPropData = () => {
+  return {
+    type: RESET_PROP_DATA,
+    payload: {}
   }
 }
