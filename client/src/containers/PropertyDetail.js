@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class PropertyDetail extends Component {
+  componentWillUnmount() {
+    this.props.resetPropData();
+  }
+
   render() {
     const jsonData = this.props.data[Object.keys(this.props.data)[1]];
 

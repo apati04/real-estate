@@ -12,6 +12,7 @@ class Projects extends Component {
   render() {
     return (
       <div className="container">
+        <div id="mapbox"></div>
         <h1>CURRENT PROJECTS</h1>
         <ProjectList/>
       </div>

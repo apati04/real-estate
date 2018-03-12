@@ -9,10 +9,6 @@ import * as actions from '../actions';
 mapboxgl.accessToken = keys.mapboxToken;
 
 class Map extends Component {
-  componentWillUnmount() {
-    this.props.resetPropData();
-  }
-
   componentDidMount() {
     this.props.fetchCurrentUserData();
     this.props.fetchMapData([ -77.05, 38.889 ]);

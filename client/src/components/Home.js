@@ -11,6 +11,7 @@ class Home extends Component {
   render() {
     return (
       <div className='container'>
+        <div id="mapbox"></div>
         <h1>Home</h1>
       </div>
     );
