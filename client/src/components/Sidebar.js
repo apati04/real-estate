@@ -7,7 +7,7 @@ class Sidebar extends Component {
     const items = [
       { menu: 'dashboard', icon: 'tachometer-alt' },
       { menu : 'map', icon: 'map-marker-alt' },
-      { menu : 'projects', icon: 'bookmark' }
+      { menu : 'projects', icon: 'paperclip' }
     ];
 
     return items.map(item => {
