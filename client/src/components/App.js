@@ -4,10 +4,10 @@ import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
-import Home from "../components/Home";
+import Dashboard from "../components/Dashboard";
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import Navbar from './Navbar';
+import Navbar from '../containers/Navbar';
 import Sidebar from './Sidebar';
 class App extends Component {
 
@@ -40,7 +40,7 @@ class App extends Component {
               <Route path="/map" component={Map}/>
               <Route path="/projects" component={Projects}/>
               <Route path="/signup" component={Signup}/>
-              <Route path ="/home" component={Home}/>
+              <Route path ="/dashboard" component={Dashboard}/>
             </div>
           </div>
         </div>

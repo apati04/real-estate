@@ -5,9 +5,9 @@ class Sidebar extends Component {
 
   renderSidebarItems = () => {
     const items = [
-      { menu: 'home', icon: 'home' },
-      { menu : 'map', icon: 'map' },
-      { menu : 'projects', icon: 'sticky-note' }
+      { menu: 'dashboard', icon: 'tachometer-alt' },
+      { menu : 'map', icon: 'map-marker-alt' },
+      { menu : 'projects', icon: 'bookmark' }
     ];
 
     return items.map(item => {
