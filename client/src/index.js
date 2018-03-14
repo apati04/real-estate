@@ -20,7 +20,7 @@ const store = createStore(
 );
 
 $(document).ready(function() {
-  $("#menu-toggle").click(function(e) {
+  $("#toggle-button").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
   });

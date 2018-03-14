@@ -39,12 +39,9 @@ class Navbar extends Component {
         <button
           className="btn btn-info"
           type="button"
-          id="menu-toggle"
           style={style.button}
         >
-          <i className="fas fa-list-ul" style={style.icon}>
-            <Link to="#menu-toggle"/>
-          </i>
+          <i className="fas fa-list-ul" style={style.icon}/>
         </button>
       );
     } else {
@@ -61,7 +58,9 @@ class Navbar extends Component {
 
     return (
       <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        {this.renderSidebarToggle()}
+        <div id="toggle-button">
+          {this.renderSidebarToggle()}
+        </div>
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
