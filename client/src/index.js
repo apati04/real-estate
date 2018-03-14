@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import '../node_modules/react-vis/dist/style.css';
 import 'bootstrap';
 import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 import React from 'react';

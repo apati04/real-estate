@@ -10,14 +10,22 @@ import * as actions from '../actions';
 import Navbar from '../containers/Navbar';
 import Sidebar from './Sidebar';
 class App extends Component {
+  renderSidebar() {
+    if (this.props.currentUser) {
+      return <Sidebar/>
+    } else {
+      return <div></div>
+    }
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div>
           <Navbar/>
           <Route exact path="/" component={Login}/>
-          <div id="wrapper">
-            <Sidebar/>
+          <div id="wrapper" className="toggled">
+            {this.renderSidebar()}
             <div id="page-content-wrapper">
               <Route path="/map" component={Map}/>
               <Route path="/projects" component={Projects}/>
@@ -31,4 +39,8 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+function mapStateToProps({ currentUser }) {
+  return { currentUser }
+}
+
+export default connect(mapStateToProps, actions)(App);
