@@ -42,11 +42,19 @@ passport.use(
     {
       consumerKey: keys.twitterClientID,
       consumerSecret: keys.twitterClientSecret,
-      callbackURL: '/auth/twitter/callback'
+      callbackURL: '/auth/twitter/callback',
+      proxy: true
     },
-    function(token, tokenSecret, profile, cb) {
-      console.log('token: ', token);
-      console.log('profile: ', profile);
+    async (token, tokenSecret, profile, done) => {
+      const currentUser = await User.findOne({ twitterId: profile.id });
+      if (currentUser) {
+        return done(null, currentUser);
+      }
+      const twitterUser = await new User({
+        twitterId: profile.id,
+        userName: profile.displayName
+      }).save();
+      done(null, twitterUser);
     }
   )
 );

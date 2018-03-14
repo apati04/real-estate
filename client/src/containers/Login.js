@@ -39,8 +39,17 @@ class LoginForm extends Component {
               component={FormField}
             />
             <div>
-              <button type="submit" className="btn btn-primary">
-                Login
+              <button
+                style={{ background: '#00aced' }}
+                type="button"
+                className="btn bmd-btn-fab"
+              >
+                <a href="/auth/twitter">
+                  <i
+                    style={{ fontSize: '1.6rem' }}
+                    className="fab fa-twitter align-middle text-white"
+                  />
+                </a>
               </button>
               <a href="/auth/google">
                 <img className="btn" src={Google} alt="google" />
