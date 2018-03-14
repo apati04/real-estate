@@ -19,33 +19,49 @@ class Navbar extends Component {
   greetUser() {
     if (this.props.currentUser) {
       return <h1 className="navbar-brand">WELCOME, {this.props.currentUser.userName.toUpperCase()}</h1>
+    } else {
+      return <Link to="/"><h1 className="navbar-brand">REAL ESTATE MANAGER</h1></Link>
     }
-    return <Link to="/"><h1 className="navbar-brand">REAL ESTATE MANAGER</h1></Link>
+  }
+
+  renderSidebarToggle() {
+    const style = {
+      button: {
+        marginRight: "10px"
+      },
+      icon: {
+        fontSize: "24px"
+      }
+    }
+
+    if (this.props.currentUser) {
+      return (
+        <button
+          className="btn btn-info"
+          type="button"
+          id="menu-toggle"
+          style={style.button}
+        >
+          <i className="fas fa-list-ul" style={style.icon}>
+            <Link to="#menu-toggle"/>
+          </i>
+        </button>
+      );
+    } else {
+      return <div></div>
+    }
   }
 
   render() {
     const style = {
       nav: {
         height: "60px"
-      },
-      button: {
-        marginRight: "10px"
-      },
-      icon: {
-        fontSize: "36px"
       }
     }
 
     return (
-      <nav
-        style={style.nav}
-        className="navbar navbar-expand-md navbar-dark bg-dark sticky-top"
-      >
-        <button className="btn btn-info" type="button" id="menu-toggle" style={style.button}>
-          <i className="fas fa-list-ul" style={style.icon}>
-            <Link to="#menu-toggle"/>
-          </i>
-        </button>
+      <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        {this.renderSidebarToggle()}
         {this.greetUser()}
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

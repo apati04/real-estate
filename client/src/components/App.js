@@ -10,32 +10,14 @@ import * as actions from '../actions';
 import Navbar from '../containers/Navbar';
 import Sidebar from './Sidebar';
 class App extends Component {
-
-  // conditionally rendering navbar and sidebar until we implement protected routes
-  renderNavbar = () => {
-    if (window.location.pathname === "/") {
-      return <div></div>
-    } else {
-      return <Navbar/>
-    }
-  }
-
-  renderSidebar = () => {
-    if (window.location.pathname === "/") {
-      return <div></div>
-    } else {
-      return <Sidebar/>
-    }
-  }
-
   render() {
     return (
       <BrowserRouter>
         <div>
-          {this.renderNavbar()}
+          <Navbar/>
           <Route exact path="/" component={Login}/>
-          <div id="wrapper" className="toggled">
-            {this.renderSidebar()}
+          <div id="wrapper">
+            <Sidebar/>
             <div id="page-content-wrapper">
               <Route path="/map" component={Map}/>
               <Route path="/projects" component={Projects}/>
