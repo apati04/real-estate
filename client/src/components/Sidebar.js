@@ -4,10 +4,19 @@ import SidebarItem from './SidebarItem';
 class Sidebar extends Component {
 
   renderSidebarItems = () => {
-    const items = ['home', 'map', 'projects'];
+    const items = [
+      { menu: 'dashboard', icon: 'tachometer-alt' },
+      { menu : 'map', icon: 'map-marker-alt' },
+      { menu : 'projects', icon: 'paperclip' }
+    ];
+
     return items.map(item => {
       return (
-        <SidebarItem key={item} field={item}/>
+        <SidebarItem
+          key={item.menu}
+          menu={item.menu}
+          icon={item.icon}
+        />
       );
     });
   }

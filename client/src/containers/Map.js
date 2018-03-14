@@ -71,13 +71,19 @@ class Map extends Component {
   };
 
   render() {
+    const style = {
+      height: '40vh',
+      width: '100%',
+      marginTop: '20px'
+    }
+
     return (
       <div className="container">
         <Search />
         <hr />
         <div
           id="mapbox"
-          style={{ height: '40vh', width: '100%', marginTop: '20px' }}
+          style={style}
         />
         <hr />
         {this.renderPropertyDetail()}

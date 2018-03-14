@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-class Home extends Component {
+class Dashboard extends Component {
 
   componentDidMount() {
     this.props.fetchCurrentUserData();
@@ -12,10 +12,10 @@ class Home extends Component {
     return (
       <div className='container'>
         <div id="mapbox"></div>
-        <h1>Home</h1>
+        <h1>Dashboard with data-visualization</h1>
       </div>
     );
   }
 }
 
-export default connect(null, actions)(Home);
+export default connect(null, actions)(Dashboard);
