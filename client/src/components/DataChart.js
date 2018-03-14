@@ -23,7 +23,7 @@ class DataChart extends Component {
           <HorizontalGridLines />
           <XAxis />
           <YAxis />
-          <LineSeries data={data} />
+          <LineSeries data={data}/>
         </XYPlot>
       </div>
     );
