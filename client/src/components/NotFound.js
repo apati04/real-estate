@@ -1,8 +1,17 @@
 import React from 'react';
 
 const NotFound = () => {
+
+  const style = {
+    container: {
+      marginRight: '250px'
+    }
+  }
+
   return (
-    <h1>PAGE NOT FOUND</h1>
+    <div style={style.container}>
+      <h1>PAGE NOT FOUND</h1>
+    </div>
   );
 }
 
