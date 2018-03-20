@@ -27,17 +27,17 @@ class Navbar extends Component {
   renderSidebarToggle() {
     const style = {
       button: {
-        marginRight: "10px"
+        marginRight: '10px'
       },
       icon: {
-        fontSize: "24px"
+        fontSize: '24px'
       }
     }
 
     if (this.props.currentUser) {
       return (
         <button
-          className="btn btn-info"
+          className="btn btn-danger"
           type="button"
           style={style.button}
         >
