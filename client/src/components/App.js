@@ -8,6 +8,7 @@ import Dashboard from "../components/Dashboard";
 import Navbar from '../containers/Navbar';
 import Sidebar from './Sidebar';
 import Landing from './Landing';
+import NotFound from './NotFound';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 class App extends Component {
@@ -24,19 +25,20 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar/>
-          <Switch>
-            <Route path="/login" component={Login}/>
-            <div id="wrapper" className="toggled">
-              {this.renderSidebar()}
-              <div id="page-content-wrapper">
-                <Route path ="/dashboard" component={Dashboard}/>
-                <Route path="/map" component={Map}/>
-                <Route path="/projects" component={Projects}/>
-                <Route path="/signup" component={Signup}/>
-              </div>
+          <div id="wrapper" className="toggled">
+            {this.renderSidebar()}
+            <div id="page-content-wrapper">
+              <Switch>
+                <Route exact path="/" component={Landing}/>
+                <Route exact path ="/dashboard" component={Dashboard}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/map" component={Map}/>
+                <Route exact path="/projects" component={Projects}/>
+                <Route exact path="/signup" component={Signup}/>
+                <Route component={NotFound}/>
+              </Switch>
             </div>
-            <Route exact path="/" component={Landing}/>
-          </Switch>
+          </div>
         </div>
       </BrowserRouter>
     );
