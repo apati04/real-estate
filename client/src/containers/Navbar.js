@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Navbar as NavBar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Container } from 'mdbreact';
+import { Navbar as NavBar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem } from 'mdbreact';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
 import * as actions from "../actions";
 
 class Navbar extends Component {
@@ -35,7 +34,7 @@ class Navbar extends Component {
     if (this.props.currentUser) {
       return <h1 className="navbar-brand">WELCOME, {this.props.currentUser.userName.toUpperCase()}</h1>
     } else {
-      return <Link to="/"><h1 className="navbar-brand">REAL ESTATE MANAGER</h1></Link>
+      return <NavbarBrand href="/">REAL ESTATE MANAGER</NavbarBrand>
     }
   }
 
@@ -72,13 +71,11 @@ class Navbar extends Component {
     }
 
     return (
-        <NavBar color="stylish-color-dark" dark expand="md" scrolling fixed="top">
+        <NavBar color="stylish-color-dark" dark expand="md" scrolling>
           <div id="toggle-button">
             {this.renderSidebarToggle()}
           </div>
-          <NavbarBrand>
-            <strong>{this.greetUser()}</strong>
-          </NavbarBrand>
+          {this.greetUser()}
           { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
           <Collapse isOpen = { this.state.collapse } navbar>
             <NavbarNav className="ml-auto">
@@ -88,6 +85,7 @@ class Navbar extends Component {
             </NavbarNav>
           </Collapse>
         </NavBar>
+
       // <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
       //   <div id="toggle-button">
       //     {this.renderSidebarToggle()}
