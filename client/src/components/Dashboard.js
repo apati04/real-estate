@@ -10,8 +10,14 @@ class Dashboard extends Component {
   }
 
   render() {
+    const style = {
+      container: {
+        marginTop: '150px'
+      }
+    }
+
     return (
-      <div className='container'>
+      <div className='container' style={style.container}>
         <div id="mapbox"></div>
         <DataChart/>
       </div>

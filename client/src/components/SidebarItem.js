@@ -1,16 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const SidebarItem = ({ menu, icon }) => {
   const style = {
-    marginRight: '10px'
+    icon: {
+      marginRight: '10px'
+    },
+    navLink: {
+      color: 'white',
+      backgroundColor: '#26b2a4'
+    }
   }
 
   return (
     <li className="nav-item">
-      <Link to={'/' + menu.toLowerCase()} className="nav-link">
-        <i className={`fas fa-${icon}`} style={style}/> {menu.toUpperCase()}
-      </Link>
+      <NavLink to={'/' + menu.toLowerCase()} className="nav-link" activeStyle={style.navLink}>
+        <i className={`fas fa-${icon}`} style={style.icon}/> {menu.toUpperCase()}
+      </NavLink>
     </li>
   );
 };

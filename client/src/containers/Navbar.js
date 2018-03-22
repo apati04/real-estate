@@ -1,9 +1,23 @@
 import React, { Component } from "react";
+import { Navbar as NavBar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem } from 'mdbreact';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
 import * as actions from "../actions";
 
 class Navbar extends Component {
+  state = {
+      collapse: false,
+      isWideEnough: false,
+      dropdownOpen: false
+  };
+
+  onClick(){
+      this.setState({ collapse: !this.state.collapse });
+  }
+
+  toggle() {
+      this.setState({ dropdownOpen: !this.state.dropdownOpen });
+  }
+
   renderSignOut() {
     if(this.props.currentUser) {
       return [
@@ -20,57 +34,66 @@ class Navbar extends Component {
     if (this.props.currentUser) {
       return <h1 className="navbar-brand">WELCOME, {this.props.currentUser.userName.toUpperCase()}</h1>
     } else {
-      return <Link to="/"><h1 className="navbar-brand">REAL ESTATE MANAGER</h1></Link>
+      return <NavbarBrand href="/">REAL ESTATE MANAGER</NavbarBrand>
     }
   }
 
-  renderSidebarToggle() {
-    const style = {
-      button: {
-        marginRight: "10px"
-      },
-      icon: {
-        fontSize: "24px"
-      }
-    }
-
-    if (this.props.currentUser) {
-      return (
-        <button
-          className="btn btn-info"
-          type="button"
-          style={style.button}
-        >
-          <i className="fas fa-list-ul" style={style.icon}/>
-        </button>
-      );
-    } else {
-      return <div></div>
-    }
-  }
+  // renderSidebarToggle() {
+  //   const style = {
+  //     button: {
+  //       marginRight: '10px'
+  //     },
+  //     icon: {
+  //       fontSize: '24px'
+  //     }
+  //   }
+  //
+  //   if (this.props.currentUser) {
+  //     return (
+  //       <button
+  //         className="btn btn-danger"
+  //         type="button"
+  //         style={style.button}
+  //       >
+  //         <i className="fas fa-list-ul" style={style.icon}/>
+  //       </button>
+  //     );
+  //   } else {
+  //     return <div></div>
+  //   }
+  // }
 
   render() {
-    const style = {
-      nav: {
-        height: "60px"
-      }
-    }
-
     return (
-      <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        <div id="toggle-button">
-          {this.renderSidebarToggle()}
-        </div>
-        {this.greetUser()}
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbar">
-          <ul className="navbar-nav ml-auto">
-            {this.renderSignOut()}
-          </ul>
-        </div>
-      </nav>
+        <NavBar color="stylish-color-dark" dark expand="md" scrolling fixed="top">
+          {/* <div id="toggle-button">
+            {this.renderSidebarToggle()}
+          </div> */}
+          {this.greetUser()}
+          { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
+          <Collapse isOpen = { this.state.collapse } navbar>
+            <NavbarNav className="ml-auto">
+              <NavItem>
+                {this.renderSignOut()}
+              </NavItem>
+            </NavbarNav>
+          </Collapse>
+        </NavBar>
+
+      // <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+      //   <div id="toggle-button">
+      //     {this.renderSidebarToggle()}
+      //   </div>
+      //   {this.greetUser()}
+      //   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
+      //     <span className="navbar-toggler-icon"></span>
+      //   </button>
+      //   <div className="collapse navbar-collapse" id="navbar">
+      //     <ul className="navbar-nav ml-auto">
+      //       {this.renderSignOut()}
+      //     </ul>
+      //   </div>
+      // </nav>
     );
   }
 }
