@@ -10,8 +10,15 @@ class Projects extends Component {
   }
 
   render() {
+
+    const style = {
+      container: {
+        marginTop: '150px'
+      }
+    }
+
     return (
-      <div className="container">
+      <div className="container" style={style.container}>
         <div id="mapbox"></div>
         <h1>CURRENT PROJECTS</h1>
         <ProjectList/>

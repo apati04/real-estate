@@ -38,43 +38,37 @@ class Navbar extends Component {
     }
   }
 
-  renderSidebarToggle() {
-    const style = {
-      button: {
-        marginRight: '10px'
-      },
-      icon: {
-        fontSize: '24px'
-      }
-    }
-
-    if (this.props.currentUser) {
-      return (
-        <button
-          className="btn btn-danger"
-          type="button"
-          style={style.button}
-        >
-          <i className="fas fa-list-ul" style={style.icon}/>
-        </button>
-      );
-    } else {
-      return <div></div>
-    }
-  }
+  // renderSidebarToggle() {
+  //   const style = {
+  //     button: {
+  //       marginRight: '10px'
+  //     },
+  //     icon: {
+  //       fontSize: '24px'
+  //     }
+  //   }
+  //
+  //   if (this.props.currentUser) {
+  //     return (
+  //       <button
+  //         className="btn btn-danger"
+  //         type="button"
+  //         style={style.button}
+  //       >
+  //         <i className="fas fa-list-ul" style={style.icon}/>
+  //       </button>
+  //     );
+  //   } else {
+  //     return <div></div>
+  //   }
+  // }
 
   render() {
-    const style = {
-      nav: {
-        height: "60px"
-      }
-    }
-
     return (
-        <NavBar color="stylish-color-dark" dark expand="md" scrolling>
-          <div id="toggle-button">
+        <NavBar color="stylish-color-dark" dark expand="md" scrolling fixed="top">
+          {/* <div id="toggle-button">
             {this.renderSidebarToggle()}
-          </div>
+          </div> */}
           {this.greetUser()}
           { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
           <Collapse isOpen = { this.state.collapse } navbar>
