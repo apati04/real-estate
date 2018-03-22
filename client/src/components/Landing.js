@@ -1,4 +1,5 @@
 import React from 'react';
+import VideoCarousel from './VideoCarousel';
 
 const Landing = () => {
 
@@ -10,7 +11,7 @@ const Landing = () => {
 
   return (
     <div style={style.container}>
-      <h1>Landing</h1>
+      <VideoCarousel/>
     </div>
   );
 }
