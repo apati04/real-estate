@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
 import Dashboard from "../components/Dashboard";
-import { connect } from 'react-redux';
-import * as actions from '../actions';
 import Navbar from '../containers/Navbar';
 import Sidebar from './Sidebar';
+import Landing from './Landing';
+// import NotFound from './NotFound';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 class App extends Component {
   renderSidebar() {
     if (this.props.currentUser) {
@@ -23,14 +25,18 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar/>
-          <Route exact path="/" component={Login}/>
+          <Route exact path="/" component={Landing}/>
           <div id="wrapper" className="toggled">
             {this.renderSidebar()}
             <div id="page-content-wrapper">
-              <Route path="/map" component={Map}/>
-              <Route path="/projects" component={Projects}/>
-              <Route path="/signup" component={Signup}/>
-              <Route path ="/dashboard" component={Dashboard}/>
+              <Switch>
+                <Route exact path ="/dashboard" component={Dashboard}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/map" component={Map}/>
+                <Route exact path="/projects" component={Projects}/>
+                <Route exact path="/signup" component={Signup}/>
+                {/* <Route component={NotFound}/> */}
+              </Switch>
             </div>
           </div>
         </div>
