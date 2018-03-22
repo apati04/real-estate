@@ -1,9 +1,24 @@
 import React, { Component } from "react";
+import { Navbar as NavBar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Container } from 'mdbreact';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
 
 class Navbar extends Component {
+  state = {
+      collapse: false,
+      isWideEnough: false,
+      dropdownOpen: false
+  };
+
+  onClick(){
+      this.setState({ collapse: !this.state.collapse });
+  }
+
+  toggle() {
+      this.setState({ dropdownOpen: !this.state.dropdownOpen });
+  }
+
   renderSignOut() {
     if(this.props.currentUser) {
       return [
@@ -57,20 +72,36 @@ class Navbar extends Component {
     }
 
     return (
-      <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        <div id="toggle-button">
-          {this.renderSidebarToggle()}
-        </div>
-        {this.greetUser()}
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbar">
-          <ul className="navbar-nav ml-auto">
-            {this.renderSignOut()}
-          </ul>
-        </div>
-      </nav>
+        <NavBar color="stylish-color-dark" dark expand="md" scrolling fixed="top">
+          <div id="toggle-button">
+            {this.renderSidebarToggle()}
+          </div>
+          <NavbarBrand>
+            <strong>{this.greetUser()}</strong>
+          </NavbarBrand>
+          { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
+          <Collapse isOpen = { this.state.collapse } navbar>
+            <NavbarNav className="ml-auto">
+              <NavItem>
+                {this.renderSignOut()}
+              </NavItem>
+            </NavbarNav>
+          </Collapse>
+        </NavBar>
+      // <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+      //   <div id="toggle-button">
+      //     {this.renderSidebarToggle()}
+      //   </div>
+      //   {this.greetUser()}
+      //   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
+      //     <span className="navbar-toggler-icon"></span>
+      //   </button>
+      //   <div className="collapse navbar-collapse" id="navbar">
+      //     <ul className="navbar-nav ml-auto">
+      //       {this.renderSignOut()}
+      //     </ul>
+      //   </div>
+      // </nav>
     );
   }
 }

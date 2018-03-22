@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import registerServiceWorker from './registerServiceWorker';
 import './styles/sidebar.css';
+import './styles/navbar.css';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
