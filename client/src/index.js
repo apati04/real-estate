@@ -1,6 +1,8 @@
 import $ from 'jquery';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 import '../node_modules/react-vis/dist/style.css';
-import 'bootstrap';
 import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';

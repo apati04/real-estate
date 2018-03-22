@@ -71,7 +71,7 @@ class Navbar extends Component {
     }
 
     return (
-        <NavBar color="stylish-color-dark" dark expand="md" scrolling>
+        <NavBar dark expand="md" scrolling>
           <div id="toggle-button">
             {this.renderSidebarToggle()}
           </div>
