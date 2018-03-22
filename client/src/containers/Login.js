@@ -19,7 +19,7 @@ class LoginForm extends Component {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: '250px'
+        marginTop: '50px'
       }
     };
 

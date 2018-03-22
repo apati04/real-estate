@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "../containers/Login";
-import Signup from "../containers/Signup";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
 import Dashboard from "../components/Dashboard";
@@ -34,7 +33,6 @@ class App extends Component {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/map" component={Map}/>
             <Route exact path="/projects" component={Projects}/>
-            <Route exact path="/signup" component={Signup}/>
             <Route component={NotFound}/>
           </Switch>
           {/* </div>

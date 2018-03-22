@@ -11,7 +11,7 @@ const Landing = () => {
         <div className="d-flex container justify-content-around p-0 text-left white-text wow fadeInUp">
           <div className="text-center">
             <h2 className="mb-4 h2-responsive">Welcome to Real Estate Manager</h2>
-            <h3 className="h3-responsive">Your Dream Meets Reality Here</h3>
+            <h3 className="h3-responsive">Insert something catchy here</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis libero orci, in venenatis lectus gravida condimentum. Nullam pretium urna ut lacinia gravida. Proin pellentesque, est eu posuere suscipit, erat neque ultricies erat, non tempor justo sem blandit massa. Cras a nulla scelerisque lacus rutrum vulputate. Integer imperdiet, massa non.</p>
             <Link to="/login"><Button>LOGIN</Button></Link>
           </div>
