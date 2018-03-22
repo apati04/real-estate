@@ -1,16 +1,10 @@
 import React from 'react';
 import VideoCarousel from './VideoCarousel';
+import { View, Mask } from 'mdbreact';
 
 const Landing = () => {
-
-  const style = {
-    container: {
-      marginRight: '250px'
-    }
-  }
-
   return (
-    <div style={style.container}>
+    <div>
       <VideoCarousel/>
     </div>
   );

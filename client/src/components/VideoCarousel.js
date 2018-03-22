@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Carousel, CarouselInner, CarouselItem } from 'mdbreact';
+import { Carousel, CarouselInner, CarouselItem, CarouselCaption } from 'mdbreact';
 
 class VideoCarousel extends Component {
   render() {

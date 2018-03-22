@@ -8,7 +8,7 @@ import Dashboard from "../components/Dashboard";
 import Navbar from '../containers/Navbar';
 import Sidebar from './Sidebar';
 import Landing from './Landing';
-import NotFound from './NotFound';
+// import NotFound from './NotFound';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 class App extends Component {
@@ -25,17 +25,17 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar/>
+          <Route exact path="/" component={Landing}/>
           <div id="wrapper" className="toggled">
             {this.renderSidebar()}
             <div id="page-content-wrapper">
               <Switch>
-                <Route exact path="/" component={Landing}/>
                 <Route exact path ="/dashboard" component={Dashboard}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/map" component={Map}/>
                 <Route exact path="/projects" component={Projects}/>
                 <Route exact path="/signup" component={Signup}/>
-                <Route component={NotFound}/>
+                {/* <Route component={NotFound}/> */}
               </Switch>
             </div>
           </div>
