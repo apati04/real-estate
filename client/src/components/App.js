@@ -24,19 +24,19 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar/>
-          {/* <div id="wrapper" className="toggled">
+          <div id="wrapper">
             {this.renderSidebar()}
-          <div id="page-content-wrapper"> */}
-          <Switch>
-            <Route exact path="/" component={Landing}/>
-            <Route exact path ="/dashboard" component={Dashboard}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/map" component={Map}/>
-            <Route exact path="/projects" component={Projects}/>
-            <Route component={NotFound}/>
-          </Switch>
-          {/* </div>
-          </div> */}
+            <div id="page-content-wrapper">
+              <Switch>
+                <Route exact path="/" component={Landing}/>
+                <Route exact path ="/dashboard" component={Dashboard}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/map" component={Map}/>
+                <Route exact path="/projects" component={Projects}/>
+                <Route component={NotFound}/>
+              </Switch>
+            </div>
+          </div>
         </div>
       </BrowserRouter>
     );
