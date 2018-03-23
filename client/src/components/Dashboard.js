@@ -12,7 +12,7 @@ class Dashboard extends Component {
   render() {
     const style = {
       container: {
-        marginTop: '150px'
+        marginTop: '60px'
       }
     }
 

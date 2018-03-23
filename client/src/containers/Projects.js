@@ -13,7 +13,7 @@ class Projects extends Component {
 
     const style = {
       container: {
-        marginTop: '150px'
+        marginTop: '60px'
       }
     }
 

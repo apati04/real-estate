@@ -73,7 +73,7 @@ class Map extends Component {
   render() {
     const style = {
       container: {
-        marginTop: '150px'
+        marginTop: '60px'
       },
       map: {
         height: '40vh',

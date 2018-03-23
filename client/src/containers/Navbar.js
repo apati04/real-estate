@@ -20,7 +20,7 @@ class Navbar extends Component {
     if (this.props.currentUser) {
       return <h1 className="navbar-brand">WELCOME, {this.props.currentUser.userName.toUpperCase()}</h1>
     } else {
-      return <Link to="/">REAL ESTATE MANAGER</Link>
+      return <Link className="navbar-brand" to="/">REAL ESTATE MANAGER</Link>
     }
   }
 
