@@ -1,3 +1,9 @@
 .Ripple.is-reppling {
   animation: none !important;
 }
+
+.view .Ripple-parent .hm-black-strong {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -57,7 +57,7 @@ class Navbar extends Component {
     }
 
     return (
-      <nav style={style.nav} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+      <nav style={style.nav} className="navbar navbar-expand-md navbar-dark sticky-top">
         <div id="toggle-button">
           {this.renderSidebarToggle()}
         </div>
