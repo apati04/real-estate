@@ -72,9 +72,6 @@ class Map extends Component {
 
   render() {
     const style = {
-      container: {
-        marginTop: '60px'
-      },
       map: {
         height: '40vh',
         width: '100%',
@@ -83,7 +80,7 @@ class Map extends Component {
     }
 
     return (
-      <div className="container" style={style.container}>
+      <div className="container-fluid">
         <Search />
         <hr />
         <div
