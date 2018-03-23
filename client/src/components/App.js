@@ -24,7 +24,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navbar/>
-          <div id="wrapper" className="toggled">
+          <div id="wrapper">
             {this.renderSidebar()}
             <div id="page-content-wrapper">
               <Switch>

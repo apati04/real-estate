@@ -18,8 +18,7 @@ class LoginForm extends Component {
         height: '80vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '50px'
+        alignItems: 'center'
       }
     };
 

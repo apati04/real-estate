@@ -37,7 +37,7 @@ class Navbar extends Component {
     if (this.props.currentUser) {
       return (
         <button
-          className="btn btn-default"
+          className="btn"
           type="button"
           style={style.button}
         >
