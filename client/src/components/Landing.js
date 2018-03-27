@@ -14,7 +14,7 @@ const Landing = () => {
   }
 
   return (
-    <View className="hm-black-strong" style={style.carousel}>
+    <View className="hm-black-strong animated fadeIn" style={style.carousel}>
       <VideoCarousel/>
       <Mask className="d-flex full-bg-img flex-center ">
         <div className="d-flex container justify-content-around p-0 text-left white-text wow fadeInUp">
