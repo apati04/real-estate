@@ -29,7 +29,7 @@ class VideoCarousel extends Component {
       >
         <CarouselInner>
           <CarouselItem itemId="1">
-            <video className="video-fluid d-block" autoPlay loop>
+            <video className="video-fluid d-block" loop>
               <source src="/video/city.mp4" type="video/mp4" />
             </video>
           </CarouselItem>
