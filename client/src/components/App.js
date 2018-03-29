@@ -26,7 +26,7 @@ class App extends Component {
           <Navbar/>
           <div id="wrapper">
             {this.renderSidebar()}
-            <div id="page-content-wrapper">
+            <div id="page-content-wrapper" className="animated fadeIn">
               <Switch>
                 <Route exact path="/" component={Landing}/>
                 <Route exact path ="/dashboard" component={Dashboard}/>
