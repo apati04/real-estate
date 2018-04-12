@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import VideoCarousel from './VideoCarousel';
 import { Button } from 'antd';
 
 class Landing extends Component {
@@ -30,22 +29,6 @@ class Landing extends Component {
 
     return (
       <div style={style.parallax}>
-        <div className="view animated fadeIn">
-          {/* <VideoCarousel/> */}
-          <div className="full-bg-img">
-            <div className="mask rgba-dark-light">
-              <div className="container flex-center text-center">
-                <div className="row mt-5">
-                  <div className="col-md-12 mb-3" style={style.text}>
-                    <h2 className="mb-4 h2-responsive">Welcome to Real Estate Manager</h2>
-                    <h3 className="h3-responsive">Insert something catchy here</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis libero orci, in venenatis lectus gravida condimentum. Nullam pretium urna ut lacinia gravida. Proin pellentesque, est eu posuere suscipit, erat neque ultricies erat, non tempor justo sem blandit massa. Cras a nulla scelerisque lacus rutrum vulputate. Integer imperdiet, massa non.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="container" style={style.container}>
           <div className="row">
             <div className="col-md-12 text-center mb-3">

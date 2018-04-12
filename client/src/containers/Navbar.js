@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from "../actions";
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Layout, Menu, Button } from 'antd';
 const { Header } = Layout;
 

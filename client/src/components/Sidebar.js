@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
+// pages
 import Login from "../containers/Login";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
 import Dashboard from "../components/Dashboard";
 import Landing from './Landing';
 import NotFound from './NotFound';
+
 import { Layout, Menu, Icon } from 'antd';
 const { Sider } = Layout;
 
@@ -77,9 +79,7 @@ class Sidebar extends Component {
 }
 
 function mapStateToProps({ currentUser }) {
-  return {
-    currentUser
-  }
+  return { currentUser }
 }
 
 export default connect(mapStateToProps, null)(Sidebar);
