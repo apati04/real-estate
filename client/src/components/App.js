@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import Navbar from '../containers/Navbar';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+
 class App extends Component {
   render() {
     return (

@@ -25,7 +25,7 @@ class LoginForm extends Component {
 
     return (
       <AntLayout>
-        <div>
+        <div style={ style.container }>
           <form onSubmit={handleSubmit(this.formSubmit)}>
             <Field
               label="Username"

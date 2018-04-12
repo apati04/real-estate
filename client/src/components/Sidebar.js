@@ -14,8 +14,8 @@ class Sidebar extends Component {
     collapsed: false
   };
 
-  onCollapse = (collapsed) => {
-    this.setState({collapsed});
+  onCollapse = collapsed => {
+    this.setState({ collapsed });
   }
 
   defaultSelected() {

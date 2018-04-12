@@ -8,7 +8,7 @@ const { Header } = Layout;
 class Navbar extends Component {
   renderSignOut() {
     if(this.props.currentUser) {
-      return <Button type='primary' href='/api/logout'>SIGN OUT</Button>
+      return <Button className="btn-danger" href='/api/logout'>SIGN OUT</Button>
     } else {
       return <div></div>
     }
