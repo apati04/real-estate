@@ -1,76 +1,61 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from "../actions";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Layout, Menu, Button } from 'antd';
+const { Header } = Layout;
 
 class Navbar extends Component {
   renderSignOut() {
     if(this.props.currentUser) {
-      return [
-        <li key="1" className="nav-item py-2">
-          <a href="/api/logout" className="btn btn-raised btn-danger">SIGN OUT</a>
-        </li>
-      ];
+      return <Button type='primary' href='/api/logout'>SIGN OUT</Button>
     } else {
       return <div></div>
     }
   }
 
   greetUser() {
-    if (this.props.currentUser) {
-      return <h1 className="navbar-brand">WELCOME, {this.props.currentUser.userName.toUpperCase()}</h1>
-    } else {
-      return <Link className="navbar-brand" to="/">REAL ESTATE MANAGER</Link>
-    }
-  }
-
-  renderSidebarToggle() {
     const style = {
-      button: {
-        marginRight: '10px'
-      },
-      icon: {
-        fontSize: '24px'
+      font: {
+        color: 'white'
       }
     }
 
     if (this.props.currentUser) {
-      return (
-        <button
-          className="btn"
-          type="button"
-          style={style.button}
-        >
-          <i className="fas fa-list-ul" style={style.icon}/>
-        </button>
-      );
+      return <Menu.Item><Link to='/' style={ style.font }>WELCOME, {this.props.currentUser.userName.toUpperCase()}</Link></Menu.Item>
     } else {
-      return <div></div>
+      return <Menu.Item><Link to='/' style={ style.font }>REAL ESTATE APP</Link></Menu.Item>
     }
   }
 
   render() {
     const style = {
-      nav: {
-        height: '60px'
-      }
-    }
+         menu: {
+           lineHeight: '64px'
+         },
+         button: {
+           position: 'absolute',
+           top: '15px',
+           right: '15px'
+         }
+       }
 
     return (
-      <nav style={style.nav} className="navbar navbar-expand-md navbar-dark sticky-top">
-        <div id="toggle-button">
-          {this.renderSidebarToggle()}
-        </div>
-        {this.greetUser()}
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="mobile-navbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbar">
-          <ul className="navbar-nav ml-auto">
-            {this.renderSignOut()}
-          </ul>
-        </div>
-      </nav>
+      <Layout>
+        <Header>
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            style={ style.menu }
+          >
+            {this.greetUser()}
+            <Menu.Item style={ style.button }>
+              {this.renderSignOut()}
+            </Menu.Item>
+          </Menu>
+        </Header>
+      </Layout>
     );
   }
 }

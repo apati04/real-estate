@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AntLayout from '../components/layout/AntLayout';
 import ProjectList from "../components/ProjectList";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -11,11 +12,11 @@ class Projects extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <AntLayout>
         <div id="mapbox"></div>
         <h1>CURRENT PROJECTS</h1>
         <ProjectList/>
-      </div>
+      </AntLayout>
     );
   }
 }

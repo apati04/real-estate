@@ -13,7 +13,7 @@ class Sidebar extends Component {
   state = {
     collapsed: false
   };
-  
+
   onCollapse = (collapsed) => {
     this.setState({collapsed});
   }
@@ -50,19 +50,19 @@ class Sidebar extends Component {
             <div className="logo"/>
             <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
               <Menu.Item key="1">
-                <NavLink to='/home'>
+                <NavLink to='/dashboard'>
                   <Icon type="user"/>
                   <span className="nav-text">Dashboard</span>
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="2">
-                <NavLink to='/about'>
+                <NavLink to='/projects'>
                   <Icon type="video-camera"/>
                   <span className="nav-text">Projects</span>
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="3">
-                <NavLink to='/contact'>
+                <NavLink to='/map'>
                   <Icon type="upload"/>
                   <span className="nav-text">Map</span>
                 </NavLink>
