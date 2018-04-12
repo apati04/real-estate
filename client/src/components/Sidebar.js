@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
 import Login from "../containers/Login";
@@ -33,19 +34,12 @@ class Sidebar extends Component {
   }
 
   render() {
-    const style = {
-      sider: {
-        background: '#fff',
-        minHeight: '100vh'
-      }
-    }
-
     return (
         <Layout>
           <Sider
             breakpoint="lg"
             collapsedWidth="0"
-            style={ style.sider }
+            style={ this.props.currentUser ? { background: '#fff', minHeight: '100vh '} : { display: 'none' } }
           >
             <div className="logo"/>
             <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
@@ -82,4 +76,10 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+function mapStateToProps({ currentUser }) {
+  return {
+    currentUser
+  }
+}
+
+export default connect(mapStateToProps, null)(Sidebar);

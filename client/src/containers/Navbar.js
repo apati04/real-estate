@@ -22,9 +22,9 @@ class Navbar extends Component {
     }
 
     if (this.props.currentUser) {
-      return <Menu.Item><Link to='/' style={ style.font }>WELCOME, {this.props.currentUser.userName.toUpperCase()}</Link></Menu.Item>
+      return <Menu.Item>WELCOME, {this.props.currentUser.userName.toUpperCase()}</Menu.Item>
     } else {
-      return <Menu.Item><Link to='/' style={ style.font }>REAL ESTATE APP</Link></Menu.Item>
+      return <Menu.Item><a href='/' style={ style.font }>REAL ESTATE APP</a></Menu.Item>
     }
   }
 
