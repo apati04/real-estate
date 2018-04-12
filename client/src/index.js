@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
@@ -23,13 +22,6 @@ const store = createStore(
   {},
   composeEnhancer(applyMiddleware(reduxThunk))
 );
-
-$(document).ready(function() {
-  $("#toggle-button").click(function(e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-  });
-});
 
 ReactDOM.render(
   <Provider store={store}>
