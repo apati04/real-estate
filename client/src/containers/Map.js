@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AntLayout from '../components/layout/AntLayout';
+import ContentLayout from '../components/layout/ContentLayout';
 import keys from '../config/keys';
 import Search from '../components/forms/Search';
 import PropertyDetail from './PropertyDetail';
@@ -81,7 +81,7 @@ class Map extends Component {
     }
 
     return (
-      <AntLayout>
+      <ContentLayout>
         <Search />
         <hr />
         <div
@@ -90,7 +90,7 @@ class Map extends Component {
         />
         <hr />
         {this.renderPropertyDetail()}
-      </AntLayout>
+      </ContentLayout>
     );
   }
 }

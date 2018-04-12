@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AntLayout from '../components/layout/AntLayout';
+import ContentLayout from '../components/layout/ContentLayout';
 import FormField from '../components/forms/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ class LoginForm extends Component {
     };
 
     return (
-      <AntLayout>
+      <ContentLayout>
         <div style={ style.container }>
           <form onSubmit={handleSubmit(this.formSubmit)}>
             <Field
@@ -61,7 +61,7 @@ class LoginForm extends Component {
             </div>
           </form>
         </div>
-      </AntLayout>
+      </ContentLayout>
     );
   }
 }

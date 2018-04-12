@@ -14,7 +14,7 @@ const style = {
   }
 }
 
-const AntLayout = props => {
+const ContentLayout = props => {
   return (
     <Layout style={ style.layout }>
       <Content style={ style.content }>
@@ -24,4 +24,4 @@ const AntLayout = props => {
   );
 }
 
-export default AntLayout;
+export default ContentLayout;

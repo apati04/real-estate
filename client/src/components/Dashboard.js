@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AntLayout from './layout/AntLayout';
+import ContentLayout from './layout/ContentLayout';
 import DataChart from './DataChart';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -13,10 +13,10 @@ class Dashboard extends Component {
   render() {
 
     return (
-      <AntLayout>
+      <ContentLayout>
         <div id="mapbox"></div>
         <DataChart/>
-      </AntLayout>
+      </ContentLayout>
     );
   }
 }

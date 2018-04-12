@@ -1,16 +1,33 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from "react-router-dom";
+import { Layout } from 'antd';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Sidebar from './Sidebar';
 import Navbar from '../containers/Navbar';
+import Login from "../containers/Login";
+import Projects from "../containers/Projects";
+import Map from "../containers/Map";
+import Dashboard from "../components/Dashboard";
+import Landing from './Landing';
+import NotFound from './NotFound';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <Layout>
           <Navbar/>
-          <Sidebar/>
-        </div>
+          <Layout>
+            <Sidebar/>
+            <Switch>
+              <Route exact path="/" component={Landing}/>
+              <Route exact path ="/dashboard" component={Dashboard}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/map" component={Map}/>
+              <Route exact path="/projects" component={Projects}/>
+              <Route component={NotFound}/>
+            </Switch>
+          </Layout>
+        </Layout>
       </BrowserRouter>
     );
   }

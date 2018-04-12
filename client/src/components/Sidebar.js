@@ -1,14 +1,6 @@
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
-// pages
-import Login from "../containers/Login";
-import Projects from "../containers/Projects";
-import Map from "../containers/Map";
-import Dashboard from "../components/Dashboard";
-import Landing from './Landing';
-import NotFound from './NotFound';
-
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
 const { Sider } = Layout;
 
@@ -22,7 +14,7 @@ class Sidebar extends Component {
   }
 
   defaultSelected() {
-    const {pathname} = window.location;
+    const { pathname } = window.location;
     switch (pathname) {
       case '/dashboard':
         return ['1'];
@@ -37,43 +29,33 @@ class Sidebar extends Component {
 
   render() {
     return (
-        <Layout>
-          <Sider
-            breakpoint="lg"
-            collapsedWidth="0"
-            style={ this.props.currentUser ? { background: '#fff', minHeight: '100vh '} : { display: 'none' } }
-          >
-            <div className="logo"/>
-            <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
-              <Menu.Item key="1">
-                <NavLink to='/dashboard'>
-                  <Icon type="user"/>
-                  <span className="nav-text">Dashboard</span>
-                </NavLink>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <NavLink to='/projects'>
-                  <Icon type="video-camera"/>
-                  <span className="nav-text">Projects</span>
-                </NavLink>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <NavLink to='/map'>
-                  <Icon type="upload"/>
-                  <span className="nav-text">Map</span>
-                </NavLink>
-              </Menu.Item>
-            </Menu>
-          </Sider>
-          <Switch>
-            <Route exact path="/" component={Landing}/>
-            <Route exact path ="/dashboard" component={Dashboard}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/map" component={Map}/>
-            <Route exact path="/projects" component={Projects}/>
-            <Route component={NotFound}/>
-          </Switch>
-        </Layout>
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        style={ this.props.currentUser ? { background: '#fff', minHeight: '100vh '} : { display: 'none' } }
+      >
+        <div className="logo"/>
+        <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
+          <Menu.Item key="1">
+            <NavLink to='/dashboard'>
+              <Icon type="user"/>
+              <span className="nav-text">Dashboard</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <NavLink to='/projects'>
+              <Icon type="video-camera"/>
+              <span className="nav-text">Projects</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <NavLink to='/map'>
+              <Icon type="upload"/>
+              <span className="nav-text">Map</span>
+            </NavLink>
+          </Menu.Item>
+        </Menu>
+      </Sider>
     );
   }
 }

@@ -1,6 +1,7 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from "../actions";
-import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Button } from 'antd';
 const { Header } = Layout;
 
@@ -23,7 +24,7 @@ class Navbar extends Component {
     if (this.props.currentUser) {
       return <Menu.Item>WELCOME, {this.props.currentUser.userName.toUpperCase()}</Menu.Item>
     } else {
-      return <Menu.Item><a href='/' style={ style.font }>REAL ESTATE APP</a></Menu.Item>
+      return <Menu.Item><Link to='/' style={ style.font }>REAL ESTATE APP</Link></Menu.Item>
     }
   }
 
@@ -40,21 +41,19 @@ class Navbar extends Component {
        }
 
     return (
-      <Layout>
-        <Header>
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            style={ style.menu }
-          >
-            {this.greetUser()}
-            <Menu.Item style={ style.button }>
-              {this.renderSignOut()}
-            </Menu.Item>
-          </Menu>
-        </Header>
-      </Layout>
+      <Header>
+        <div className="logo" />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          style={ style.menu }
+        >
+          {this.greetUser()}
+          <Menu.Item style={ style.button }>
+            {this.renderSignOut()}
+          </Menu.Item>
+        </Menu>
+      </Header>
     );
   }
 }
