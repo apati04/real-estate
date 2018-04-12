@@ -1,50 +1,36 @@
 import React, { Component } from 'react';
+import { Layout } from 'antd';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Sidebar from './Sidebar';
+import Navbar from '../containers/Navbar';
 import Login from "../containers/Login";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
 import Dashboard from "../components/Dashboard";
-import Navbar from '../containers/Navbar';
-import Sidebar from './Sidebar';
 import Landing from './Landing';
 import NotFound from './NotFound';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-class App extends Component {
-  renderSidebar() {
-    if (this.props.currentUser) {
-      return <Sidebar/>
-    } else {
-      return <div></div>
-    }
-  }
 
+class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <Layout>
           <Navbar/>
-          <div id="wrapper">
-            {this.renderSidebar()}
-            <div id="page-content-wrapper" className="animated fadeIn">
-              <Switch>
-                <Route exact path="/" component={Landing}/>
-                <Route exact path ="/dashboard" component={Dashboard}/>
-                <Route exact path="/login" component={Login}/>
-                <Route exact path="/map" component={Map}/>
-                <Route exact path="/projects" component={Projects}/>
-                <Route component={NotFound}/>
-              </Switch>
-            </div>
-          </div>
-        </div>
+          <Layout>
+            <Sidebar/>
+            <Switch>
+              <Route exact path="/" component={Landing}/>
+              <Route exact path ="/dashboard" component={Dashboard}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/map" component={Map}/>
+              <Route exact path="/projects" component={Projects}/>
+              <Route component={NotFound}/>
+            </Switch>
+          </Layout>
+        </Layout>
       </BrowserRouter>
     );
   }
 }
 
-function mapStateToProps({ currentUser }) {
-  return { currentUser }
-}
-
-export default connect(mapStateToProps, actions)(App);
+export default App;

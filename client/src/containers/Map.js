@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ContentLayout from '../components/layout/ContentLayout';
 import keys from '../config/keys';
 import Search from '../components/forms/Search';
 import PropertyDetail from './PropertyDetail';
@@ -80,7 +81,7 @@ class Map extends Component {
     }
 
     return (
-      <div className="container-fluid">
+      <ContentLayout>
         <Search />
         <hr />
         <div
@@ -89,7 +90,7 @@ class Map extends Component {
         />
         <hr />
         {this.renderPropertyDetail()}
-      </div>
+      </ContentLayout>
     );
   }
 }

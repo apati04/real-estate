@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ContentLayout from '../components/layout/ContentLayout';
 import FormField from '../components/forms/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
@@ -23,8 +24,8 @@ class LoginForm extends Component {
     };
 
     return (
-      <div style={style.container}>
-        <div>
+      <ContentLayout>
+        <div style={ style.container }>
           <form onSubmit={handleSubmit(this.formSubmit)}>
             <Field
               label="Username"
@@ -60,7 +61,7 @@ class LoginForm extends Component {
             </div>
           </form>
         </div>
-      </div>
+      </ContentLayout>
     );
   }
 }

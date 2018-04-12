@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import VideoCarousel from './VideoCarousel';
-import { Button } from 'mdbreact';
-import { Link } from 'react-router-dom';
+import { Button } from 'antd';
 
 class Landing extends Component {
   render() {
@@ -31,28 +29,12 @@ class Landing extends Component {
 
     return (
       <div style={style.parallax}>
-        <div className="view animated fadeIn">
-          <VideoCarousel/>
-          <div className="full-bg-img">
-            <div className="mask rgba-dark-light">
-              <div className="container flex-center text-center">
-                <div className="row mt-5">
-                  <div className="col-md-12 mb-3" style={style.text}>
-                    <h2 className="mb-4 h2-responsive">Welcome to Real Estate Manager</h2>
-                    <h3 className="h3-responsive">Insert something catchy here</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis libero orci, in venenatis lectus gravida condimentum. Nullam pretium urna ut lacinia gravida. Proin pellentesque, est eu posuere suscipit, erat neque ultricies erat, non tempor justo sem blandit massa. Cras a nulla scelerisque lacus rutrum vulputate. Integer imperdiet, massa non.</p>
-                    <Link to="/login"><Button>GO TO LOGIN</Button></Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="container" style={style.container}>
           <div className="row">
             <div className="col-md-12 text-center mb-3">
               <h1 className="font-weight-bold light-blue-text my-3">Lorem ipsum dolor sit amet, consectetur quis elit.</h1>
               <p align="justify">Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.Lorem ipsum dolor sit amet, consectetur quis elit. Perspiciatis commodi porro, cumque provident rem corporis odit, ut quas dolores maxime nesciunt possimus quis, soluta velit debitis amet, veritatis cupiditate reprehenderit.</p>
+              <Button type='primary' href='/login'>GO TO LOGIN</Button>
             </div>
           </div>
         </div>
