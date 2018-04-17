@@ -19,40 +19,98 @@ class NewProject extends Component {
 
     return (
       <ContentLayout>
-        <form onSubmit={handleSubmit(this.formSubmit)}>
-          <Field
-            label="ADDRESS"
-            name="address"
-            component={FormField}
-          />
+        <div className='row'>
+          <div className='col-md-3'>
+            <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='placeholder'/>
+          </div>
+          <div className='col-md-8'>
+            <form onSubmit={handleSubmit(this.formSubmit)}>
+              <button
+                className="btn btn-raised btn-info float-right"
+                style={{ marginBottom: '10px' }}
+                type="submit"
+              >
+                SAVE PROPERTY
+              </button>
+              <Field
+                label="Address"
+                name="address"
+                component={FormField}
+              />
+              <div className='row'>
+                <div className='col-md-6'>
+                  <Field
+                    label="Longitude"
+                    name="longitude"
+                    component={FormField}
+                  />
+                  <Field
+                    label="Latitude"
+                    name="latitude"
+                    component={FormField}
+                  />
+                </div>
+                <div className='col-md-6'>
+                  <Field
+                    label="Color RGB"
+                    name="color"
+                    component={FormField}
+                  />
+                  <Field
+                    label="Placemark Height"
+                    name="placemark"
+                    component={FormField}
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div style={{ marginTop: '30px'}}>
+          <h1 className='display-3'>Building Profile</h1>
+          <hr/>
           <div className='row'>
             <div className='col-md-6'>
               <Field
-                label="Longitude"
-                name="longitude"
+                label="Rennovated"
+                name="renovated"
                 component={FormField}
               />
               <Field
-                label="Latitude"
-                name="latitude"
+                label="Owner"
+                name="owner"
+                component={FormField}
+              />
+              <Field
+                label="Built"
+                name="built"
+                component={FormField}
+              />
+              <Field
+                label="Website"
+                name="website"
                 component={FormField}
               />
             </div>
             <div className='col-md-6'>
               <Field
-                label="Color RGB"
-                name="color"
+                label="Previous Owner"
+                name="prevOwner"
                 component={FormField}
               />
               <Field
-                label="Placemark Height"
-                name="placemark"
+                label="Notes"
+                name="notes"
+                component={FormField}
+              />
+              <Field
+                label="Commercial Real Estate Certifications"
+                name="certifications"
                 component={FormField}
               />
             </div>
           </div>
-          <button className="btn btn-raised btn-info" type="submit">SAVE PROPERTY</button>
-        </form>
+        </div>
       </ContentLayout>
     );
   }
