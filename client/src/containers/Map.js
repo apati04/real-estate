@@ -15,7 +15,7 @@ class Map extends Component {
     this.props.fetchMapData([ -77.05, 38.889 ]);
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
+      navigator.geolocation.getCurrentPosition(async position => {
         const { coords: { longitude }} = await position;
         const { coords: { latitude }} = await position;
         const map = new mapboxgl.Map({
@@ -33,7 +33,7 @@ class Map extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.data.features[0]) {
+    if (this.props.data.features) {
       const lng = this.props.data.features[0].center[0];
       const lat = this.props.data.features[0].center[1];
       const map = new mapboxgl.Map({
