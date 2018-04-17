@@ -15,15 +15,14 @@ class Sidebar extends Component {
 
   defaultSelected() {
     const { pathname } = window.location;
-    switch (pathname) {
-      case '/dashboard':
-        return ['1'];
-      case '/projects':
-        return ['2'];
-      case '/map':
-        return ['3'];
-      default:
-        return ['1'];
+    if (pathname.includes('project')) {
+      return ['2'];
+    } else if (pathname === '/dashboard') {
+      return ['1'];
+    } else if (pathname === '/map') {
+      return ['3'];
+    } else {
+      return ['1'];
     }
   }
 
