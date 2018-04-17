@@ -63,6 +63,18 @@ function validate(values) {
   if (!values.address) {
     errors.address = 'Please enter the address';
   }
+  if (!values.latitude) {
+    errors.latitude = 'Please enter the latitude';
+  }
+  if (!values.longitude) {
+    errors.longitude = 'Please enter the longitude';
+  }
+  if (!values.color) {
+    errors.color = 'Please enter the color in RGB';
+  }
+  if (!values.placemark) {
+    errors.placemark = 'Please enter the placemark height in px';
+  }
   return errors;
 }
 
