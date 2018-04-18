@@ -48,9 +48,9 @@ class Sidebar extends Component {
             </NavLink>
           </Menu.Item>
           <Menu.Item key="3">
-            <NavLink to='/map'>
+            <NavLink to='/search'>
               <Icon type="global"/>
-              <span className="nav-text">Map</span>
+              <span className="nav-text">Property Search</span>
             </NavLink>
           </Menu.Item>
         </Menu>
