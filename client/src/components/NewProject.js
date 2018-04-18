@@ -70,7 +70,7 @@ class NewProject extends Component {
           <h1 className='display-3'>Building Profile</h1>
           <hr/>
           <div className='row'>
-            <div className='col-md-6'>
+            <div className='col-md-5'>
               <Field
                 label="Rennovated"
                 name="renovated"
@@ -92,7 +92,7 @@ class NewProject extends Component {
                 component={FormField}
               />
             </div>
-            <div className='col-md-6'>
+            <div className='col-md-5 offset-md-1'>
               <Field
                 label="Previous Owner"
                 name="prevOwner"

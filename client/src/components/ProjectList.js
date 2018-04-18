@@ -9,7 +9,7 @@ const CurrentProjects = () => {
         {/* map through database to display projectlistItem */}
         <ProjectListItem/>
       </ul>
-      <Link to='/project/new' className="btn btn-raised btn-primary" style={{ marginTop: "20px" }}>ADD NEW PROJECT</Link>
+      <Link to='/projects/new' className="btn btn-raised btn-primary" style={{ marginTop: "20px" }}>ADD NEW PROJECT</Link>
       <hr/>
       <div className="d-flex justify-content-between">
         <button className="btn btn-raised btn-success">SAVE PROJECT</button>
