@@ -6,9 +6,6 @@ import { Layout, Menu, Button } from 'antd';
 const { Header } = Layout;
 
 class Navbar extends Component {
-  componentDidMount() {
-    this.props.fetchCurrentUserData();
-  }
   renderSignOut() {
     if (this.props.currentUser) {
       return (
