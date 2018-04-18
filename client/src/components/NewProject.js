@@ -3,6 +3,7 @@ import ContentLayout from './layout/ContentLayout';
 import FormField from './forms/FormField';
 import { Field, reduxForm } from "redux-form"
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../actions';
 
 class NewProject extends Component {
@@ -111,6 +112,7 @@ class NewProject extends Component {
             </div>
           </div>
         </div>
+        <Link to='/projects' className="btn btn-raised btn-danger float-right">BACK</Link>
       </ContentLayout>
     );
   }
