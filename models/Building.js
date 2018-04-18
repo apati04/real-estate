@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const projectSchema = new Schema({
+const buildingSchema = new Schema({
   address: String,
   longitude: Number,
   latitude: Number,
@@ -15,4 +15,4 @@ const projectSchema = new Schema({
   _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
-mongoose.model('projects', projectSchema);
+mongoose.model('buildings', projectSchema);
