@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ContentLayout from './layout/ContentLayout';
 import FormField from './forms/FormField';
-import { Field, reduxForm } from "redux-form"
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 
 class NewProject extends Component {
@@ -11,21 +11,25 @@ class NewProject extends Component {
     this.props.fetchCurrentUserData();
   }
 
-  formSubmit = value => {
-    console.log(value);
-  }
+  formSubmit = (values, dispatch, { history }) => {
+    const { submitNewBuilding } = this.props;
+    submitNewBuilding(values, history);
+  };
 
   render() {
     const { handleSubmit } = this.props;
-
     return (
       <ContentLayout>
-        <div id='mapbox'/>
-        <div className='row'>
-          <div className='col-md-3'>
-            <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='placeholder'/>
+        <div id="mapbox" />
+        <div className="row">
+          <div className="col-md-3">
+            <img
+              src="http://via.placeholder.com/350x350"
+              className="img-fluid"
+              alt="placeholder"
+            />
           </div>
-          <div className='col-md-8'>
+          <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <button
                 className="btn btn-raised btn-info float-right"
@@ -34,13 +38,9 @@ class NewProject extends Component {
               >
                 SAVE PROPERTY
               </button>
-              <Field
-                label="Address"
-                name="address"
-                component={FormField}
-              />
-              <div className='row'>
-                <div className='col-md-6'>
+              <Field label="Address" name="address" component={FormField} />
+              <div className="row">
+                <div className="col-md-6">
                   <Field
                     label="Longitude"
                     name="longitude"
@@ -52,12 +52,8 @@ class NewProject extends Component {
                     component={FormField}
                   />
                 </div>
-                <div className='col-md-6'>
-                  <Field
-                    label="Color RGB"
-                    name="color"
-                    component={FormField}
-                  />
+                <div className="col-md-6">
+                  <Field label="Color RGB" name="color" component={FormField} />
                   <Field
                     label="Placemark Height"
                     name="placemark"
@@ -68,43 +64,27 @@ class NewProject extends Component {
             </form>
           </div>
         </div>
-        <div style={{ marginTop: '30px'}}>
-          <h1 className='display-3'>Building Profile</h1>
-          <hr/>
-          <div className='row'>
-            <div className='col-md-5'>
+        <div style={{ marginTop: '30px' }}>
+          <h1 className="display-3">Building Profile</h1>
+          <hr />
+          <div className="row">
+            <div className="col-md-5">
               <Field
                 label="Rennovated"
                 name="renovated"
                 component={FormField}
               />
-              <Field
-                label="Owner"
-                name="owner"
-                component={FormField}
-              />
-              <Field
-                label="Built"
-                name="built"
-                component={FormField}
-              />
-              <Field
-                label="Website"
-                name="website"
-                component={FormField}
-              />
+              <Field label="Owner" name="owner" component={FormField} />
+              <Field label="Built" name="built" component={FormField} />
+              <Field label="Website" name="website" component={FormField} />
             </div>
-            <div className='col-md-5 offset-md-1'>
+            <div className="col-md-5 offset-md-1">
               <Field
                 label="Previous Owner"
                 name="prevOwner"
                 component={FormField}
               />
-              <Field
-                label="Notes"
-                name="notes"
-                component={FormField}
-              />
+              <Field label="Notes" name="notes" component={FormField} />
               <Field
                 label="Commercial Real Estate Certifications"
                 name="certifications"
@@ -113,7 +93,9 @@ class NewProject extends Component {
             </div>
           </div>
         </div>
-        <Link to='/projects' className="btn btn-raised btn-danger float-right">BACK</Link>
+        <Link to="/projects" className="btn btn-raised btn-danger float-right">
+          BACK
+        </Link>
       </ContentLayout>
     );
   }
@@ -139,4 +121,6 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({ form: 'propDetail', validate })(connect(null, actions)(NewProject));
+export default reduxForm({ form: 'propDetail', validate })(
+  connect(null, actions)(withRouter(NewProject))
+);
