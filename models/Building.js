@@ -9,10 +9,13 @@ const buildingSchema = new Schema({
   owner: String,
   built: String,
   website: String,
+  color: String,
+  placemark: String,
   notes: String,
   certifications: String,
+  prevOwner: String,
   dateAdded: Date,
   _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
-mongoose.model('buildings', projectSchema);
+mongoose.model('buildings', buildingSchema);
