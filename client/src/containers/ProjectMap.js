@@ -11,7 +11,12 @@ mapboxgl.accessToken = keys.mapboxToken;
 class ProjectMap extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    this.props.fetchMapData([ -77.05, 38.889 ]);
+    const map = new mapboxgl.Map({
+      container: 'mapbox',
+      style: 'mapbox://styles/mapbox/outdoors-v10',
+      center: [ -77.05, 38.889 ],
+      zoom: 3
+    });
   }
 
   render() {
@@ -19,12 +24,21 @@ class ProjectMap extends Component {
       map: {
         height: '80vh',
         width: '100%'
+      },
+      button: {
+        marginBottom: '20px'
       }
     }
 
     return (
       <ContentLayout>
-        <Link to='/projects' className="btn btn-raised btn-danger float-right">BACK</Link>
+        <Link
+          to='/projects'
+          className="btn btn-raised btn-danger float-right"
+          style={style.button}
+        >
+          BACK
+        </Link>
         <div id='mapbox'
           style={style.map}
         />
