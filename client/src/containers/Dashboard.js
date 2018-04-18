@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ContentLayout from './layout/ContentLayout';
-import DataChart from './DataChart';
+import ContentLayout from '../components/layout/ContentLayout';
+import DataChart from '../components/DataChart';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -14,7 +14,6 @@ class Dashboard extends Component {
 
     return (
       <ContentLayout>
-        <div id="mapbox"></div>
         <DataChart/>
       </ContentLayout>
     );

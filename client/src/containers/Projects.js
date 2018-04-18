@@ -13,7 +13,6 @@ class Projects extends Component {
   render() {
     return (
       <ContentLayout>
-        <div id="mapbox"></div>
         <h1>CURRENT PROJECTS</h1>
         <ProjectList/>
       </ContentLayout>
