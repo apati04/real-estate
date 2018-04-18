@@ -20,6 +20,7 @@ class NewProject extends Component {
 
     return (
       <ContentLayout>
+        <div id='mapbox'/>
         <div className='row'>
           <div className='col-md-3'>
             <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='placeholder'/>

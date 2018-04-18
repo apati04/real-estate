@@ -19,7 +19,7 @@ class Sidebar extends Component {
       return ['2'];
     } else if (pathname === '/dashboard') {
       return ['1'];
-    } else if (pathname === '/map') {
+    } else if (pathname === '/search') {
       return ['3'];
     } else {
       return ['1'];

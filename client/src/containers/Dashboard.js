@@ -14,6 +14,7 @@ class Dashboard extends Component {
 
     return (
       <ContentLayout>
+        <div id='mapbox'/>
         <DataChart/>
       </ContentLayout>
     );

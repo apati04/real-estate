@@ -18,7 +18,6 @@ const ContentLayout = props => {
   return (
     <Layout style={ style.layout }>
       <Content style={ style.content }>
-        <div id='mapbox'></div>
         { props.children }
       </Content>
     </Layout>
