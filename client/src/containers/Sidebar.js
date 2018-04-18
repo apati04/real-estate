@@ -19,7 +19,7 @@ class Sidebar extends Component {
       return ['2'];
     } else if (pathname === '/dashboard') {
       return ['1'];
-    } else if (pathname === '/map') {
+    } else if (pathname === '/search') {
       return ['3'];
     } else {
       return ['1'];
@@ -37,20 +37,20 @@ class Sidebar extends Component {
         <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
           <Menu.Item key="1">
             <NavLink to='/dashboard'>
-              <Icon type="user"/>
+              <Icon type="dashboard"/>
               <span className="nav-text">Dashboard</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="2">
             <NavLink to='/projects'>
-              <Icon type="video-camera"/>
+              <Icon type="paper-clip"/>
               <span className="nav-text">Projects</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="3">
-            <NavLink to='/map'>
-              <Icon type="upload"/>
-              <span className="nav-text">Map</span>
+            <NavLink to='/search'>
+              <Icon type="global"/>
+              <span className="nav-text">Property Search</span>
             </NavLink>
           </Menu.Item>
         </Menu>

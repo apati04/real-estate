@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Sidebar from './Sidebar';
+import Sidebar from '../containers/Sidebar';
 import Navbar from '../containers/Navbar';
 import Login from "../containers/Login";
 import Projects from "../containers/Projects";
 import Map from "../containers/Map";
-import Dashboard from "../components/Dashboard";
+import Dashboard from "../containers/Dashboard";
 import Landing from './Landing';
 import NewProject from './NewProject';
+import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 
 class App extends Component {
@@ -23,9 +24,10 @@ class App extends Component {
               <Route exact path="/" component={Landing}/>
               <Route exact path ="/dashboard" component={Dashboard}/>
               <Route exact path="/login" component={Login}/>
-              <Route exact path="/map" component={Map}/>
+              <Route exact path="/search" component={Map}/>
               <Route exact path="/projects" component={Projects}/>
-              <Route exact path="/project/new" component={NewProject}/>
+              <Route exact path="/projects/new" component={NewProject}/>
+              <Route exact path="/projects/map" component={ProjectMap}/>
               <Route component={NotFound}/>
             </Switch>
           </Layout>

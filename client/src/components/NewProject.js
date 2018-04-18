@@ -3,6 +3,7 @@ import ContentLayout from './layout/ContentLayout';
 import FormField from './forms/FormField';
 import { Field, reduxForm } from "redux-form"
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../actions';
 
 class NewProject extends Component {
@@ -19,6 +20,7 @@ class NewProject extends Component {
 
     return (
       <ContentLayout>
+        <div id='mapbox'/>
         <div className='row'>
           <div className='col-md-3'>
             <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='placeholder'/>
@@ -70,7 +72,7 @@ class NewProject extends Component {
           <h1 className='display-3'>Building Profile</h1>
           <hr/>
           <div className='row'>
-            <div className='col-md-6'>
+            <div className='col-md-5'>
               <Field
                 label="Rennovated"
                 name="renovated"
@@ -92,7 +94,7 @@ class NewProject extends Component {
                 component={FormField}
               />
             </div>
-            <div className='col-md-6'>
+            <div className='col-md-5 offset-md-1'>
               <Field
                 label="Previous Owner"
                 name="prevOwner"
@@ -111,6 +113,7 @@ class NewProject extends Component {
             </div>
           </div>
         </div>
+        <Link to='/projects' className="btn btn-raised btn-danger float-right">BACK</Link>
       </ContentLayout>
     );
   }

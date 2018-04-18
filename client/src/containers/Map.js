@@ -13,7 +13,6 @@ class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
     this.props.fetchMapData([ -77.05, 38.889 ]);
-
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async position => {
         const { coords: { longitude }} = await position;
