@@ -13,7 +13,7 @@ class EditProject extends Component {
   render() {
     return (
       <ContentLayout>
-        <div id='map'/>
+        <div id='map' />
         <div style={{ marginTop: "20px" }}>
           <ul className="list-group list-group-flush">
             {/* map through database to display PropertyListItem */}
