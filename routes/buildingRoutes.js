@@ -44,4 +44,9 @@ module.exports = app => {
       res.status(442).send(error);
     }
   });
+
+  app.get('/api/building', requireAuth, async (req, res) => {
+    const buildings = await Building.find({ _user: req.user.id });
+    res.send(buildings);
+  });
 };
