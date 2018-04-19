@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 
-class NewProject extends Component {
+class EditProperty extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
   }
@@ -93,7 +93,7 @@ class NewProject extends Component {
             </div>
           </div>
         </div>
-        <Link to="/projects" className="btn btn-raised btn-danger float-right">
+        <Link to="/projects/edit" className="btn btn-raised btn-danger float-right">
           BACK
         </Link>
       </ContentLayout>
@@ -122,5 +122,5 @@ function validate(values) {
 }
 
 export default reduxForm({ form: 'propDetail', validate })(
-  connect(null, actions)(withRouter(NewProject))
+  connect(null, actions)(withRouter(EditProperty))
 );

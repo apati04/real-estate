@@ -8,7 +8,8 @@ import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
 import Landing from './Landing';
-import NewProject from './NewProject';
+import EditProperty from './EditProperty';
+import EditProject from './EditProject';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 
@@ -26,8 +27,9 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/search" component={Map} />
               <Route exact path="/projects" component={Projects} />
-              <Route exact path="/projects/new" component={NewProject} />
               <Route exact path="/projects/map" component={ProjectMap} />
+              <Route exact path="/projects/edit" component={EditProject} />
+              <Route exact path="/projects/edit/properties" component={EditProperty} />
               <Route component={NotFound} />
             </Switch>
           </Layout>
