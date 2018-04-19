@@ -56,7 +56,7 @@ export const submitNewBuilding = (values, history) => async dispatch => {
   console.log('vals: ', values, 'history', history);
   const postBuilding = await axios.post('/api/building', values);
   const { data } = postBuilding;
-  history.push('/projects');
+  history.push('/projects/edit');
   dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
 };
 
