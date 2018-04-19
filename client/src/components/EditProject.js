@@ -13,16 +13,18 @@ class EditProject extends Component {
   render() {
     return (
       <ContentLayout>
-        <div id='map' />
+        <div id='mapbox' />
         <div style={{ marginTop: "20px" }}>
           <ul className="list-group list-group-flush">
             {/* map through database to display PropertyListItem */}
             <PropertyListItem/>
           </ul>
         </div>
-        <Link to="/projects" className="btn btn-raised btn-danger float-right">
-          BACK
-        </Link>
+        <div className='float-right'>
+          <button className='btn btn-raised btn-default'>EDIT PROJECT SETTINGS</button>
+          <Link to="/projects" className="btn btn-raised btn-danger">RETURN TO PROJECTS</Link>
+          <button className='btn btn-raised btn-warning'>DELETE SELECTED PROPERTIES</button>
+        </div>
       </ContentLayout>
     );
   }
