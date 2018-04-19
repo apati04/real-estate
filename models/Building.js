@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const projectSchema = new Schema({
+const buildingSchema = new Schema({
   address: String,
   longitude: Number,
   latitude: Number,
@@ -9,10 +9,13 @@ const projectSchema = new Schema({
   owner: String,
   built: String,
   website: String,
+  color: String,
+  placemark: String,
   notes: String,
   certifications: String,
+  prevOwner: String,
   dateAdded: Date,
   _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
-mongoose.model('projects', projectSchema);
+mongoose.model('buildings', buildingSchema);

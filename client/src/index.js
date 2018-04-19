@@ -5,7 +5,6 @@ import rootReducer from './reducers';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import registerServiceWorker from './registerServiceWorker';
 import './styles/sidebar.css';
 import './styles/navbar.css';
 import './styles/index.css';
@@ -29,4 +28,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-registerServiceWorker();
