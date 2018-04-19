@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 require('./models/User');
 require('./models/Building');
+require('./models/Project');
 require('./utils/passport');
 
 mongoose.Promise = global.Promise;
@@ -28,7 +29,7 @@ app.use(passport.session());
 require('./routes/auth')(app);
 require('./routes/twitter')(app);
 require('./routes/buildingRoutes')(app);
-// Serve up static assets (usually on heroku)
+require('./routes/projectRoutes')(app);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
