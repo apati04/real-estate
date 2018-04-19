@@ -11,6 +11,7 @@ const PropertyListItem = (props) => {
           <Link to='/projects/edit/properties' className="btn btn-sm btn-raised btn-primary">EDIT</Link>
         </div>
       </li>
+      <hr/>
     </div>
   );
 }
