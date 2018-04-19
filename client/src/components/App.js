@@ -19,6 +19,7 @@ class App extends Component {
       <BrowserRouter>
         <Layout>
           <Navbar />
+
           <Layout>
             <Sidebar />
             <Switch>
@@ -29,7 +30,11 @@ class App extends Component {
               <Route exact path="/projects" component={Projects} />
               <Route exact path="/projects/map" component={ProjectMap} />
               <Route exact path="/projects/edit" component={EditProject} />
-              <Route exact path="/projects/edit/properties" component={EditProperty} />
+              <Route
+                exact
+                path="/projects/edit/properties"
+                component={EditProperty}
+              />
               <Route component={NotFound} />
             </Switch>
           </Layout>

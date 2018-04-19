@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import ContentLayout from './layout/ContentLayout';
-import PropertyListItem from './PropertyListItem';
+import PropertyList from '../components/properties/PropertyList';
 
 class EditProject extends Component {
   componentDidMount() {
@@ -17,7 +17,7 @@ class EditProject extends Component {
         <div style={{ marginTop: '20px' }}>
           <ul className="list-group list-group-flush">
             {/* map through database to display PropertyListItem */}
-            <PropertyListItem />
+            <PropertyList />
           </ul>
         </div>
         <div className="float-left">
