@@ -6,7 +6,8 @@ import {
   FETCH_PROPERTY_DATA,
   FETCH_MAP_DATA,
   LOADING_DATA,
-  RESET_PROP_DATA
+  RESET_PROP_DATA,
+  FETCH_PROPERTIES
 } from './types';
 import keys from '../config/keys';
 
@@ -57,4 +58,9 @@ export const submitNewBuilding = (values, history) => async dispatch => {
   const { data } = postBuilding;
   history.push('/projects');
   dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
+};
+
+export const fetchProperties = () => async dispatch => {
+  const response = await axios.get('/api/building');
+  dispatch({ type: FETCH_PROPERTIES, payload: response.data });
 };
