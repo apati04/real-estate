@@ -11,8 +11,8 @@ class NewProject extends Component {
     this.props.fetchCurrentUserData();
   }
 
-  formSubmit = (values, dispatch, { history }) => {
-    const { submitNewBuilding } = this.props;
+  formSubmit = values => {
+    const { submitNewBuilding, history } = this.props;
     submitNewBuilding(values, history);
   };
 
