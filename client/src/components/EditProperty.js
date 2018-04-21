@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ContentLayout from './layout/ContentLayout';
 import FormField from './forms/FormField';
-import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 
@@ -18,7 +18,6 @@ class EditProperty extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-    console.log(this.props.location.state);
     return (
       <ContentLayout>
         <div id="mapbox" />
@@ -126,15 +125,29 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps({ propData: { data }}) {
-  return {
-    data
+function mapStateToProps(state, ownProps) {
+  if (ownProps.location.state) {
+    const { address, longitude, latitude } = ownProps.location.state;
+    return {
+      initialValues: {
+        address: `${address}`,
+        longitude: `${longitude}`,
+        'latitude': `${latitude}`
+      }
+    }
+  } else {
+    return {
+      initialValues: {
+        address: '',
+        longitude: '',
+        'latitude': ''
+      }
+    }
   }
 }
 
-export default reduxForm({
+export default connect(mapStateToProps, actions)(reduxForm({
   form: 'propDetail',
   enableReinitialize: true,
-  // initialValues: { address: '123'}
-  validate })(connect(mapStateToProps, actions)(withRouter(EditProperty))
-);
+  validate
+})(withRouter(EditProperty)));

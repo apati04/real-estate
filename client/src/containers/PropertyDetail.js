@@ -52,7 +52,7 @@ class PropertyDetail extends Component {
           to={{
             pathname: '/projects/edit/properties',
             state: {
-              adress: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
+              address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
               longitude: `${result.address.latitude._text}`,
               latitude: `${result.address.longitude._text}`
             }
