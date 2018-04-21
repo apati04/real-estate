@@ -26,18 +26,18 @@ class PropertyDetail extends Component {
       if (!result.lastSoldDate || !result.lastSoldPrice) {
         return (
           <div className="card-body">
-            <h6 className="card-title">Last Sold Data</h6>
+            <p className="card-title">Last Sold Data</p>
             <p className="card-text"><small className="text-danger">N/A</small></p>
-            <h6 className="card-title">Last Sold Price</h6>
+            <p className="card-title">Last Sold Price</p>
             <p className="card-text"><small className="text-danger">N/A</small></p>
           </div>
         );
       } else {
         return (
           <div className="card-body">
-            <h6 className="card-title">Last Sold Data</h6>
+            <p className="card-title">Last Sold Data</p>
             <p className="card-text"><small className="text-warning">{result.lastSoldDate._text}</small></p>
-            <h6 className="card-title">Last Sold Price</h6>
+            <p className="card-title">Last Sold Price</p>
             <p className="card-text"><small className="text-warning">${result.lastSoldPrice._text}</small></p>
           </div>
         );
@@ -49,24 +49,24 @@ class PropertyDetail extends Component {
         <div className="card text-white bg-dark">
           <div className="card-header">Location</div>
           <div className="card-body">
-            <h6 className="card-title">Address</h6>
+            <p className="card-title">Address</p>
             <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
-            <h6 className="card-title">Latitude & Longitude</h6>
+            <p className="card-title">Latitude & Longitude</p>
             <p className="card-text"><small className="text-warning">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
           </div>
         </div>
         <div className="card text-white bg-dark">
           <div className="card-header">About This Property</div>
           <div className="card-body">
-            <h6 className="card-title">Year Built</h6>
+            <p className="card-title">Year Built</p>
             <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
-            <h6 className="card-title">Square FT</h6>
+            <p className="card-title">Square FT</p>
             <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
-            <h6 className="card-title">Lot Size Square FT</h6>
+            <p className="card-title">Lot Size Square FT</p>
             <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
-            <h6 className="card-title">Bedrooms</h6>
+            <p className="card-title">Bedrooms</p>
             <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
-            <h6 className="card-title">Bathrooms</h6>
+            <p className="card-title">Bathrooms</p>
             <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
           </div>
         </div>
@@ -77,9 +77,9 @@ class PropertyDetail extends Component {
         <div className="card text-white bg-dark">
           <div className="card-header">Tax Assessment</div>
           <div className="card-body">
-            <h6 className="card-title">Year</h6>
+            <p className="card-title">Year</p>
             <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
-            <h6 className="card-title">Price</h6>
+            <p className="card-title">Price</p>
             <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
           </div>
         </div>

@@ -14,7 +14,16 @@ class Search extends Component {
 
   renderAddBtn() {
     if (this.props.data) {
-      return <Link to='/projects/edit/properties' className="btn btn-raised btn-default float-right text-uppercase">+ add property</Link>
+      return (
+        <Link
+          className="btn btn-raised btn-default float-right text-uppercase"
+          to={{
+            pathname: '/projects/edit/properties',
+            state: {test: 'hello'}
+          }}>
+          + add property
+        </Link>
+      )
     } else {
       return <div/>
     }

@@ -17,7 +17,7 @@ class EditProperty extends Component {
   };
 
   render() {
-    console.log(this.props.test);
+    console.log(this.props.location.state.test);
     const { handleSubmit } = this.props;
     return (
       <ContentLayout>
