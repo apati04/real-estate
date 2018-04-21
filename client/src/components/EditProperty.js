@@ -4,7 +4,7 @@ import FormField from './forms/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import * as actions from '../actions';
+import { fetchCurrentUserData } from '../actions';
 
 class EditProperty extends Component {
   componentDidMount() {
@@ -17,6 +17,7 @@ class EditProperty extends Component {
   };
 
   render() {
+    console.log(this.props.test);
     const { handleSubmit } = this.props;
     return (
       <ContentLayout>
@@ -38,7 +39,12 @@ class EditProperty extends Component {
               >
                 SAVE PROPERTY
               </button>
-              <Field label="Address" name="address" component={FormField} />
+              <Field
+                label="Address"
+                name="address"
+                component={FormField}
+                defaultValue={this.props.data}
+              />
               <div className="row">
                 <div className="col-md-6">
                   <Field
@@ -122,5 +128,5 @@ function validate(values) {
 }
 
 export default reduxForm({ form: 'propDetail', validate })(
-  connect(null, actions)(withRouter(EditProperty))
+  connect(null, { fetchCurrentUserData })(withRouter(EditProperty))
 );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FormField from "./FormField";
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from "redux-form"
 import { connect } from "react-redux";
 import * as actions from "../../actions";
@@ -11,9 +12,16 @@ class Search extends Component {
     this.props.fetchPropertyData(value.address, value.citystatezip);
   }
 
+  renderAddBtn() {
+    if (this.props.data) {
+      return <Link to='/projects/edit/properties' className="btn btn-raised btn-default float-right text-uppercase">+ add property</Link>
+    } else {
+      return <div/>
+    }
+  }
+
   render() {
     const { handleSubmit } = this.props;
-
     return (
       <form onSubmit={handleSubmit(this.formSubmit)}>
         <Field
@@ -27,7 +35,7 @@ class Search extends Component {
           component={FormField}
         />
         <button className="btn btn-raised btn-success" type="submit">SEARCH</button>
-        <button className="btn btn-raised btn-danger float-right" type="button" onClick={() => window.history.back()}>BACK</button>
+        {this.renderAddBtn()}
       </form>
     );
   }
@@ -44,4 +52,10 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({ form: "location", validate })(connect(null, actions)(Search));
+function mapStateToProps({ propData: { data } }) {
+  return {
+    data
+  }
+}
+
+export default reduxForm({ form: "location", validate })(connect(mapStateToProps, actions)(Search));
