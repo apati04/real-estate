@@ -4,7 +4,7 @@ import FormField from './forms/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { fetchCurrentUserData } from '../actions';
+import * as actions from '../actions';
 
 class EditProperty extends Component {
   componentDidMount() {
@@ -17,8 +17,8 @@ class EditProperty extends Component {
   };
 
   render() {
-    console.log(this.props.location.state.test);
     const { handleSubmit } = this.props;
+    console.log(this.props.location.state);
     return (
       <ContentLayout>
         <div id="mapbox" />
@@ -43,7 +43,6 @@ class EditProperty extends Component {
                 label="Address"
                 name="address"
                 component={FormField}
-                defaultValue={this.props.data}
               />
               <div className="row">
                 <div className="col-md-6">
@@ -127,6 +126,15 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({ form: 'propDetail', validate })(
-  connect(null, { fetchCurrentUserData })(withRouter(EditProperty))
+function mapStateToProps({ propData: { data }}) {
+  return {
+    data
+  }
+}
+
+export default reduxForm({
+  form: 'propDetail',
+  enableReinitialize: true,
+  // initialValues: { address: '123'}
+  validate })(connect(mapStateToProps, actions)(withRouter(EditProperty))
 );

@@ -19,7 +19,11 @@ class Search extends Component {
           className="btn btn-raised btn-default float-right text-uppercase"
           to={{
             pathname: '/projects/edit/properties',
-            state: {test: 'hello'}
+            state: {
+              adress: '1234 abdc blvd, city, state',
+              longitude: '11111',
+              latitude: '11111'
+            }
           }}>
           + add property
         </Link>
