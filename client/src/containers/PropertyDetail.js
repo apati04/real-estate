@@ -46,46 +46,9 @@ class PropertyDetail extends Component {
     }
 
     return (
-      <div className="card-group" style={{marginTop: "10px"}}>
-        <div className="card text-white bg-dark">
-          <div className="card-header">Location</div>
-          <div className="card-body">
-            <p className="card-title">Address</p>
-            <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
-            <p className="card-title">Latitude & Longitude</p>
-            <p className="card-text"><small className="text-warning">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
-          </div>
-        </div>
-        <div className="card text-white bg-dark">
-          <div className="card-header">About This Property</div>
-          <div className="card-body">
-            <p className="card-title">Year Built</p>
-            <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
-            <p className="card-title">Square FT</p>
-            <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
-            <p className="card-title">Lot Size Square FT</p>
-            <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
-            <p className="card-title">Bedrooms</p>
-            <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
-            <p className="card-title">Bathrooms</p>
-            <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
-          </div>
-        </div>
-        <div className="card text-white bg-dark">
-          <div className="card-header">Last Transaction</div>
-          {renderLastSoldData()}
-        </div>
-        <div className="card text-white bg-dark">
-          <div className="card-header">Tax Assessment</div>
-          <div className="card-body">
-            <p className="card-title">Year</p>
-            <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
-            <p className="card-title">Price</p>
-            <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
-          </div>
-        </div>
+      <div>
         <Link
-          className="btn btn-raised btn-default float-right text-uppercase"
+          className="btn btn-raised btn-default text-uppercase"
           to={{
             pathname: '/projects/edit/properties',
             state: {
@@ -96,6 +59,45 @@ class PropertyDetail extends Component {
           }}>
           + add property
         </Link>
+        <div className="card-group" style={{marginTop: "10px"}}>
+          <div className="card text-white bg-dark">
+            <div className="card-header">Location</div>
+            <div className="card-body">
+              <p className="card-title">Address</p>
+              <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
+              <p className="card-title">Latitude & Longitude</p>
+              <p className="card-text"><small className="text-warning">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
+            </div>
+          </div>
+          <div className="card text-white bg-dark">
+            <div className="card-header">About This Property</div>
+            <div className="card-body">
+              <p className="card-title">Year Built</p>
+              <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
+              <p className="card-title">Square FT</p>
+              <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
+              <p className="card-title">Lot Size Square FT</p>
+              <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
+              <p className="card-title">Bedrooms</p>
+              <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
+              <p className="card-title">Bathrooms</p>
+              <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
+            </div>
+          </div>
+          <div className="card text-white bg-dark">
+            <div className="card-header">Last Transaction</div>
+            {renderLastSoldData()}
+          </div>
+          <div className="card text-white bg-dark">
+            <div className="card-header">Tax Assessment</div>
+            <div className="card-body">
+              <p className="card-title">Year</p>
+              <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
+              <p className="card-title">Price</p>
+              <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
