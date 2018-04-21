@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import * as actions from "../actions";
 
 class PropertyDetail extends Component {
@@ -83,6 +84,18 @@ class PropertyDetail extends Component {
             <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
           </div>
         </div>
+        <Link
+          className="btn btn-raised btn-default float-right text-uppercase"
+          to={{
+            pathname: '/projects/edit/properties',
+            state: {
+              adress: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
+              longitude: `${result.address.latitude._text}`,
+              latitude: `${result.address.longitude._text}`
+            }
+          }}>
+          + add property
+        </Link>
       </div>
     );
   }
