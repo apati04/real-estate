@@ -101,7 +101,7 @@ class PropertyDetail extends Component {
         <Link
           className="btn btn-raised btn-default text-uppercase"
           to={{
-            pathname: '/projects/edit/properties',
+            pathname: '/projects/add/properties',
             state: {
               address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
               longitude: `${result.address.longitude._text}`,

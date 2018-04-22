@@ -22,7 +22,7 @@ class EditProject extends Component {
         </div>
         <div className="float-left">
           <Link
-            to="/projects/edit/properties"
+            to="/projects/add/properties"
             className="btn btn-raised btn-default text-uppercase"
           >
             + add property

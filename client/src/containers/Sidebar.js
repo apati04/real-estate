@@ -9,13 +9,17 @@ class Sidebar extends Component {
     collapsed: false
   };
 
+  componentDidUpdate() {
+    console.log('updated');
+  }
+
   onCollapse = collapsed => {
     this.setState({ collapsed });
   }
 
   defaultSelected() {
     const { pathname } = window.location;
-    if (pathname.includes('project')) {
+    if (pathname.includes('projects')) {
       return ['2'];
     } else if (pathname === '/dashboard') {
       return ['1'];
