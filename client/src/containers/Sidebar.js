@@ -9,10 +9,6 @@ class Sidebar extends Component {
     collapsed: false
   };
 
-  componentDidUpdate() {
-    console.log('updated');
-  }
-
   onCollapse = collapsed => {
     this.setState({ collapsed });
   }
