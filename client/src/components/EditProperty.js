@@ -132,7 +132,7 @@ function mapStateToProps(state, ownProps) {
       initialValues: {
         address: `${address}`,
         longitude: `${longitude}`,
-        'latitude': `${latitude}`
+        latitude: `${latitude}`
       }
     }
   } else {
@@ -140,7 +140,7 @@ function mapStateToProps(state, ownProps) {
       initialValues: {
         address: '',
         longitude: '',
-        'latitude': ''
+        latitude: ''
       }
     }
   }
