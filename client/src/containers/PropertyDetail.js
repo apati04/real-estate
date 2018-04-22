@@ -104,8 +104,8 @@ class PropertyDetail extends Component {
             pathname: '/projects/edit/properties',
             state: {
               address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
-              longitude: `${result.address.latitude._text}`,
-              latitude: `${result.address.longitude._text}`
+              longitude: `${result.address.longitude._text}`,
+              latitude: `${result.address.latitude._text}`
             }
           }}>
           + add property
