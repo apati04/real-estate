@@ -13,7 +13,6 @@ class Search extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-
     return (
       <form onSubmit={handleSubmit(this.formSubmit)}>
         <Field
@@ -27,7 +26,6 @@ class Search extends Component {
           component={FormField}
         />
         <button className="btn btn-raised btn-success" type="submit">SEARCH</button>
-        <button className="btn btn-raised btn-danger float-right" type="button" onClick={() => window.history.back()}>BACK</button>
       </form>
     );
   }
@@ -44,4 +42,10 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({ form: "location", validate })(connect(null, actions)(Search));
+function mapStateToProps({ propData: { data } }) {
+  return {
+    data
+  }
+}
+
+export default reduxForm({ form: "location", validate })(connect(mapStateToProps, actions)(Search));

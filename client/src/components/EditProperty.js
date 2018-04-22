@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ContentLayout from './layout/ContentLayout';
 import FormField from './forms/FormField';
-import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 
@@ -38,7 +38,11 @@ class EditProperty extends Component {
               >
                 SAVE PROPERTY
               </button>
-              <Field label="Address" name="address" component={FormField} />
+              <Field
+                label="Address"
+                name="address"
+                component={FormField}
+              />
               <div className="row">
                 <div className="col-md-6">
                   <Field
@@ -121,6 +125,29 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({ form: 'propDetail', validate })(
-  connect(null, actions)(withRouter(EditProperty))
-);
+function mapStateToProps(state, ownProps) {
+  if (ownProps.location.state) {
+    const { address, longitude, latitude } = ownProps.location.state;
+    return {
+      initialValues: {
+        address: `${address}`,
+        longitude: `${longitude}`,
+        latitude: `${latitude}`
+      }
+    }
+  } else {
+    return {
+      initialValues: {
+        address: '',
+        longitude: '',
+        latitude: ''
+      }
+    }
+  }
+}
+
+export default connect(mapStateToProps, actions)(reduxForm({
+  form: 'propDetail',
+  enableReinitialize: true,
+  validate
+})(withRouter(EditProperty)));
