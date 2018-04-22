@@ -8,7 +8,7 @@ import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
 import Landing from './Landing';
-import EditProperty from './EditProperty';
+import AddProperty from './AddProperty';
 import EditProject from './EditProject';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
@@ -32,8 +32,8 @@ class App extends Component {
               <Route exact path="/projects/edit" component={EditProject} />
               <Route
                 exact
-                path="/projects/edit/properties"
-                component={EditProperty}
+                path="/projects/add/properties"
+                component={AddProperty}
               />
               <Route component={NotFound} />
             </Switch>

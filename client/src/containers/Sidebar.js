@@ -15,7 +15,7 @@ class Sidebar extends Component {
 
   defaultSelected() {
     const { pathname } = window.location;
-    if (pathname.includes('project')) {
+    if (pathname.includes('projects')) {
       return ['2'];
     } else if (pathname === '/dashboard') {
       return ['1'];
