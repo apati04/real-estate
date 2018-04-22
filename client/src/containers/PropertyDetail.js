@@ -23,25 +23,27 @@ class PropertyDetail extends Component {
       return <h1>Could not find the property detail at this location!</h1>
     }
 
-    const renderLastSoldData = () => {
-      if (!result.lastSoldDate || !result.lastSoldPrice) {
-        return (
-          <div className="card-body">
-            <p className="card-title">Last Sold Data</p>
-            <p className="card-text"><small className="text-danger">N/A</small></p>
-            <p className="card-title">Last Sold Price</p>
-            <p className="card-text"><small className="text-danger">N/A</small></p>
-          </div>
-        );
-      } else {
-        return (
-          <div className="card-body">
-            <p className="card-title">Last Sold Data</p>
-            <p className="card-text"><small className="text-warning">{result.lastSoldDate._text}</small></p>
-            <p className="card-title">Last Sold Price</p>
-            <p className="card-text"><small className="text-warning">${result.lastSoldPrice._text}</small></p>
-          </div>
-        );
+    const renderPropData = {
+      lastSoldData() {
+        if (!result.lastSoldDate || !result.lastSoldPrice) {
+          return (
+            <div className="card-body">
+              <p className="card-title">Last Sold Data</p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
+              <p className="card-title">Last Sold Price</p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
+            </div>
+          );
+        } else {
+          return (
+            <div className="card-body">
+              <p className="card-title">Last Sold Data</p>
+              <p className="card-text"><small className="text-warning">{result.lastSoldDate._text}</small></p>
+              <p className="card-title">Last Sold Price</p>
+              <p className="card-text"><small className="text-warning">${result.lastSoldPrice._text}</small></p>
+            </div>
+          );
+        }
       }
     }
 
@@ -86,7 +88,7 @@ class PropertyDetail extends Component {
           </div>
           <div className="card text-white bg-dark">
             <div className="card-header">Last Transaction</div>
-            {renderLastSoldData()}
+            {renderPropData.lastSoldData()}
           </div>
           <div className="card text-white bg-dark">
             <div className="card-header">Tax Assessment</div>
