@@ -44,6 +44,55 @@ class PropertyDetail extends Component {
             </div>
           );
         }
+      },
+      bedroomData() {
+        if (!result.bedrooms) {
+          return <p className="card-text"><small className="text-warning">N/A</small></p>
+        } else {
+          return <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
+        }
+      },
+      bathroomData() {
+        if (!result.bathrooms) {
+          return <p className="card-text"><small className="text-warning">N/A</small></p>
+        } else {
+          return <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
+        }
+      },
+      lotSizeData() {
+        if (!result.lotSizeSqFt) {
+          return <p className="card-text"><small className="text-warning">N/A</small></p>
+        } else {
+          return <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
+        }
+      },
+      sqftData() {
+        if (!result.finishedSqFt) {
+          return <p className="card-text"><small className="text-warning">N/A</small></p>
+        } else {
+          return <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
+        }
+      },
+      yearBuiltData() {
+        if (!result.yearBuilt) {
+          return <p className="card-text"><small className="text-warning">N/A</small></p>
+        } else {
+          return <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
+        }
+      },
+      taxYearData() {
+        if (!result.taxAssessmentYear) {
+          return <p className="card-text"><small className="text-warning">N/A</small></p>
+        } else {
+          return <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
+        }
+      },
+      taxAssessData() {
+        if (!result.taxAssessment) {
+          return <p className="card-text"><small className="text-warning">N/A</small></p>
+        } else {
+          return <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
+        }
       }
     }
 
@@ -75,15 +124,15 @@ class PropertyDetail extends Component {
             <div className="card-header">About This Property</div>
             <div className="card-body">
               <p className="card-title">Year Built</p>
-              <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
+              {renderPropData.yearBuiltData()}
               <p className="card-title">Square FT</p>
-              <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
+              {renderPropData.sqftData()}
               <p className="card-title">Lot Size Square FT</p>
-              <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
+              {renderPropData.lotSizeData()}
               <p className="card-title">Bedrooms</p>
-              <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
+              {renderPropData.bedroomData()}
               <p className="card-title">Bathrooms</p>
-              <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
+              {renderPropData.bathroomData()}
             </div>
           </div>
           <div className="card text-white bg-dark">
@@ -94,9 +143,9 @@ class PropertyDetail extends Component {
             <div className="card-header">Tax Assessment</div>
             <div className="card-body">
               <p className="card-title">Year</p>
-              <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
+              {renderPropData.taxYearData()}
               <p className="card-title">Price</p>
-              <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
+              {renderPropData.taxAssessData()}
             </div>
           </div>
         </div>
