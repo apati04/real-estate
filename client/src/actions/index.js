@@ -29,8 +29,8 @@ export const fetchPropertyData = (address, citystatezip) => async dispatch => {
   dispatch({ type: FETCH_PROPERTY_DATA, payload: result });
 };
 
-export const fetchImgData = () => async dispatch => {
-  const request = await axios.get(`https://cors-anywhere.herokuapp.com/${keys.zillowImgUrl}?zws-id=${keys.zillowKey}&zpid=48749425`);
+export const fetchImgData = zpid => async dispatch => {
+  const request = await axios.get(`https://cors-anywhere.herokuapp.com/${keys.zillowImgUrl}?zws-id=${keys.zillowKey}&zpid=${zpid}`);
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
   dispatch({ type: FETCH_PROPERTY_IMG, payload: result });

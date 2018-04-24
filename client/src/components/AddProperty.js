@@ -9,6 +9,7 @@ import * as actions from '../actions';
 class EditProperty extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
+    this.renderPropertyImg();
   }
 
   formSubmit = values => {
@@ -16,7 +17,26 @@ class EditProperty extends Component {
     submitNewBuilding(values, history);
   };
 
+  renderPropertyImg() {
+    const { zpid } = this.props.location.state;
+    if (zpid) {
+      this.props.fetchImgData(zpid);
+    } else {
+      return null;
+    }
+  }
+
   render() {
+    const data = this.props.img[Object.keys(this.props.img)[1]];
+
+    if (!data) {
+      return null;
+    } else if (!data.response) {
+      return null;
+    }
+
+    const { response: { images: { image: url } } } = data;
+
     const { handleSubmit } = this.props;
     return (
       <ContentLayout>
@@ -24,7 +44,9 @@ class EditProperty extends Component {
         <div className="row">
           <div className="col-md-3">
             <img
-              src="http://via.placeholder.com/350x350"
+              src={url ? url.url._text : 'http://via.placeholder.com/350x350'}
+              width={350}
+              height={350}
               className="img-fluid"
               alt="placeholder"
             />
@@ -125,10 +147,11 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps({ imgData: img }, ownProps) {
   if (ownProps.location.state) {
     const { address, longitude, latitude } = ownProps.location.state;
     return {
+      img: img.img,
       initialValues: {
         address: `${address}`,
         longitude: `${longitude}`,
@@ -137,6 +160,7 @@ function mapStateToProps(state, ownProps) {
     }
   } else {
     return {
+      img: img.img,
       initialValues: {
         address: '',
         longitude: '',

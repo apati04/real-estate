@@ -18,7 +18,6 @@ class PropertyDetail extends Component {
     }
 
     const { response: { results: { result } } } = jsonData;
-    console.log(result);
 
     if (!result.address) {
       return <h1>Could not find the property detail at this location!</h1>
@@ -106,7 +105,8 @@ class PropertyDetail extends Component {
             state: {
               address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
               longitude: `${result.address.longitude._text}`,
-              latitude: `${result.address.latitude._text}`
+              latitude: `${result.address.latitude._text}`,
+              zpid: `${result.zpid._text}`
             }
           }}>
           + add property
