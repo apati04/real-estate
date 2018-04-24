@@ -18,6 +18,7 @@ class PropertyDetail extends Component {
     }
 
     const { response: { results: { result } } } = jsonData;
+    console.log(result);
 
     if (!result.address) {
       return <h1>Could not find the property detail at this location!</h1>
@@ -154,9 +155,10 @@ class PropertyDetail extends Component {
   }
 }
 
-function mapStateToProps({ propData: { data } }) {
+function mapStateToProps({ propData: { data }, imgData: { img } }) {
   return {
-    data
+    data,
+    img
   }
 }
 
