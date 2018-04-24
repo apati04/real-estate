@@ -9,6 +9,7 @@ class Search extends Component {
     this.props.loadingData();
     this.props.fetchMapData(`${value.address},${value.citystatezip}`);
     this.props.fetchPropertyData(value.address, value.citystatezip);
+    this.props.fetchImgData();
   }
 
   render() {

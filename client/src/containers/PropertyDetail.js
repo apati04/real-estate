@@ -105,7 +105,8 @@ class PropertyDetail extends Component {
             state: {
               address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
               longitude: `${result.address.longitude._text}`,
-              latitude: `${result.address.latitude._text}`
+              latitude: `${result.address.latitude._text}`,
+              zpid: `${result.zpid._text}`
             }
           }}>
           + add property
@@ -154,9 +155,10 @@ class PropertyDetail extends Component {
   }
 }
 
-function mapStateToProps({ propData: { data } }) {
+function mapStateToProps({ propData: { data }, imgData: { img } }) {
   return {
-    data
+    data,
+    img
   }
 }
 
