@@ -9,7 +9,7 @@ import * as actions from '../actions';
 class EditProperty extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    this.renderPropertyImg();
+    this.props.fetchImgData(this.props.location.state.zpid);
   }
 
   formSubmit = values => {
@@ -18,38 +18,40 @@ class EditProperty extends Component {
   };
 
   renderPropertyImg() {
-    const { zpid } = this.props.location.state;
-    if (zpid) {
-      this.props.fetchImgData(zpid);
+    const data = this.props.img[Object.keys(this.props.img)[1]];
+    if (!data) {
+      return <div></div>
+    } else if (!data.response) {
+      return (
+        <img
+          src='http://via.placeholder.com/350x350'
+          style={{ width: 350, height: 350 }}
+          className="img-fluid"
+          alt="placeholder"
+        />
+      )
     } else {
-      return null;
+      const { response: { images: { image: url } } } = data;
+      return (
+        <img
+          src={url.url._text}
+          style={{ width: 350, height: 350 }}
+          className="img-fluid"
+          alt="placeholder"
+        />
+      )
     }
   }
 
   render() {
-    const data = this.props.img[Object.keys(this.props.img)[1]];
+   const { handleSubmit } = this.props;
 
-    if (!data) {
-      return null;
-    } else if (!data.response) {
-      return null;
-    }
-
-    const { response: { images: { image: url } } } = data;
-
-    const { handleSubmit } = this.props;
     return (
       <ContentLayout>
         <div id="mapbox" />
         <div className="row">
           <div className="col-md-3">
-            <img
-              src={url ? url.url._text : 'http://via.placeholder.com/350x350'}
-              width={350}
-              height={350}
-              className="img-fluid"
-              alt="placeholder"
-            />
+            {this.renderPropertyImg()}
           </div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
