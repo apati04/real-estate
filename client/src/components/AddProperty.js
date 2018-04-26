@@ -8,8 +8,10 @@ import * as actions from '../actions';
 
 class EditProperty extends Component {
   componentDidMount() {
+    if (this.props.location.state) {
+      this.props.fetchImgData(this.props.location.state.zpid);
+    }
     this.props.fetchCurrentUserData();
-    this.props.fetchImgData(this.props.location.state.zpid);
   }
 
   formSubmit = values => {
@@ -20,7 +22,14 @@ class EditProperty extends Component {
   renderPropertyImg() {
     const data = this.props.img[Object.keys(this.props.img)[1]];
     if (!data) {
-      return <div></div>
+      return (
+        <img
+          src='http://via.placeholder.com/350x350'
+          style={{ width: 350, height: 350 }}
+          className="img-fluid"
+          alt="placeholder"
+        />
+      )
     } else if (!data.response) {
       return (
         <img
