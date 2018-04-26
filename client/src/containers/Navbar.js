@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Avatar, Dropdown, Card } from 'antd';
+import { Layout, Menu, Avatar, Dropdown, Card, Icon } from 'antd';
 const { Header } = Layout;
 
 class Navbar extends Component {
@@ -14,9 +14,10 @@ class Navbar extends Component {
           <Card
             title={this.props.currentUser.userName.toUpperCase()}
             bordered={false}
-            style={{ width: 300 }}
+            style={{ width: 200 }}
           >
-            <a href='/api/logout'>Log Out</a>
+            <p><Icon type="setting"/> Settings</p>
+            <a href='/api/logout' className='text-danger'><Icon type="logout"/> Log Out</a>
           </Card>
         </Menu>
       );
