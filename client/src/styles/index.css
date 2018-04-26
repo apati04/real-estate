@@ -15,6 +15,6 @@ body {
   background: transparent !important
 }
 
-.Ripple.is-reppling {
-  animation: none !important;
+.ant-layout-header {
+  padding: 0 10px !important;
 }
