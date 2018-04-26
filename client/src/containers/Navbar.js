@@ -9,9 +9,11 @@ class Navbar extends Component {
   renderSignOut() {
     if (this.props.currentUser) {
       return (
-        <Button className="btn-danger" href="/api/logout">
-          SIGN OUT
-        </Button>
+        <div className='align-middle'>
+          <Button className="btn-danger" href="/api/logout">
+            SIGN OUT
+          </Button>
+        </div>
       );
     } else {
       return <div />;
@@ -46,11 +48,6 @@ class Navbar extends Component {
     const style = {
       menu: {
         lineHeight: '64px'
-      },
-      button: {
-        position: 'absolute',
-        top: '15px',
-        right: '15px'
       }
     };
 
@@ -59,7 +56,7 @@ class Navbar extends Component {
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" style={style.menu}>
           {this.greetUser()}
-          <Menu.Item style={style.button}>{this.renderSignOut()}</Menu.Item>
+          <Menu.Item className='float-right'>{this.renderSignOut()}</Menu.Item>
         </Menu>
       </Header>
     );
