@@ -2,23 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Avatar } from 'antd';
+import { Layout, Menu, Avatar, Dropdown, Card } from 'antd';
 const { Header } = Layout;
 
 class Navbar extends Component {
   renderSignOut() {
     if (this.props.currentUser) {
+      const firstName = this.props.currentUser.userName.split(' ')[0];
+      const menu = (
+        <Menu>
+          <Card
+            title={this.props.currentUser.userName.toUpperCase()}
+            bordered={false}
+            style={{ width: 300 }}
+          >
+            <a href='/api/logout'>Log Out</a>
+          </Card>
+        </Menu>
+      );
       return (
         <div className='align-middle'>
-          {/* <Button className="btn-danger" href="/api/logout">
-            SIGN OUT
-          </Button> */}
-          <Avatar
-            size='large' 
-            style={{ backgroundColor: '#26b2a4' }}
+          <Dropdown
+            overlay={menu}
+            trigger={['click']}
           >
-            {this.props.currentUser.userName.split(' ')[0]}
-          </Avatar>
+            <Avatar
+              size='large'
+              style={{ backgroundColor: '#26b2a4' }}
+            >
+              {firstName.toUpperCase()}
+            </Avatar>
+          </Dropdown>
         </div>
       );
     } else {

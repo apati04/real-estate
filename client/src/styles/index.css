@@ -8,13 +8,17 @@ body {
 
 .ant-layout-sider-trigger {
   background-color: #f0f2f5;
-  color: black
+  color: black;
 }
 
 .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-  background: transparent !important
+  background: transparent !important;
 }
 
 .ant-layout-header {
   padding: 0 10px !important;
+}
+
+.ant-card-head {
+  background-color: #ebebeb !important;
 }
