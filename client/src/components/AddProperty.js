@@ -14,6 +14,10 @@ class EditProperty extends Component {
     this.props.fetchCurrentUserData();
   }
 
+  componentWillUnmount() {
+    this.props.resetPropData();
+  }
+
   formSubmit = values => {
     const { submitNewBuilding, history } = this.props;
     submitNewBuilding(values, history);
