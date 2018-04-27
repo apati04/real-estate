@@ -12,7 +12,7 @@ class Navbar extends Component {
       const menu = (
         <Menu>
           <Card
-            title={this.props.currentUser.userName.toUpperCase()}
+            title={`Hello, ${firstName.toUpperCase()}`}
             bordered={false}
             style={{ width: 200 }}
           >
