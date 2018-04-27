@@ -11,12 +11,28 @@ mapboxgl.accessToken = keys.mapboxToken;
 class ProjectMap extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    new mapboxgl.Map({
-      container: 'mapbox',
-      style: 'mapbox://styles/mapbox/outdoors-v10',
-      center: [ -77.05, 38.889 ],
-      zoom: 3
-    });
+    this.props.fetchMapData(this.props.location.state.address);
+  }
+
+  componentDidUpdate() {
+    if (this.props.data.features) {
+      const lng = this.props.data.features[0].center[0];
+      const lat = this.props.data.features[0].center[1];
+      const map = new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/outdoors-v10',
+        center: [ lng, lat ],
+        zoom: 15
+      });
+      new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
+    } else {
+      new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/outdoors-v10',
+        center: [ -73.98, 40.75 ],
+        zoom: 1
+      });
+    }
   }
 
   render() {
@@ -33,7 +49,7 @@ class ProjectMap extends Component {
     return (
       <ContentLayout>
         <Link
-          to='/projects'
+          to='/projects/edit'
           className="btn btn-raised btn-danger float-right"
           style={style.button}
         >
@@ -47,4 +63,10 @@ class ProjectMap extends Component {
   }
 }
 
-export default connect(null, actions)(ProjectMap);
+function mapStateToProps({ mapData: data }) {
+  return {
+    data: data.data
+  };
+}
+
+export default connect(mapStateToProps, actions)(ProjectMap);
