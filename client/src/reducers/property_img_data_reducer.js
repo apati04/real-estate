@@ -1,4 +1,4 @@
-import { FETCH_PROPERTY_IMG } from '../actions/types';
+import { FETCH_PROPERTY_IMG, RESET_PROP_DATA } from '../actions/types';
 
 const initialState = {
   img: {}
@@ -6,6 +6,11 @@ const initialState = {
 
 function propertyImgDataReducer(state = initialState, action) {
   switch (action.type) {
+    case RESET_PROP_DATA:
+      return {
+        ...state,
+        img: action.payload
+      };
     case FETCH_PROPERTY_IMG:
       return {
         ...state,
