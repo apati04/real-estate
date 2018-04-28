@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Card } from 'antd';
 
 class PropertyDetailCard extends Component {
@@ -7,7 +7,6 @@ class PropertyDetailCard extends Component {
     noTitleKey: 'Location'
   }
   onTabChange = (key, type) => {
-    console.log(key, type);
     this.setState({[type]: key});
   }
   render() {
@@ -20,31 +19,46 @@ class PropertyDetailCard extends Component {
         key: 'About',
         tab: 'About'
       }, {
-        key: 'Last Transaction',
+        key: 'LastTransaction',
         tab: 'Last Transaction',
       },
       {
-        key: 'Tax Assessment',
+        key: 'TaxAssessment',
         tab: 'Tax Assessment',
       }
     ];
 
     const contentListNoTitle = {
-      article: <p>article content</p>,
-      app: <p>app content</p>,
-      project: <p>project content</p>
+      Location: this.props.propData.locationData(),
+      About: <div>
+        {this.props.propData.yearBuiltData()}
+        {this.props.propData.sqftData()}
+        {this.props.propData.lotSizeData()}
+        {this.props.propData.bedroomData()}
+        {this.props.propData.bathroomData()}
+      </div>
+      ,
+      LastTransaction: <div>
+        {this.props.propData.lastSoldData()}
+      </div>,
+      TaxAssessment: <div>
+        {this.props.propData.taxYearData()}
+        {this.props.propData.taxAssessData()}
+      </div>
     };
 
     return (
-      <div>
-        <Card style={{
-          width: '100%'
-        }} tabList={tabListNoTitle} activeTabKey={this.state.noTitleKey} onTabChange={(key) => {
-          this.onTabChange(key, 'noTitleKey');
-        }}>
+      <Fragment>
+        <Card style={{ marginTop: '10px' }}
+          tabList={tabListNoTitle}
+          activeTabKey={this.state.noTitleKey}
+          onTabChange={(key) => {
+            this.onTabChange(key, 'noTitleKey');
+          }}
+        >
           {contentListNoTitle[this.state.noTitleKey]}
         </Card>
-      </div>
+      </Fragment>
     );
   }
 }
