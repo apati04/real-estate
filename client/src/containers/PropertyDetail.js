@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import PropertyDetailCard from './PropertyDetailCard';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import * as actions from "../actions";
@@ -24,74 +25,154 @@ class PropertyDetail extends Component {
     }
 
     const renderPropData = {
-      lastSoldData() {
-        if (!result.lastSoldDate || !result.lastSoldPrice) {
+      locationData() {
+        return (
+          <Fragment>
+            <p className="card-title">Address</p>
+            <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
+            <p className="card-title">Latitude & Longitude</p>
+            <p className="card-text"><small className="text-warning">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
+          </Fragment>
+        )
+      },
+      yearBuiltData() {
+        if (!result.yearBuilt) {
           return (
-            <div className="card-body">
-              <p className="card-title">Last Sold Data</p>
-              <p className="card-text"><small className="text-danger">N/A</small></p>
-              <p className="card-title">Last Sold Price</p>
-              <p className="card-text"><small className="text-danger">N/A</small></p>
-            </div>
-          );
+            <Fragment>
+              <p className="card-title">Year Built</p>
+              <p className="card-text"><small className="text-warning">N/A</small></p>
+            </Fragment>
+          )
         } else {
           return (
-            <div className="card-body">
-              <p className="card-title">Last Sold Data</p>
-              <p className="card-text"><small className="text-warning">{result.lastSoldDate._text}</small></p>
-              <p className="card-title">Last Sold Price</p>
-              <p className="card-text"><small className="text-warning">${result.lastSoldPrice._text}</small></p>
-            </div>
-          );
+            <Fragment>
+              <p className="card-title">Year Built</p>
+              <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
+            </Fragment>
+          )
         }
       },
       bedroomData() {
         if (!result.bedrooms) {
-          return <p className="card-text"><small className="text-warning">N/A</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Bedrooms</p>
+              <p className="card-text"><small className="text-warning">N/A</small></p>
+            </Fragment>
+          )
         } else {
-          return <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Bedrooms</p>
+              <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
+            </Fragment>
+          )
         }
       },
       bathroomData() {
         if (!result.bathrooms) {
-          return <p className="card-text"><small className="text-warning">N/A</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Bathrooms</p>
+              <p className="card-text"><small className="text-warning">N/A</small></p>
+            </Fragment>
+          )
         } else {
-          return <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Bathrooms</p>
+              <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
+            </Fragment>
+          )
         }
       },
       lotSizeData() {
         if (!result.lotSizeSqFt) {
-          return <p className="card-text"><small className="text-warning">N/A</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Lot Size Square FT</p>
+              <p className="card-text"><small className="text-warning">N/A</small></p>
+            </Fragment>
+          )
         } else {
-          return <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Lot Size Square FT</p>
+              <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
+            </Fragment>
+          )
         }
       },
       sqftData() {
         if (!result.finishedSqFt) {
-          return <p className="card-text"><small className="text-warning">N/A</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Square FT</p>
+              <p className="card-text"><small className="text-warning">N/A</small></p>
+            </Fragment>
+          )
         } else {
-          return <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Square FT</p>
+              <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
+            </Fragment>
+          )
         }
       },
-      yearBuiltData() {
-        if (!result.yearBuilt) {
-          return <p className="card-text"><small className="text-warning">N/A</small></p>
+      lastSoldData() {
+        if (!result.lastSoldDate || !result.lastSoldPrice) {
+          return (
+            <Fragment>
+              <p className="card-title">Last Sold Date</p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
+              <p className="card-title">Last Sold Price</p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
+            </Fragment>
+          );
         } else {
-          return <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Last Sold Date</p>
+              <p className="card-text"><small className="text-warning">{result.lastSoldDate._text}</small></p>
+              <p className="card-title">Last Sold Price</p>
+              <p className="card-text"><small className="text-warning">${result.lastSoldPrice._text}</small></p>
+            </Fragment>
+          );
         }
       },
       taxYearData() {
         if (!result.taxAssessmentYear) {
-          return <p className="card-text"><small className="text-warning">N/A</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Year</p>
+              <p className="card-text"><small className="text-warning">N/A</small></p>
+            </Fragment>
+          )
         } else {
-          return <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Year</p>
+              <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
+            </Fragment>
+          )
         }
       },
       taxAssessData() {
         if (!result.taxAssessment) {
-          return <p className="card-text"><small className="text-warning">N/A</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Tax</p>
+              <p className="card-text"><small className="text-warning">N/A</small></p>
+            </Fragment>
+          )
         } else {
-          return <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
+          return (
+            <Fragment>
+              <p className="card-title">Tax</p>
+              <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
+            </Fragment>
+          )
         }
       }
     }
@@ -111,45 +192,9 @@ class PropertyDetail extends Component {
           }}>
           + add property
         </Link>
-        <div className="card-group" style={{marginTop: "10px"}}>
-          <div className="card text-white bg-dark">
-            <div className="card-header">Location</div>
-            <div className="card-body">
-              <p className="card-title">Address</p>
-              <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
-              <p className="card-title">Latitude & Longitude</p>
-              <p className="card-text"><small className="text-warning">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
-            </div>
-          </div>
-          <div className="card text-white bg-dark">
-            <div className="card-header">About This Property</div>
-            <div className="card-body">
-              <p className="card-title">Year Built</p>
-              {renderPropData.yearBuiltData()}
-              <p className="card-title">Square FT</p>
-              {renderPropData.sqftData()}
-              <p className="card-title">Lot Size Square FT</p>
-              {renderPropData.lotSizeData()}
-              <p className="card-title">Bedrooms</p>
-              {renderPropData.bedroomData()}
-              <p className="card-title">Bathrooms</p>
-              {renderPropData.bathroomData()}
-            </div>
-          </div>
-          <div className="card text-white bg-dark">
-            <div className="card-header">Last Transaction</div>
-            {renderPropData.lastSoldData()}
-          </div>
-          <div className="card text-white bg-dark">
-            <div className="card-header">Tax Assessment</div>
-            <div className="card-body">
-              <p className="card-title">Year</p>
-              {renderPropData.taxYearData()}
-              <p className="card-title">Price</p>
-              {renderPropData.taxAssessData()}
-            </div>
-          </div>
-        </div>
+        <PropertyDetailCard
+          propData = {renderPropData}
+        />
       </div>
     );
   }
