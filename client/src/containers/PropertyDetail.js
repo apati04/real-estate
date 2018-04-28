@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import PropertyDetailCard from './PropertyDetailCard';
-import { Card, Col, Row } from 'antd';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import * as actions from "../actions";
