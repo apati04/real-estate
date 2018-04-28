@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import PropertyDetailCard from './PropertyDetailCard';
+import { Card, Col, Row } from 'antd';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import * as actions from "../actions";
@@ -27,21 +29,21 @@ class PropertyDetail extends Component {
       lastSoldData() {
         if (!result.lastSoldDate || !result.lastSoldPrice) {
           return (
-            <div className="card-body">
+            <Fragment>
               <p className="card-title">Last Sold Data</p>
               <p className="card-text"><small className="text-danger">N/A</small></p>
               <p className="card-title">Last Sold Price</p>
               <p className="card-text"><small className="text-danger">N/A</small></p>
-            </div>
+            </Fragment>
           );
         } else {
           return (
-            <div className="card-body">
+            <Fragment>
               <p className="card-title">Last Sold Data</p>
               <p className="card-text"><small className="text-warning">{result.lastSoldDate._text}</small></p>
               <p className="card-title">Last Sold Price</p>
               <p className="card-text"><small className="text-warning">${result.lastSoldPrice._text}</small></p>
-            </div>
+            </Fragment>
           );
         }
       },
@@ -111,19 +113,17 @@ class PropertyDetail extends Component {
           }}>
           + add property
         </Link>
-        <div className="card-group" style={{marginTop: "10px"}}>
-          <div className="card text-white bg-dark">
-            <div className="card-header">Location</div>
-            <div className="card-body">
+        <Row gutter={16}>
+          <Col span={6}>
+            <Card title="Location" bordered={true}>
               <p className="card-title">Address</p>
               <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
               <p className="card-title">Latitude & Longitude</p>
               <p className="card-text"><small className="text-warning">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
-            </div>
-          </div>
-          <div className="card text-white bg-dark">
-            <div className="card-header">About This Property</div>
-            <div className="card-body">
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card title="About" bordered={true}>
               <p className="card-title">Year Built</p>
               {renderPropData.yearBuiltData()}
               <p className="card-title">Square FT</p>
@@ -134,22 +134,23 @@ class PropertyDetail extends Component {
               {renderPropData.bedroomData()}
               <p className="card-title">Bathrooms</p>
               {renderPropData.bathroomData()}
-            </div>
-          </div>
-          <div className="card text-white bg-dark">
-            <div className="card-header">Last Transaction</div>
-            {renderPropData.lastSoldData()}
-          </div>
-          <div className="card text-white bg-dark">
-            <div className="card-header">Tax Assessment</div>
-            <div className="card-body">
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card title="Last Transaction" bordered={true}>
+              {renderPropData.lastSoldData()}
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card title="Tax Assessment" bordered={true}>
               <p className="card-title">Year</p>
               {renderPropData.taxYearData()}
               <p className="card-title">Price</p>
               {renderPropData.taxAssessData()}
-            </div>
-          </div>
-        </div>
+            </Card>
+          </Col>
+        </Row>
+        <PropertyDetailCard />
       </div>
     );
   }
