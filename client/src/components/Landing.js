@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import LandingCarousel from './LandingCarousel';
 
 class Landing extends Component {
   render() {
@@ -30,7 +29,6 @@ class Landing extends Component {
 
     return (
       <div style={style.parallax}>
-        {/* <LandingCarousel /> */}
         <div className="container" style={style.container}>
           <div className="row">
             <div className="col-md-12 text-center mb-3">
