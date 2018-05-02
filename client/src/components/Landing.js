@@ -30,7 +30,7 @@ class Landing extends Component {
 
     return (
       <div style={style.parallax}>
-        <LandingCarousel />
+        {/* <LandingCarousel /> */}
         <div className="container" style={style.container}>
           <div className="row">
             <div className="col-md-12 text-center mb-3">
