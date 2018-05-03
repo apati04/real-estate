@@ -5,7 +5,6 @@ const CurrentProjects = () => {
   return (
     <div style={{ marginTop: "20px" }}>
       <ul className="list-group list-group-flush">
-        {/* map through database to display projectlistItem */}
         <ProjectListItem/>
       </ul>
       <button className="btn btn-raised btn-primary" style={{ marginTop: "20px" }}>ADD NEW PROJECT</button>

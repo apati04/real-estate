@@ -49,7 +49,7 @@ class ProjectMap extends Component {
     return (
       <ContentLayout>
         <Link
-          to='/projects/edit'
+          to='/projects'
           className="btn btn-raised btn-danger float-right"
           style={style.button}
         >

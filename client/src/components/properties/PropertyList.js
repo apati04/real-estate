@@ -21,18 +21,6 @@ class PropertyList extends Component {
               >
                 EDIT
               </Link>
-              <Link
-                className="btn btn-sm btn-raised btn-info"
-                style={{ marginLeft: '10px' }}
-                to={{
-                  pathname: '/projects/map',
-                  state: {
-                    address: `${item.address}`,
-                  }
-                }}
-              >
-                VIEW MAP
-              </Link>
             </div>
           </li>
         </div>
