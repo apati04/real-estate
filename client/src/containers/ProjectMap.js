@@ -15,20 +15,26 @@ class ProjectMap extends Component {
     const propJson = properties.map(prop => {
       return {
         'address': prop.address,
-        'coordinates': prop.longitude < 0 ? [ prop.longitude, prop.latitude ] : [ prop.latitude, prop.longitude ]
+        'coordinates': prop.longitude < 0
+          ? [prop.longitude, prop.latitude]
+          : [prop.latitude, prop.longitude]
       }
     });
 
     const map = new mapboxgl.Map({
       container: 'mapbox',
       style: 'mapbox://styles/mapbox/outdoors-v10',
-      center: [ -95.712891, 37.090240 ],
+      center: [
+        -95.712891, 37.090240
+      ],
       zoom: 4
     });
 
     propJson.forEach(data => {
-      new mapboxgl.Marker().setLngLat(data.coordinates).addTo(map);
-      new mapboxgl.Popup().setLngLat(data.coordinates).setHTML(data.address).addTo(map);
+      const marker = new mapboxgl.Marker().setLngLat(data.coordinates).addTo(map);
+      marker._element.addEventListener('click', function() {
+        alert(data.address);
+      });
     });
   }
 
@@ -45,16 +51,10 @@ class ProjectMap extends Component {
 
     return (
       <ContentLayout>
-        <Link
-          to='/projects'
-          className="btn btn-raised btn-danger float-right"
-          style={style.button}
-        >
+        <Link to='/projects' className="btn btn-raised btn-danger float-right" style={style.button}>
           BACK
         </Link>
-        <div id='mapbox'
-          style={style.map}
-        />
+        <div id='mapbox' style={style.map}/>
       </ContentLayout>
     );
   }
@@ -62,8 +62,8 @@ class ProjectMap extends Component {
 
 function mapStateToProps({ mapData: data }) {
   return {
-    data: data.data
-  };
+     data: data.data
+   };
 }
 
 export default connect(mapStateToProps, actions)(ProjectMap);
