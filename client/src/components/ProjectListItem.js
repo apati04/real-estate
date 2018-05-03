@@ -25,7 +25,7 @@ class ProjectListItem extends Component {
               to={{
                 pathname: '/projects/map',
                 state: {
-                  
+                  properties: this.props.userProperties
                 }
               }}
             >
