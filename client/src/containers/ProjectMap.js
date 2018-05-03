@@ -14,16 +14,16 @@ class ProjectMap extends Component {
     const { properties } = this.props.location.state;
     const geojson = properties.map(prop => {
       return {
-        'coordinates': [ prop.latitude, prop.longitude ]
+        'address': prop.address,
+        'coordinates': prop.longitude < 0 ? [ prop.longitude, prop.latitude ] : [ prop.latitude, prop.longitude ]
       }
     });
-    console.log(geojson);
 
     const map = new mapboxgl.Map({
       container: 'mapbox',
       style: 'mapbox://styles/mapbox/outdoors-v10',
       center: [ -95.712891, 37.090240 ],
-      zoom: 3.5
+      zoom: 4
     });
 
     geojson.forEach(data => {
@@ -32,7 +32,6 @@ class ProjectMap extends Component {
   }
 
   render() {
-    console.log(this.props.location.state.properties);
     const style = {
       map: {
         height: '80vh',
