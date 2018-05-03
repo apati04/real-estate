@@ -9,9 +9,6 @@ class ProjectListItem extends Component {
   }
 
   render() {
-    console.log(this.props.userProperties.map(property => {
-      return { address: property.address, long: property.longitude, lat: property.latitude };
-    }));
     return (
       <div>
         <li className="list-group-item d-flex justify-content-between align-items-center">

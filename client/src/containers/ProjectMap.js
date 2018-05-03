@@ -12,7 +12,7 @@ class ProjectMap extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
     const { properties } = this.props.location.state;
-    const geojson = properties.map(prop => {
+    const propJson = properties.map(prop => {
       return {
         'address': prop.address,
         'coordinates': prop.longitude < 0 ? [ prop.longitude, prop.latitude ] : [ prop.latitude, prop.longitude ]
@@ -26,8 +26,9 @@ class ProjectMap extends Component {
       zoom: 4
     });
 
-    geojson.forEach(data => {
-      new mapboxgl.Marker().setLngLat(data.coordinates ).addTo(map);
+    propJson.forEach(data => {
+      new mapboxgl.Marker().setLngLat(data.coordinates).addTo(map);
+      new mapboxgl.Popup().setLngLat(data.coordinates).setHTML(data.address).addTo(map);
     });
   }
 
