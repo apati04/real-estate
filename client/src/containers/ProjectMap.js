@@ -43,7 +43,8 @@ class ProjectMap extends Component {
       },
       icon: {
         fontSize: '24px',
-        color: '#fff'
+        color: '#fff',
+        marginBottom: '10px'
       }
     }
     if (!this.state.collapsed) {
@@ -52,7 +53,7 @@ class ProjectMap extends Component {
           <Card
             cover={<img src='http://via.placeholder.com/150x150' className='img-fluid' alt='property' />}
             style={style.card}
-            >
+          >
             <div className='text-center'>
               <Icon type="home" style={style.icon}/>
             </div>
@@ -61,13 +62,13 @@ class ProjectMap extends Component {
               <h6 className='lead'>{`${cityState}, ${zipcode}`}</h6>
               <p className='small'>{`Latitude: ${this.state.latitude}`}</p>
               <p className='small'>{`Longitude: ${this.state.longitude}`}</p>
-          </div>
+            </div>
           </Card>
           <Button
             onClick={() => this.close()}
             style={style.closeBtn}
             className='btn-danger'
-            >
+          >
             <Icon type="close" style={{ fontSize: '24px' }}/>
           </Button>
       </Fragment>
@@ -92,9 +93,7 @@ class ProjectMap extends Component {
       const map = new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [
-          -95.712891, 37.090240
-        ],
+        center: [ -95.712891, 37.090240 ],
         zoom: 4
       });
 
