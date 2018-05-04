@@ -7,7 +7,7 @@ class Landing extends Component {
       parallax: {
         position: 'absolute',
         width: '100%',
-        top: '0',
+        top: '60px',
         left: '0'
       },
       text: {

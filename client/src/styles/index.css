@@ -22,3 +22,24 @@ body {
 .ant-card-head {
   background-color: #ebebeb !important;
 }
+
+.ant-carousel .slick-slide {
+  text-align: center;
+  min-height: 80vh;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+#mapsidebar.ant-layout-sider {
+  min-width: 250px !important;
+}
+
+#mapsidebar.ant-layout-sider-collapsed {
+  min-width: 0.1px !important;
+  max-width: 0.1px !important;
+}

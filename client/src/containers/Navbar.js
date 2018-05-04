@@ -25,6 +25,7 @@ class Navbar extends Component {
         <div className='align-middle'>
           <Dropdown
             overlay={menu}
+            placement='bottomLeft'
             trigger={['click']}
           >
             <Avatar

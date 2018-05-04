@@ -1,38 +1,128 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Layout, Menu, Icon, Card, Button } from 'antd';
 import * as actions from '../actions';
 import mapboxgl from 'mapbox-gl';
 import keys from '../config/keys';
 import ContentLayout from '../components/layout/ContentLayout';
+const { Sider } = Layout;
 
 mapboxgl.accessToken = keys.mapboxToken;
 
 class ProjectMap extends Component {
-  componentDidMount() {
-    this.props.fetchCurrentUserData();
-    this.props.fetchMapData(this.props.location.state.address);
+  state = {
+    collapsed: true,
+    address: '',
+    latitude: '',
+    longitude: ''
   }
 
-  componentDidUpdate() {
-    if (this.props.data.features) {
-      const lng = this.props.data.features[0].center[0];
-      const lat = this.props.data.features[0].center[1];
+  open() {
+    this.setState({ collapsed: false });
+  }
+
+  close() {
+    this.setState({ collapsed: true });
+  }
+
+  renderSidebarContent() {
+    const splitAddress = this.state.address.split(' ');
+    const cityState = splitAddress[splitAddress.length -2];
+    const zipcode = splitAddress[splitAddress.length -1];
+    const street = splitAddress.splice(splitAddress, splitAddress.length-2).join(' ');
+    const style = {
+      closeBtn: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%'
+      },
+      card: {
+        backgroundColor: '#001529',
+        border: 'none'
+      },
+      icon: {
+        fontSize: '24px',
+        color: '#fff',
+        marginBottom: '10px'
+      }
+    }
+    if (!this.state.collapsed) {
+      return (
+        <Fragment>
+          <Card
+            cover={<img src='http://via.placeholder.com/150x150' className='img-fluid' alt='property' />}
+            style={style.card}
+          >
+            <div className='text-center'>
+              <Icon type="home" style={style.icon}/>
+            </div>
+            <div style={{ color: '#fff' }}>
+              <h6 className='lead'>{street}</h6>
+              <h6 className='lead'>{`${cityState}, ${zipcode}`}</h6>
+              <p className='small'>{`Latitude: ${this.state.latitude}`}</p>
+              <p className='small'>{`Longitude: ${this.state.longitude}`}</p>
+            </div>
+          </Card>
+          <Button
+            onClick={() => this.close()}
+            style={style.closeBtn}
+            className='btn-danger'
+          >
+            <Icon type="close" style={{ fontSize: '24px' }}/>
+          </Button>
+      </Fragment>
+      );
+    } else {
+      return <Menu theme="dark" mode="inline"/>
+    }
+  }
+
+  renderMap() {
+    if (this.props.location.state) {
+      const { properties } = this.props.location.state;
+      const propJson = properties.map(prop => {
+        return {
+          'address': prop.address,
+          'coordinates': prop.longitude < 0
+          ? [prop.longitude, prop.latitude]
+          : [prop.latitude, prop.longitude]
+        }
+      });
+
       const map = new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [ lng, lat ],
-        zoom: 15
+        center: [ -95.712891, 37.090240 ],
+        zoom: 4
       });
-      new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
+
+      propJson.forEach(data => {
+        const marker = new mapboxgl.Marker().setLngLat(data.coordinates).addTo(map);
+        marker._element.addEventListener('click', () => {
+          this.open();
+          this.setState({
+            address: data.address,
+            latitude: data.coordinates[1],
+            longitude: data.coordinates[0]
+          });
+        });
+      });
     } else {
       new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [ -73.98, 40.75 ],
-        zoom: 1
+        center: [
+          -95.712891, 37.090240
+        ],
+        zoom: 4
       });
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchCurrentUserData();
+    this.renderMap();
   }
 
   render() {
@@ -43,21 +133,30 @@ class ProjectMap extends Component {
       },
       button: {
         marginBottom: '20px'
+      },
+      mapBox: {
+        display: 'flex',
+        width: '100%',
+        marginTop: '60px'
       }
     }
 
     return (
-      <ContentLayout>
-        <Link
-          to='/projects/edit'
-          className="btn btn-raised btn-danger float-right"
-          style={style.button}
-        >
-          BACK
-        </Link>
-        <div id='mapbox'
-          style={style.map}
-        />
+        <ContentLayout>
+          <Link to='/projects' className="btn btn-raised btn-danger float-right" style={style.button}>
+            BACK
+          </Link>
+          <div style={style.mapBox}>
+            <div id='mapbox' style={style.map}/>
+            <Sider
+              collapsible="collapsible"
+              collapsed={this.state.collapsed}
+              trigger={null}
+              id='mapsidebar'
+              >
+              {this.renderSidebarContent()}
+            </Sider>
+          </div>
       </ContentLayout>
     );
   }
@@ -65,8 +164,8 @@ class ProjectMap extends Component {
 
 function mapStateToProps({ mapData: data }) {
   return {
-    data: data.data
-  };
+     data: data.data
+   };
 }
 
 export default connect(mapStateToProps, actions)(ProjectMap);
