@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -30,15 +29,13 @@ require('./routes/auth')(app);
 require('./routes/twitter')(app);
 require('./routes/buildingRoutes')(app);
 require('./routes/projectRoutes')(app);
-if (process.env.NODE_ENV === 'production') {
+if (['production', 'ci'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve('client', 'build', 'index.html'));
+  });
 }
-
-// Send every request to the React app
-// Define any API routes before this runs
-app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
