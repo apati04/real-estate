@@ -5,7 +5,7 @@ const { Footer } = Layout;
 const FooterNav = () => {
   return (
     <Footer style={{ textAlign: 'center' }}>
-      Ant Design ©2016 Created by Ant UED
+      Real Estate Manager ©2018 Created by AITech
     </Footer>
   );
 }
