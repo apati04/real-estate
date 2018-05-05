@@ -32,7 +32,7 @@ class Map extends Component {
         center: [
           -95.712891, 37.090240
         ],
-        zoom: 4
+        zoom: 3.5
       });
     }
   }
@@ -53,7 +53,7 @@ class Map extends Component {
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
         center: [ -95.712891, 37.090240 ],
-        zoom: 4
+        zoom: 3.5
       });
     }
   }
