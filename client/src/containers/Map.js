@@ -12,7 +12,6 @@ mapboxgl.accessToken = keys.mapboxToken;
 class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    this.props.fetchMapData([ -77.05, 38.889 ]);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async position => {
         const { coords: { longitude }} = await position;
@@ -27,7 +26,14 @@ class Map extends Component {
       });
     } else {
       alert('This browser does not support geolocation.');
-      this.props.fetchMapData([ -77.05, 38.889 ]);
+      new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/outdoors-v10',
+        center: [
+          -95.712891, 37.090240
+        ],
+        zoom: 4
+      });
     }
   }
 
@@ -46,8 +52,8 @@ class Map extends Component {
       new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [ -73.98, 40.75 ],
-        zoom: 1
+        center: [ -95.712891, 37.090240 ],
+        zoom: 4
       });
     }
   }
