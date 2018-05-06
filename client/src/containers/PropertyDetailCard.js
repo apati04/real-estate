@@ -47,9 +47,17 @@ class PropertyDetailCard extends Component {
       </div>
     };
 
+    const style = {
+      card: {
+        marginTop: '10px',
+        minHeight: '440px'
+      }
+    }
+
     return (
       <Fragment>
-        <Card style={{ marginTop: '10px', minHeight: '440px' }}
+        <Card 
+          style={style.card}
           tabList={tabListNoTitle}
           activeTabKey={this.state.noTitleKey}
           onTabChange={(key) => {
