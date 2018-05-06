@@ -190,7 +190,7 @@ class PropertyDetail extends Component {
               zpid: `${result.zpid._text}`
             }
           }}>
-          + add property
+          <i className="fas fa-plus-circle" /> add property
         </Link>
         <PropertyDetailCard
           propData = {renderPropData}

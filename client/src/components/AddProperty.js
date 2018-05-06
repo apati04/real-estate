@@ -69,11 +69,11 @@ class EditProperty extends Component {
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <button
-                className="btn btn-raised btn-info float-right"
+                className="btn btn-raised btn-default float-right"
                 style={{ marginBottom: '10px' }}
                 type="submit"
               >
-                SAVE PROPERTY
+                <i className="fas fa-plus-circle" /> SAVE PROPERTY
               </button>
               <Field
                 label="Address"
