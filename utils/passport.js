@@ -10,7 +10,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
+  User.findById(id).then(user => {
     done(null, user);
   });
 });
@@ -37,24 +37,24 @@ passport.use(
   )
 );
 
-passport.use(
-  new TwitterStrategy(
-    {
-      consumerKey: keys.twitterClientID,
-      consumerSecret: keys.twitterClientSecret,
-      callbackURL: '/auth/twitter/callback',
-      proxy: true
-    },
-    async (token, tokenSecret, profile, done) => {
-      const currentUser = await User.findOne({ twitterId: profile.id });
-      if (currentUser) {
-        return done(null, currentUser);
-      }
-      const twitterUser = await new User({
-        twitterId: profile.id,
-        userName: profile.displayName
-      }).save();
-      done(null, twitterUser);
-    }
-  )
-);
+// passport.use(
+//   new TwitterStrategy(
+//     {
+//       consumerKey: keys.twitterClientID,
+//       consumerSecret: keys.twitterClientSecret,
+//       callbackURL: '/auth/twitter/callback',
+//       proxy: true
+//     },
+//     async (token, tokenSecret, profile, done) => {
+//       const currentUser = await User.findOne({ twitterId: profile.id });
+//       if (currentUser) {
+//         return done(null, currentUser);
+//       }
+//       const twitterUser = await new User({
+//         twitterId: profile.id,
+//         userName: profile.displayName
+//       }).save();
+//       done(null, twitterUser);
+//     }
+//   )
+// );
