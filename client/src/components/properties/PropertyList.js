@@ -19,7 +19,7 @@ class PropertyList extends Component {
                 to="/projects/edit"
                 className="btn btn-sm btn-raised btn-primary"
               >
-                EDIT
+                <i className="fas fa-edit" /> EDIT
               </Link>
             </div>
           </li>

@@ -144,7 +144,7 @@ class ProjectMap extends Component {
     return (
         <ContentLayout>
           <Link to='/projects' className="btn btn-raised btn-danger float-right" style={style.button}>
-            BACK
+            <i className="fas fa-undo" /> BACK
           </Link>
           <div style={style.mapBox}>
             <div id='mapbox' style={style.map}/>

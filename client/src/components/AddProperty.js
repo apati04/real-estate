@@ -135,7 +135,7 @@ class EditProperty extends Component {
           </div>
         </div>
         <Link to="/projects/edit" className="btn btn-raised btn-danger float-right">
-          BACK
+          <i className="fas fa-undo" /> BACK
         </Link>
       </ContentLayout>
     );

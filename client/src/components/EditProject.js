@@ -25,15 +25,15 @@ class EditProject extends Component {
             to="/projects/add/properties"
             className="btn btn-raised btn-default text-uppercase"
           >
-            + add property
+            <i className="fas fa-plus-circle" /> add property
           </Link>
         </div>
         <div className="float-right">
           <Link to="/projects" className="btn btn-raised btn-danger">
-            RETURN TO PROJECTS
+            <i className="fas fa-undo" /> RETURN TO PROJECTS
           </Link>
           <button className="btn btn-raised btn-warning">
-            DELETE SELECTED PROPERTIES
+            <i className="fas fa-trash-alt" /> DELETE SELECTED PROPERTIES
           </button>
         </div>
       </ContentLayout>
