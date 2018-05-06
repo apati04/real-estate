@@ -4,7 +4,7 @@ import keys from '../config/keys';
 import Search from '../components/forms/Search';
 import PropertyDetail from './PropertyDetail';
 import mapboxgl from 'mapbox-gl';
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -67,6 +67,10 @@ class Map extends Component {
         {
           key: 'TaxAssessment',
           tab: 'Tax Assessment',
+        },
+        {
+          key: 'AddProperty',
+          tab: <Button disabled className='btn btn-raised btn-default text-uppercase'><i className="fas fa-plus-circle" /> add property</Button>
         }
       ];
 
@@ -80,11 +84,7 @@ class Map extends Component {
     } else if (this.props.loading === '') {
       return <div />;
     } else {
-      return (
-        <div>
-          <PropertyDetail />
-        </div>
-      );
+      return <PropertyDetail />
     }
   };
 

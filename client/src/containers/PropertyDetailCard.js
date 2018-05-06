@@ -25,10 +25,14 @@ class PropertyDetailCard extends Component {
       {
         key: 'TaxAssessment',
         tab: 'Tax Assessment',
+      },
+      {
+        key: 'AddProperty',
+        tab: this.props.propData.renderAddBtn()
       }
     ];
 
-    const contentListNoTitle = {
+    const cardContent = {
       Location: this.props.propData.locationData(),
       About: <div>
         {this.props.propData.yearBuiltData()}
@@ -49,7 +53,6 @@ class PropertyDetailCard extends Component {
 
     const style = {
       card: {
-        marginTop: '10px',
         minHeight: '440px'
       }
     }
@@ -64,7 +67,7 @@ class PropertyDetailCard extends Component {
             this.onTabChange(key, 'noTitleKey');
           }}
         >
-          {contentListNoTitle[this.state.noTitleKey]}
+          {cardContent[this.state.noTitleKey]}
         </Card>
       </Fragment>
     );
