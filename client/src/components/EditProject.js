@@ -40,7 +40,10 @@ class EditProject extends Component {
           <Link to="/projects" className="btn btn-raised btn-danger">
             <i className="fas fa-undo" /> RETURN TO PROJECTS
           </Link>
-          <button className="btn btn-raised btn-warning">
+          <button
+            onClick={this.handleDeleteClick}
+            className="btn btn-raised btn-warning"
+          >
             <i className="fas fa-trash-alt" /> DELETE SELECTED PROPERTIES
           </button>
         </div>
