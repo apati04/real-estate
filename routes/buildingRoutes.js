@@ -49,4 +49,37 @@ module.exports = app => {
     const buildings = await Building.find({ _user: req.user.id });
     res.send(buildings);
   });
+
+  app.delete(
+    '/api/building/delete/:id',
+    requireAuth,
+    async (req, res, next) => {
+      const buildingId = req.params.id;
+      try {
+        await Building.remove({ _id: buildingId });
+        const user = await req.user.save();
+        res.send(user);
+      } catch (error) {
+        res.status(442).send(error);
+      }
+    }
+  );
 };
+/**
+ *  try {
+      await building.save();
+      const user = await req.user.save();
+      res.send(user);
+    } catch (error) {
+      res.status(442).send(error);
+    }
+ */
+/**
+ *   delete(req, res, next) {
+    const driverId = req.params.id;
+
+    Driver.findByIdAndRemove({ _id: driverId })
+      .then(driver => res.status(204).send(driver))
+      .catch(next);
+  }
+ */

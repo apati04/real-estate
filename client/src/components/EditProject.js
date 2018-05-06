@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import ContentLayout from './layout/ContentLayout';
 import PropertyList from '../components/properties/PropertyList';
 
 class EditProject extends Component {
+  state = { propertyId: null };
   componentDidMount() {
     this.props.fetchCurrentUserData();
   }
-
+  handleDeleteClick = () => {
+    const bId = this.state.propertyId;
+    this.props.deleteSelectedProperty(bId, this.props.history);
+  };
+  deleteProperty = propertyId => {
+    this.setState({ propertyId });
+  };
   render() {
+    console.log(this.state);
     return (
       <ContentLayout>
         <div id="mapbox" />
         <div style={{ marginTop: '20px' }}>
           <ul className="list-group list-group-flush">
             {/* map through database to display PropertyListItem */}
-            <PropertyList />
+            <PropertyList deleteProperty={this.deleteProperty} />
           </ul>
         </div>
         <div className="float-left">
@@ -32,8 +40,11 @@ class EditProject extends Component {
           <Link to="/projects" className="btn btn-raised btn-danger">
             RETURN TO PROJECTS
           </Link>
-          <button className="btn btn-raised btn-warning">
-            DELETE SELECTED PROPERTIES
+          <button
+            onClick={this.handleDeleteClick}
+            className="btn btn-raised btn-warning"
+          >
+            DELETE PROPERTY
           </button>
         </div>
       </ContentLayout>
@@ -41,4 +52,4 @@ class EditProject extends Component {
   }
 }
 
-export default connect(null, actions)(EditProject);
+export default withRouter(connect(null, actions)(EditProject));

@@ -28,23 +28,27 @@ class EditProperty extends Component {
     if (!data) {
       return (
         <img
-          src='http://via.placeholder.com/350x350'
+          src="http://via.placeholder.com/350x350"
           style={{ width: 350, height: 350 }}
           className="img-fluid"
           alt="placeholder"
         />
-      )
+      );
     } else if (!data.response) {
       return (
         <img
-          src='http://via.placeholder.com/350x350'
+          src="http://via.placeholder.com/350x350"
           style={{ width: 350, height: 350 }}
           className="img-fluid"
           alt="placeholder"
         />
-      )
+      );
     } else {
-      const { response: { images: { image: url } } } = data;
+      const {
+        response: {
+          images: { image: url }
+        }
+      } = data;
       return (
         <img
           src={url.url._text}
@@ -52,20 +56,18 @@ class EditProperty extends Component {
           className="img-fluid"
           alt="placeholder"
         />
-      )
+      );
     }
   }
 
   render() {
-   const { handleSubmit } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <ContentLayout>
         <div id="mapbox" />
         <div className="row">
-          <div className="col-md-3">
-            {this.renderPropertyImg()}
-          </div>
+          <div className="col-md-3">{this.renderPropertyImg()}</div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <button
@@ -75,11 +77,7 @@ class EditProperty extends Component {
               >
                 SAVE PROPERTY
               </button>
-              <Field
-                label="Address"
-                name="address"
-                component={FormField}
-              />
+              <Field label="Address" name="address" component={FormField} />
               <div className="row">
                 <div className="col-md-6">
                   <Field
@@ -134,7 +132,10 @@ class EditProperty extends Component {
             </div>
           </div>
         </div>
-        <Link to="/projects/edit" className="btn btn-raised btn-danger float-right">
+        <Link
+          to="/projects/edit"
+          className="btn btn-raised btn-danger float-right"
+        >
           BACK
         </Link>
       </ContentLayout>
@@ -172,7 +173,7 @@ function mapStateToProps({ imgData: img }, ownProps) {
         longitude: `${longitude}`,
         latitude: `${latitude}`
       }
-    }
+    };
   } else {
     return {
       img: img.img,
@@ -181,12 +182,14 @@ function mapStateToProps({ imgData: img }, ownProps) {
         longitude: '',
         latitude: ''
       }
-    }
+    };
   }
 }
 
-export default connect(mapStateToProps, actions)(reduxForm({
-  form: 'propDetail',
-  enableReinitialize: true,
-  validate
-})(withRouter(EditProperty)));
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'propDetail',
+    enableReinitialize: true,
+    validate
+  })(withRouter(EditProperty))
+);
