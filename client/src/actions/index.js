@@ -8,7 +8,8 @@ import {
   FETCH_MAP_DATA,
   LOADING_DATA,
   RESET_PROP_DATA,
-  FETCH_PROPERTIES
+  FETCH_PROPERTIES,
+  DELETE_SELECTED_PROPERTY
 } from './types';
 import keys from '../config/keys';
 
@@ -79,7 +80,5 @@ export const fetchProperties = () => async dispatch => {
 export const deleteSelectedProperty = (value, history) => async dispatch => {
   const deleteResponse = await axios.delete(`/api/building/delete/${value}`);
   const { data } = deleteResponse;
-  console.log(data);
-  history.push('/projects/edit');
-  dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
+  dispatch({ type: DELETE_SELECTED_PROPERTY, payload: data });
 };
