@@ -29,6 +29,10 @@ require('./routes/auth')(app);
 require('./routes/twitter')(app);
 require('./routes/buildingRoutes')(app);
 require('./routes/projectRoutes')(app);
+
+app.use((err, req, res, next) => {
+  res.status(422).send({ error: err.message });
+});
 if (['production', 'ci'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
   const path = require('path');
