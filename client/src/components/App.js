@@ -3,7 +3,6 @@ import { Layout } from 'antd';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Sidebar from '../containers/Sidebar';
 import Navbar from '../containers/Navbar';
-import FooterNav from './FooterNav';
 import Login from '../containers/Login';
 import Projects from '../containers/Projects';
 import Map from '../containers/Map';
@@ -20,6 +19,7 @@ class App extends Component {
       <BrowserRouter>
         <Layout>
           <Navbar />
+          
           <Layout>
             <Sidebar />
             <Switch>
@@ -38,7 +38,6 @@ class App extends Component {
               <Route component={NotFound} />
             </Switch>
           </Layout>
-          <FooterNav />
         </Layout>
       </BrowserRouter>
     );
