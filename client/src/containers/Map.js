@@ -12,29 +12,14 @@ mapboxgl.accessToken = keys.mapboxToken;
 class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async position => {
-        const { coords: { longitude }} = await position;
-        const { coords: { latitude }} = await position;
-        const map = new mapboxgl.Map({
-          container: 'mapbox',
-          style: 'mapbox://styles/mapbox/outdoors-v10',
-          center: [ longitude, latitude ],
-          zoom: 15
-        });
-        new mapboxgl.Marker().setLngLat([ longitude, latitude ]).addTo(map);
-      });
-    } else {
-      alert('This browser does not support geolocation.');
-      new mapboxgl.Map({
-        container: 'mapbox',
-        style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [
-          -95.712891, 37.090240
-        ],
-        zoom: 3.5
-      });
-    }
+    new mapboxgl.Map({
+      container: 'mapbox',
+      style: 'mapbox://styles/mapbox/outdoors-v10',
+      center: [
+        -95.712891, 37.090240
+      ],
+      zoom: 3
+    });
   }
 
   componentDidUpdate() {
