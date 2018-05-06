@@ -55,6 +55,7 @@ module.exports = app => {
     requireAuth,
     async (req, res, next) => {
       const buildingId = req.params.id;
+      console.log(buildingId);
       try {
         await Building.remove({ _id: buildingId });
         const user = await req.user.save();
