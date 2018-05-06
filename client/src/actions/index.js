@@ -30,11 +30,15 @@ export const fetchPropertyData = (address, citystatezip) => async dispatch => {
 };
 
 export const fetchImgData = zpid => async dispatch => {
-  const request = await axios.get(`https://cors-anywhere.herokuapp.com/${keys.zillowImgUrl}?zws-id=${keys.zillowKey}&zpid=${zpid}`);
+  const request = await axios.get(
+    `https://cors-anywhere.herokuapp.com/${keys.zillowImgUrl}?zws-id=${
+      keys.zillowKey
+    }&zpid=${zpid}`
+  );
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
   dispatch({ type: FETCH_PROPERTY_IMG, payload: result });
-}
+};
 
 export const fetchMapData = location => async dispatch => {
   const request = await axios.get(
@@ -61,7 +65,6 @@ export const resetPropData = () => {
 };
 
 export const submitNewBuilding = (values, history) => async dispatch => {
-  console.log('vals: ', values, 'history', history);
   const postBuilding = await axios.post('/api/building', values);
   const { data } = postBuilding;
   history.push('/projects/edit');
@@ -71,4 +74,12 @@ export const submitNewBuilding = (values, history) => async dispatch => {
 export const fetchProperties = () => async dispatch => {
   const response = await axios.get('/api/building');
   dispatch({ type: FETCH_PROPERTIES, payload: response.data });
+};
+
+export const deleteSelectedProperty = (value, history) => async dispatch => {
+  const deleteResponse = await axios.delete(`/api/building/delete/${value}`);
+  const { data } = deleteResponse;
+  console.log(data);
+  history.push('/projects/edit');
+  dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
 };
