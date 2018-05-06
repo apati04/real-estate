@@ -11,13 +11,15 @@ class ProjectListItem extends Component {
   render() {
     return (
       <div>
-        <li className="list-group-item d-flex justify-content-between align-items-center">
-          <input type="radio" style={{marginLeft: "10px"}} name="option"/>
+        <li className="d-flex justify-content-between align-items-center">
+          <input type="radio" style={{ marginLeft: "10px" }} name="option"/>
           <h6>Project List Item with Radio Button, Edit & View Map Button 1</h6>
           <div className="d-flex">
-            <Link to='/projects/edit' className="btn btn-sm btn-raised btn-primary">EDIT</Link>
+            <Link to='/projects/edit' className="btn btn-sm btn-raised btn-primary">
+              <i className="fas fa-edit" /> EDIT
+            </Link>
             <Link
-              className="btn btn-sm btn-raised btn-info"
+              className="btn btn-sm btn-raised btn-default"
               style={{ marginLeft: '10px' }}
               to={{
                 pathname: '/projects/map',
@@ -26,7 +28,7 @@ class ProjectListItem extends Component {
                 }
               }}
             >
-              VIEW MAP
+              <i className="fas fa-map-marker-alt" /> VIEW MAP
             </Link>
           </div>
         </li>

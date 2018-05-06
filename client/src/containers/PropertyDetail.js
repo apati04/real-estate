@@ -174,29 +174,27 @@ class PropertyDetail extends Component {
             </Fragment>
           )
         }
+      },
+      renderAddBtn() {
+        return (
+          <Link
+            className="btn btn-raised btn-default text-uppercase"
+            to={{
+              pathname: '/projects/add/properties',
+              state: {
+                address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
+                longitude: `${result.address.longitude._text}`,
+                latitude: `${result.address.latitude._text}`,
+                zpid: `${result.zpid._text}`
+              }
+            }}>
+            <i className="fas fa-plus-circle" /> add property
+          </Link>
+        );
       }
     }
 
-    return (
-      <div>
-        <Link
-          className="btn btn-raised btn-default text-uppercase"
-          to={{
-            pathname: '/projects/add/properties',
-            state: {
-              address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
-              longitude: `${result.address.longitude._text}`,
-              latitude: `${result.address.latitude._text}`,
-              zpid: `${result.zpid._text}`
-            }
-          }}>
-          + add property
-        </Link>
-        <PropertyDetailCard
-          propData = {renderPropData}
-        />
-      </div>
-    );
+    return <PropertyDetailCard propData = {renderPropData} />
   }
 }
 

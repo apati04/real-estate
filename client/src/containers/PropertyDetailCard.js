@@ -11,7 +11,7 @@ class PropertyDetailCard extends Component {
   }
   render() {
 
-    const tabListNoTitle = [
+    const tabList = [
       {
         key: 'Location',
         tab: 'Location'
@@ -25,10 +25,14 @@ class PropertyDetailCard extends Component {
       {
         key: 'TaxAssessment',
         tab: 'Tax Assessment',
+      },
+      {
+        key: 'AddProperty',
+        tab: this.props.propData.renderAddBtn()
       }
     ];
 
-    const contentListNoTitle = {
+    const cardContent = {
       Location: this.props.propData.locationData(),
       About: <div>
         {this.props.propData.yearBuiltData()}
@@ -47,16 +51,23 @@ class PropertyDetailCard extends Component {
       </div>
     };
 
+    const style = {
+      card: {
+        minHeight: '440px'
+      }
+    }
+
     return (
       <Fragment>
-        <Card style={{ marginTop: '10px', minHeight: '440px' }}
-          tabList={tabListNoTitle}
+        <Card
+          style={style.card}
+          tabList={tabList}
           activeTabKey={this.state.noTitleKey}
           onTabChange={(key) => {
             this.onTabChange(key, 'noTitleKey');
           }}
         >
-          {contentListNoTitle[this.state.noTitleKey]}
+          {cardContent[this.state.noTitleKey]}
         </Card>
       </Fragment>
     );
