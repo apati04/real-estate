@@ -26,7 +26,7 @@ class Search extends Component {
           name="citystatezip"
           component={FormField}
         />
-        <button className="btn btn-raised btn-success" type="submit">SEARCH</button>
+        <button className="btn btn-raised btn-default" type="submit"><i className="fas fa-search" /> SEARCH</button>
       </form>
     );
   }

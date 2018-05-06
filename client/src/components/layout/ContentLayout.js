@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 const { Content } = Layout;
 const style = {
   layout: {
-    padding: '0 24px 24px'
+    padding: '0 24px'
   },
   content: {
     background: '#fff',

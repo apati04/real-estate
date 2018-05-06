@@ -4,6 +4,7 @@ import keys from '../config/keys';
 import Search from '../components/forms/Search';
 import PropertyDetail from './PropertyDetail';
 import mapboxgl from 'mapbox-gl';
+import { Button, Card } from 'antd';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -12,29 +13,14 @@ mapboxgl.accessToken = keys.mapboxToken;
 class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async position => {
-        const { coords: { longitude }} = await position;
-        const { coords: { latitude }} = await position;
-        const map = new mapboxgl.Map({
-          container: 'mapbox',
-          style: 'mapbox://styles/mapbox/outdoors-v10',
-          center: [ longitude, latitude ],
-          zoom: 15
-        });
-        new mapboxgl.Marker().setLngLat([ longitude, latitude ]).addTo(map);
-      });
-    } else {
-      alert('This browser does not support geolocation.');
-      new mapboxgl.Map({
-        container: 'mapbox',
-        style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [
-          -95.712891, 37.090240
-        ],
-        zoom: 3.5
-      });
-    }
+    new mapboxgl.Map({
+      container: 'mapbox',
+      style: 'mapbox://styles/mapbox/outdoors-v10',
+      center: [
+        -95.712891, 37.090240
+      ],
+      zoom: 3
+    });
   }
 
   componentDidUpdate() {
@@ -60,19 +46,45 @@ class Map extends Component {
 
   renderPropertyDetail = () => {
     if (this.props.loading) {
+      const style = {
+        card: {
+          marginTop: '10px',
+          minHeight: '440px'
+        }
+      }
+
+      const tabList = [
+        {
+          key: 'Location',
+          tab: 'Location'
+        }, {
+          key: 'About',
+          tab: 'About'
+        }, {
+          key: 'LastTransaction',
+          tab: 'Last Transaction',
+        },
+        {
+          key: 'TaxAssessment',
+          tab: 'Tax Assessment',
+        },
+        {
+          key: 'AddProperty',
+          tab: <Button disabled className='btn btn-raised btn-default text-uppercase'><i className="fas fa-plus-circle" /> add property</Button>
+        }
+      ];
+
       return (
-        <div>
-          <div>Loading...</div>
-        </div>
+        <Card
+          loading={true}
+          style={style.card}
+          tabList={tabList}
+        />
       );
     } else if (this.props.loading === '') {
       return <div />;
     } else {
-      return (
-        <div>
-          <PropertyDetail />
-        </div>
-      );
+      return <PropertyDetail />
     }
   };
 
