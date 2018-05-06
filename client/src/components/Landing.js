@@ -5,10 +5,8 @@ class Landing extends Component {
   render() {
     const style = {
       parallax: {
-        position: 'absolute',
         width: '100%',
-        top: '60px',
-        left: '0'
+        backgroundColor: 'powderblue'
       },
       text: {
         color: 'white'
