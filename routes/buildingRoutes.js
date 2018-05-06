@@ -55,13 +55,13 @@ module.exports = app => {
     requireAuth,
     async (req, res, next) => {
       const buildingId = req.params.id;
-      console.log(buildingId);
       try {
-        await Building.remove({ _id: buildingId });
-        const user = await req.user.save();
-        res.send(user);
+        const deleteBuilding = await Building.findByIdAndRemove({
+          _id: buildingId
+        });
+        res.send(deleteBuilding);
       } catch (error) {
-        res.status(442).send(error);
+        res.status(422).send(error);
       }
     }
   );
