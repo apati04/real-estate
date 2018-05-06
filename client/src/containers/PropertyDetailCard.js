@@ -11,7 +11,7 @@ class PropertyDetailCard extends Component {
   }
   render() {
 
-    const tabListNoTitle = [
+    const tabList = [
       {
         key: 'Location',
         tab: 'Location'
@@ -56,9 +56,9 @@ class PropertyDetailCard extends Component {
 
     return (
       <Fragment>
-        <Card 
+        <Card
           style={style.card}
-          tabList={tabListNoTitle}
+          tabList={tabList}
           activeTabKey={this.state.noTitleKey}
           onTabChange={(key) => {
             this.onTabChange(key, 'noTitleKey');

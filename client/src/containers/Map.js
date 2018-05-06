@@ -4,6 +4,7 @@ import keys from '../config/keys';
 import Search from '../components/forms/Search';
 import PropertyDetail from './PropertyDetail';
 import mapboxgl from 'mapbox-gl';
+import { Card } from 'antd';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -45,10 +46,36 @@ class Map extends Component {
 
   renderPropertyDetail = () => {
     if (this.props.loading) {
+      const style = {
+        card: {
+          marginTop: '10px',
+          minHeight: '440px'
+        }
+      }
+
+      const tabList = [
+        {
+          key: 'Location',
+          tab: 'Location'
+        }, {
+          key: 'About',
+          tab: 'About'
+        }, {
+          key: 'LastTransaction',
+          tab: 'Last Transaction',
+        },
+        {
+          key: 'TaxAssessment',
+          tab: 'Tax Assessment',
+        }
+      ];
+
       return (
-        <div>
-          <div>Loading...</div>
-        </div>
+        <Card
+          loading={true}
+          style={style.card}
+          tabList={tabList}
+        />
       );
     } else if (this.props.loading === '') {
       return <div />;
