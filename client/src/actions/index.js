@@ -96,3 +96,7 @@ export const deleteSelectedProperty = (value, history) => async dispatch => {
   const { data } = deleteResponse;
   dispatch({ type: DELETE_SELECTED_PROPERTY, payload: data });
 };
+
+export const fetchUserProperty = id => async dispatch => {
+  const userResponse = await axios.get('/api/building/${id}');
+};
