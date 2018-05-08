@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import ContentLayout from './layout/ContentLayout';
@@ -52,4 +52,4 @@ class EditProject extends Component {
   }
 }
 
-export default withRouter(connect(null, actions)(EditProject));
+export default connect(null, actions)(EditProject);
