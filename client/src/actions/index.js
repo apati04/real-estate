@@ -65,7 +65,18 @@ export const resetPropData = () => {
   };
 };
 
-export const submitNewBuilding = (values, history) => async dispatch => {
+export const submitNewBuilding = (
+  values,
+  uploadFile,
+  history
+) => async dispatch => {
+  const upload = await axios.get('/api/awsUpload');
+  const params = {
+    headers: {
+      'Content-Type': uploadFile.type
+    }
+  };
+  await axios.put(upload.data.url, uploadFile, params);
   const postBuilding = await axios.post('/api/building', values);
   const { data } = postBuilding;
   history.push('/projects/edit');

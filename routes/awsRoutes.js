@@ -9,7 +9,7 @@ const s3 = new AWS.S3({
   secretAccessKey: keys.secretAccessKey
 });
 module.exports = app => {
-  app.get('/api/awsUpload', (req, res) => {
+  app.get('/api/awsUpload', requireAuth, (req, res) => {
     const uniqueKey = `${req.user.id}/${uuid()}.jpeg`;
 
     const bucketObj = {
