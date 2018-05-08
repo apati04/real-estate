@@ -8,7 +8,7 @@ class PropertyList extends Component {
   }
   renderProperties() {
     const { userProperties, deleteProperty } = this.props;
-    return userProperties.buildings.reverse().map(item => {
+    return userProperties.buildings.map(item => {
       return (
         <div key={item._id}>
           <li className="list-group-item d-flex justify-content-between align-items-center">
