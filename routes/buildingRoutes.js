@@ -18,9 +18,11 @@ module.exports = app => {
       placemark,
       notes,
       certifications,
-      prevOwner
+      prevOwner,
+      imageUrl
     } = req.body;
     const building = new Building({
+      imageUrl,
       address,
       longitude,
       latitude,

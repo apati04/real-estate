@@ -71,16 +71,19 @@ export const submitNewBuilding = (
   history
 ) => async dispatch => {
   const upload = await axios.get('/api/awsUpload');
-  const params = {
+  const awsRequest = await axios.put(upload.data.url, uploadFile, {
     headers: {
       'Content-Type': uploadFile.type
     }
-  };
-  await axios.put(upload.data.url, uploadFile, params);
-  const postBuilding = await axios.post('/api/building', values);
-  const { data } = postBuilding;
-  history.push('/projects/edit');
-  dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
+  });
+  console.log('upload: ', upload);
+  console.log('aws: ', awsRequest);
+  // const postBuilding = await axios.post('/api/building', {
+  //   ...values,
+  //   imageUrl: upload.data.key
+  // });
+  // history.push('/projects/edit');
+  // dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
 };
 
 export const fetchProperties = () => async dispatch => {
