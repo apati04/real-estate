@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import ContentLayout from './layout/ContentLayout';
 import PropertyList from '../components/properties/PropertyList';
 
-class EditProject extends Component {
+class BuildingProfile extends Component {
   state = { propertyId: null };
   componentDidMount() {
-    this.props.fetchCurrentUserData();
+    console.log('building profile: ', this.props.currentUser);
   }
   handleDeleteClick = () => {
     const bId = this.state.propertyId;
@@ -52,4 +52,7 @@ class EditProject extends Component {
   }
 }
 
-export default withRouter(connect(null, actions)(EditProject));
+function mapStateToProps({ currentUser }) {
+  return { currentUser };
+}
+export default connect(mapStateToProps, actions)(BuildingProfile);
