@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ContentLayout from './layout/ContentLayout';
+import { fetchCurrentUserData } from '../actions';
+import { connect } from 'react-redux';
 
-const NotFound = () => {
+class NotFound extends Component {
 
-  const style = {
-    container: {
-      marginRight: '250px'
-    }
+  componentDidMount() {
+    this.props.fetchCurrentUserData();
   }
 
-  return (
-    <div style={style.container}>
-      <h1>PAGE NOT FOUND</h1>
-    </div>
-  );
+  render() {
+    return (
+      <ContentLayout>
+        <h1>PAGE NOT FOUND</h1>
+      </ContentLayout>
+    );
+  }
 }
 
-export default NotFound;
+export default connect(null, { fetchCurrentUserData })(NotFound);
