@@ -8,6 +8,7 @@ import { Link, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 
 class EditProperty extends Component {
+  state = { file: null };
   componentDidMount() {
     if (this.props.location.state) {
       this.props.fetchImgData(this.props.location.state.zpid);
@@ -21,7 +22,7 @@ class EditProperty extends Component {
 
   formSubmit = values => {
     const { submitNewBuilding, history } = this.props;
-    submitNewBuilding(values, history);
+    submitNewBuilding(values, this.state.file, history);
   };
 
   renderPropertyImg() {
@@ -53,7 +54,9 @@ class EditProperty extends Component {
       );
     }
   }
-
+  onFileUpload = e => {
+    this.setState({ file: e.target.files[0] });
+  };
   render() {
     const { handleSubmit } = this.props;
 
@@ -61,8 +64,8 @@ class EditProperty extends Component {
       <ContentLayout>
         <div id="mapbox" />
         <div className="row">
-          <div className="col-md-3">{this.renderPropertyImg()}</div>
-          <div className="col-md-8">
+          <div className="col col-md-4">{this.renderPropertyImg()}</div>
+          <div className="col col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <button
                 className="btn btn-raised btn-default float-right"
@@ -91,6 +94,14 @@ class EditProperty extends Component {
                     label="Placemark Height"
                     name="placemark"
                     component={FormField}
+                  />
+                </div>
+                <div>
+                  <h5>Upload an Image</h5>
+                  <input
+                    onChange={this.onFileUpload}
+                    type="file"
+                    accept="image/*"
                   />
                 </div>
               </div>
