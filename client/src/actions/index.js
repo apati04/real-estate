@@ -8,7 +8,8 @@ import {
   FETCH_MAP_DATA,
   LOADING_DATA,
   RESET_PROP_DATA,
-  FETCH_PROPERTIES,
+  FETCH_USER_PROPERTIES,
+  FETCH_USER_PROPERTY,
   DELETE_SELECTED_PROPERTY
 } from './types';
 import keys from '../config/keys';
@@ -86,9 +87,9 @@ export const submitNewBuilding = (
   // dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
 };
 
-export const fetchProperties = () => async dispatch => {
+export const fetchUserProperties = () => async dispatch => {
   const response = await axios.get('/api/building');
-  dispatch({ type: FETCH_PROPERTIES, payload: response.data });
+  dispatch({ type: FETCH_USER_PROPERTIES, payload: response.data });
 };
 
 export const deleteSelectedProperty = (value, history) => async dispatch => {
@@ -99,4 +100,5 @@ export const deleteSelectedProperty = (value, history) => async dispatch => {
 
 export const fetchUserProperty = id => async dispatch => {
   const userResponse = await axios.get('/api/building/${id}');
+  dispatch({ type: FETCH_USER_PROPERTY, payload: userResponse.data });
 };

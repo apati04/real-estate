@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
 import ScrollToTop from './ScrollToTop';
 import Sidebar from '../containers/Sidebar';
 import Navbar from '../containers/Navbar';
@@ -10,13 +13,18 @@ import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
 import Landing from './Landing';
-import AddProperty from './AddProperty';
+import PropertyAdd from './properties/PropertyAdd';
 import BuildingProfile from './BuildingProfile';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import EditProperty from './EditProperty';
 
+// property detail is the details of a single property
+const PropertyDetail = () => <div>placeholder property detail</div>;
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchCurrentUserData();
+  }
   render() {
     return (
       <BrowserRouter>
@@ -32,9 +40,10 @@ class App extends Component {
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/projects" component={Projects} />
                 <Route exact path="/projects/map" component={ProjectMap} />
+                <Route path="/property/new" component={PropertyAdd} />
                 <Route
                   exact
-                  path="/projects/edit"
+                  path="/projects/properties"
                   component={BuildingProfile}
                 />
                 <Route
@@ -58,4 +67,11 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions)(App);
+/**
+ *              <Route
+                  exact
+                  path="/projects/add/properties"
+                  component={AddProperty}
+                />
+ */

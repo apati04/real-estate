@@ -5,9 +5,11 @@ import { Card } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
-import * as actions from '../actions';
+import * as actions from '../../actions';
+import ContentLayout from '../layout/ContentLayout';
+import FormField from '../forms/FormField';
 
-class EditProperty extends Component {
+class PropertyAdd extends Component {
   state = { file: null };
   componentDidMount() {
     if (this.props.location.state) {
@@ -28,7 +30,9 @@ class EditProperty extends Component {
   renderPropertyImg() {
     const data = this.props.img[Object.keys(this.props.img)[1]];
     if (!data) {
-      return <Card loading style={{ width: 350, height: 350, border: 'none' }}/>
+      return (
+        <Card loading style={{ width: 350, height: 350, border: 'none' }} />
+      );
     } else if (!data.response) {
       return (
         <img
@@ -196,5 +200,5 @@ export default connect(mapStateToProps, actions)(
     form: 'propDetail',
     enableReinitialize: true,
     validate
-  })(withRouter(EditProperty))
+  })(withRouter(PropertyAdd))
 );
