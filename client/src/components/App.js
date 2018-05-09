@@ -39,13 +39,17 @@ class App extends Component {
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/projects" component={Projects} />
                 <Route exact path="/projects/map" component={ProjectMap} />
-                <Route path="/property/new" component={PropertyAdd} />
+                <Route path="/projects/property/new" component={PropertyAdd} />
                 <Route
                   exact
                   path="/projects/properties"
                   component={BuildingProfile}
                 />
-                <Route exact path="property/:_id" component={PropertyDetail} />
+                <Route
+                  exact
+                  path="/projects/property/:_id"
+                  component={PropertyDetail}
+                />
 
                 <Route component={NotFound} />
               </Switch>

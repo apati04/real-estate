@@ -77,14 +77,12 @@ export const submitNewBuilding = (
       'Content-Type': uploadFile.type
     }
   });
-  console.log('upload: ', upload);
-  console.log('aws: ', awsRequest);
-  // const postBuilding = await axios.post('/api/building', {
-  //   ...values,
-  //   imageUrl: upload.data.key
-  // });
-  // history.push('/projects/edit');
-  // dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
+  const postBuilding = await axios.post('/api/building', {
+    ...values,
+    imageUrl: upload.data.key
+  });
+  history.push('/properties');
+  dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
 };
 
 export const fetchUserProperties = () => async dispatch => {
