@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const buildingSchema = new Schema({
   address: String,
+  imageUrl: String,
   longitude: Number,
   latitude: Number,
   rennovated: String,
