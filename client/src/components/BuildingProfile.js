@@ -8,6 +8,7 @@ import PropertyList from '../components/properties/PropertyList';
 class BuildingProfile extends Component {
   state = { propertyId: null };
   componentDidMount() {
+    this.props.fetchCurrentUserData();
     console.log('building profile: ', this.props.currentUser);
   }
   handleDeleteClick = () => {

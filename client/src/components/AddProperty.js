@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContentLayout from './layout/ContentLayout';
 import FormField from './forms/FormField';
+import { Card } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
@@ -26,14 +27,7 @@ class EditProperty extends Component {
   renderPropertyImg() {
     const data = this.props.img[Object.keys(this.props.img)[1]];
     if (!data) {
-      return (
-        <img
-          src="http://via.placeholder.com/350x350"
-          style={{ width: 350, height: 350 }}
-          className="img-fluid"
-          alt="placeholder"
-        />
-      );
+      return <Card loading style={{ width: 350, height: 350, border: 'none' }}/>
     } else if (!data.response) {
       return (
         <img

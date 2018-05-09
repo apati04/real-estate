@@ -14,6 +14,7 @@ import AddProperty from './AddProperty';
 import BuildingProfile from './BuildingProfile';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
+import EditProperty from './EditProperty';
 
 class App extends Component {
   render() {
@@ -35,6 +36,11 @@ class App extends Component {
                   exact
                   path="/projects/edit"
                   component={BuildingProfile}
+                />
+                <Route
+                  exact
+                  path="/projects/edit/properties/:id"
+                  component={EditProperty}
                 />
                 <Route
                   exact

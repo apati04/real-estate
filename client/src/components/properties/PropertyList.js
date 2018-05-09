@@ -11,7 +11,7 @@ class PropertyList extends Component {
     return userProperties.buildings.map(item => {
       return (
         <div key={item._id}>
-          <li className="list-group-item d-flex justify-content-between align-items-center">
+          <li className="d-flex justify-content-between align-items-center">
             <input
               type="radio"
               style={{ marginLeft: '10px' }}
@@ -21,7 +21,7 @@ class PropertyList extends Component {
             <h6>{item.address}</h6>
             <div className="d-flex">
               <Link
-                to="/projects/edit"
+                to={`/projects/edit/properties/${item._id}`}
                 className="btn btn-sm btn-raised btn-primary"
               >
                 <i className="fas fa-edit" /> EDIT
