@@ -54,7 +54,7 @@ module.exports = app => {
   app.get('/api/building/:id', async (req, res) => {
     const property = await Building.findOne({
       _id: req.params.id,
-      _user: '5aee3ac1bc25b2118cb23b90'
+      _user: req.user.id
     });
     res.send(property);
   });

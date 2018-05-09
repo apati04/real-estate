@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import ContentLayout from './layout/ContentLayout';
-import FormField from './forms/FormField';
+
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
-import * as actions from '../actions';
+import * as actions from '../../actions';
+import ContentLayout from '../layout/ContentLayout';
+import FormField from '../forms/FormField';
 
-class EditProperty extends Component {
+class PropertyAdd extends Component {
   state = { file: null };
   componentDidMount() {
     if (this.props.location.state) {
@@ -202,5 +203,5 @@ export default connect(mapStateToProps, actions)(
     form: 'propDetail',
     enableReinitialize: true,
     validate
-  })(withRouter(EditProperty))
+  })(withRouter(PropertyAdd))
 );

@@ -7,6 +7,6 @@ export const RESET_PROP_DATA = 'RESET_PROP_DATA';
 export const FETCH_PROJECTS = 'fetch_projects';
 
 // User Action Creators
-export const FETCH_PROPERTIES = 'fetch_properties';
+export const FETCH_USER_PROPERTIES = 'fetch_user_properties';
 export const DELETE_SELECTED_PROPERTY = 'delete_selected_property';
 export const FETCH_USER_PROPERTY = 'fetch_user_property';
