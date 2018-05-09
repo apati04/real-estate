@@ -67,14 +67,6 @@ export const resetPropData = () => {
     payload: {}
   };
 };
-<<<<<<< HEAD
-// ----
-export const submitNewBuilding = (values, history) => async dispatch => {
-  const postBuilding = await axios.post('/api/building', values);
-  const { data } = postBuilding;
-  history.push('/projects/edit');
-  dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
-=======
 
 export const submitNewBuilding = (
   values,
@@ -93,7 +85,6 @@ export const submitNewBuilding = (
   });
   history.push('/properties');
   dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
->>>>>>> 5cdd89872012abe47bc3a34452dae3c3a14267d0
 };
 
 export const fetchUserProperties = () => async dispatch => {
@@ -107,7 +98,6 @@ export const deleteSelectedProperty = (value, history) => async dispatch => {
   dispatch({ type: DELETE_SELECTED_PROPERTY, payload: data });
 };
 
-<<<<<<< HEAD
 export const fetchProjects = () => async dispatch => {
   const projRes = await axios.get('/api/projects');
 
@@ -118,9 +108,4 @@ export const fetchProject = id => async dispatch => {
   const projRes = await axios.get(`/api/projects/${id}`);
 
   dispatch({ type: FETCH_PROEJCTS, payload: projRes.data });
-=======
-export const fetchUserProperty = id => async dispatch => {
-  const userResponse = await axios.get('/api/building/${id}');
-  dispatch({ type: FETCH_USER_PROPERTY, payload: userResponse.data });
->>>>>>> 5cdd89872012abe47bc3a34452dae3c3a14267d0
 };

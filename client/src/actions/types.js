@@ -9,9 +9,6 @@ export const FETCH_PROJECTS = 'fetch_projects';
 // User Action Creators
 export const FETCH_USER_PROPERTIES = 'fetch_user_properties';
 export const DELETE_SELECTED_PROPERTY = 'delete_selected_property';
-<<<<<<< HEAD
 export const FETCH_PROJECT = 'fetch_project';
 export const FETCH_PROJECTS = 'fetch_projects';
-=======
 export const FETCH_USER_PROPERTY = 'fetch_user_property';
->>>>>>> 5cdd89872012abe47bc3a34452dae3c3a14267d0
