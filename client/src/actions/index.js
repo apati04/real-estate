@@ -3,6 +3,8 @@ import convert from 'xml-js';
 
 import {
   FETCH_CURRENT_USER_DATA,
+  FETCH_PROJECT,
+  FETCH_PROJECTS,
   FETCH_PROPERTY_DATA,
   FETCH_PROPERTY_IMG,
   FETCH_MAP_DATA,

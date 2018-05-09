@@ -1,22 +1,36 @@
 const mongoose = require('mongoose');
 const requireAuth = require('../middlewares/requireAuth');
 
-const Project = mongoose.model('projects');
+const Project = mongoose.model('Project');
 
 module.exports = app => {
-  app.post('/api/building', requireAuth, async (req, res) => {
+  app.get('/api/projects', requireAuth, async (req, res, next) => {
+    const projects = await Project.find({ _user: req.user.id });
+    res.send(projects);
+  });
+  app.get('/api/projects/:projectId', async (req, res, next) => {
+    const project = await Project.findOne({
+      _id: req.params.id,
+      _user: req.user.projectId
+    });
+    res.send(project);
+  });
+  app.get('/api/projects', requireAuth, async (req, res, next) => {
+    const projects = await Project.find({ _user: req.user.id });
+    res.send(projects);
+  });
+
+  app.post('/api/projects', requireAuth, async (req, res, next) => {
     const { title } = req.body;
     const project = new Project({
       title,
-      dateAdded: Date.now(),
       _user: req.user.id
     });
     try {
       await project.save();
-      const user = await req.user.save();
-      res.send(user);
+      res.send(project);
     } catch (error) {
-      res.status(422).send(error);
+      res.status(400).send(error);
     }
   });
 };

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const requireAuth = require('../middlewares/requireAuth');
 
-const Building = mongoose.model('buildings');
+const Building = mongoose.model('Building');
 
 module.exports = app => {
   // save building data into db
@@ -66,21 +66,3 @@ module.exports = app => {
     }
   );
 };
-/**
- *  try {
-      await building.save();
-      const user = await req.user.save();
-      res.send(user);
-    } catch (error) {
-      res.status(442).send(error);
-    }
- */
-/**
- *   delete(req, res, next) {
-    const driverId = req.params.id;
-
-    Driver.findByIdAndRemove({ _id: driverId })
-      .then(driver => res.status(204).send(driver))
-      .catch(next);
-  }
- */
