@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const requireAuth = require('../middlewares/requireAuth');
 
-const Building = mongoose.model('buildings');
+const Building = mongoose.model('Building');
 
 module.exports = app => {
   // save building data into db

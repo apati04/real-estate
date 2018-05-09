@@ -16,7 +16,7 @@ const buildingSchema = new Schema({
   certifications: String,
   prevOwner: String,
   dateAdded: Date,
-  _user: { type: Schema.Types.ObjectId, ref: 'User' }
+  _projectId: { type: Schema.Types.ObjectId, ref: 'Project' }
 });
 
-mongoose.model('buildings', buildingSchema);
+mongoose.model('Building', buildingSchema);
