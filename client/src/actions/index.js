@@ -66,7 +66,7 @@ export const resetPropData = () => {
     payload: {}
   };
 };
-
+// ----
 export const submitNewBuilding = (values, history) => async dispatch => {
   const postBuilding = await axios.post('/api/building', values);
   const { data } = postBuilding;
@@ -83,4 +83,16 @@ export const deleteSelectedProperty = (value, history) => async dispatch => {
   const deleteResponse = await axios.delete(`/api/building/delete/${value}`);
   const { data } = deleteResponse;
   dispatch({ type: DELETE_SELECTED_PROPERTY, payload: data });
+};
+
+export const fetchProjects = () => async dispatch => {
+  const projRes = await axios.get('/api/projects');
+
+  dispatch({ type: FETCH_PROEJCTS, payload: projRes.data });
+};
+
+export const fetchProject = id => async dispatch => {
+  const projRes = await axios.get(`/api/projects/${id}`);
+
+  dispatch({ type: FETCH_PROEJCTS, payload: projRes.data });
 };
