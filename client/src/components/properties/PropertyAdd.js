@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContentLayout from './layout/ContentLayout';
 import FormField from './forms/FormField';
 import { Card } from 'antd';
+
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
