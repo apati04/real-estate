@@ -40,10 +40,9 @@ module.exports = app => {
     });
     try {
       await building.save();
-      const user = await req.user.save();
-      res.send(user);
+      res.send(building);
     } catch (error) {
-      res.status(442).send(error);
+      res.status(400).send(error);
     }
   });
 
@@ -51,7 +50,8 @@ module.exports = app => {
     const buildings = await Building.find({ _user: req.user.id });
     res.send(buildings);
   });
-  app.get('/api/building/:id', async (req, res) => {
+
+  app.get('/api/building/:id', requireAuth, async (req, res) => {
     const property = await Building.findOne({
       _id: req.params.id,
       _user: req.user.id
@@ -74,21 +74,3 @@ module.exports = app => {
     }
   );
 };
-/**
- *  try {
-      await building.save();
-      const user = await req.user.save();
-      res.send(user);
-    } catch (error) {
-      res.status(442).send(error);
-    }
- */
-/**
- *   delete(req, res, next) {
-    const driverId = req.params.id;
-
-    Driver.findByIdAndRemove({ _id: driverId })
-      .then(driver => res.status(204).send(driver))
-      .catch(next);
-  }
- */

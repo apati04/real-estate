@@ -13,6 +13,7 @@ export default function(state = initialState, action) {
       const property = action.payload;
       return { ...state, [property._id]: property };
     case FETCH_USER_PROPERTIES:
+      console.log('properties', action.payload);
       const properties = action.payload;
       return { ...state, ...mapKeys(properties, '_id') };
     case DELETE_SELECTED_PROPERTY:

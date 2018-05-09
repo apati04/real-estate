@@ -16,7 +16,7 @@ class ProjectListItem extends Component {
           <h6>Project List Item with Radio Button, Edit & View Map Button 1</h6>
           <div className="d-flex">
             <Link
-              to="/properties"
+              to="/projects/properties"
               className="btn btn-sm btn-raised btn-primary"
             >
               <i className="fas fa-edit" /> EDIT

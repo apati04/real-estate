@@ -40,7 +40,7 @@ class App extends Component {
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/projects" component={Projects} />
                 <Route exact path="/projects/map" component={ProjectMap} />
-                <Route path="/property/new" component={PropertyAdd} />
+                <Route path="/projects/property/new" component={PropertyAdd} />
                 <Route
                   exact
                   path="/projects/properties"
@@ -48,6 +48,7 @@ class App extends Component {
                 />
                 <Route
                   exact
+<<<<<<< HEAD
                   path="/projects/edit/properties/:id"
                   component={EditProperty}
                 />
@@ -56,6 +57,12 @@ class App extends Component {
                   path="/projects/add/properties"
                   component={AddProperty}
                 />
+=======
+                  path="/projects/property/:_id"
+                  component={PropertyDetail}
+                />
+
+>>>>>>> wip
                 <Route component={NotFound} />
               </Switch>
             </Layout>
