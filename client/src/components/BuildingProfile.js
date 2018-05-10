@@ -20,6 +20,7 @@ class BuildingProfile extends Component {
   };
   render() {
     console.log(this.state);
+    console.log(this.props.userProperties);
     return (
       <ContentLayout>
         <div id="mapbox" />
@@ -32,18 +33,18 @@ class BuildingProfile extends Component {
         <div className="float-left">
           <Link
             to="/projects/add/properties"
-            className="btn btn-raised btn-default text-uppercase"
+            className="btn btn-outline-info text-uppercase"
           >
             <i className="fas fa-plus-circle" /> add property
           </Link>
         </div>
         <div className="float-right">
-          <Link to="/projects" className="btn btn-raised btn-danger">
+          <Link to="/projects" className="btn btn-outline-danger">
             <i className="fas fa-undo" /> RETURN TO PROJECTS
           </Link>
           <button
             onClick={this.handleDeleteClick}
-            className="btn btn-raised btn-warning"
+            className="btn btn-outline-warning"
           >
             <i className="fas fa-trash-alt" /> DELETE SELECTED PROPERTIES
           </button>
@@ -53,7 +54,7 @@ class BuildingProfile extends Component {
   }
 }
 
-function mapStateToProps({ currentUser }) {
-  return { currentUser };
+function mapStateToProps({ currentUser, userProperties }) {
+  return { currentUser, userProperties };
 }
 export default connect(mapStateToProps, actions)(BuildingProfile);
