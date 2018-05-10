@@ -13,6 +13,7 @@ import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
 import ProjectDashboard from './projects/ProjectDashboard';
+import PropertyDashboard from './properties/PropertyDashboard';
 import Landing from './Landing';
 import PropertyAdd from './properties/PropertyAdd';
 import BuildingProfile from './BuildingProfile';
@@ -39,8 +40,13 @@ class App extends Component {
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/search" component={Map} />
+                <Route exact path="/projects/:_id/map" component={ProjectMap} />
+                <Route
+                  exact
+                  path="/projects/:_id"
+                  component={PropertyDashboard}
+                />
                 <Route exact path="/projects" component={ProjectDashboard} />
-                <Route exact path="/projects/map" component={ProjectMap} />
                 <Route path="/projects/property/new" component={PropertyAdd} />
                 <Route
                   exact

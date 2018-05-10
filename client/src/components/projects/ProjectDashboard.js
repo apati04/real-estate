@@ -7,16 +7,12 @@ const ProjectDashboard = () => {
   return (
     <ContentLayout>
       <div style={{ marginTop: '20px' }}>
-        <ul className="list-group list-group-flush">
-          <ProjectList />
-        </ul>
+        <ProjectList />
+
         <ProjectCreate />
         <hr />
         <div className="d-flex justify-content-between">
-          <button className="btn btn-outline-info">
-            <i className="fas fa-save" /> SAVE PROJECT
-          </button>
-          <button className="btn btn-outline-danger">
+          <button className="btn btn-raised btn-danger">
             <i className="fas fa-trash-alt" /> DELETE SELECTED PROJECTS
           </button>
         </div>
