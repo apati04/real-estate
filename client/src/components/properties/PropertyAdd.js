@@ -66,8 +66,8 @@ class PropertyAdd extends Component {
       <ContentLayout>
         <div id="mapbox" />
         <div className="row">
-          <div className="col col-md-3">{this.renderPropertyImg()}</div>
-          <div className="col col-md-8">
+          <div className="col-md-3">{this.renderPropertyImg()}</div>
+          <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <Field label="Address" name="address" component={FormField} />
               <div className="row">
