@@ -6,11 +6,7 @@ import ContentLayout from '../layout/ContentLayout';
 
 class ProjectCreate extends Component {
   render() {
-    return (
-      <div>
-        <ProjectCollection />
-      </div>
-    );
+    return <ProjectCollection />;
   }
 }
 
