@@ -3,12 +3,15 @@ import convert from 'xml-js';
 
 import {
   FETCH_CURRENT_USER_DATA,
+  FETCH_PROJECT,
+  FETCH_PROJECTS,
   FETCH_PROPERTY_DATA,
   FETCH_PROPERTY_IMG,
   FETCH_MAP_DATA,
   LOADING_DATA,
   RESET_PROP_DATA,
-  FETCH_PROPERTIES,
+  FETCH_USER_PROPERTIES,
+  FETCH_USER_PROPERTY,
   DELETE_SELECTED_PROPERTY
 } from './types';
 import keys from '../config/keys';
@@ -65,20 +68,48 @@ export const resetPropData = () => {
   };
 };
 
-export const submitNewBuilding = (values, history) => async dispatch => {
-  const postBuilding = await axios.post('/api/building', values);
-  const { data } = postBuilding;
-  history.push('/projects/edit');
-  dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
+export const submitNewBuilding = (
+  values,
+  uploadFile,
+  history
+) => async dispatch => {
+  const upload = await axios.get('/api/awsUpload');
+  const awsRequest = await axios.put(upload.data.url, uploadFile, {
+    headers: {
+      'Content-Type': uploadFile.type
+    }
+  });
+  const postBuilding = await axios.post('/api/building', {
+    ...values,
+    imageUrl: upload.data.key
+  });
+  history.push('/properties');
+  dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
 };
 
-export const fetchProperties = () => async dispatch => {
+export const fetchUserProperties = () => async dispatch => {
   const response = await axios.get('/api/building');
-  dispatch({ type: FETCH_PROPERTIES, payload: response.data });
+  dispatch({ type: FETCH_USER_PROPERTIES, payload: response.data });
 };
 
 export const deleteSelectedProperty = (value, history) => async dispatch => {
   const deleteResponse = await axios.delete(`/api/building/delete/${value}`);
   const { data } = deleteResponse;
   dispatch({ type: DELETE_SELECTED_PROPERTY, payload: data });
+};
+
+export const fetchUserProperty = id => async dispatch => {
+  const userResponse = await axios.get('/api/building/${id}');
+  dispatch({ type: FETCH_USER_PROPERTY, payload: userResponse.data });
+};
+export const fetchProjects = () => async dispatch => {
+  const projRes = await axios.get('/api/projects');
+
+  dispatch({ type: FETCH_PROJECTS, payload: projRes.data });
+};
+
+export const fetchProject = id => async dispatch => {
+  const projRes = await axios.get(`/api/projects/${id}`);
+
+  dispatch({ type: FETCH_PROJECT, payload: projRes.data });
 };

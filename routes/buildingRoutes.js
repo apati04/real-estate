@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const requireAuth = require('../middlewares/requireAuth');
 
-const Building = mongoose.model('buildings');
+const Building = mongoose.model('Building');
 
 module.exports = app => {
   // save building data into db
@@ -18,9 +18,11 @@ module.exports = app => {
       placemark,
       notes,
       certifications,
-      prevOwner
+      prevOwner,
+      imageUrl
     } = req.body;
     const building = new Building({
+      imageUrl,
       address,
       longitude,
       latitude,
@@ -38,10 +40,9 @@ module.exports = app => {
     });
     try {
       await building.save();
-      const user = await req.user.save();
-      res.send(user);
+      res.send(building);
     } catch (error) {
-      res.status(442).send(error);
+      res.status(400).send(error);
     }
   });
 
@@ -50,6 +51,13 @@ module.exports = app => {
     res.send(buildings);
   });
 
+  app.get('/api/building/:id', requireAuth, async (req, res) => {
+    const property = await Building.findOne({
+      _id: req.params.id,
+      _user: req.user.id
+    });
+    res.send(property);
+  });
   app.delete(
     '/api/building/delete/:id',
     requireAuth,
@@ -66,21 +74,3 @@ module.exports = app => {
     }
   );
 };
-/**
- *  try {
-      await building.save();
-      const user = await req.user.save();
-      res.send(user);
-    } catch (error) {
-      res.status(442).send(error);
-    }
- */
-/**
- *   delete(req, res, next) {
-    const driverId = req.params.id;
-
-    Driver.findByIdAndRemove({ _id: driverId })
-      .then(driver => res.status(204).send(driver))
-      .catch(next);
-  }
- */

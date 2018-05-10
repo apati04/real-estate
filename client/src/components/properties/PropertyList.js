@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProperties } from '../../actions';
+import { fetchUserProperties } from '../../actions';
 class PropertyList extends Component {
   componentDidMount() {
-    this.props.fetchProperties();
+    this.props.fetchUserProperties();
   }
   renderProperties() {
     const { userProperties, deleteProperty } = this.props;
@@ -44,4 +44,4 @@ class PropertyList extends Component {
 function mapStateToProps({ userProperties }) {
   return { userProperties };
 }
-export default connect(mapStateToProps, { fetchProperties })(PropertyList);
+export default connect(mapStateToProps, { fetchUserProperties })(PropertyList);

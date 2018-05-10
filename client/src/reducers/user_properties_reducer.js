@@ -1,19 +1,24 @@
-import { FETCH_PROPERTIES, DELETE_SELECTED_PROPERTY } from '../actions/types';
-const initialState = {
-  buildings: []
-};
+import mapKeys from 'lodash/mapKeys';
+import omit from 'lodash/omit';
+import {
+  FETCH_USER_PROPERTIES,
+  FETCH_USER_PROPERTY,
+  DELETE_SELECTED_PROPERTY
+} from '../actions/types';
+
+const initialState = {};
 export default function(state = initialState, action) {
   switch (action.type) {
-    case FETCH_PROPERTIES: {
-      return { ...state, buildings: action.payload };
-    }
-    case DELETE_SELECTED_PROPERTY: {
-      const { _id } = action.payload;
-      return {
-        ...state,
-        buildings: state.buildings.filter(item => item._id !== _id)
-      };
-    }
+    case FETCH_USER_PROPERTY:
+      const property = action.payload;
+      return { ...state, [property._id]: property };
+    case FETCH_USER_PROPERTIES:
+      console.log('properties', action.payload);
+      const properties = action.payload;
+      return { ...state, ...mapKeys(properties, '_id') };
+    case DELETE_SELECTED_PROPERTY:
+      // payload should be id of property
+      return omit(state, action.payload);
     default:
       return state;
   }

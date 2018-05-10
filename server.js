@@ -29,6 +29,7 @@ require('./routes/auth')(app);
 require('./routes/twitter')(app);
 require('./routes/buildingRoutes')(app);
 require('./routes/projectRoutes')(app);
+require('./routes/awsRoutes')(app);
 
 app.use((err, req, res, next) => {
   res.status(422).send({ error: err.message });
