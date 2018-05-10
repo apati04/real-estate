@@ -11,7 +11,7 @@ class Sidebar extends Component {
 
   onCollapse = collapsed => {
     this.setState({ collapsed });
-  }
+  };
 
   defaultSelected() {
     const { pathname } = window.location;
@@ -31,25 +31,29 @@ class Sidebar extends Component {
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
-        style={ this.props.currentUser ? { background: '#fff', minHeight: '100vh '} : { display: 'none' } }
+        style={
+          this.props.currentUser && window.location.pathname !== '/'
+            ? { background: '#fff', minHeight: '100vh ' }
+            : { display: 'none' }
+        }
       >
-        <div className="logo"/>
+        <div className="logo" />
         <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
           <Menu.Item key="1">
-            <NavLink to='/dashboard'>
-              <Icon type="dashboard"/>
+            <NavLink to="/dashboard">
+              <Icon type="dashboard" />
               <span className="nav-text">Dashboard</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="2">
-            <NavLink to='/projects'>
-              <Icon type="paper-clip"/>
+            <NavLink to="/projects">
+              <Icon type="paper-clip" />
               <span className="nav-text">Projects</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="3">
-            <NavLink to='/search'>
-              <Icon type="global"/>
+            <NavLink to="/search">
+              <Icon type="global" />
               <span className="nav-text">Property Search</span>
             </NavLink>
           </Menu.Item>
@@ -60,7 +64,7 @@ class Sidebar extends Component {
 }
 
 function mapStateToProps({ currentUser }) {
-  return { currentUser }
+  return { currentUser };
 }
 
 export default connect(mapStateToProps, null)(Sidebar);
