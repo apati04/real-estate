@@ -8,36 +8,41 @@ class ProjectList extends Component {
     this.props.fetchProjects();
   }
   renderList() {
-    const { projects } = this.props;
-    return map(projects, project => (
-      <li
-        style={{ margin: '10px' }}
-        key={project._id}
-        className="d-flex justify-content-between align-items-center"
-      >
-        <h6>
-          <strong>{project.title}</strong> - {project.description}
-        </h6>
-        <div>
-          <p>Buildings: {project.posts.length || 0}</p>
-          <Link
-            className="btn btn-sm btn-raised btn-primary"
-            to={`/projects/${project._id}`}
-          >
-            <i className="fas fa-edit" /> VIEW
-          </Link>
-          <Link
-            to={`/projects/${project._id}`}
-            className="btn btn-sm btn-raised btn-warning"
-          >
-            <i className="fas fa-map-marker-alt" /> MAPS
-          </Link>
-        </div>
-      </li>
-    ));
+    return map(this.props.projects, project => {
+      return (
+        <li
+          style={{ borderRadius: '4px' }}
+          key={project._id}
+          className="d-flex justify-content-between align-items-center list-group-item m-2"
+        >
+          <h6>
+            <strong>{project.title}</strong> -{' '}
+            <span className="text-muted">{project.description}</span>
+          </h6>
+          <div>
+            <Link
+              className="btn btn-sm btn-raised btn-primary"
+              to={`/projects/${project._id}`}
+            >
+              <i className="fas fa-edit" /> VIEW
+            </Link>
+            <Link
+              to={`/projects/${project._id}`}
+              className="btn btn-sm btn-raised btn-warning"
+            >
+              <i className="fas fa-map-marker-alt" /> MAPS
+            </Link>
+          </div>
+        </li>
+      );
+    });
   }
   render() {
-    return <ul>{this.renderList()}</ul>;
+    return (
+      <div>
+        <ul className="list-group">{this.renderList()}</ul>
+      </div>
+    );
   }
 }
 function mapStateToProps({ projects }) {
