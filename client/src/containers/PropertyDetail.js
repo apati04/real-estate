@@ -178,7 +178,7 @@ class PropertyDetail extends Component {
       renderAddBtn() {
         return (
           <Link
-            className="btn btn-raised btn-default text-uppercase"
+            className="btn btn-outline-info text-uppercase"
             to={{
               pathname: '/projects/add/properties',
               state: {

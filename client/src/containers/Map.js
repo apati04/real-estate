@@ -70,7 +70,7 @@ class Map extends Component {
         },
         {
           key: 'AddProperty',
-          tab: <Button disabled className='btn btn-raised btn-default text-uppercase'><i className="fas fa-plus-circle" /> add property</Button>
+          tab: <Button disabled className='btn btn-outline-info disabled text-uppercase'><i className="fas fa-plus-circle" /> add property</Button>
         }
       ];
 

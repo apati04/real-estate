@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from 'antd';
+import { Card, Input } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
@@ -66,16 +66,9 @@ class PropertyAdd extends Component {
       <ContentLayout>
         <div id="mapbox" />
         <div className="row">
-          <div className="col col-md-4">{this.renderPropertyImg()}</div>
+          <div className="col col-md-3">{this.renderPropertyImg()}</div>
           <div className="col col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
-              <button
-                className="btn btn-raised btn-default float-right"
-                style={{ marginBottom: '10px' }}
-                type="submit"
-              >
-                <i className="fas fa-plus-circle" /> SAVE PROPERTY
-              </button>
               <Field label="Address" name="address" component={FormField} />
               <div className="row">
                 <div className="col-md-6">
@@ -89,6 +82,12 @@ class PropertyAdd extends Component {
                     name="latitude"
                     component={FormField}
                   />
+                  <h5>Upload an Image</h5>
+                  <input
+                    onChange={this.onFileUpload}
+                    type="file"
+                    accept="image/*"
+                  />
                 </div>
                 <div className="col-md-6">
                   <Field label="Color RGB" name="color" component={FormField} />
@@ -98,20 +97,26 @@ class PropertyAdd extends Component {
                     component={FormField}
                   />
                 </div>
-                <div>
-                  <h5>Upload an Image</h5>
-                  <input
-                    onChange={this.onFileUpload}
-                    type="file"
-                    accept="image/*"
-                  />
-                </div>
               </div>
+              <Link
+                to="/projects/edit"
+                className="btn btn-outline-danger float-right"
+                style={{ marginLeft: '30px '}}
+              >
+                <i className="fas fa-undo" /> BACK
+              </Link>
+              <button
+                className="btn btn-outline-info float-right"
+                style={{ marginBottom: '10px' }}
+                type="submit"
+              >
+                <i className="fas fa-plus-circle" /> SAVE PROPERTY
+              </button>
             </form>
           </div>
         </div>
         <div style={{ marginTop: '30px' }}>
-          <h1 className="display-3">Building Profile</h1>
+          <h1 className="display-4">Building Profile</h1>
           <hr />
           <div className="row">
             <div className="col-md-5">
@@ -139,12 +144,6 @@ class PropertyAdd extends Component {
             </div>
           </div>
         </div>
-        <Link
-          to="/projects/edit"
-          className="btn btn-raised btn-danger float-right"
-        >
-          <i className="fas fa-undo" /> BACK
-        </Link>
       </ContentLayout>
     );
   }
