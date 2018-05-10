@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import ContentLayout from '../components/layout/ContentLayout';
-import ProjectList from "../components/ProjectList";
-import { connect } from "react-redux";
-import * as actions from "../actions";
+import ProjectDashboard from '../components/projects/ProjectDashboard';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class Projects extends Component {
   componentDidMount() {
@@ -12,9 +12,9 @@ class Projects extends Component {
   render() {
     return (
       <ContentLayout>
-        <div id='mapbox' />
+        <div id="mapbox" />
         <h1>CURRENT PROJECTS</h1>
-        <ProjectList/>
+        <ProjectDashboard />
       </ContentLayout>
     );
   }

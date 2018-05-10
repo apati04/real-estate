@@ -101,14 +101,15 @@ export const deleteSelectedProperty = (value, history) => async dispatch => {
 export const fetchUserProperty = id => async dispatch => {
   const userResponse = await axios.get('/api/building/${id}');
   dispatch({ type: FETCH_USER_PROPERTY, payload: userResponse.data });
+};
 export const fetchProjects = () => async dispatch => {
   const projRes = await axios.get('/api/projects');
 
-  dispatch({ type: FETCH_PROEJCTS, payload: projRes.data });
+  dispatch({ type: FETCH_PROJECTS, payload: projRes.data });
 };
 
 export const fetchProject = id => async dispatch => {
   const projRes = await axios.get(`/api/projects/${id}`);
 
-  dispatch({ type: FETCH_PROEJCTS, payload: projRes.data });
+  dispatch({ type: FETCH_PROJECT, payload: projRes.data });
 };

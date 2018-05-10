@@ -12,13 +12,14 @@ import Login from '../containers/Login';
 import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
+import ProjectDashboard from './projects/ProjectDashboard';
 import Landing from './Landing';
 import PropertyAdd from './properties/PropertyAdd';
 import BuildingProfile from './BuildingProfile';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import EditProperty from './EditProperty';
-
+import ProjectCreate from './projects/ProjectCreate';
 // property detail is the details of a single property
 const PropertyDetail = () => <div>placeholder property detail</div>;
 class App extends Component {
@@ -38,7 +39,7 @@ class App extends Component {
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/search" component={Map} />
-                <Route exact path="/projects" component={Projects} />
+                <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/projects/map" component={ProjectMap} />
                 <Route path="/projects/property/new" component={PropertyAdd} />
                 <Route
@@ -54,7 +55,7 @@ class App extends Component {
                 <Route
                   exact
                   path="/projects/add/properties"
-                  component={AddProperty}
+                  component={PropertyAdd}
                 />
 
                 <Route component={NotFound} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUserProperties } from '../actions';
+import { fetchUserProperties } from '../../actions';
 import { Link } from 'react-router-dom';
 
 class ProjectListItem extends Component {
