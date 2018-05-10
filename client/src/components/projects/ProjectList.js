@@ -1,14 +1,12 @@
-import React from 'react';
-import ProjectListItem from './ProjectListItem';
+import React, { Component } from 'react';
 
-const CurrentProjects = () => {
-  return (
-    <div style={{ marginTop: '20px' }}>
-      <ul className="list-group list-group-flush">
-        <ProjectListItem />
-      </ul>
-    </div>
-  );
-};
+class ProjectList extends Component {
+  componentDidMount() {
+    this;
+  }
+  render() {
+    return <div>asdf</div>;
+  }
+}
 
-export default CurrentProjects;
+export default ProjectList;

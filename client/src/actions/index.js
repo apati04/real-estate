@@ -102,6 +102,8 @@ export const fetchUserProperty = id => async dispatch => {
   const userResponse = await axios.get('/api/building/${id}');
   dispatch({ type: FETCH_USER_PROPERTY, payload: userResponse.data });
 };
+
+// PROJECT ACTION CREATORS
 export const fetchProjects = () => async dispatch => {
   const projRes = await axios.get('/api/projects');
 
@@ -112,4 +114,11 @@ export const fetchProject = id => async dispatch => {
   const projRes = await axios.get(`/api/projects/${id}`);
 
   dispatch({ type: FETCH_PROJECT, payload: projRes.data });
+};
+
+export const createNewProject = (values, history) => async dispatch => {
+  console.log(values);
+  const response = await axios.post('/api/projects', values);
+  console.log();
+  dispatch({ type: FETCH_PROJECT, payload: response.data });
 };

@@ -21,9 +21,10 @@ module.exports = app => {
   });
 
   app.post('/api/projects', requireAuth, async (req, res, next) => {
-    const { title } = req.body;
+    const { projectTitle, projectDescription } = req.body;
     const project = new Project({
-      title,
+      title: projectTitle,
+      description: projectDescription,
       _user: req.user.id
     });
     try {
