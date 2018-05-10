@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const requireAuth = require('../middlewares/requireAuth');
 
 const Project = mongoose.model('Project');
+const Building = mongoose.model('Building');
 
 module.exports = app => {
   app.get('/api/projects', requireAuth, async (req, res, next) => {
@@ -30,6 +31,21 @@ module.exports = app => {
     try {
       await project.save();
       res.send(project);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  });
+  app.post('/api/projects/:_id', async (req, res, next) => {
+    const { address, owner, built } = req.body;
+    const building = new Building({
+      address,
+      owner,
+      built,
+      _project: req.params._id
+    });
+    try {
+      await building.save();
+      res.send(building);
     } catch (error) {
       res.status(400).send(error);
     }
