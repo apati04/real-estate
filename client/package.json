@@ -30,6 +30,7 @@
     "react-vis": "^1.9.1",
     "redux": "^3.7.2",
     "redux-form": "^7.2.1",
+    "redux-form-antd": "^1.0.5",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
