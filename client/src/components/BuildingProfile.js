@@ -20,7 +20,6 @@ class BuildingProfile extends Component {
   };
   render() {
     console.log(this.state);
-    console.log(this.props.userProperties);
     return (
       <ContentLayout>
         <div id="mapbox" />
@@ -54,7 +53,7 @@ class BuildingProfile extends Component {
   }
 }
 
-function mapStateToProps({ currentUser, userProperties }) {
-  return { currentUser, userProperties };
+function mapStateToProps({ currentUser }) {
+  return { currentUser };
 }
 export default connect(mapStateToProps, actions)(BuildingProfile);
