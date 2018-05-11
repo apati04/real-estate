@@ -15,7 +15,10 @@ class PropertyDashboard extends Component {
         <PropertyList userProperties={this.props.userProperties} />
 
         <div>
-          <Link className="btn btn-info" to="/property/add">
+          <Link
+            className="btn btn-info"
+            to={`/projects/${this.props.match.params._id}/new`}
+          >
             ADD PROPERTY
           </Link>
         </div>

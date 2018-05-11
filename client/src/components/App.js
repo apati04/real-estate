@@ -37,7 +37,11 @@ class App extends Component {
               <Sidebar />
               <Switch>
                 <Route exact path="/projects/:_id" component={BuildingDash} />
-                <Route exact path="/property/add" component={PropertyAdd} />
+                <Route
+                  exact
+                  path="/projects/:_id/new"
+                  component={PropertyAdd}
+                />
                 <Route exact path="/projects/:_id/map" component={ProjectMap} />
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />

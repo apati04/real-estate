@@ -19,7 +19,8 @@ module.exports = app => {
       notes,
       certifications,
       prevOwner,
-      imageUrl
+      imageUrl,
+      _project
     } = req.body;
     const building = new Building({
       imageUrl,
@@ -35,7 +36,7 @@ module.exports = app => {
       notes,
       certifications,
       prevOwner,
-      dateAdded: Date.now(),
+      _project: _project,
       _user: req.user.id
     });
     try {
