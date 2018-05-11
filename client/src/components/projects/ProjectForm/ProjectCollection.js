@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Input, Form } from 'antd';
+import { Button, Modal, Input, Form, message } from 'antd';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../../actions';
@@ -16,7 +16,10 @@ class ProjectCollection extends Component {
   handleCreate = () => {
     const vals = this.props.projectForm.values;
     const { createNewProject } = this.props;
-    createNewProject(vals);
+    const displayMsg = () => {
+      message.success('Project has been successfully added!', 2);
+    }
+    createNewProject(vals, displayMsg);
     this.props.reset();
     this.setState({ visible: false });
   };
