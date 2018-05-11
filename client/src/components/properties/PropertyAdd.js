@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Input } from 'antd';
+import { Card, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
@@ -23,7 +23,10 @@ class PropertyAdd extends Component {
   formSubmit = values => {
     const { submitNewBuilding, history } = this.props;
     const formValues = { ...values, _project: this.props.match.params._id };
-    submitNewBuilding(formValues, this.state.file, history);
+    const displayMsg = () => {
+      message.success('Property has been successfully added!', 2);
+    }
+    submitNewBuilding(formValues, this.state.file, history, displayMsg);
   };
 
   renderPropertyImg() {

@@ -71,7 +71,8 @@ export const resetPropData = () => {
 export const submitNewBuilding = (
   values,
   uploadFile,
-  history
+  history,
+  callback
 ) => async dispatch => {
   console.log(values);
 
@@ -83,6 +84,7 @@ export const submitNewBuilding = (
   // });
   const postBuilding = await axios.post('/api/building', values);
   history.push(`/projects/${values._project}`);
+  callback();
   dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
 };
 
