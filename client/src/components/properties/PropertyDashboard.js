@@ -17,10 +17,10 @@ class PropertyDashboard extends Component {
 
         <div>
           <Link
-            className="btn btn-info"
+            className="btn btn-outline-info"
             to={`/projects/${this.props.match.params._id}/new`}
           >
-            ADD PROPERTY
+            <i className="fas fa-plus-circle" /> ADD PROPERTY
           </Link>
         </div>
       </ContentLayout>
