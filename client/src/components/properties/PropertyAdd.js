@@ -22,7 +22,8 @@ class PropertyAdd extends Component {
 
   formSubmit = values => {
     const { submitNewBuilding, history } = this.props;
-    submitNewBuilding(values, this.state.file, history);
+    const formValues = { ...values, _project: this.props.match.params._id };
+    submitNewBuilding(formValues, this.state.file, history);
   };
 
   renderPropertyImg() {
@@ -61,7 +62,6 @@ class PropertyAdd extends Component {
   };
   render() {
     const { handleSubmit } = this.props;
-    console.log('propertyadd: ', this.props);
     return (
       <ContentLayout>
         <div id="mapbox" />
