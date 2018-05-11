@@ -12,7 +12,7 @@ class PropertyList extends Component {
             <h6>{property.address}</h6>
             <div className="d-flex">
               <Link
-                to={`/projects/edit/properties/${item._id}`}
+                to={`/projects/edit/properties/${property._id}`}
                 className="btn btn-sm btn-outline-primary"
               >
                 <i className="fas fa-edit" /> EDIT
