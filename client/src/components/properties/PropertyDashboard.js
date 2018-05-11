@@ -2,6 +2,7 @@ import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserProperties } from '../../actions';
+import { Link } from 'react-router-dom';
 import PropertyList from './PropertyList';
 class PropertyDashboard extends Component {
   componentDidMount() {
@@ -12,6 +13,12 @@ class PropertyDashboard extends Component {
       <div>
         <h2>Project</h2>
         <PropertyList userProperties={this.props.userProperties} />
+
+        <div>
+          <Link className="btn btn-info" to="/property/add">
+            ADD PROPERTY
+          </Link>
+        </div>
       </div>
     );
   }
