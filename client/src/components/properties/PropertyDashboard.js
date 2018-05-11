@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
+import ContentLayout from '../layout/ContentLayout';
 import { connect } from 'react-redux';
 import { fetchUserProperties } from '../../actions';
 import { Link } from 'react-router-dom';
@@ -10,16 +11,16 @@ class PropertyDashboard extends Component {
   }
   render() {
     return (
-      <div>
+      <ContentLayout>
         <h2>Project</h2>
         <PropertyList userProperties={this.props.userProperties} />
 
         <div>
-          <Link className="btn btn-info" to="/property/add">
-            ADD PROPERTY
+          <Link className="btn btn-outline-info" to="/property/add">
+            <i className="fas fa-plus-circle" /> ADD PROPERTY
           </Link>
         </div>
-      </div>
+      </ContentLayout>
     );
   }
 }

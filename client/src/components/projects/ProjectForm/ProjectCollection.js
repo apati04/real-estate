@@ -23,8 +23,8 @@ class ProjectCollection extends Component {
   render() {
     return (
       <div>
-        <button className="btn btn-primary" onClick={this.showModal}>
-          New Project Collection
+        <button className="btn btn-outline-primary" onClick={this.showModal}>
+          <i className="fas fa-plus-circle" /> New Project Collection
         </button>
         <ProjectForm
           visible={this.state.visible}
