@@ -22,7 +22,7 @@ class PropertyList extends Component {
             <div className="d-flex">
               <Link
                 to={`/projects/edit/properties/${item._id}`}
-                className="btn btn-sm btn-raised btn-primary"
+                className="btn btn-sm btn-outline-primary"
               >
                 <i className="fas fa-edit" /> EDIT
               </Link>

@@ -17,12 +17,12 @@ class ProjectListItem extends Component {
           <div className="d-flex">
             <Link
               to="/projects/properties"
-              className="btn btn-sm btn-raised btn-primary"
+              className="btn btn-sm btn-outline-primary"
             >
               <i className="fas fa-edit" /> EDIT
             </Link>
             <Link
-              className="btn btn-sm btn-raised btn-default"
+              className="btn btn-sm btn-outline-info"
               style={{ marginLeft: '10px' }}
               to={{
                 pathname: '/projects/map',

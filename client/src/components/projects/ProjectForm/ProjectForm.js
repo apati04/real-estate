@@ -13,7 +13,7 @@ const renderProjectForm = ({
   <div>
     <button
       type="button"
-      className="btn btn-raised btn-primary"
+      className="btn btn-outline-primary"
       style={{ marginTop: '20px' }}
       onClick={() => fields.push({})}
     >
