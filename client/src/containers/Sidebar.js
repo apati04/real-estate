@@ -41,17 +41,17 @@ class Sidebar extends Component {
         <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
           <Menu.Item key="1">
             <NavLink to="/dashboard">
-              <i class="fas fa-tachometer-alt" /> <span className="nav-text">Dashboard</span>
+              <i className="fas fa-tachometer-alt" /> <span className="nav-text">Dashboard</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="2">
             <NavLink to="/projects">
-              <i class="fas fa-paperclip" /> <span className="nav-text">Projects</span>
+              <i className="fas fa-paperclip" /> <span className="nav-text">Projects</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="3">
             <NavLink to="/search">
-              <i class="fas fa-map-marker-alt" /> <span className="nav-text">Property Search</span>
+              <i className="fas fa-map-marker-alt" /> <span className="nav-text">Property Search</span>
             </NavLink>
           </Menu.Item>
         </Menu>
