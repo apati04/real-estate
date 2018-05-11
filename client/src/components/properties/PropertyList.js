@@ -1,27 +1,18 @@
+import map from 'lodash/map';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUserProperties } from '../../actions';
 class PropertyList extends Component {
-  componentDidMount() {
-    this.props.fetchUserProperties();
-  }
   renderProperties() {
     const { userProperties, deleteProperty } = this.props;
-    return userProperties.buildings.map(item => {
+    return map(userProperties, property => {
       return (
-        <div key={item._id}>
+        <div key={property._id}>
           <li className="d-flex justify-content-between align-items-center">
-            <input
-              type="radio"
-              style={{ marginLeft: '10px' }}
-              name="option"
-              onClick={() => deleteProperty(item._id)}
-            />
-            <h6>{item.address}</h6>
+            <input type="radio" style={{ marginLeft: '10px' }} name="option" />
+            <h6>{property.address}</h6>
             <div className="d-flex">
               <Link
-                to={`/projects/edit/properties/${item._id}`}
+                to={`/projects/edit/properties/${property._id}`}
                 className="btn btn-sm btn-raised btn-primary"
               >
                 <i className="fas fa-edit" /> EDIT
@@ -41,7 +32,4 @@ class PropertyList extends Component {
     );
   }
 }
-function mapStateToProps({ userProperties }) {
-  return { userProperties };
-}
-export default connect(mapStateToProps, { fetchUserProperties })(PropertyList);
+export default PropertyList;
