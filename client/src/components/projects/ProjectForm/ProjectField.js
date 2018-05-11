@@ -1,17 +1,12 @@
-import React, { Fragment } from 'react';
-import { Input } from 'antd';
+import React from 'react';
+import { Input as input } from 'antd';
 const ProjectField = ({ input, label, type, meta: { error, touched } }) => {
   return (
-    <Fragment>
+    <div>
       <label>{label}</label>
-      <Input
-        {...input}
-        type={type}
-        placeholder={label}
-        style={{ marginBottom: '5px' }}
-      />
-      {touched && error && <span>{error}</span>}
-    </Fragment>
+      <input {...input} type={type} style={{ marginBottom: '5px' }} />
+      {touched && error}
+    </div>
   );
 };
 

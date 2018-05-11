@@ -6,16 +6,13 @@ import {
   DELETE_SELECTED_PROPERTY
 } from '../actions/types';
 
-const initialState = {};
-export default function(state = initialState, action) {
+export default function(state = [], action) {
   switch (action.type) {
     case FETCH_USER_PROPERTY:
       const property = action.payload;
       return { ...state, [property._id]: property };
     case FETCH_USER_PROPERTIES:
-      console.log('properties', action.payload);
-      const properties = action.payload;
-      return { ...state, ...mapKeys(properties, '_id') };
+      return action.payload;
     case DELETE_SELECTED_PROPERTY:
       // payload should be id of property
       return omit(state, action.payload);
