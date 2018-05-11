@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Input, message } from 'antd';
+import { Button, Card, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
@@ -8,7 +8,7 @@ import ContentLayout from '../layout/ContentLayout';
 import FormField from '../forms/FormField';
 
 class PropertyAdd extends Component {
-  state = { file: null };
+  state = { file: null, loading: false };
   componentDidMount() {
     if (this.props.location.state) {
       this.props.fetchImgData(this.props.location.state.zpid);
@@ -21,10 +21,12 @@ class PropertyAdd extends Component {
   }
 
   formSubmit = values => {
+    this.setState({ loading: true });
     const { submitNewBuilding, history } = this.props;
     const formValues = { ...values, _project: this.props.match.params._id };
     const displayMsg = () => {
       message.success('Property has been successfully added!', 2);
+      this.setState({ loading: false });
     }
     submitNewBuilding(formValues, this.state.file, history, displayMsg);
   };
@@ -63,6 +65,30 @@ class PropertyAdd extends Component {
   onFileUpload = e => {
     this.setState({ file: e.target.files[0] });
   };
+
+  renderSaveBtn() {
+    if (this.state.loading) {
+      return (
+        <Button
+          loading
+          className='float-right'
+        >
+          SAVING PROPERTY
+        </Button>
+      );
+    } else {
+      return (
+        <button
+          className="btn btn-outline-info float-right"
+          style={{ marginBottom: '10px' }}
+          type="submit"
+        >
+          <i className="fas fa-plus-circle" /> SAVE PROPERTY
+        </button>
+      );
+    }
+  }
+
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -110,13 +136,7 @@ class PropertyAdd extends Component {
               >
                 <i className="fas fa-undo" /> BACK
               </button>
-              <button
-                className="btn btn-outline-info float-right"
-                style={{ marginBottom: '10px' }}
-                type="submit"
-              >
-                <i className="fas fa-plus-circle" /> SAVE PROPERTY
-              </button>
+              {this.renderSaveBtn()}
             </form>
           </div>
         </div>
