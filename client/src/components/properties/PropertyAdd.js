@@ -61,7 +61,7 @@ class PropertyAdd extends Component {
   };
   render() {
     const { handleSubmit } = this.props;
-
+    console.log('propertyadd: ', this.props);
     return (
       <ContentLayout>
         <div id="mapbox" />
@@ -98,13 +98,15 @@ class PropertyAdd extends Component {
                   />
                 </div>
               </div>
-              <Link
-                to="/projects/edit"
+              <button
+                onClick={() => {
+                  this.props.history.goBack();
+                }}
                 className="btn btn-outline-danger float-right"
-                style={{ marginLeft: '30px '}}
+                style={{ marginLeft: '30px ' }}
               >
                 <i className="fas fa-undo" /> BACK
-              </Link>
+              </button>
               <button
                 className="btn btn-outline-info float-right"
                 style={{ marginBottom: '10px' }}
