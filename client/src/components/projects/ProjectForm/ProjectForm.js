@@ -37,37 +37,6 @@ const ProjectForm = Form.create()(
     }
   }
 );
-// const renderProjectForm = ({
-//   submitting,
-//   pristine,
-//   reset,
-//   fields,
-//   meta: { touched, error, submitFailed }
-// }) => (
-//   <div>
-//     <ul className="list-unstyled">
-//       {fields.map((item, index) => (
-//         <li key={index}>
-//           <h4>New Project</h4>
-//         </li>
-//       ))}
-//     </ul>
-//   </div>
-// );
-// class ProjectForm extends Component {
-//   render() {
-//     const {
-//       submitting,
-//       pristine,
-//       reset,
-//       fields,
-//       visible,
-//       onCancel,
-//       onCreate,
-//       handleSubmit
-//     } = this.props;
-//   }
-// }
 const formFields = [
   { label: 'Title', name: 'projectTitle' },
   { label: 'Description', name: 'projectDescription' }
