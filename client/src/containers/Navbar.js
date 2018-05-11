@@ -17,7 +17,7 @@ class Navbar extends Component {
             style={{ width: 200 }}
           >
             <p><Icon type="setting"/> Settings</p>
-            <a href='/api/logout' className='text-danger'><Icon type="logout"/> Log Out</a>
+            <a href='/api/logout' className='text-danger'><i className="fas fa-power-off"/> Log Out</a>
           </Card>
         </Menu>
       );

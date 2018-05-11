@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu } from 'antd';
 const { Sider } = Layout;
 
 class Sidebar extends Component {
@@ -41,20 +41,17 @@ class Sidebar extends Component {
         <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
           <Menu.Item key="1">
             <NavLink to="/dashboard">
-              <Icon type="dashboard" />
-              <span className="nav-text">Dashboard</span>
+              <i className="fas fa-tachometer-alt" /> <span className="nav-text">Dashboard</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="2">
             <NavLink to="/projects">
-              <Icon type="paper-clip" />
-              <span className="nav-text">Projects</span>
+              <i className="fas fa-paperclip" /> <span className="nav-text">Projects</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="3">
             <NavLink to="/search">
-              <Icon type="global" />
-              <span className="nav-text">Property Search</span>
+              <i className="fas fa-map-marker-alt" /> <span className="nav-text">Property Search</span>
             </NavLink>
           </Menu.Item>
         </Menu>

@@ -15,7 +15,7 @@ class NotFound extends Component {
       <ContentLayout>
         <div id='mapbox'/>
         <h1>PAGE NOT FOUND</h1>
-        <Link to="/projects" className="btn btn-raised btn-danger">
+        <Link to="/projects" className="btn btn-outline-danger">
           <i className="fas fa-undo" /> BACK
         </Link>
       </ContentLayout>
