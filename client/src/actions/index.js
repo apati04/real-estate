@@ -117,7 +117,8 @@ export const fetchProject = id => async dispatch => {
   dispatch({ type: FETCH_PROJECT, payload: projRes.data });
 };
 
-export const createNewProject = (values, history) => async dispatch => {
+export const createNewProject = (values, callback) => async dispatch => {
   const response = await axios.post('/api/projects', values);
+  callback();
   dispatch({ type: FETCH_PROJECT, payload: response.data });
 };
