@@ -26,7 +26,7 @@ class ProjectCollection extends Component {
   render() {
     return (
       <div>
-        <button className="btn btn-outline-primary" onClick={this.showModal}>
+        <button className="btn btn-outline-primary" style={{ marginTop: '10px' }} onClick={this.showModal}>
           <i className="fas fa-plus-circle" /> New Project Collection
         </button>
         <ProjectForm
