@@ -21,14 +21,15 @@ class ProjectList extends Component {
           </h6>
           <div>
             <Link
-              className="btn btn-sm btn-raised btn-primary"
+              className="btn btn-sm btn-outline-primary"
+              style={{ marginRight: '10px' }}
               to={`/projects/${project._id}`}
             >
               <i className="fas fa-edit" /> VIEW
             </Link>
             <Link
               to={`/projects/${project._id}`}
-              className="btn btn-sm btn-raised btn-warning"
+              className="btn btn-sm btn-outline-info"
             >
               <i className="fas fa-map-marker-alt" /> MAPS
             </Link>

@@ -12,7 +12,7 @@ const ProjectDashboard = () => {
         <ProjectCreate />
         <hr />
         <div className="d-flex justify-content-between">
-          <button className="btn btn-raised btn-danger">
+          <button className="btn btn-outline-danger">
             <i className="fas fa-trash-alt" /> DELETE SELECTED PROJECTS
           </button>
         </div>
