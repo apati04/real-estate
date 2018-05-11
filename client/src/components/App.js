@@ -13,7 +13,7 @@ import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
 import ProjectDashboard from './projects/ProjectDashboard';
-import PropertyDashboard from './properties/PropertyDashboard';
+import BuildingDash from './properties/PropertyDashboard';
 import Landing from './Landing';
 import PropertyAdd from './properties/PropertyAdd';
 import BuildingProfile from './BuildingProfile';
@@ -36,18 +36,43 @@ class App extends Component {
             <Layout>
               <Sidebar />
               <Switch>
+                <Route exact path="/projects/:_id" component={BuildingDash} />
+                <Route
+                  exact
+                  path="/projects/_:id/new"
+                  component={PropertyAdd}
+                />
+                <Route exact path="/projects/:_id/map" component={ProjectMap} />
+                <Route exact path="/projects" component={ProjectDashboard} />
+                <Route exact path="/search" component={Map} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/" component={Landing} />
-                <Route exact path="/dashboard" component={Dashboard} />
+                <Route component={NotFound} />
+              </Switch>
+            </Layout>
+            <FooterNav />
+          </Layout>
+        </ScrollToTop>
+      </BrowserRouter>
+    );
+  }
+}
+
+export default connect(null, actions)(App);
+
+/* 
+              <Switch>
+                <Route exact path="/" component={Landing} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/projects/:_id/map" component={ProjectMap} />
+                <Route exact path="/projects/:_id" component={BuildingDash} />
                 <Route
                   exact
-                  path="/projects/:_id"
-                  component={PropertyDashboard}
+                  path="/projects/_:id/new"
+                  component={PropertyAdd}
                 />
                 <Route exact path="/projects" component={ProjectDashboard} />
-                <Route path="/projects/property/new" component={PropertyAdd} />
                 <Route
                   exact
                   path="/projects/properties"
@@ -66,20 +91,4 @@ class App extends Component {
 
                 <Route component={NotFound} />
               </Switch>
-            </Layout>
-            <FooterNav />
-          </Layout>
-        </ScrollToTop>
-      </BrowserRouter>
-    );
-  }
-}
-
-export default connect(null, actions)(App);
-/**
- *              <Route
-                  exact
-                  path="/projects/add/properties"
-                  component={AddProperty}
-                />
- */
+*/

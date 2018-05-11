@@ -9,7 +9,6 @@ class BuildingProfile extends Component {
   state = { propertyId: null };
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    console.log('building profile: ', this.props.currentUser);
   }
   handleDeleteClick = () => {
     const bId = this.state.propertyId;
@@ -19,7 +18,6 @@ class BuildingProfile extends Component {
     this.setState({ propertyId });
   };
   render() {
-    console.log(this.state);
     return (
       <ContentLayout>
         <div id="mapbox" />

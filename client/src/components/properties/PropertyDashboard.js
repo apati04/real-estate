@@ -1,26 +1,26 @@
+import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProject } from '../../actions';
+import { fetchUserProperties } from '../../actions';
+import PropertyList from './PropertyList';
 class PropertyDashboard extends Component {
   componentDidMount() {
-    const project = this.props.match.params._id;
-    this.props.fetchProject(project);
+    this.props.fetchUserProperties(this.props.match.params._id);
   }
-
   render() {
-    if (!this.props.project) {
-      return '';
-    }
     return (
       <div>
-        <h2>Welcome to project: {this.props.project.title}</h2>
+        <h2>Project</h2>
+        <PropertyList userProperties={this.props.userProperties} />
       </div>
     );
   }
 }
 
-function mapStateToProps({ projects }, ownProps) {
-  return { project: projects[ownProps.match.params._id] };
+function mapStateToProps({ userProperties }, ownProps) {
+  return { userProperties };
 }
 
-export default connect(mapStateToProps, { fetchProject })(PropertyDashboard);
+export default connect(mapStateToProps, { fetchUserProperties })(
+  PropertyDashboard
+);
