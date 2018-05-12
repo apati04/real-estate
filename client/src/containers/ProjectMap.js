@@ -19,6 +19,15 @@ class ProjectMap extends Component {
     longitude: ''
   };
 
+  componentDidMount() {
+    this.props.fetchCurrentUserData();
+    this.props.fetchUserProperties(this.props.match.params._id)
+  }
+
+  componentDidUpdate() {
+    this.renderMap();
+  }
+
   open() {
     this.setState({ collapsed: false });
   }
@@ -88,9 +97,9 @@ class ProjectMap extends Component {
   }
 
   renderMap() {
-    if (this.props.location.state) {
-      const { properties } = this.props.location.state;
-      const propJson = properties.map(prop => {
+    if (this.props.userProperties) {
+      const { userProperties } = this.props;
+      const propJson = userProperties.map(prop => {
         return {
           address: prop.address,
           coordinates:
@@ -99,7 +108,7 @@ class ProjectMap extends Component {
               : [prop.latitude, prop.longitude]
         };
       });
-
+      console.log(propJson);
       const map = new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
@@ -130,12 +139,8 @@ class ProjectMap extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.fetchCurrentUserData();
-    this.renderMap();
-  }
-
   render() {
+    console.log(this.props.userProperties);
     const style = {
       map: {
         height: '80vh',
@@ -176,9 +181,10 @@ class ProjectMap extends Component {
   }
 }
 
-function mapStateToProps({ mapData: data }) {
+function mapStateToProps({ mapData: data, userProperties }) {
   return {
-    data: data.data
+    data: data.data,
+    userProperties
   };
 }
 
