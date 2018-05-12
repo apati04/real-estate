@@ -75,16 +75,8 @@ export const submitNewBuilding = (
   callback
 ) => async dispatch => {
   console.log(values);
-
-  // const upload = await axios.get('/api/awsUpload');
-  // const awsRequest = await axios.put(upload.data.url, uploadFile, {
-  //   headers: {
-  //     'Content-Type': uploadFile.type
-  //   }
-  // });
   const postBuilding = await axios.post('/api/building', values);
-  history.push(`/projects/${values._project}`);
-  callback();
+  history.push(`/projects/${values._project}/overview`);
   dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
 };
 

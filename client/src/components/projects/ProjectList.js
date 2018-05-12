@@ -23,7 +23,7 @@ class ProjectList extends Component {
             <Link
               className="btn btn-sm btn-outline-primary"
               style={{ marginRight: '10px' }}
-              to={`/projects/${project._id}/profile`}
+              to={`/projects/${project._id}/overview`}
             >
               <i className="fas fa-edit" /> VIEW
             </Link>
@@ -33,6 +33,12 @@ class ProjectList extends Component {
             >
               <i className="fas fa-map-marker-alt" /> MAPS
             </Link>
+            <button
+              className="btn btn-sm btn-outline-danger"
+              style={{ marginLeft: '10px' }}
+            >
+              <i className="fas fa-trash-alt" /> DELETE
+            </button>
           </div>
         </li>
       );
