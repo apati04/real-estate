@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import UserAuth from '../components/auth/UserAuth';
 class Landing extends Component {
   render() {
     const style = {
@@ -24,6 +23,7 @@ class Landing extends Component {
         marginBottom: '150px'
       }
     };
+
     return (
       <div style={style.parallax}>
         <div className="container" style={style.container}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -21,7 +21,6 @@ import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import EditProperty from './EditProperty';
 import ProjectCreate from './projects/ProjectCreate';
-import UserAuth from './auth/UserAuth';
 // property detail is the details of a single property
 const PropertyDetail = () => <div>placeholder property detail</div>;
 class App extends Component {
@@ -37,6 +36,17 @@ class App extends Component {
             <Layout>
               <Sidebar />
               <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={() =>
+                    this.props.currentUser ? (
+                      <Redirect to="/projects" />
+                    ) : (
+                      <Landing />
+                    )
+                  }
+                />
                 <Route exact path="/projects/:_id" component={BuildingDash} />
                 <Route
                   exact
@@ -47,8 +57,7 @@ class App extends Component {
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/test123" component={UserAuth} />
+
                 <Route component={NotFound} />
               </Switch>
             </Layout>
@@ -59,8 +68,10 @@ class App extends Component {
     );
   }
 }
-
-export default connect(null, actions)(App);
+function mapStateToProps({ currentUser }) {
+  return { currentUser };
+}
+export default connect(mapStateToProps, actions)(App);
 
 /* 
               <Switch>
