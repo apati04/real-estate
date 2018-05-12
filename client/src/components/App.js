@@ -27,6 +27,16 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
   }
+  renderPage = () => {
+    switch (this.props.currentUser) {
+      case null:
+        return <div />;
+      case false:
+        return <Landing />;
+      default:
+        return <Redirect to="/projects" />;
+    }
+  };
   render() {
     return (
       <BrowserRouter>
@@ -36,17 +46,6 @@ class App extends Component {
             <Layout>
               <Sidebar />
               <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={() =>
-                    this.props.currentUser ? (
-                      <Redirect to="/projects" />
-                    ) : (
-                      <Landing />
-                    )
-                  }
-                />
                 <Route exact path="/projects/:_id" component={BuildingDash} />
                 <Route
                   exact
@@ -57,7 +56,7 @@ class App extends Component {
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/login" component={Login} />
-
+                <Route exact path="/" render={this.renderPage} />
                 <Route component={NotFound} />
               </Switch>
             </Layout>
