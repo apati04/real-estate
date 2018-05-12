@@ -66,12 +66,11 @@ class ProjectMap extends Component {
         });
       });
       const center = propJson.map(prop => prop.coordinates).reduce((acc, curr) => {
-        return [(acc[0] + curr[0]) / propJson.length, (acc[1] + curr[1]) / propJson.length];
-      });
-      console.log(center);
+        return [acc[0] + curr[0], acc[1] + curr[1]];
+      }).map(coord => coord / propJson.length);
       map.flyTo({
         center: center,
-        zoom: 4
+        zoom: 10
       });
     } else {
       new mapboxgl.Map({
