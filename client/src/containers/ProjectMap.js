@@ -21,7 +21,7 @@ class ProjectMap extends Component {
 
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    this.props.fetchUserProperties(this.props.match.params._id)
+    this.props.fetchUserProperties(this.props.match.params._id);
   }
 
   componentDidUpdate() {
@@ -159,7 +159,7 @@ class ProjectMap extends Component {
       <ContentLayout>
         <button
           onClick={() => this.props.history.goBack()}
-          className="btn btn-raised btn-danger float-right"
+          className="btn btn-outline-danger float-right"
           style={style.button}
         >
           <i className="fas fa-undo" /> BACK
