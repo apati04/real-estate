@@ -23,7 +23,7 @@ class PropertyDashboard extends Component {
             <i className="fas fa-plus-circle" /> ADD PROPERTY
           </Link>
           <Link
-            className='btn btn-outline-danger'
+            className='btn btn-outline-danger float-right'
             to='/projects'
           >
             <i className="fas fa-undo" /> BACK
