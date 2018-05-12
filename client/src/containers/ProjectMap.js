@@ -36,6 +36,49 @@ class ProjectMap extends Component {
     this.setState({ collapsed: true });
   }
 
+  renderMap() {
+    if (this.props.userProperties) {
+      const { userProperties } = this.props;
+      const propJson = userProperties.map(prop => {
+        return {
+          address: prop.address,
+          coordinates:
+            prop.longitude < 0
+              ? [prop.longitude, prop.latitude]
+              : [prop.latitude, prop.longitude]
+        };
+      });
+      console.log(propJson);
+      const map = new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/outdoors-v10',
+        center: [-95.712891, 37.09024],
+        zoom: 4
+      });
+
+      propJson.forEach(data => {
+        const marker = new mapboxgl.Marker()
+          .setLngLat(data.coordinates)
+          .addTo(map);
+        marker._element.addEventListener('click', () => {
+          this.open();
+          this.setState({
+            address: data.address,
+            latitude: data.coordinates[1],
+            longitude: data.coordinates[0]
+          });
+        });
+      });
+    } else {
+      new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/outdoors-v10',
+        center: [-95.712891, 37.09024],
+        zoom: 4
+      });
+    }
+  }
+
   renderSidebarContent() {
     const splitAddress = this.state.address.split(' ');
     const cityState = splitAddress[splitAddress.length - 2];
@@ -96,51 +139,7 @@ class ProjectMap extends Component {
     }
   }
 
-  renderMap() {
-    if (this.props.userProperties) {
-      const { userProperties } = this.props;
-      const propJson = userProperties.map(prop => {
-        return {
-          address: prop.address,
-          coordinates:
-            prop.longitude < 0
-              ? [prop.longitude, prop.latitude]
-              : [prop.latitude, prop.longitude]
-        };
-      });
-      console.log(propJson);
-      const map = new mapboxgl.Map({
-        container: 'mapbox',
-        style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [-95.712891, 37.09024],
-        zoom: 4
-      });
-
-      propJson.forEach(data => {
-        const marker = new mapboxgl.Marker()
-          .setLngLat(data.coordinates)
-          .addTo(map);
-        marker._element.addEventListener('click', () => {
-          this.open();
-          this.setState({
-            address: data.address,
-            latitude: data.coordinates[1],
-            longitude: data.coordinates[0]
-          });
-        });
-      });
-    } else {
-      new mapboxgl.Map({
-        container: 'mapbox',
-        style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [-95.712891, 37.09024],
-        zoom: 4
-      });
-    }
-  }
-
   render() {
-    console.log(this.props.userProperties);
     const style = {
       map: {
         height: '80vh',
