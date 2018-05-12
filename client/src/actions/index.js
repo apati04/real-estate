@@ -101,13 +101,11 @@ export const fetchUserProperty = id => async dispatch => {
 // PROJECT ACTION CREATORS
 export const fetchProjects = () => async dispatch => {
   const projRes = await axios.get('/api/projects');
-
   dispatch({ type: FETCH_PROJECTS, payload: projRes.data });
 };
 
 export const fetchProject = id => async dispatch => {
   const projRes = await axios.get(`/api/projects/${id}`);
-
   dispatch({ type: FETCH_PROJECT, payload: projRes.data });
 };
 
