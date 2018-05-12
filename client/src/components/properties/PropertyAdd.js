@@ -217,10 +217,7 @@ function mapStateToProps({ imgData: img }, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'propDetail',
-    enableReinitialize: true,
-    validate
-  })(withRouter(PropertyAdd))
-);
+export default reduxForm({
+  form: 'propDetail',
+  validate
+})(withRouter(connect(mapStateToProps, actions)(PropertyAdd)));

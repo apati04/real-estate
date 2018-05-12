@@ -21,6 +21,7 @@ import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import EditProperty from './EditProperty';
 import ProjectCreate from './projects/ProjectCreate';
+import UserAuth from './auth/UserAuth';
 // property detail is the details of a single property
 const PropertyDetail = () => <div>placeholder property detail</div>;
 class App extends Component {
@@ -47,6 +48,7 @@ class App extends Component {
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/" component={Landing} />
+                <Route exact path="/test123" component={UserAuth} />
                 <Route component={NotFound} />
               </Switch>
             </Layout>
