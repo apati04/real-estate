@@ -56,7 +56,11 @@ class App extends Component {
                   path="/projects/:_id/new"
                   component={PropertyAdd}
                 />
-                <Route exact path="/projects/:_id/map" component={ProjectMap} />
+                <Route
+                  exact
+                  path="/projects/:_id/mapview"
+                  component={ProjectMap}
+                />
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/login" component={Login} />
