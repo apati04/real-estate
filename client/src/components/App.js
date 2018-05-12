@@ -46,7 +46,11 @@ class App extends Component {
             <Layout>
               <Sidebar />
               <Switch>
-                <Route exact path="/projects/:_id" component={BuildingDash} />
+                <Route
+                  exact
+                  path="/projects/:_id/overview"
+                  component={BuildingDash}
+                />
                 <Route
                   exact
                   path="/projects/:_id/new"
