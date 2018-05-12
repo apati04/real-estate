@@ -23,7 +23,7 @@ class ProjectList extends Component {
             <Link
               className="btn btn-sm btn-outline-primary"
               style={{ marginRight: '10px' }}
-              to={`/projects/${project._id}`}
+              to={`/projects/${project._id}/profile`}
             >
               <i className="fas fa-edit" /> VIEW
             </Link>

@@ -156,10 +156,8 @@ function mapStateToProps({ userProperties }, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'propDetail',
-    enableReinitialize: true,
-    validate
-  })(withRouter(EditProperty))
-);
+export default reduxForm({
+  form: 'propDetail',
+  enableReinitialize: true,
+  validate
+})(withRouter(connect(mapStateToProps, actions)(EditProperty)));

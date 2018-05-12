@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -27,6 +27,16 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
   }
+  renderPage = () => {
+    switch (this.props.currentUser) {
+      case null:
+        return <div />;
+      case false:
+        return <Landing />;
+      default:
+        return <Redirect to="/projects" />;
+    }
+  };
   render() {
     return (
       <BrowserRouter>
@@ -46,7 +56,7 @@ class App extends Component {
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/" component={Landing} />
+                <Route exact path="/" render={this.renderPage} />
                 <Route component={NotFound} />
               </Switch>
             </Layout>
@@ -57,8 +67,10 @@ class App extends Component {
     );
   }
 }
-
-export default connect(null, actions)(App);
+function mapStateToProps({ currentUser }) {
+  return { currentUser };
+}
+export default connect(mapStateToProps, actions)(App);
 
 /* 
               <Switch>

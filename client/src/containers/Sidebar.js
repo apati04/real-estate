@@ -32,7 +32,7 @@ class Sidebar extends Component {
         breakpoint="lg"
         collapsedWidth="0"
         style={
-          this.props.currentUser && window.location.pathname !== '/'
+          this.props.currentUser
             ? { background: '#fff', minHeight: '100vh ' }
             : { display: 'none' }
         }
@@ -41,17 +41,20 @@ class Sidebar extends Component {
         <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
           <Menu.Item key="1">
             <NavLink to="/dashboard">
-              <i className="fas fa-tachometer-alt" /> <span className="nav-text">Dashboard</span>
+              <i className="fas fa-tachometer-alt" />{' '}
+              <span className="nav-text">Dashboard</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="2">
             <NavLink to="/projects">
-              <i className="fas fa-paperclip" /> <span className="nav-text">Projects</span>
+              <i className="fas fa-paperclip" />{' '}
+              <span className="nav-text">Projects</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="3">
             <NavLink to="/search">
-              <i className="fas fa-map-marker-alt" /> <span className="nav-text">Property Search</span>
+              <i className="fas fa-map-marker-alt" />{' '}
+              <span className="nav-text">Property Search</span>
             </NavLink>
           </Menu.Item>
         </Menu>
