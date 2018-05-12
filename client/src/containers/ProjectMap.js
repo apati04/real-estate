@@ -19,12 +19,9 @@ class ProjectMap extends Component {
     longitude: ''
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetchCurrentUserData();
-    this.props.fetchUserProperties(this.props.match.params._id);
-  }
-
-  componentDidUpdate() {
+    await this.props.fetchUserProperties(this.props.match.params._id);
     this.renderMap();
   }
 
