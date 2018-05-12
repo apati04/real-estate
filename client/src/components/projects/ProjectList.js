@@ -28,7 +28,7 @@ class ProjectList extends Component {
               <i className="fas fa-edit" /> VIEW
             </Link>
             <Link
-              to={`/projects/${project._id}`}
+              to={`/projects/${project._id}/mapview`}
               className="btn btn-sm btn-outline-info"
             >
               <i className="fas fa-map-marker-alt" /> MAPS
