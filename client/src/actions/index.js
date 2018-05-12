@@ -76,6 +76,7 @@ export const submitNewBuilding = (
 ) => async dispatch => {
   console.log(values);
   const postBuilding = await axios.post('/api/building', values);
+  callback();
   history.push(`/projects/${values._project}/overview`);
   dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
 };
