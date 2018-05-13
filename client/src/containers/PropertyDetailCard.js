@@ -53,7 +53,7 @@ class PropertyDetailCard extends Component {
 
     const style = {
       card: {
-        minHeight: '440px'
+        minHeight: '460px'
       }
     }
 

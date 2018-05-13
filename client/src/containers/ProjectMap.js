@@ -19,12 +19,78 @@ class ProjectMap extends Component {
     longitude: ''
   };
 
+  async componentDidMount() {
+    this.props.fetchCurrentUserData();
+    await this.props.fetchUserProperties(this.props.match.params._id);
+    this.renderMap();
+  }
+
   open() {
     this.setState({ collapsed: false });
   }
 
   close() {
     this.setState({ collapsed: true });
+  }
+
+  renderMap() {
+    if (this.props.userProperties) {
+      const { userProperties } = this.props;
+      const propJson = userProperties.map(prop => {
+        return {
+          address: prop.address,
+          coordinates:
+            prop.longitude < 0
+              ? [prop.longitude, prop.latitude]
+              : [prop.latitude, prop.longitude]
+        };
+      });
+      const map = new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/outdoors-v10',
+        center: [-95.712891, 37.09024],
+        zoom: 4
+      }).addControl(new mapboxgl.NavigationControl());;
+
+      propJson.forEach(data => {
+        const marker = new mapboxgl.Marker()
+          .setLngLat(data.coordinates)
+          .addTo(map);
+        marker._element.addEventListener('click', () => {
+          this.open();
+          this.setState({
+            address: data.address,
+            latitude: data.coordinates[1],
+            longitude: data.coordinates[0]
+          });
+        });
+      });
+
+      if (propJson.length !== 0) {
+        const center = propJson.map(prop => prop.coordinates).reduce((acc, curr) => {
+          return [acc[0] + curr[0], acc[1] + curr[1]];
+        }).map(coord => coord / propJson.length);
+        map.flyTo({
+          center: center,
+          zoom: 10
+        });
+      } else {
+        new mapboxgl.Map({
+          container: 'mapbox',
+          style: 'mapbox://styles/mapbox/outdoors-v10',
+          center: [-95.712891, 37.09024],
+          zoom: 4
+        });
+      }
+
+    } else {
+      new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/outdoors-v10',
+        center: [-95.712891, 37.09024],
+        zoom: 4
+      });
+    }
   }
 
   renderSidebarContent() {
@@ -87,54 +153,6 @@ class ProjectMap extends Component {
     }
   }
 
-  renderMap() {
-    if (this.props.location.state) {
-      const { properties } = this.props.location.state;
-      const propJson = properties.map(prop => {
-        return {
-          address: prop.address,
-          coordinates:
-            prop.longitude < 0
-              ? [prop.longitude, prop.latitude]
-              : [prop.latitude, prop.longitude]
-        };
-      });
-
-      const map = new mapboxgl.Map({
-        container: 'mapbox',
-        style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [-95.712891, 37.09024],
-        zoom: 4
-      });
-
-      propJson.forEach(data => {
-        const marker = new mapboxgl.Marker()
-          .setLngLat(data.coordinates)
-          .addTo(map);
-        marker._element.addEventListener('click', () => {
-          this.open();
-          this.setState({
-            address: data.address,
-            latitude: data.coordinates[1],
-            longitude: data.coordinates[0]
-          });
-        });
-      });
-    } else {
-      new mapboxgl.Map({
-        container: 'mapbox',
-        style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [-95.712891, 37.09024],
-        zoom: 4
-      });
-    }
-  }
-
-  componentDidMount() {
-    this.props.fetchCurrentUserData();
-    this.renderMap();
-  }
-
   render() {
     const style = {
       map: {
@@ -155,7 +173,7 @@ class ProjectMap extends Component {
       <ContentLayout>
         <button
           onClick={() => this.props.history.goBack()}
-          className="btn btn-raised btn-danger float-right"
+          className="btn btn-outline-danger float-right"
           style={style.button}
         >
           <i className="fas fa-undo" /> BACK
@@ -176,9 +194,10 @@ class ProjectMap extends Component {
   }
 }
 
-function mapStateToProps({ mapData: data }) {
+function mapStateToProps({ mapData: data, userProperties }) {
   return {
-    data: data.data
+    data: data.data,
+    userProperties
   };
 }
 
