@@ -65,13 +65,24 @@ class ProjectMap extends Component {
           });
         });
       });
-      const center = propJson.map(prop => prop.coordinates).reduce((acc, curr) => {
-        return [acc[0] + curr[0], acc[1] + curr[1]];
-      }).map(coord => coord / propJson.length);
-      map.flyTo({
-        center: center,
-        zoom: 10
-      });
+
+      if (propJson.length !== 0) {
+        const center = propJson.map(prop => prop.coordinates).reduce((acc, curr) => {
+          return [acc[0] + curr[0], acc[1] + curr[1]];
+        }).map(coord => coord / propJson.length);
+        map.flyTo({
+          center: center,
+          zoom: 10
+        });
+      } else {
+        new mapboxgl.Map({
+          container: 'mapbox',
+          style: 'mapbox://styles/mapbox/outdoors-v10',
+          center: [-95.712891, 37.09024],
+          zoom: 4
+        });
+      }
+      
     } else {
       new mapboxgl.Map({
         container: 'mapbox',
