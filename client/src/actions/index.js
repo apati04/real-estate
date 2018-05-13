@@ -12,7 +12,9 @@ import {
   RESET_PROP_DATA,
   FETCH_USER_PROPERTIES,
   FETCH_USER_PROPERTY,
-  DELETE_SELECTED_PROPERTY
+  DELETE_SELECTED_PROPERTY,
+  REQUEST_PROJECT_POSTS,
+  RECEIVE_PROJECT_POSTS
 } from './types';
 import keys from '../config/keys';
 
@@ -115,4 +117,32 @@ export const createNewProject = (values, callback) => async dispatch => {
   const response = await axios.post('/api/projects', values);
   callback();
   dispatch({ type: FETCH_PROJECT, payload: response.data });
+};
+
+const requestProjectPosts = projectId => ({
+  type: REQUEST_PROJECT_POSTS,
+  projectId
+});
+const receiveProjectPosts = (projectId, data) => ({
+  type: RECEIVE_PROJECT_POSTS,
+  projectId,
+  payload: data,
+  receivedAt: Date.now()
+});
+
+const fetchProjectPosts = projectId => dispatch => {
+  dispatch(requestProjectPosts(projectId));
+  return axios.get(`/api/projects/${projectId}`).then(({ data }) => {
+    dispatch(receiveProjectPosts(projectId, data));
+  });
+};
+const shouldFetchProjectPosts = (state, projectId) => {
+  const posts = state.postsInProject[projectId];
+  if (!posts) return true;
+  if (posts.isFetching) return false;
+};
+export const fetchProjectPostsIfNeeded = projectId => (dispatch, getState) => {
+  if (shouldFetchProjectPosts(getState(), projectId)) {
+    return dispatch(fetchProjectPosts(projectId));
+  }
 };

@@ -1,0 +1,11 @@
+.ant-form-item-label {
+  line-height: 1.5em !important;
+  font-weight: bold;
+}
+.ant-form-item {
+  margin-bottom: 12px !important;
+}
+input.ant-input {
+  height: 40px !important;
+  font-size: 1rem !important;
+}
