@@ -50,7 +50,7 @@ class ProjectMap extends Component {
         style: 'mapbox://styles/mapbox/outdoors-v10',
         center: [-95.712891, 37.09024],
         zoom: 4
-      });
+      }).addControl(new mapboxgl.NavigationControl());;
 
       propJson.forEach(data => {
         const marker = new mapboxgl.Marker()
@@ -82,7 +82,7 @@ class ProjectMap extends Component {
           zoom: 4
         });
       }
-      
+
     } else {
       new mapboxgl.Map({
         container: 'mapbox',
