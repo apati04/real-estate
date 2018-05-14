@@ -11,3 +11,6 @@ export const FETCH_USER_PROPERTIES = 'fetch_user_properties';
 export const DELETE_SELECTED_PROPERTY = 'delete_selected_property';
 export const FETCH_PROJECT = 'fetch_project';
 export const FETCH_USER_PROPERTY = 'fetch_user_property';
+
+export const RECEIVE_PROJECT_POSTS = 'receive_project_posts';
+export const REQUEST_PROJECT_POSTS = 'request_project_posts';

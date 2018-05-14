@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Layout, Menu, Avatar, Dropdown, Card, Icon } from 'antd';
 const { Header } = Layout;
 
@@ -11,27 +11,28 @@ class Navbar extends Component {
       const firstName = this.props.currentUser.userName.split(' ')[0];
       const menu = (
         <Menu>
-          <Card
-            title={`Hello, ${firstName.toUpperCase()}`}
-            bordered={false}
-            style={{ width: 200 }}
-          >
-            <p><Icon type="setting"/> Settings</p>
-            <a href='/api/logout' className='text-danger'><i className="fas fa-power-off"/> Log Out</a>
-          </Card>
+          <Menu.Item className="m-0 p-0" key="1">
+            <Card
+              title={`Hello, ${firstName.toUpperCase()}`}
+              bordered={false}
+              style={{ width: '100%' }}
+            >
+              <Link to="/settings/profile">
+                <p>
+                  <Icon type="setting" /> Settings{' '}
+                </p>
+              </Link>
+              <a href="/api/logout" className="text-danger">
+                <i className="fas fa-power-off" /> Log Out
+              </a>
+            </Card>
+          </Menu.Item>
         </Menu>
       );
       return (
-        <div className='align-middle'>
-          <Dropdown
-            overlay={menu}
-            placement='bottomLeft'
-            trigger={['click']}
-          >
-            <Avatar
-              size='large'
-              style={{ backgroundColor: '#26b2a4' }}
-            >
+        <div className="align-middle">
+          <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']}>
+            <Avatar size="large" style={{ backgroundColor: '#26b2a4' }}>
               {firstName.toUpperCase()}
             </Avatar>
           </Dropdown>
@@ -78,7 +79,7 @@ class Navbar extends Component {
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" style={style.menu}>
           {this.greetUser()}
-          <Menu.Item className='float-right'>{this.renderSignOut()}</Menu.Item>
+          <Menu.Item className="float-right">{this.renderSignOut()}</Menu.Item>
         </Menu>
       </Header>
     );

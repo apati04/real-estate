@@ -12,7 +12,9 @@ import {
   RESET_PROP_DATA,
   FETCH_USER_PROPERTIES,
   FETCH_USER_PROPERTY,
-  DELETE_SELECTED_PROPERTY
+  DELETE_SELECTED_PROPERTY,
+  REQUEST_PROJECT_POSTS,
+  RECEIVE_PROJECT_POSTS
 } from './types';
 import keys from '../config/keys';
 
@@ -68,19 +70,6 @@ export const resetPropData = () => {
   };
 };
 
-export const submitNewBuilding = (
-  values,
-  uploadFile,
-  history,
-  callback
-) => async dispatch => {
-  console.log(values);
-  const postBuilding = await axios.post('/api/building', values);
-  callback();
-  history.push(`/projects/${values._project}/overview`);
-  dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
-};
-
 export const fetchUserProperties = _id => async dispatch => {
   const response = await axios.get(`/api/projects/${_id}`);
 
@@ -113,4 +102,53 @@ export const createNewProject = (values, callback) => async dispatch => {
   const response = await axios.post('/api/projects', values);
   callback();
   dispatch({ type: FETCH_PROJECT, payload: response.data });
+};
+
+const requestProjectPosts = projectId => ({
+  type: REQUEST_PROJECT_POSTS,
+  projectId
+});
+const receiveProjectPosts = (projectId, data) => ({
+  type: RECEIVE_PROJECT_POSTS,
+  projectId,
+  payload: data,
+  receivedAt: Date.now()
+});
+
+const fetchProjectPosts = projectId => dispatch => {
+  dispatch(requestProjectPosts(projectId));
+  return axios.get(`/api/projects/${projectId}`).then(({ data }) => {
+    dispatch(receiveProjectPosts(projectId, data));
+  });
+};
+const shouldFetchProjectPosts = (state, projectId) => {
+  const posts = state.postsInProject[projectId];
+  if (!posts) return true;
+  if (posts.isFetching) return false;
+};
+export const fetchProjectPostsIfNeeded = projectId => (dispatch, getState) => {
+  if (shouldFetchProjectPosts(getState(), projectId)) {
+    return dispatch(fetchProjectPosts(projectId));
+  }
+};
+
+export const submitNewBuilding = (
+  values,
+  uploadFile,
+  history,
+  callback
+) => async dispatch => {
+  console.log(uploadFile);
+  const awsConfig = await axios.get('/api/awsUpload');
+  await axios.put(awsConfig.data.url, uploadFile, {
+    headers: { 'Content-Type': uploadFile.type }
+  });
+
+  const postBuilding = await axios.post('/api/building', {
+    ...values,
+    imageUrl: awsConfig.data.key
+  });
+  callback();
+  history.push(`/projects/${values._project}/overview`);
+  dispatch(fetchProjectPosts(values._project));
 };

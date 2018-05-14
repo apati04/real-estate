@@ -23,11 +23,14 @@ class PropertyAdd extends Component {
   formSubmit = values => {
     this.setState({ loading: true });
     const { submitNewBuilding, history } = this.props;
-    const formValues = { ...values, _project: this.props.match.params._id };
+    const formValues = {
+      ...values,
+      _project: this.props.match.params._id
+    };
     const displayMsg = () => {
       message.success('Property has been successfully added!', 2);
       this.setState({ loading: false });
-    }
+    };
     submitNewBuilding(formValues, this.state.file, history, displayMsg);
   };
 
@@ -69,10 +72,7 @@ class PropertyAdd extends Component {
   renderSaveBtn() {
     if (this.state.loading) {
       return (
-        <Button
-          loading
-          className='float-right'
-        >
+        <Button loading className="float-right">
           SAVING PROPERTY
         </Button>
       );
@@ -115,7 +115,7 @@ class PropertyAdd extends Component {
                   <input
                     onChange={this.onFileUpload}
                     type="file"
-                    accept="image/*"
+                    accept="image/jpeg"
                   />
                 </div>
                 <div className="col-md-6">

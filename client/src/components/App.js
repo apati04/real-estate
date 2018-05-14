@@ -9,7 +9,6 @@ import Sidebar from '../containers/Sidebar';
 import Navbar from '../containers/Navbar';
 import FooterNav from './FooterNav';
 import Login from '../containers/Login';
-import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
 import ProjectDashboard from './projects/ProjectDashboard';
@@ -21,8 +20,9 @@ import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import EditProperty from './EditProperty';
 import ProjectCreate from './projects/ProjectCreate';
-// property detail is the details of a single property
-const PropertyDetail = () => <div>placeholder property detail</div>;
+import UserSettings from './users/UserSettings';
+
+const PlaceHolderComponent = () => <div>BUILDING PROFILE HERE</div>;
 class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
@@ -48,6 +48,11 @@ class App extends Component {
               <Switch>
                 <Route
                   exact
+                  path="/settings/profile"
+                  component={UserSettings}
+                />
+                <Route
+                  exact
                   path="/projects/:_id/overview"
                   component={BuildingDash}
                 />
@@ -60,6 +65,11 @@ class App extends Component {
                   exact
                   path="/projects/:_id/mapview"
                   component={ProjectMap}
+                />
+                <Route
+                  exact
+                  path="/building/profile/:_id"
+                  component={PlaceHolderComponent}
                 />
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />
@@ -79,36 +89,3 @@ function mapStateToProps({ currentUser }) {
   return { currentUser };
 }
 export default connect(mapStateToProps, actions)(App);
-
-/* 
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/search" component={Map} />
-                <Route exact path="/projects/:_id/map" component={ProjectMap} />
-                <Route exact path="/projects/:_id" component={BuildingDash} />
-                <Route
-                  exact
-                  path="/projects/_:id/new"
-                  component={PropertyAdd}
-                />
-                <Route exact path="/projects" component={ProjectDashboard} />
-                <Route
-                  exact
-                  path="/projects/properties"
-                  component={BuildingProfile}
-                />
-                <Route
-                  exact
-                  path="/projects/edit/properties/:id"
-                  component={EditProperty}
-                />
-                <Route
-                  exact
-                  path="/projects/add/properties"
-                  component={PropertyAdd}
-                />
-
-                <Route component={NotFound} />
-              </Switch>
-*/
