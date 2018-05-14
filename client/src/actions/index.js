@@ -14,7 +14,8 @@ import {
   FETCH_USER_PROPERTY,
   DELETE_SELECTED_PROPERTY,
   REQUEST_PROJECT_POSTS,
-  RECEIVE_PROJECT_POSTS
+  RECEIVE_PROJECT_POSTS,
+  SELECT_PROJECT_POST
 } from './types';
 import keys from '../config/keys';
 
@@ -152,3 +153,8 @@ export const submitNewBuilding = (
   history.push(`/projects/${values._project}/overview`);
   dispatch(fetchProjectPosts(values._project));
 };
+
+export const selectProjectPost = projectPost => ({
+  type: SELECT_PROJECT_POST,
+  projectPost
+});

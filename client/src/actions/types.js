@@ -14,3 +14,4 @@ export const FETCH_USER_PROPERTY = 'fetch_user_property';
 
 export const RECEIVE_PROJECT_POSTS = 'receive_project_posts';
 export const REQUEST_PROJECT_POSTS = 'request_project_posts';
+export const SELECT_PROJECT_POST = 'select_project_post';
