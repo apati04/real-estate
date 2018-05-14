@@ -70,19 +70,6 @@ export const resetPropData = () => {
   };
 };
 
-export const submitNewBuilding = (
-  values,
-  uploadFile,
-  history,
-  callback
-) => async dispatch => {
-  console.log(values);
-  const postBuilding = await axios.post('/api/building', values);
-  callback();
-  history.push(`/projects/${values._project}/overview`);
-  dispatch({ type: FETCH_USER_PROPERTIES, payload: postBuilding.data });
-};
-
 export const fetchUserProperties = _id => async dispatch => {
   const response = await axios.get(`/api/projects/${_id}`);
 
@@ -145,4 +132,25 @@ export const fetchProjectPostsIfNeeded = projectId => (dispatch, getState) => {
   if (shouldFetchProjectPosts(getState(), projectId)) {
     return dispatch(fetchProjectPosts(projectId));
   }
+};
+
+export const submitNewBuilding = (
+  values,
+  uploadFile,
+  history,
+  callback
+) => async dispatch => {
+  console.log(uploadFile);
+  const awsConfig = await axios.get('/api/awsUpload');
+  await axios.put(awsConfig.data.url, uploadFile, {
+    headers: { 'Content-Type': uploadFile.type }
+  });
+
+  const postBuilding = await axios.post('/api/building', {
+    ...values,
+    imageUrl: awsConfig.data.key
+  });
+  callback();
+  history.push(`/projects/${values._project}/overview`);
+  dispatch(fetchProjectPosts(values._project));
 };

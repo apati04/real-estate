@@ -22,6 +22,7 @@ module.exports = app => {
       imageUrl,
       _project
     } = req.body;
+    console.log('imageUrl: ', imageUrl);
     const building = new Building({
       imageUrl,
       address,

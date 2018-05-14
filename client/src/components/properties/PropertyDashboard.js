@@ -10,36 +10,47 @@ class PropertyDashboard extends Component {
     this.props.fetchProjectPostsIfNeeded(this.props.match.params._id);
   }
   componentWillReceiveProps(nextProps) {
-    console.log('next: ', nextProps);
-    // if (nextProps.postsInProject !== this.props.postsInProject) {
-    //   const { dispatch, selectedSubreddit } = nextProps
-    //   dispatch(fetchPostsIfNeeded(selectedSubreddit))
-    // }
+    if (nextProps.postsInProject !== this.props.postsInProject) {
+      this.props.fetchProjectPostsIfNeeded(nextProps.match.params._id);
+    }
   }
+  renderPosts = () => {
+    const { items } = this.props.posts;
+    if (items.length === 0) {
+      return <div>You have no posts.</div>;
+    }
+    return <PropertyList posts={items} />;
+  };
   render() {
-    console.log('propertyDashboard: ', this.props.userState);
+    const { isFetching, posts, project } = this.props;
     return (
       <ContentLayout>
-        <div>dasdf</div>
-        {/* <h2>Project</h2>
-        <PropertyList userProperties={this.props.userProperties} />
-
-        <div>
-          <Link
-            className="btn btn-outline-info"
-            to={`/projects/${this.props.match.params._id}/new`}
-          >
-            <i className="fas fa-plus-circle" /> ADD PROPERTY
-          </Link>
-        </div> */}
-        <div>{this.props.isFetching ? 'loading...' : 'complete'}</div>
+        {posts.isFetching === false ? (
+          <div>
+            <h2>Project {project.title}</h2>
+            {this.renderPosts()}
+            <div>
+              <Link
+                className="btn btn-outline-info"
+                to={`/projects/${this.props.match.params._id}/new`}
+              >
+                <i className="fas fa-plus-circle" /> ADD PROPERTY
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
       </ContentLayout>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return { userState: state };
+function mapStateToProps({ postsInProject, projects }, ownProps) {
+  return {
+    posts: postsInProject[ownProps.match.params._id] || {},
+    project: projects[ownProps.match.params._id] || {}
+  };
 }
 
 export default connect(mapStateToProps, { fetchProjectPostsIfNeeded })(
