@@ -2,42 +2,63 @@ import map from 'lodash/map';
 import React, { Component } from 'react';
 import ContentLayout from '../layout/ContentLayout';
 import { connect } from 'react-redux';
-import { fetchUserProperties } from '../../actions';
+import { fetchProjectPostsIfNeeded } from '../../actions';
 import { Link } from 'react-router-dom';
 import PropertyList from './PropertyList';
 class PropertyDashboard extends Component {
   componentDidMount() {
-    this.props.fetchUserProperties(this.props.match.params._id);
+    this.props.fetchProjectPostsIfNeeded(this.props.match.params._id);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.postsInProject !== this.props.postsInProject) {
+      this.props.fetchProjectPostsIfNeeded(nextProps.match.params._id);
+    }
+  }
+  renderPosts = () => {
+    const { items } = this.props.posts;
+    if (items.length === 0) {
+      return <div>You have no posts.</div>;
+    }
+    return <PropertyList posts={items} />;
+  };
   render() {
+    const { isFetching, posts, project } = this.props;
     return (
       <ContentLayout>
-        <h2>Project</h2>
-        <PropertyList userProperties={this.props.userProperties} />
-
-        <div>
-          <Link
-            className="btn btn-outline-info"
-            to={`/projects/${this.props.match.params._id}/new`}
-          >
-            <i className="fas fa-plus-circle" /> ADD PROPERTY
-          </Link>
-          <Link
-            className='btn btn-outline-danger float-right'
-            to='/projects'
-          >
-            <i className="fas fa-undo" /> BACK
-          </Link>
-        </div>
+        {posts.isFetching === false ? (
+          <div>
+            <h2>Project {project.title}</h2>
+            {this.renderPosts()}
+            <div>
+              <Link
+                className="btn btn-outline-info"
+                to={`/projects/${this.props.match.params._id}/new`}
+              >
+                <i className="fas fa-plus-circle" /> ADD PROPERTY
+              </Link>
+              <Link
+                className="btn btn-outline-danger float-right"
+                to={`/projects/${this.props.match.params._id}`}
+              >
+                <i className="fas fa-undo" /> BACK
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
       </ContentLayout>
     );
   }
 }
 
-function mapStateToProps({ userProperties }, ownProps) {
-  return { userProperties };
+function mapStateToProps({ postsInProject, projects }, ownProps) {
+  return {
+    posts: postsInProject[ownProps.match.params._id] || {},
+    project: projects[ownProps.match.params._id] || {}
+  };
 }
 
-export default connect(mapStateToProps, { fetchUserProperties })(
+export default connect(mapStateToProps, { fetchProjectPostsIfNeeded })(
   PropertyDashboard
 );

@@ -9,7 +9,6 @@ import Sidebar from '../containers/Sidebar';
 import Navbar from '../containers/Navbar';
 import FooterNav from './FooterNav';
 import Login from '../containers/Login';
-import Projects from '../containers/Projects';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
 import ProjectDashboard from './projects/ProjectDashboard';
@@ -21,8 +20,9 @@ import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import EditProperty from './EditProperty';
 import ProjectCreate from './projects/ProjectCreate';
+import UserSettings from './users/UserSettings';
 // property detail is the details of a single property
-const PropertyDetail = () => <div>placeholder property detail</div>;
+const ProfileSettings = () => <div>profilesettings</div>;
 class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
@@ -46,6 +46,11 @@ class App extends Component {
             <Layout>
               <Sidebar />
               <Switch>
+                <Route
+                  exact
+                  path="/settings/profile"
+                  component={UserSettings}
+                />
                 <Route
                   exact
                   path="/projects/:_id/overview"

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 class PropertyList extends Component {
   renderProperties() {
-    const { userProperties, deleteProperty } = this.props;
-    return map(userProperties, (property, index) => {
+    const { posts, deleteProperty } = this.props;
+    return posts.map((property, index) => {
       return (
         <li
           key={index + property._id}
