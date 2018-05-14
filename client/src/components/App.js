@@ -21,8 +21,8 @@ import NotFound from './NotFound';
 import EditProperty from './EditProperty';
 import ProjectCreate from './projects/ProjectCreate';
 import UserSettings from './users/UserSettings';
-// property detail is the details of a single property
-const ProfileSettings = () => <div>profilesettings</div>;
+
+const PlaceHolderComponent = () => <div>BUILDING PROFILE HERE</div>;
 class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
@@ -66,6 +66,11 @@ class App extends Component {
                   path="/projects/:_id/mapview"
                   component={ProjectMap}
                 />
+                <Route
+                  exact
+                  path="/building/profile/:_id"
+                  component={PlaceHolderComponent}
+                />
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />
                 <Route exact path="/login" component={Login} />
@@ -84,36 +89,3 @@ function mapStateToProps({ currentUser }) {
   return { currentUser };
 }
 export default connect(mapStateToProps, actions)(App);
-
-/* 
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/search" component={Map} />
-                <Route exact path="/projects/:_id/map" component={ProjectMap} />
-                <Route exact path="/projects/:_id" component={BuildingDash} />
-                <Route
-                  exact
-                  path="/projects/_:id/new"
-                  component={PropertyAdd}
-                />
-                <Route exact path="/projects" component={ProjectDashboard} />
-                <Route
-                  exact
-                  path="/projects/properties"
-                  component={BuildingProfile}
-                />
-                <Route
-                  exact
-                  path="/projects/edit/properties/:id"
-                  component={EditProperty}
-                />
-                <Route
-                  exact
-                  path="/projects/add/properties"
-                  component={PropertyAdd}
-                />
-
-                <Route component={NotFound} />
-              </Switch>
-*/
