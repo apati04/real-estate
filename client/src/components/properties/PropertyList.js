@@ -14,7 +14,7 @@ class PropertyList extends Component {
           <h6>{property.address}</h6>
           <div className="d-flex">
             <Link
-              to={`/building/profile/${property._id}`}
+              to={`/projects/${this.props.projectId}/post/${property._id}`}
               className="btn btn-sm btn-outline-primary"
             >
               <i className="fas fa-edit" /> VIEW

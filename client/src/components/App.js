@@ -70,7 +70,7 @@ class App extends Component {
                 />
                 <Route
                   exact
-                  path="/building/profile/:_id"
+                  path="/projects/:_id/post/:postId"
                   component={PropertyView}
                 />
                 <Route exact path="/projects" component={ProjectDashboard} />

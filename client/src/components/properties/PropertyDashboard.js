@@ -16,10 +16,11 @@ class PropertyDashboard extends Component {
   }
   renderPosts = () => {
     const { items } = this.props.posts;
+    const projectId = this.props.match.params._id;
     if (items.length === 0) {
       return <div>You have no posts.</div>;
     }
-    return <PropertyList posts={items} />;
+    return <PropertyList projectId={projectId} posts={items} />;
   };
   render() {
     const { isFetching, posts, project } = this.props;
