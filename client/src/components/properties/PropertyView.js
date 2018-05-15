@@ -20,7 +20,7 @@ class PropertyView extends Component {
         <div>
           <img
             className="img-fluid"
-            style={{ width: 800 }}
+            style={{ width: 800, height: 500, marginTop: '40px' }}
             src={`https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${
               post.imageUrl
             }`}
