@@ -19,7 +19,8 @@ class PropertyView extends Component {
       return (
         <div>
           <img
-            className="img-thumbnail"
+            className="img-fluid"
+            style={{ width: 800 }}
             src={`https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${
               post.imageUrl
             }`}
@@ -75,38 +76,41 @@ class PropertyView extends Component {
       return (
         <div>
           <div className="p-2">
-            {this.renderImage(post)}
-            <h2 className="my-4">{post.address}</h2>
-
-            <ul className="my-4 list-inline">
-              <li className="list-unstyled list-inline-item">
-                <h5>4 beds </h5>
-              </li>
-              <li className="list-inline-item">
-                <h5> - 3 baths</h5>
-              </li>
-              <li className="list-inline-item">
-                <h5> - 2,343 sqft</h5>
-              </li>
-            </ul>
+            <div className='row'>
+              <div className='col-sm-6'>
+                {this.renderImage(post)}
+              </div>
+              <div className='col-sm-6'>
+                <h2 className="my-4">{post.address}</h2>
+                <ul className="my-4 list-inline">
+                  <li className="list-unstyled list-inline-item">
+                    <h5>4 beds </h5>
+                  </li>
+                  <li className="list-inline-item">
+                    <h5> - 3 baths</h5>
+                  </li>
+                  <li className="list-inline-item">
+                    <h5> - 2,343 sqft</h5>
+                  </li>
+                </ul>
+                <List
+                  grid={{ gutter: 16, xs: 1, sm: 3, md: 3, lg: 3, xl: 3, xxl: 3 }}
+                  justify="space-around"
+                  dataSource={data}
+                  renderItem={item => (
+                    <List.Item>
+                      <List.Item.Meta
+                        avatar={<Avatar icon={`${item.icon}`} />}
+                        title={<h6>{item.title}</h6>}
+                        description={<p>{item.content}</p>}
+                      />
+                    </List.Item>
+                  )}
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="my-2 p-2">
-            <List
-              grid={{ gutter: 16, xs: 1, sm: 3, md: 3, lg: 3, xl: 3, xxl: 3 }}
-              justify="space-around"
-              dataSource={data}
-              renderItem={item => (
-                <List.Item>
-                  <List.Item.Meta
-                    avatar={<Avatar icon={`${item.icon}`} />}
-                    title={<h6>{item.title}</h6>}
-                    description={<p>{item.content}</p>}
-                  />
-                </List.Item>
-              )}
-            />
-          </div>
           <div className="d-flex my-4">
             <div className="mr-auto p-2">
               <button
