@@ -123,13 +123,13 @@ class PropertyView extends Component {
               </button>
             </div>
             <div className=" p-2">
-              <button className="btn btn-outline-danger">
-                <i className="fas fa-undo" /> Edit
+              <button className="btn btn-outline-info">
+                <i className="fas fa-edit" /> Edit
               </button>
             </div>
             <div className=" p-2">
               <button className="btn btn-outline-danger">
-                <i className="fas fa-undo" /> Delete
+                <i className="fas fa-trash-alt" /> Delete
               </button>
             </div>
           </div>
