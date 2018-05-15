@@ -81,7 +81,7 @@ class PropertyView extends Component {
                 {this.renderImage(post)}
               </div>
               <div className='col-sm-6'>
-                <h2 className="my-4">{post.address}</h2>
+                <h2 className="my-4 display-4">{post.address}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
                     <h5>4 beds </h5>
@@ -94,7 +94,7 @@ class PropertyView extends Component {
                   </li>
                 </ul>
                 <List
-                  grid={{ gutter: 16, xs: 1, sm: 3, md: 3, lg: 3, xl: 3, xxl: 3 }}
+                  grid={{ gutter: 16, xs: 1, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }}
                   justify="space-around"
                   dataSource={data}
                   renderItem={item => (
