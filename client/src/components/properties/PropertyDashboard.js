@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ContentLayout from '../layout/ContentLayout';
 import { connect } from 'react-redux';
 import { fetchProjectPostsIfNeeded } from '../../actions';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropertyList from './PropertyList';
 class PropertyDashboard extends Component {
   componentDidMount() {
@@ -37,12 +37,14 @@ class PropertyDashboard extends Component {
               >
                 <i className="fas fa-plus-circle" /> ADD PROPERTY
               </Link>
-              <Link
+              <button
+                onClick={() => {
+                  this.props.history.goBack();
+                }}
                 className="btn btn-outline-danger float-right"
-                to={`/projects/${this.props.match.params._id}`}
               >
                 <i className="fas fa-undo" /> BACK
-              </Link>
+              </button>
             </div>
           </div>
         ) : (
@@ -60,6 +62,6 @@ function mapStateToProps({ postsInProject, projects }, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { fetchProjectPostsIfNeeded })(
+export default withRouter(connect(mapStateToProps, { fetchProjectPostsIfNeeded })(
   PropertyDashboard
-);
+));
