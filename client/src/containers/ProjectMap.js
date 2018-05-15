@@ -50,7 +50,7 @@ class ProjectMap extends Component {
         style: 'mapbox://styles/mapbox/outdoors-v10',
         center: [-95.712891, 37.09024],
         zoom: 4
-      }).addControl(new mapboxgl.NavigationControl());;
+      }).addControl(new mapboxgl.NavigationControl());
 
       propJson.forEach(data => {
         const marker = new mapboxgl.Marker()
@@ -67,9 +67,12 @@ class ProjectMap extends Component {
       });
 
       if (propJson.length !== 0) {
-        const center = propJson.map(prop => prop.coordinates).reduce((acc, curr) => {
-          return [acc[0] + curr[0], acc[1] + curr[1]];
-        }).map(coord => coord / propJson.length);
+        const center = propJson
+          .map(prop => prop.coordinates)
+          .reduce((acc, curr) => {
+            return [acc[0] + curr[0], acc[1] + curr[1]];
+          })
+          .map(coord => coord / propJson.length);
         map.flyTo({
           center: center,
           zoom: 10
@@ -82,7 +85,6 @@ class ProjectMap extends Component {
           zoom: 4
         });
       }
-
     } else {
       new mapboxgl.Map({
         container: 'mapbox',
