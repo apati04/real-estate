@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ContentLayout from '../layout/ContentLayout';
 import { selectProjectItem, fetchProjectPostsIfNeeded } from '../../actions';
+import { Avatar, Icon, List } from 'antd';
+
 class PropertyView extends Component {
   componentDidMount() {
     this.props.fetchProjectPostsIfNeeded(this.props.match.params._id);
@@ -14,11 +17,14 @@ class PropertyView extends Component {
   renderImage(post) {
     if (post) {
       return (
-        <img
-          src={`https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${
-            post.imageUrl
-          }`}
-        />
+        <div>
+          <img
+            className="img-thumbnail"
+            src={`https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${
+              post.imageUrl
+            }`}
+          />
+        </div>
       );
     }
   }
@@ -28,12 +34,101 @@ class PropertyView extends Component {
     if (currentProject.items.length > 0) {
       const post = currentProject.items.find(item => item._id === postId);
       console.log(post);
+      const formatAddress = post.address.split(' ');
+      const street = formatAddress.slice(0, 3).join(' ');
+      const cityStateZip = formatAddress.slice(3).join(' ');
+      // latitude, longitude, notes, owner, website, built, address
+      const home = '<Icon type="home" />';
+      const global = <Icon type="global" />;
+      let calendar = () => <Icon type="calendar" />;
+      const edit = <Icon type="edit" />;
+      const data = [
+        {
+          title: 'Address',
+          content: post.address,
+          icon: 'environment-o'
+        },
+        { title: 'Type', content: 'Single Family', icon: 'home' },
+        {
+          title: 'Latitude, Longitude',
+          content: `${post.latitude}, ${post.longitude}`,
+          icon: 'global'
+        },
+        { title: 'Year Built', content: post.built, icon: 'calendar' },
+
+        {
+          title: 'Owner',
+          content: post.owner,
+          icon: 'user'
+        },
+        {
+          title: 'Website',
+          content: post.website,
+          icon: 'export'
+        },
+        {
+          title: 'Notes',
+          content: post.notes,
+          icon: 'edit'
+        }
+      ];
       return (
         <div>
-          <h1>{post.address}</h1>
-          <h2>{post.longitute || ''}</h2>
-          <h2>{post.latitude || ''}</h2>
-          {this.renderImage(post)}
+          <div className="p-2">
+            {this.renderImage(post)}
+            <h2 className="my-4">{post.address}</h2>
+
+            <ul className="my-4 list-inline">
+              <li className="list-unstyled list-inline-item">
+                <h5>4 beds </h5>
+              </li>
+              <li className="list-inline-item">
+                <h5> - 3 baths</h5>
+              </li>
+              <li className="list-inline-item">
+                <h5> - 2,343 sqft</h5>
+              </li>
+            </ul>
+          </div>
+
+          <div className="my-2 p-2">
+            <List
+              grid={{ gutter: 16, xs: 1, sm: 3, md: 3, lg: 3, xl: 3, xxl: 3 }}
+              justify="space-around"
+              dataSource={data}
+              renderItem={item => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<Avatar icon={`${item.icon}`} />}
+                    title={<h6>{item.title}</h6>}
+                    description={<p>{item.content}</p>}
+                  />
+                </List.Item>
+              )}
+            />
+          </div>
+          <div className="d-flex my-4">
+            <div className="mr-auto p-2">
+              <button
+                onClick={() => {
+                  this.props.history.goBack();
+                }}
+                className="btn btn-outline-danger"
+              >
+                <i className="fas fa-undo" /> BACK
+              </button>
+            </div>
+            <div className=" p-2">
+              <button className="btn btn-outline-danger">
+                <i className="fas fa-undo" /> Edit
+              </button>
+            </div>
+            <div className=" p-2">
+              <button className="btn btn-outline-danger">
+                <i className="fas fa-undo" /> Delete
+              </button>
+            </div>
+          </div>
         </div>
       );
     }
@@ -53,6 +148,6 @@ function mapStateToProps({ postsInProject }, ownProps) {
   const fetchedProject = postsInProject[_id] || { isFetching: true, items: [] };
   return { currentProject: fetchedProject };
 }
-export default connect(mapStateToProps, { fetchProjectPostsIfNeeded })(
-  PropertyView
+export default withRouter(
+  connect(mapStateToProps, { fetchProjectPostsIfNeeded })(PropertyView)
 );
