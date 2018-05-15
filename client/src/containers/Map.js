@@ -3,7 +3,6 @@ import ContentLayout from '../components/layout/ContentLayout';
 import keys from '../config/keys';
 import Search from '../components/forms/Search';
 import PropertyDetail from './PropertyDetail';
-import AddToList from '../components/AddToList';
 import mapboxgl from 'mapbox-gl';
 import { Button, Card } from 'antd';
 import { connect } from 'react-redux';
@@ -14,12 +13,6 @@ mapboxgl.accessToken = keys.mapboxToken;
 class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    new mapboxgl.Map({
-      container: 'mapbox',
-      style: 'mapbox://styles/mapbox/outdoors-v10',
-      center: [-95.712891, 37.09024],
-      zoom: 3
-    });
   }
 
   componentDidUpdate() {
@@ -105,10 +98,7 @@ class Map extends Component {
         <hr />
         <div id="mapbox" style={style.map} />
         <hr />
-        <div>
-          add to propety
-          <AddToList />
-        </div>
+
         {this.renderPropertyDetail()}
       </ContentLayout>
     );

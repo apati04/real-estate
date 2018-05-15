@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
 import { fetchProjects } from '../actions';
@@ -11,11 +11,19 @@ class AddToList extends Component {
   }
 
   renderOptions = () => {
+    let options = [];
     if (Object.keys(this.props.projects).length == 0) {
-      return <div>noprojects</div>;
+      return;
     }
-    <Option />;
-    return <div>render</div>;
+    for (const keys in this.props.projects) {
+      options.push(
+        <Option key={keys} value={keys}>
+          {this.props.projects[keys].title}
+        </Option>
+      );
+    }
+    console.log(options);
+    return options;
     // return [
     //   <Option key="1" value="one">
     //     One
@@ -31,15 +39,20 @@ class AddToList extends Component {
   render() {
     console.log('render: ', this.props.list);
     return (
-      <div>
-        {/* <Select
+      <div className="text-right">
+        <Select
           size="large"
           defaultValue="Add To Project"
           onChange={value => this.setState({ selected: value })}
         >
-        </Select> */}
-        {this.renderOptions()}
-        <button onClick={() => console.log(this.state)}>Save</button>
+          {this.renderOptions()}
+        </Select>
+        <button
+          className="btn-lg btn btn-outline-info ml-4"
+          onClick={() => console.log(this.state)}
+        >
+          Save
+        </button>
       </div>
     );
   }
