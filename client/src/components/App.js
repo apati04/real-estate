@@ -11,18 +11,20 @@ import FooterNav from './FooterNav';
 import Login from '../containers/Login';
 import Map from '../containers/Map';
 import Dashboard from '../containers/Dashboard';
-import ProjectDashboard from './projects/ProjectDashboard';
-import BuildingDash from './properties/PropertyDashboard';
 import Landing from './Landing';
-import PropertyAdd from './properties/PropertyAdd';
 import BuildingProfile from './BuildingProfile';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import EditProperty from './EditProperty';
-import ProjectCreate from './projects/ProjectCreate';
 import UserSettings from './users/UserSettings';
 
-const PlaceHolderComponent = () => <div>BUILDING PROFILE HERE</div>;
+import ProjectDashboard from './projects/ProjectDashboard';
+import ProjectCreate from './projects/ProjectCreate';
+
+import PropertyAdd from './properties/PropertyAdd';
+import BuildingDash from './properties/PropertyDashboard';
+import PropertyView from './properties/PropertyView';
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
@@ -68,8 +70,8 @@ class App extends Component {
                 />
                 <Route
                   exact
-                  path="/building/profile/:_id"
-                  component={PlaceHolderComponent}
+                  path="/projects/:_id/post/:postId"
+                  component={PropertyView}
                 />
                 <Route exact path="/projects" component={ProjectDashboard} />
                 <Route exact path="/search" component={Map} />

@@ -14,7 +14,8 @@ import {
   FETCH_USER_PROPERTY,
   DELETE_SELECTED_PROPERTY,
   REQUEST_PROJECT_POSTS,
-  RECEIVE_PROJECT_POSTS
+  RECEIVE_PROJECT_POSTS,
+  SELECT_PROJECT_POST
 } from './types';
 import keys from '../config/keys';
 
@@ -32,6 +33,7 @@ export const fetchPropertyData = (address, citystatezip) => async dispatch => {
   );
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
+  console.log(result);
   dispatch({ type: FETCH_PROPERTY_DATA, payload: result });
 };
 
@@ -80,11 +82,6 @@ export const deleteSelectedProperty = (value, history) => async dispatch => {
   const deleteResponse = await axios.delete(`/api/building/delete/${value}`);
   const { data } = deleteResponse;
   dispatch({ type: DELETE_SELECTED_PROPERTY, payload: data });
-};
-
-export const fetchUserProperty = id => async dispatch => {
-  const userResponse = await axios.get(`/api/building/${id}`);
-  dispatch({ type: FETCH_USER_PROPERTY, payload: userResponse.data });
 };
 
 // PROJECT ACTION CREATORS
@@ -152,3 +149,8 @@ export const submitNewBuilding = (
   history.push(`/projects/${values._project}/overview`);
   dispatch(fetchProjectPosts(values._project));
 };
+
+export const selectProjectPost = projectPost => ({
+  type: SELECT_PROJECT_POST,
+  projectPost
+});
