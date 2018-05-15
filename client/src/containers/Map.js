@@ -84,6 +84,7 @@ class Map extends Component {
   };
 
   render() {
+    console.log(this.props.data);
     const style = {
       map: {
         height: '40vh',

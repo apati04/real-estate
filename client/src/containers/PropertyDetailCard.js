@@ -10,6 +10,7 @@ class PropertyDetailCard extends Component {
     this.setState({ [type]: key });
   };
   render() {
+    console.log('detail: ', this.props);
     const tabList = [
       {
         key: 'Location',
