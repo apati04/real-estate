@@ -88,13 +88,13 @@ class PropertyView extends Component {
                 <h2 className="my-4 display-4">{post.address}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
-                    <h5>4 beds </h5>
+                    <h5># of bedrooms </h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5> - 3 baths</h5>
+                    <h5> - # of bathrooms</h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5> - 2,343 sqft</h5>
+                    <h5> - x sqft</h5>
                   </li>
                 </ul>
                 <List
