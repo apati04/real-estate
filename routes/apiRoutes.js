@@ -12,7 +12,7 @@ module.exports = app => {
           business district
      */
     const xml = await axios.get(
-      'https://www.zillow.com/webservice/GetSearchResults.htm?',
+      'https://www.zillow.com/webservice/GetDeepSearchResults.htm?',
       {
         params: {
           'zws-id': keys.zillowKey,
