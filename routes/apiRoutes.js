@@ -11,17 +11,19 @@ module.exports = app => {
           citystatezip: 'Irvine, CA 92614'
           business district
      */
+    const { address, citystatezip } = req.params;
     const xml = await axios.get(
       'https://www.zillow.com/webservice/GetDeepSearchResults.htm?',
       {
         params: {
           'zws-id': keys.zillowKey,
-          address: '5161 myra ave',
-          citystatezip: 'cypress, ca 90630'
+          address: '4455 Casa Grande Cir',
+          citystatezip: 'cypress,ca 90630'
         }
       }
     );
-    const { 'SearchResults:searchresults': zRes } = await xml2JsPromise(
+
+    const { 'SearchResults:searchresults': zResult } = await xml2JsPromise(
       xml.data,
       {
         normalize: true,
@@ -34,11 +36,12 @@ module.exports = app => {
       }
     );
 
-    if (zRes.message.code !== '0') {
-      return res.send(zRes.message.code);
+    if (zResult.message.code !== '0') {
+      return res.send(zResult.message.code);
     }
-    // const zObj = zRes.response.results.result;
-    res.send(zRes);
+    const zObj = zResult.response.results.result;
+    res.send(zObj);
+    // res.send(zRes);
     // const images = await axios.get(
     //   'http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm',
     //   {

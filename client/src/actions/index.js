@@ -26,12 +26,19 @@ export const fetchCurrentUserData = () => async dispatch => {
 };
 
 export const fetchPropertyData = (address, citystatezip) => async dispatch => {
-  // const request = await axios.get(
-  //   `https://cors-anywhere.herokuapp.com/${keys.zillowUrl}?zws-id=${
-  //     keys.zillowKey
-  //   }&address=${address}&citystatezip=${citystatezip}`
-  // );
-  const request = await axiot.get('/api/zDeepSearchResults');
+  const request = await axios.get(
+    `https://cors-anywhere.herokuapp.com/${keys.zillowUrl}?zws-id=${
+      keys.zillowKey
+    }&address=${address}&citystatezip=${citystatezip}`
+  );
+
+  // const request = await axios.get('/api/zDeepSearchResults/', {
+  //   params: {
+  //     address,
+  //     citystatezip
+  //   }
+  // });
+
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
 
