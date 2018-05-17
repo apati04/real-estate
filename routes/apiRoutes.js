@@ -11,14 +11,15 @@ module.exports = app => {
           citystatezip: 'Irvine, CA 92614'
           business district
      */
-    const { address, citystatezip } = req.params;
+    const { address, citystatezip } = req.query;
+    console.log(address, citystatezip);
     const xml = await axios.get(
       'https://www.zillow.com/webservice/GetDeepSearchResults.htm?',
       {
         params: {
           'zws-id': keys.zillowKey,
-          address: '4455 Casa Grande Cir',
-          citystatezip: 'cypress,ca 90630'
+          address,
+          citystatezip,
         }
       }
     );
