@@ -13,14 +13,6 @@ mapboxgl.accessToken = keys.mapboxToken;
 class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    new mapboxgl.Map({
-      container: 'mapbox',
-      style: 'mapbox://styles/mapbox/outdoors-v10',
-      center: [
-        -95.712891, 37.090240
-      ],
-      zoom: 3
-    });
   }
 
   componentDidUpdate() {
@@ -30,15 +22,15 @@ class Map extends Component {
       const map = new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [ lng, lat ],
+        center: [lng, lat],
         zoom: 15
       });
-      new mapboxgl.Marker().setLngLat([ lng, lat ]).addTo(map);
+      new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map);
     } else {
       new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [ -95.712891, 37.090240 ],
+        center: [-95.712891, 37.09024],
         zoom: 3.5
       });
     }
@@ -51,61 +43,63 @@ class Map extends Component {
           marginTop: '10px',
           minHeight: '440px'
         }
-      }
+      };
 
       const tabList = [
         {
           key: 'Location',
           tab: 'Location'
-        }, {
+        },
+        {
           key: 'About',
           tab: 'About'
-        }, {
+        },
+        {
           key: 'LastTransaction',
-          tab: 'Last Transaction',
+          tab: 'Last Transaction'
         },
         {
           key: 'TaxAssessment',
-          tab: 'Tax Assessment',
+          tab: 'Tax Assessment'
         },
         {
           key: 'AddProperty',
-          tab: <Button disabled className='btn btn-outline-info disabled text-uppercase'><i className="fas fa-plus-circle" /> add property</Button>
+          tab: (
+            <Button
+              disabled
+              className="btn btn-outline-info disabled text-uppercase"
+            >
+              <i className="fas fa-plus-circle" /> add property
+            </Button>
+          )
         }
       ];
 
-      return (
-        <Card
-          loading={true}
-          style={style.card}
-          tabList={tabList}
-        />
-      );
+      return <Card loading={true} style={style.card} tabList={tabList} />;
     } else if (this.props.loading === '') {
       return <div />;
     } else {
-      return <PropertyDetail />
+      return <PropertyDetail />;
     }
   };
 
   render() {
+    console.log(this.props.data);
     const style = {
       map: {
         height: '40vh',
         width: '100%',
         marginTop: '20px'
       }
-    }
+    };
 
     return (
       <ContentLayout>
         <Search />
         <hr />
-        <div
-          id="mapbox"
-          style={style.map}
-        />
+        <div id="mapbox" style={style.map} />
         <hr />
+
         {this.renderPropertyDetail()}
       </ContentLayout>
     );

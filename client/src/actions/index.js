@@ -26,14 +26,15 @@ export const fetchCurrentUserData = () => async dispatch => {
 };
 
 export const fetchPropertyData = (address, citystatezip) => async dispatch => {
-  const request = await axios.get(
-    `https://cors-anywhere.herokuapp.com/${keys.zillowUrl}?zws-id=${
-      keys.zillowKey
-    }&address=${address}&citystatezip=${citystatezip}`
-  );
+  // const request = await axios.get(
+  //   `https://cors-anywhere.herokuapp.com/${keys.zillowUrl}?zws-id=${
+  //     keys.zillowKey
+  //   }&address=${address}&citystatezip=${citystatezip}`
+  // );
+  const request = await axiot.get('/api/zDeepSearchResults');
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
-  console.log(result);
+
   dispatch({ type: FETCH_PROPERTY_DATA, payload: result });
 };
 
@@ -135,15 +136,20 @@ export const submitNewBuilding = (
   history,
   callback
 ) => async dispatch => {
-  console.log(uploadFile);
-  const awsConfig = await axios.get('/api/awsUpload');
-  await axios.put(awsConfig.data.url, uploadFile, {
-    headers: { 'Content-Type': uploadFile.type }
-  });
+  let imageUrl;
+  if (uploadFile !== null) {
+    const awsConfig = await axios.get('/api/awsUpload');
+    await axios.put(awsConfig.data.url, uploadFile, {
+      headers: { 'Content-Type': uploadFile.type }
+    });
+    imageUrl = awsConfig.data.key;
+  } else {
+    imageUrl = 'http://via.placeholder.com/300/4298f4/e7e7e7?text=Nein+Image';
+  }
 
   const postBuilding = await axios.post('/api/building', {
     ...values,
-    imageUrl: awsConfig.data.key
+    imageUrl
   });
   callback();
   history.push(`/projects/${values._project}/overview`);

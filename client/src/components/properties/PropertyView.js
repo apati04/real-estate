@@ -16,14 +16,20 @@ class PropertyView extends Component {
   }
   renderImage(post) {
     if (post) {
+      let img;
+      if (post.imageUrl.includes('placeholder')) {
+        img = post.imageUrl;
+      } else {
+        img = `https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${
+          post.imageUrl
+        }`;
+      }
       return (
         <div>
           <img
             className="img-fluid"
             style={{ width: 800, height: 500, marginTop: '40px' }}
-            src={`https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${
-              post.imageUrl
-            }`}
+            src={img}
           />
         </div>
       );
@@ -76,11 +82,9 @@ class PropertyView extends Component {
       return (
         <div>
           <div className="p-2">
-            <div className='row'>
-              <div className='col-sm-6'>
-                {this.renderImage(post)}
-              </div>
-              <div className='col-sm-6'>
+            <div className="row">
+              <div className="col-sm-6">{this.renderImage(post)}</div>
+              <div className="col-sm-6">
                 <h2 className="my-4 display-4">{post.address}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
@@ -94,7 +98,15 @@ class PropertyView extends Component {
                   </li>
                 </ul>
                 <List
-                  grid={{ gutter: 16, xs: 1, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }}
+                  grid={{
+                    gutter: 16,
+                    xs: 1,
+                    sm: 2,
+                    md: 2,
+                    lg: 2,
+                    xl: 2,
+                    xxl: 2
+                  }}
                   justify="space-around"
                   dataSource={data}
                   renderItem={item => (
