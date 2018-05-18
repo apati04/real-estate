@@ -52,13 +52,13 @@ class PropertyDetailCard extends Component {
 
     const style = {
       card: {
-        minHeight: '460px'
+        minHeight: '460px',
+        marginTop: '20px'
       }
     };
 
     return (
       <Fragment>
-        <AddToList />
         <Card
           style={style.card}
           tabList={tabList}
@@ -69,6 +69,7 @@ class PropertyDetailCard extends Component {
         >
           {cardContent[this.state.noTitleKey]}
         </Card>
+        <AddToList />
       </Fragment>
     );
   }
