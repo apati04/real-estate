@@ -35,14 +35,13 @@ class ProjectMap extends Component {
   }
 
   renderMap() {
-    if (this.props.userProperties.length !== 0) {
-      const { userProperties } = this.props;
-      const filterProps = _.map(userProperties, item => {
-        if (item._project === this.props.match.params._id) {
-          return item;
-        }
-      }).filter(item => item !== undefined);
-
+    const { userProperties } = this.props;
+    const filterProps = _.map(userProperties, item => {
+      if (item._project === this.props.match.params._id) {
+        return item;
+      }
+    }).filter(item => item !== undefined);
+    if (filterProps.length !== 0) {
       const propJson = filterProps.map(prop => {
         return {
           address: prop.address,
@@ -52,12 +51,16 @@ class ProjectMap extends Component {
               : [prop.latitude, prop.longitude]
         };
       });
+      const center = propJson.map(prop => prop.coordinates).reduce((acc, curr) => {
+        return [acc[0] + curr[0], acc[1] + curr[1]];
+      }).map(coord => coord / propJson.length);
+
       const map = new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
         center: [-95.712891, 37.09024],
         zoom: 4
-      }).addControl(new mapboxgl.NavigationControl());
+      }).flyTo({ center: center,zoom: 10 }).addControl(new mapboxgl.NavigationControl());
 
       propJson.forEach(data => {
         const marker = new mapboxgl.Marker()
@@ -72,21 +75,8 @@ class ProjectMap extends Component {
           });
         });
       });
-
-      if (propJson.length !== 0) {
-        const center = propJson
-          .map(prop => prop.coordinates)
-          .reduce((acc, curr) => {
-            return [acc[0] + curr[0], acc[1] + curr[1]];
-          })
-          .map(coord => coord / propJson.length);
-        map.flyTo({
-          center: center,
-          zoom: 10
-        });
-      }
     } else {
-      return <div />;
+      return <div />
     }
   }
 
@@ -150,19 +140,8 @@ class ProjectMap extends Component {
     }
   }
 
-  renderNoPropertyMsg() {
-    if (this.props.userProperties.length === 0) {
-      return (
-        <p className="display-4 text-danger">
-          No properties found in this project
-        </p>
-      );
-    } else {
-      return <div />;
-    }
-  }
-
   render() {
+    const { userProperties } = this.props;
     const style = {
       map: {
         height: '80vh',
@@ -187,9 +166,10 @@ class ProjectMap extends Component {
         >
           <i className="fas fa-undo" /> BACK
         </button>
-        {this.renderNoPropertyMsg()}
         <div style={style.mapBox}>
-          <div id="mapbox" style={style.map} />
+          {_.isEmpty(userProperties)
+            ? <p className='display-4 text-danger'>No properties found in this project</p>
+            : <div id="mapbox" style={style.map} />}
           <Sider
             collapsible="collapsible"
             collapsed={this.state.collapsed}

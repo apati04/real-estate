@@ -85,10 +85,10 @@ class Map extends Component {
       <ContentLayout>
         <Search />
         <div className="row">
-          <div className="col-sm-7">
+          <div className="col-sm-6">
             <div id="mapbox" style={style.map} />
           </div>
-          <div className="col-sm-5">{this.renderPropertyDetail()}</div>
+          <div className="col-sm-6">{this.renderPropertyDetail()}</div>
         </div>
       </ContentLayout>
     );
