@@ -53,7 +53,8 @@ class PropertyDetailCard extends Component {
     const style = {
       card: {
         minHeight: '460px',
-        marginTop: '20px'
+        marginTop: '20px',
+        marginBottom: '20px'
       }
     };
 
