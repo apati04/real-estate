@@ -144,6 +144,14 @@ class ProjectMap extends Component {
     }
   }
 
+  renderNoPropertyMsg() {
+    if (this.props.userProperties.length === 0) {
+      return <p className='display-4 text-danger'>No properties found in this project</p>
+    } else {
+      return <div />
+    }
+  }
+
   render() {
     const style = {
       map: {
@@ -169,9 +177,7 @@ class ProjectMap extends Component {
         >
           <i className="fas fa-undo" /> BACK
         </button>
-        {this.props.userProperties.length === 0
-          ? <p className='display-4 text-danger'>No properties found in this project</p>
-          : <div/>}
+        {this.renderNoPropertyMsg()}
         <div style={style.mapBox}>
           <div id="mapbox" style={style.map} />
           <Sider
