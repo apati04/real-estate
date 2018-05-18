@@ -41,7 +41,6 @@ class ProjectMap extends Component {
         return item;
       }
     }).filter(item => item !== undefined);
-
     if (filterProps.length !== 0) {
       const propJson = filterProps.map(prop => {
         return {
@@ -77,7 +76,7 @@ class ProjectMap extends Component {
         });
       });
     } else {
-      return <div id='mapbox' style={{backgroundColor: 'red'}}/>;
+      return <div />
     }
   }
 
@@ -142,6 +141,7 @@ class ProjectMap extends Component {
   }
 
   render() {
+    const { userProperties } = this.props;
     const style = {
       map: {
         height: '80vh',
@@ -167,7 +167,9 @@ class ProjectMap extends Component {
           <i className="fas fa-undo" /> BACK
         </button>
         <div style={style.mapBox}>
-          <div id="mapbox" style={style.map} />
+          {_.isEmpty(userProperties)
+            ? <p className='display-4 text-danger'>No properties found in this project</p>
+            : <div id="mapbox" style={style.map} />}
           <Sider
             collapsible="collapsible"
             collapsed={this.state.collapsed}
