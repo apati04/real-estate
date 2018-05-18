@@ -11,19 +11,27 @@ import * as actions from '../actions';
 class Map extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
-    }
+  }
 
   componentDidUpdate() {
     if (this.props.data.features) {
-      const lng = this.props.data.features[0] ? this.props.data.features[0].center[0] : -95.712891;
-      const lat = this.props.data.features[0] ? this.props.data.features[0].center[1] : 37.09024;
+      const lng = this.props.data.features[0]
+        ? this.props.data.features[0].center[0]
+        : -95.712891;
+      const lat = this.props.data.features[0]
+        ? this.props.data.features[0].center[1]
+        : 37.09024;
       const map = new mapboxgl.Map({
         container: 'mapbox',
         style: 'mapbox://styles/mapbox/outdoors-v10',
         center: [lng, lat],
         zoom: this.props.data.features[0] ? 15 : 3.5
       }).addControl(new mapboxgl.NavigationControl());
-      this.props.data.features[0] ? new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map) : <div/>;
+      this.props.data.features[0] ? (
+        new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
+      ) : (
+        <div />
+      );
     }
   }
 
@@ -59,6 +67,7 @@ class Map extends Component {
     } else if (this.props.loading === '') {
       return <div />;
     } else {
+      console.log('prop: ', this.props);
       return <PropertyDetail />;
     }
   };
@@ -75,13 +84,11 @@ class Map extends Component {
     return (
       <ContentLayout>
         <Search />
-        <div className='row'>
-          <div className='col-sm-7'>
+        <div className="row">
+          <div className="col-sm-7">
             <div id="mapbox" style={style.map} />
           </div>
-          <div className='col-sm-5'>
-            {this.renderPropertyDetail()}
-          </div>
+          <div className="col-sm-5">{this.renderPropertyDetail()}</div>
         </div>
       </ContentLayout>
     );

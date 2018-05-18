@@ -37,7 +37,14 @@ class ProjectMap extends Component {
   renderMap() {
     if (this.props.userProperties.length !== 0) {
       const { userProperties } = this.props;
-      const propJson = _.map(userProperties, prop => {
+      const filterProps = _.map(userProperties, item => {
+        if (item._project === this.props.match.params._id) {
+          return item;
+        }
+        return;
+      });
+
+      const propJson = filterProps.map(prop => {
         return {
           address: prop.address,
           coordinates:
