@@ -1,4 +1,9 @@
-import { REQUEST_PROJECT_POSTS, RECEIVE_PROJECT_POSTS } from '../actions/types';
+import omit from 'lodash/omit';
+import {
+  REQUEST_PROJECT_POSTS,
+  RECEIVE_PROJECT_POSTS,
+  DELETE_SELECTED_PROPERTY
+} from '../actions/types';
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -18,6 +23,13 @@ const posts = (state = INITIAL_STATE, action) => {
         items: action.payload,
         lastUpdated: action.receivedAt
       };
+    case DELETE_SELECTED_PROPERTY:
+      const newItems = state.items.filter(item => item._id !== action.postId);
+      return {
+        ...state,
+        items: newItems,
+        lastUpdated: action.receivedAt
+      };
     default:
       return state;
   }
@@ -27,6 +39,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_PROJECT_POSTS:
     case REQUEST_PROJECT_POSTS:
+    case DELETE_SELECTED_PROPERTY:
       return {
         ...state,
         [action.projectId]: posts(state[action.projectId], action)

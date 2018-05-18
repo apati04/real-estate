@@ -14,8 +14,6 @@ export default function(state = {}, action) {
     case FETCH_PROJECTS:
       return { ...state, ...mapKeys(action.payload, '_id') };
     case DELETE_PROJECT:
-      console.log(action.payload);
-      console.log('state: ', state);
       return omit(state, action.payload);
     default:
       return state;

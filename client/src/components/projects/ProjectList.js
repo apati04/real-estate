@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProjects, deleteProject } from '../../actions';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import map from 'lodash/map';
 
 class ProjectList extends Component {
@@ -16,7 +16,15 @@ class ProjectList extends Component {
       content: 'This operation cannot be undone',
       okText: 'Yes, delete this project',
       onOk() {
-        deleteProject(project._id);
+        const msg = () => {
+          const title = project.title;
+          message.success(
+            <span>
+              Project <strong>{title}</strong> has been deleted
+            </span>
+          );
+        };
+        deleteProject(project._id, msg);
       },
       onCancel() {
         return;

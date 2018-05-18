@@ -163,17 +163,33 @@ export const selectProjectPost = projectPost => ({
 });
 
 // DELETE ACTION CREATORS
-export const deleteProject = projectId => async dispatch => {
+export const deleteProject = (projectId, message) => async dispatch => {
   const res = await axios.delete('/api/projects', {
     params: {
       projectId
     }
   });
-  dispatch({ type: DELETE_PROJECT, payload: res.data });
+  if (res.data === projectId) {
+    dispatch({ type: DELETE_PROJECT, payload: res.data });
+    message();
+  }
 };
 
-export const deleteSelectedProperty = (value, history) => async dispatch => {
-  const deleteResponse = await axios.delete(`/api/building/delete/${value}`);
-  const { data } = deleteResponse;
-  dispatch({ type: DELETE_SELECTED_PROPERTY, payload: data });
+export const deleteSelectedProperty = (
+  { projectId, postId },
+  history,
+  message
+) => async dispatch => {
+  const del = await axios.delete('/api/building/delete', {
+    params: { id: postId }
+  });
+  if (postId === del.data._id) {
+    history.push(`/projects/${projectId}/overview`);
+    dispatch({
+      type: DELETE_SELECTED_PROPERTY,
+      projectId: del.data._project,
+      postId: del.data._id
+    });
+    message();
+  }
 };
