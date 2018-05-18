@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -36,7 +37,7 @@ class ProjectMap extends Component {
   renderMap() {
     if (this.props.userProperties.length !== 0) {
       const { userProperties } = this.props;
-      const propJson = userProperties.map(prop => {
+      const propJson = _.map(userProperties, prop => {
         return {
           address: prop.address,
           coordinates:
@@ -78,9 +79,8 @@ class ProjectMap extends Component {
           zoom: 10
         });
       }
-
     } else {
-      return <div />
+      return <div />;
     }
   }
 
@@ -146,9 +146,13 @@ class ProjectMap extends Component {
 
   renderNoPropertyMsg() {
     if (this.props.userProperties.length === 0) {
-      return <p className='display-4 text-danger'>No properties found in this project</p>
+      return (
+        <p className="display-4 text-danger">
+          No properties found in this project
+        </p>
+      );
     } else {
-      return <div />
+      return <div />;
     }
   }
 
