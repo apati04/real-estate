@@ -24,17 +24,6 @@ class AddToList extends Component {
     }
     console.log(options);
     return options;
-    // return [
-    //   <Option key="1" value="one">
-    //     One
-    //   </Option>,
-    //   <Option key="2" value="two">
-    //     Two
-    //   </Option>,
-    //   <Option key="3" value="three">
-    //     Three
-    //   </Option>
-    // ];
   };
   render() {
     console.log('render: ', this.props.list);
@@ -48,10 +37,10 @@ class AddToList extends Component {
           {this.renderOptions()}
         </Select>
         <button
-          className="btn-lg btn btn-outline-info ml-4"
+          className="btn btn-outline-info ml-2"
           onClick={() => console.log(this.state)}
         >
-          Save
+          <i className="fas fa-plus-circle" /> SAVE
         </button>
       </div>
     );

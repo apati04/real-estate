@@ -5,123 +5,121 @@ import { Link } from 'react-router-dom';
 import * as actions from "../actions";
 
 class PropertyDetail extends Component {
-  componentWillUnmount() {
-    this.props.resetPropData();
-  }
-
   render() {
-    const jsonData = this.props.data[Object.keys(this.props.data)[1]];
-
-    if (!jsonData) {
-      return <div></div>
-    } else if (!jsonData.response) {
-      return <h1>Could not find the property detail at this location!</h1>
-    }
-
-    const { response: { results: { result } } } = jsonData;
-
-    if (!result.address) {
-      return <h1>Could not find the property detail at this location!</h1>
+    const { data } = this.props;
+    if (data === 508) {
+      return <p className='display-4 text-danger'>Details are not available for this property!</p>
     }
 
     const renderPropData = {
       locationData() {
-        return (
-          <Fragment>
-            <p className="card-title">Address</p>
-            <p className="card-text"><small className="text-warning">{result.address.street._text}, {result.address.city._text},{result.address.state._text} {result.address.zipcode._text}</small></p>
-            <p className="card-title">Latitude & Longitude</p>
-            <p className="card-text"><small className="text-warning">{result.address.latitude._text}, {result.address.longitude._text}</small></p>
-          </Fragment>
-        )
+        if (!data.address) {
+          return (
+            <Fragment>
+              <p className="card-title">Address</p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
+              <p className="card-title">Latitude & Longitude</p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
+            </Fragment>
+          );
+        } else {
+          return (
+            <Fragment>
+              <p className="card-title">Address</p>
+              <p className="card-text"><small className="text-warning">{data.address.street}, {data.address.city},{data.address.state} {data.address.zipcode}</small></p>
+              <p className="card-title">Latitude & Longitude</p>
+              <p className="card-text"><small className="text-warning">{data.address.latitude}, {data.address.longitude}</small></p>
+            </Fragment>
+          );
+        }
       },
       yearBuiltData() {
-        if (!result.yearBuilt) {
+        if (!data.yearBuilt) {
           return (
             <Fragment>
               <p className="card-title">Year Built</p>
-              <p className="card-text"><small className="text-warning">N/A</small></p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
             </Fragment>
-          )
+          );
         } else {
           return (
             <Fragment>
               <p className="card-title">Year Built</p>
-              <p className="card-text"><small className="text-warning">{result.yearBuilt._text}</small></p>
+              <p className="card-text"><small className="text-warning">{data.yearBuilt}</small></p>
             </Fragment>
-          )
+          );
         }
       },
       bedroomData() {
-        if (!result.bedrooms) {
+        if (!data.bedrooms) {
           return (
             <Fragment>
               <p className="card-title">Bedrooms</p>
-              <p className="card-text"><small className="text-warning">N/A</small></p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
             </Fragment>
-          )
+          );
         } else {
           return (
             <Fragment>
               <p className="card-title">Bedrooms</p>
-              <p className="card-text"><small className="text-warning">{result.bedrooms._text}</small></p>
+              <p className="card-text"><small className="text-warning">{data.bedrooms}</small></p>
             </Fragment>
-          )
+          );
         }
       },
       bathroomData() {
-        if (!result.bathrooms) {
+        if (!data.bathrooms) {
           return (
             <Fragment>
               <p className="card-title">Bathrooms</p>
-              <p className="card-text"><small className="text-warning">N/A</small></p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
             </Fragment>
-          )
+          );
         } else {
           return (
             <Fragment>
               <p className="card-title">Bathrooms</p>
-              <p className="card-text"><small className="text-warning">{result.bathrooms._text}</small></p>
+              <p className="card-text"><small className="text-warning">{data.bathrooms}</small></p>
             </Fragment>
-          )
+          );
         }
       },
       lotSizeData() {
-        if (!result.lotSizeSqFt) {
+        if (!data.lotSizeSqFt) {
           return (
             <Fragment>
               <p className="card-title">Lot Size Square FT</p>
-              <p className="card-text"><small className="text-warning">N/A</small></p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
             </Fragment>
-          )
+          );
         } else {
           return (
             <Fragment>
               <p className="card-title">Lot Size Square FT</p>
-              <p className="card-text"><small className="text-warning">{result.lotSizeSqFt._text}</small></p>
+              <p className="card-text"><small className="text-warning">{data.lotSizeSqFt}</small></p>
             </Fragment>
-          )
+          );
         }
       },
       sqftData() {
-        if (!result.finishedSqFt) {
+        if (!data.finishedSqFt) {
           return (
             <Fragment>
               <p className="card-title">Square FT</p>
-              <p className="card-text"><small className="text-warning">N/A</small></p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
             </Fragment>
-          )
+          );
         } else {
           return (
             <Fragment>
               <p className="card-title">Square FT</p>
-              <p className="card-text"><small className="text-warning">{result.finishedSqFt._text}</small></p>
+              <p className="card-text"><small className="text-warning">{data.finishedSqFt}</small></p>
             </Fragment>
-          )
+          );
         }
       },
       lastSoldData() {
-        if (!result.lastSoldDate || !result.lastSoldPrice) {
+        if (!data.lastSoldDate || !data.lastSoldPrice) {
           return (
             <Fragment>
               <p className="card-title">Last Sold Date</p>
@@ -134,45 +132,45 @@ class PropertyDetail extends Component {
           return (
             <Fragment>
               <p className="card-title">Last Sold Date</p>
-              <p className="card-text"><small className="text-warning">{result.lastSoldDate._text}</small></p>
+              <p className="card-text"><small className="text-warning">{data.lastSoldDate}</small></p>
               <p className="card-title">Last Sold Price</p>
-              <p className="card-text"><small className="text-warning">${result.lastSoldPrice._text}</small></p>
+              <p className="card-text"><small className="text-warning">${data.lastSoldPrice._}</small></p>
             </Fragment>
           );
         }
       },
       taxYearData() {
-        if (!result.taxAssessmentYear) {
+        if (!data.taxAssessmentYear) {
           return (
             <Fragment>
               <p className="card-title">Year</p>
-              <p className="card-text"><small className="text-warning">N/A</small></p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
             </Fragment>
-          )
+          );
         } else {
           return (
             <Fragment>
               <p className="card-title">Year</p>
-              <p className="card-text"><small className="text-warning">{result.taxAssessmentYear._text}</small></p>
+              <p className="card-text"><small className="text-warning">{data.taxAssessmentYear}</small></p>
             </Fragment>
-          )
+          );
         }
       },
       taxAssessData() {
-        if (!result.taxAssessment) {
+        if (!data.taxAssessment) {
           return (
             <Fragment>
               <p className="card-title">Tax</p>
-              <p className="card-text"><small className="text-warning">N/A</small></p>
+              <p className="card-text"><small className="text-danger">N/A</small></p>
             </Fragment>
-          )
+          );
         } else {
           return (
             <Fragment>
               <p className="card-title">Tax</p>
-              <p className="card-text"><small className="text-warning">${result.taxAssessment._text}</small></p>
+              <p className="card-text"><small className="text-warning">${data.taxAssessment}</small></p>
             </Fragment>
-          )
+          );
         }
       },
       renderAddBtn() {
@@ -182,10 +180,10 @@ class PropertyDetail extends Component {
             to={{
               pathname: '/projects/add/properties',
               state: {
-                address: `${result.address.street._text}, ${result.address.city._text},${result.address.state._text} ${result.address.zipcode._text}`,
-                longitude: `${result.address.longitude._text}`,
-                latitude: `${result.address.latitude._text}`,
-                zpid: `${result.zpid._text}`
+                address: `${data.address.street}, ${data.address.city},${data.address.state} ${data.address.zipcode}`,
+                longitude: `${data.address.longitude}`,
+                latitude: `${data.address.latitude}`,
+                zpid: `${data.zpid}`
               }
             }}>
             <i className="fas fa-plus-circle" /> add property
