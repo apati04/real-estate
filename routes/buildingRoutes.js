@@ -60,19 +60,16 @@ module.exports = app => {
     });
     res.send(property);
   });
-  app.delete(
-    '/api/building/delete/:id',
-    requireAuth,
-    async (req, res, next) => {
-      const buildingId = req.params.id;
-      try {
-        const deleteBuilding = await Building.findByIdAndRemove({
-          _id: buildingId
-        });
-        res.send(deleteBuilding);
-      } catch (error) {
-        res.status(422).send(error);
-      }
+  app.delete('/api/building/delete', requireAuth, async (req, res, next) => {
+    const { id } = req.query;
+
+    try {
+      const delData = await Building.findByIdAndRemove({
+        _id: id
+      });
+      res.send(delData);
+    } catch (error) {
+      res.status(422).send(error);
     }
-  );
+  });
 };

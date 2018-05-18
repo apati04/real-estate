@@ -31,22 +31,16 @@ module.exports = app => {
       res.status(400).send(error);
     }
   });
-  app.post('/api/projects/:_id/new', async (req, res, next) => {
-    const testproj = mongoose.Types.ObjectId(req.params._id);
-    const { address, owner, built } = req.body;
-    const testuser = mongoose.Types.ObjectId('5af4f9c342ad7d2dc05776e0');
-    const building = new Building({
-      address,
-      owner,
-      built,
-      _project: req.params._id,
-      _user: testuser
-    });
+
+  app.delete('/api/projects', requireAuth, async (req, res) => {
+    const { projectId } = req.query;
     try {
-      const result = await building.save();
-      res.send(result);
+      const removeProject = await Project.findByIdAndRemove({
+        _id: projectId
+      });
+      res.send(removeProject._id);
     } catch (error) {
-      res.status(400).send(error);
+      res.status(422).send(error);
     }
   });
 };

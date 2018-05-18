@@ -127,15 +127,13 @@ class PropertyAdd extends Component {
                   />
                 </div>
               </div>
-              <button
-                onClick={() => {
-                  this.props.history.goBack();
-                }}
+              <Link
+                to={`/projects/${this.props.match.params._id}/overview`}
                 className="btn btn-outline-danger float-right"
                 style={{ marginLeft: '30px ' }}
               >
                 <i className="fas fa-undo" /> BACK
-              </button>
+              </Link>
               {this.renderSaveBtn()}
             </form>
           </div>
