@@ -1,13 +1,38 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProjects } from '../../actions';
+import { fetchProjects, deleteProject } from '../../actions';
+import { Modal, message } from 'antd';
 import map from 'lodash/map';
+
 class ProjectList extends Component {
   componentDidMount() {
     this.props.fetchProjects();
   }
+
+  showDeleteModal = (project, deleteProject) => {
+    Modal.confirm({
+      title: `Are you sure?`,
+      content: 'This operation cannot be undone',
+      okText: 'Yes, delete this project',
+      onOk() {
+        const msg = () => {
+          const title = project.title;
+          message.success(
+            <span>
+              Project <strong>{title}</strong> has been deleted
+            </span>
+          );
+        };
+        deleteProject(project._id, msg);
+      },
+      onCancel() {
+        return;
+      }
+    });
+  };
   renderList() {
+    const { deleteProject } = this.props;
     return map(this.props.projects, project => {
       return (
         <li
@@ -35,6 +60,7 @@ class ProjectList extends Component {
             </Link>
             <button
               className="btn btn-sm btn-outline-danger"
+              onClick={() => this.showDeleteModal(project, deleteProject)}
               style={{ marginLeft: '10px' }}
             >
               <i className="fas fa-trash-alt" /> DELETE
@@ -55,4 +81,6 @@ class ProjectList extends Component {
 function mapStateToProps({ projects }) {
   return { projects };
 }
-export default connect(mapStateToProps, { fetchProjects })(ProjectList);
+export default connect(mapStateToProps, { fetchProjects, deleteProject })(
+  ProjectList
+);

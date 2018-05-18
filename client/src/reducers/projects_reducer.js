@@ -1,5 +1,10 @@
 import mapKeys from 'lodash/mapKeys';
-import { FETCH_PROJECTS, FETCH_PROJECT } from '../actions/types';
+import omit from 'lodash/omit';
+import {
+  FETCH_PROJECTS,
+  FETCH_PROJECT,
+  DELETE_PROJECT
+} from '../actions/types';
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -8,6 +13,8 @@ export default function(state = {}, action) {
       return { ...state, [proj._id]: proj };
     case FETCH_PROJECTS:
       return { ...state, ...mapKeys(action.payload, '_id') };
+    case DELETE_PROJECT:
+      return omit(state, action.payload);
     default:
       return state;
   }

@@ -31,20 +31,15 @@ class PropertyDashboard extends Component {
             <h2>Project {project.title}</h2>
             {this.renderPosts()}
             <div>
+              <Link to="/projects" className="btn btn-outline-danger">
+                <i className="fas fa-undo" /> BACK
+              </Link>
               <Link
-                className="btn btn-outline-info"
+                className="btn btn-outline-info float-right"
                 to={`/projects/${this.props.match.params._id}/new`}
               >
                 <i className="fas fa-plus-circle" /> ADD PROPERTY
               </Link>
-              <button
-                onClick={() => {
-                  this.props.history.goBack();
-                }}
-                className="btn btn-outline-danger float-right"
-              >
-                <i className="fas fa-undo" /> BACK
-              </button>
             </div>
           </div>
         ) : (
@@ -62,6 +57,6 @@ function mapStateToProps({ postsInProject, projects }, ownProps) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchProjectPostsIfNeeded })(
-  PropertyDashboard
-));
+export default withRouter(
+  connect(mapStateToProps, { fetchProjectPostsIfNeeded })(PropertyDashboard)
+);

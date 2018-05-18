@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ContentLayout from '../layout/ContentLayout';
-import { selectProjectItem, fetchProjectPostsIfNeeded } from '../../actions';
-import { Avatar, Icon, List } from 'antd';
-
+import {
+  selectProjectItem,
+  fetchProjectPostsIfNeeded,
+  deleteSelectedProperty
+} from '../../actions';
+import { Avatar, Icon, List, Modal, message } from 'antd';
+const { confirm } = Modal;
 class PropertyView extends Component {
   componentDidMount() {
     this.props.fetchProjectPostsIfNeeded(this.props.match.params._id);
@@ -35,20 +39,35 @@ class PropertyView extends Component {
       );
     }
   }
+  showDeleteModal = () => {
+    const {
+      match: {
+        params: { _id: projectId, postId }
+      },
+      deleteSelectedProperty,
+      history
+    } = this.props;
+    confirm({
+      title: 'Are you sure?',
+      content: 'This operation cannot be undone',
+      okText: 'Yes, delete this property',
+      onOk: () => {
+        const msg = () => {
+          message.success('Item has been deleted');
+        };
+        const values = { projectId, postId };
+        deleteSelectedProperty(values, history, msg);
+      }
+    });
+  };
   renderDetails() {
-    const { currentProject, isFetching } = this.props;
+    const { currentProject, isFetching, deleteSelectedProperty } = this.props;
     const postId = this.props.match.params.postId;
     if (currentProject.items.length > 0) {
       const post = currentProject.items.find(item => item._id === postId);
-      console.log(post);
       const formatAddress = post.address.split(' ');
       const street = formatAddress.slice(0, 3).join(' ');
       const cityStateZip = formatAddress.slice(3).join(' ');
-      // latitude, longitude, notes, owner, website, built, address
-      const home = '<Icon type="home" />';
-      const global = <Icon type="global" />;
-      let calendar = () => <Icon type="calendar" />;
-      const edit = <Icon type="edit" />;
       const data = [
         {
           title: 'Address',
@@ -140,7 +159,12 @@ class PropertyView extends Component {
               </button>
             </div>
             <div className=" p-2">
-              <button className="btn btn-outline-danger">
+              <button
+                onClick={() => {
+                  this.showDeleteModal(currentProject, deleteSelectedProperty);
+                }}
+                className="btn btn-outline-danger"
+              >
                 <i className="fas fa-trash-alt" /> Delete
               </button>
             </div>
@@ -150,6 +174,7 @@ class PropertyView extends Component {
     }
     return <div>Loading...</div>;
   }
+
   render() {
     return (
       <ContentLayout>
@@ -165,5 +190,8 @@ function mapStateToProps({ postsInProject }, ownProps) {
   return { currentProject: fetchedProject };
 }
 export default withRouter(
-  connect(mapStateToProps, { fetchProjectPostsIfNeeded })(PropertyView)
+  connect(mapStateToProps, {
+    fetchProjectPostsIfNeeded,
+    deleteSelectedProperty
+  })(PropertyView)
 );
