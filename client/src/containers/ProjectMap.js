@@ -41,8 +41,7 @@ class ProjectMap extends Component {
         if (item._project === this.props.match.params._id) {
           return item;
         }
-        return;
-      });
+      }).filter(item => item !== undefined);
 
       const propJson = filterProps.map(prop => {
         return {
