@@ -35,14 +35,14 @@ class ProjectMap extends Component {
   }
 
   renderMap() {
-    if (this.props.userProperties.length !== 0) {
-      const { userProperties } = this.props;
-      const filterProps = _.map(userProperties, item => {
-        if (item._project === this.props.match.params._id) {
-          return item;
-        }
-      }).filter(item => item !== undefined);
+    const { userProperties } = this.props;
+    const filterProps = _.map(userProperties, item => {
+      if (item._project === this.props.match.params._id) {
+        return item;
+      }
+    }).filter(item => item !== undefined);
 
+    if (filterProps.length !== 0) {
       const propJson = filterProps.map(prop => {
         return {
           address: prop.address,
@@ -86,7 +86,7 @@ class ProjectMap extends Component {
         });
       }
     } else {
-      return <div />;
+      return <div style={{backgroundColor: 'red'}}/>;
     }
   }
 
@@ -187,7 +187,7 @@ class ProjectMap extends Component {
         >
           <i className="fas fa-undo" /> BACK
         </button>
-        {this.renderNoPropertyMsg()}
+        {/* {this.renderNoPropertyMsg()} */}
         <div style={style.mapBox}>
           <div id="mapbox" style={style.map} />
           <Sider
