@@ -1,14 +1,21 @@
-import { FETCH_MAP_DATA } from "../actions/types";
+import { REQUEST_MAP_DATA, RECEIVE_MAP_DATA } from '../actions/types';
 
-const initialState = {
+const INITIAL_STATE = {
+  isFetching: false,
   data: {}
-}
-
-function mapDataReducer(state = initialState, action) {
+};
+function mapDataReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case FETCH_MAP_DATA:
+    case REQUEST_MAP_DATA:
       return {
         ...state,
+        isFetching: true
+      };
+    case RECEIVE_MAP_DATA:
+      console.log('payload: ', action.payload);
+      return {
+        ...state,
+        isFetching: false,
         data: action.payload
       };
     default:

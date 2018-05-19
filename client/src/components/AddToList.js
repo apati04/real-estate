@@ -5,20 +5,18 @@ import { fetchProjects } from '../actions';
 const Option = Select.Option;
 
 class AddToList extends Component {
-  state = { selected: null };
-  componentDidMount() {
-    this.props.fetchProjects();
-  }
-
+  state = {
+    selected: null
+  };
   renderOptions = () => {
     let options = [];
-    if (Object.keys(this.props.projects).length == 0) {
+    if (Object.keys(this.props.projectList).length == 0) {
       return;
     }
-    for (const keys in this.props.projects) {
+    for (const keys in this.props.projectList) {
       options.push(
         <Option key={keys} value={keys}>
-          {this.props.projects[keys].title}
+          {this.props.projectList[keys].title}
         </Option>
       );
     }
@@ -26,7 +24,7 @@ class AddToList extends Component {
     return options;
   };
   render() {
-    console.log('render: ', this.props.list);
+    console.log('render: ', this.props);
     return (
       <div className="text-right">
         <Select
@@ -46,7 +44,5 @@ class AddToList extends Component {
     );
   }
 }
-function mapStateToProps({ projects }) {
-  return { projects };
-}
-export default connect(mapStateToProps, { fetchProjects })(AddToList);
+
+export default AddToList;

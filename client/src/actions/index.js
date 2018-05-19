@@ -7,7 +7,6 @@ import {
   FETCH_PROJECTS,
   FETCH_PROPERTY_DATA,
   FETCH_PROPERTY_IMG,
-  FETCH_MAP_DATA,
   LOADING_DATA,
   RESET_PROP_DATA,
   FETCH_USER_PROPERTIES,
@@ -16,7 +15,9 @@ import {
   DELETE_PROJECT,
   REQUEST_PROJECT_POSTS,
   RECEIVE_PROJECT_POSTS,
-  SELECT_PROJECT_POST
+  SELECT_PROJECT_POST,
+  RECEIVE_MAP_DATA,
+  REQUEST_MAP_DATA
 } from './types';
 import keys from '../config/keys';
 
@@ -54,16 +55,6 @@ export const fetchImgData = zpid => async dispatch => {
   const { data } = request;
   const result = JSON.parse(convert.xml2json(data, { compact: true }));
   dispatch({ type: FETCH_PROPERTY_IMG, payload: result });
-};
-
-export const fetchMapData = location => async dispatch => {
-  const request = await axios.get(
-    `https://cors-anywhere.herokuapp.com/${
-      keys.mapboxUrl
-    }/${location}.json?access_token=${keys.mapboxToken}`
-  );
-  const { data } = request;
-  dispatch({ type: FETCH_MAP_DATA, payload: data });
 };
 
 export const loadingData = () => {
@@ -137,32 +128,29 @@ export const submitNewBuilding = (
   history,
   callback
 ) => async dispatch => {
-  let imageUrl;
+  let userImage = {};
   if (uploadFile !== null) {
     const awsConfig = await axios.get('/api/awsUpload');
     await axios.put(awsConfig.data.url, uploadFile, {
       headers: { 'Content-Type': uploadFile.type }
     });
-    imageUrl = awsConfig.data.key;
-  } else {
-    imageUrl = 'http://via.placeholder.com/300/4298f4/e7e7e7?text=Nein+Image';
+    userImage.url = awsConfig.data.key;
   }
 
   const postBuilding = await axios.post('/api/building', {
     ...values,
-    imageUrl
+    userImage
   });
   callback();
   history.push(`/projects/${values._project}/overview`);
   dispatch(fetchProjectPosts(values._project));
 };
-
+// ------
 export const selectProjectPost = projectPost => ({
   type: SELECT_PROJECT_POST,
   projectPost
 });
 
-// DELETE ACTION CREATORS
 export const deleteProject = (projectId, message) => async dispatch => {
   const res = await axios.delete('/api/projects', {
     params: {
@@ -192,4 +180,26 @@ export const deleteSelectedProperty = (
     });
     message();
   }
+};
+
+const requestMapData = () => ({
+  type: REQUEST_MAP_DATA
+});
+const receiveMapData = data => ({
+  type: RECEIVE_MAP_DATA,
+  payload: data
+});
+export const fetchMapData = (location, resetForm) => dispatch => {
+  dispatch(requestMapData());
+  return axios
+    .get('/api/mapSearch/', {
+      params: {
+        location
+      }
+    })
+    .then(({ data }) => {
+      console.log(data);
+      dispatch(receiveMapData(data));
+    })
+    .catch(error => console.log(error));
 };
