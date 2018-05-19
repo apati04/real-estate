@@ -50,10 +50,11 @@ class PropertyDashboard extends Component {
   }
 }
 
-function mapStateToProps({ postsInProject, projects }, ownProps) {
+function mapStateToProps(state, ownProps) {
+  console.log('posts: ', state);
   return {
-    posts: postsInProject[ownProps.match.params._id] || {},
-    project: projects[ownProps.match.params._id] || {}
+    posts: state.postsInProject[ownProps.match.params._id] || {},
+    project: state.projects[ownProps.match.params._id] || {}
   };
 }
 

@@ -125,23 +125,24 @@ export const fetchProjectPostsIfNeeded = projectId => (dispatch, getState) => {
 export const submitNewBuilding = (
   values,
   uploadFile,
-  redirect,
+  history,
   callback
 ) => async dispatch => {
+  let userImage = {};
   if (uploadFile !== null) {
     const awsConfig = await axios.get('/api/awsUpload');
     await axios.put(awsConfig.data.url, uploadFile, {
       headers: { 'Content-Type': uploadFile.type }
     });
-    values.image.url = awsConfig.data.key;
+    userImage.url = awsConfig.data.key;
   }
+
   const postBuilding = await axios.post('/api/building', {
-    formValues: { ...values }
+    ...values,
+    userImage
   });
   callback();
-  if (redirect.shouldRedirect === true) {
-    redirect.history.push(`/projects/${values._project}/overview`);
-  }
+  history.push(`/projects/${values._project}/overview`);
   dispatch(fetchProjectPosts(values._project));
 };
 // ------

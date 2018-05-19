@@ -18,27 +18,6 @@ class PropertyView extends Component {
       this.props.fetchProjectPostsIfNeeded(nextProps.match.params._id);
     }
   }
-  renderImage(post) {
-    if (post) {
-      let img;
-      if (post.imageUrl.includes('placeholder')) {
-        img = post.imageUrl;
-      } else {
-        img = `https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${
-          post.imageUrl
-        }`;
-      }
-      return (
-        <div>
-          <img
-            className="img-fluid"
-            style={{ width: 800, height: 500, marginTop: '40px' }}
-            src={img}
-          />
-        </div>
-      );
-    }
-  }
   showDeleteModal = () => {
     const {
       match: {
@@ -65,13 +44,12 @@ class PropertyView extends Component {
     const postId = this.props.match.params.postId;
     if (currentProject.items.length > 0) {
       const post = currentProject.items.find(item => item._id === postId);
-      const formatAddress = post.address.split(' ');
-      const street = formatAddress.slice(0, 3).join(' ');
-      const cityStateZip = formatAddress.slice(3).join(' ');
+      // ----------------------------------------
+      // data array for property details,
       const data = [
         {
           title: 'Address',
-          content: post.address,
+          content: post.fullAddress,
           icon: 'environment-o'
         },
         { title: 'Type', content: 'Single Family', icon: 'home' },
@@ -80,13 +58,7 @@ class PropertyView extends Component {
           content: `${post.latitude}, ${post.longitude}`,
           icon: 'global'
         },
-        { title: 'Year Built', content: post.built, icon: 'calendar' },
-
-        {
-          title: 'Owner',
-          content: post.owner,
-          icon: 'user'
-        },
+        { title: 'Year Built', content: post.yearBuilt, icon: 'calendar' },
         {
           title: 'Website',
           content: post.website,
@@ -98,22 +70,30 @@ class PropertyView extends Component {
           icon: 'edit'
         }
       ];
+      //------ this renders the view ---------------
+      console.log(post);
       return (
         <div>
           <div className="p-2">
             <div className="row">
-              <div className="col-sm-6">{this.renderImage(post)}</div>
               <div className="col-sm-6">
-                <h2 className="my-4 display-4">{post.address}</h2>
+                {/* <img
+                  className="img-fluid"
+                  style={{ width: 800, height: 500, marginTop: '40px' }}
+                  src={post.userImage.url || post.image.url}
+                /> */}
+              </div>
+              <div className="col-sm-6">
+                <h2 className="my-4 display-4">{post.fullAddress}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
-                    <h5>4 beds </h5>
+                    <h5>{`${post.rooms.bedrooms} bedrooms`}</h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5> - 3 baths</h5>
+                    <h5>{`- ${post.rooms.bathrooms} bathrooms`}</h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5> - 2,343 sqft</h5>
+                    <h5>{`- ${post.finishedSize.value} sq.ft.`}</h5>
                   </li>
                 </ul>
                 <List
@@ -132,7 +112,7 @@ class PropertyView extends Component {
                     <List.Item>
                       <List.Item.Meta
                         avatar={<Avatar icon={`${item.icon}`} />}
-                        title={<h6>{item.title}</h6>}
+                        title={item.title}
                         description={<p>{item.content}</p>}
                       />
                     </List.Item>
@@ -141,7 +121,6 @@ class PropertyView extends Component {
               </div>
             </div>
           </div>
-
           <div className="d-flex my-4">
             <div className="mr-auto p-2">
               <button
@@ -172,6 +151,7 @@ class PropertyView extends Component {
         </div>
       );
     }
+    // ------if still fetching data render loading...
     return <div>Loading...</div>;
   }
 
@@ -179,7 +159,6 @@ class PropertyView extends Component {
     return (
       <ContentLayout>
         <div>{this.renderDetails()}</div>
-        <div>{this.renderImage()}</div>
       </ContentLayout>
     );
   }

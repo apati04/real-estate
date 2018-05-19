@@ -5,11 +5,16 @@ import { message } from 'antd';
 import ContentLayout from '../layout/ContentLayout';
 import SearchForm from './forms/SearchForm';
 import SearchDisplay from './SearchDisplay';
+import AddToList from '../AddToList';
 import { submitNewBuilding, fetchProjects } from '../../actions';
 class SearchDashboard extends Component {
+  componentDidMount() {
+    this.props.fetchProjects();
+  }
   searchResults = () => {
     const { isFetching, data } = this.props.mapData;
     const { submitNewBuilding, reset } = this.props;
+
     if (isFetching) {
       return <div>Getting search results...</div>;
     }
@@ -19,21 +24,7 @@ class SearchDashboard extends Component {
     return (
       <div>
         <SearchDisplay {...data} />
-        <button
-          onClick={() => {
-            submitNewBuilding(
-              { ...data },
-              null,
-              { shouldRedirect: false },
-              () => {
-                message.success('property has been added');
-                this.props.reset();
-              }
-            );
-          }}
-        >
-          Add To Project
-        </button>
+        <AddToList projectList={this.props.projects} />
       </div>
     );
   };
@@ -46,9 +37,11 @@ class SearchDashboard extends Component {
     );
   }
 }
-function mapStateToProps({ mapData, form }) {
-  return { mapData };
+function mapStateToProps({ mapData, projects }) {
+  return { mapData, projects };
 }
 export default reduxForm({ form: 'searchProperty' })(
-  connect(mapStateToProps, { submitNewBuilding })(SearchDashboard)
+  connect(mapStateToProps, { submitNewBuilding, fetchProjects })(
+    SearchDashboard
+  )
 );

@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const buildingSchema = new Schema({
   zpid: String,
   image: Object,
+  userImage: Object,
   type: String,
   fullAddress: String,
   address: Object,
