@@ -1,0 +1,54 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
+import { message } from 'antd';
+import ContentLayout from '../layout/ContentLayout';
+import SearchForm from './forms/SearchForm';
+import SearchDisplay from './SearchDisplay';
+import { submitNewBuilding, fetchProjects } from '../../actions';
+class SearchDashboard extends Component {
+  searchResults = () => {
+    const { isFetching, data } = this.props.mapData;
+    const { submitNewBuilding, reset } = this.props;
+    if (isFetching) {
+      return <div>Getting search results...</div>;
+    }
+    if (Object.keys(data).length === 0) {
+      return <div />;
+    }
+    return (
+      <div>
+        <SearchDisplay {...data} />
+        <button
+          onClick={() => {
+            submitNewBuilding(
+              { ...data },
+              null,
+              { shouldRedirect: false },
+              () => {
+                message.success('property has been added');
+                this.props.reset();
+              }
+            );
+          }}
+        >
+          Add To Project
+        </button>
+      </div>
+    );
+  };
+  render() {
+    return (
+      <ContentLayout>
+        <SearchForm />
+        {this.searchResults()}
+      </ContentLayout>
+    );
+  }
+}
+function mapStateToProps({ mapData, form }) {
+  return { mapData };
+}
+export default reduxForm({ form: 'searchProperty' })(
+  connect(mapStateToProps, { submitNewBuilding })(SearchDashboard)
+);

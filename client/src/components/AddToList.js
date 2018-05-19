@@ -5,11 +5,6 @@ import { fetchProjects } from '../actions';
 const Option = Select.Option;
 
 class AddToList extends Component {
-  state = { selected: null };
-  componentDidMount() {
-    this.props.fetchProjects();
-  }
-
   renderOptions = () => {
     let options = [];
     if (Object.keys(this.props.projects).length == 0) {
@@ -46,7 +41,5 @@ class AddToList extends Component {
     );
   }
 }
-function mapStateToProps({ projects }) {
-  return { projects };
-}
-export default connect(mapStateToProps, { fetchProjects })(AddToList);
+
+export default AddToList;

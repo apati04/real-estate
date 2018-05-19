@@ -25,6 +25,7 @@ import PropertyAdd from './properties/PropertyAdd';
 import BuildingDash from './properties/PropertyDashboard';
 import PropertyView from './properties/PropertyView';
 import ProjectMapView from './projects/ProjectMapView';
+import SearchDashboard from './search/SearchDashboard';
 class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
@@ -79,7 +80,8 @@ class App extends Component {
                   component={PropertyView}
                 />
                 <Route exact path="/projects" component={ProjectDashboard} />
-                <Route exact path="/search" component={Map} />
+
+                <Route exact path="/search" component={SearchDashboard} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/" render={this.renderPage} />
                 <Route component={NotFound} />

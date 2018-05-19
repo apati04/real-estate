@@ -6,39 +6,13 @@ const Building = mongoose.model('Building');
 module.exports = app => {
   // save building data into db
   app.post('/api/building', requireAuth, async (req, res) => {
-    const {
-      address,
-      longitude,
-      latitude,
-      rennovated,
-      owner,
-      built,
-      website,
-      color,
-      placemark,
-      notes,
-      certifications,
-      prevOwner,
-      imageUrl,
-      _project
-    } = req.body;
-    console.log('imageUrl: ', imageUrl);
+    const { formValues } = req.body;
+    console.log('form values: ', formValues);
+    const _project = mongoose.Types.ObjectId('5b008e5c36cada1744654783');
     const building = new Building({
-      imageUrl,
-      address,
-      longitude,
-      latitude,
-      rennovated,
-      owner,
-      built,
-      website,
-      color,
-      placemark,
-      notes,
-      certifications,
-      prevOwner,
-      _project: _project,
-      _user: req.user.id
+      ...formValues,
+      _user: req.user.id,
+      _project: _project
     });
     try {
       await building.save();

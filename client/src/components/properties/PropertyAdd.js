@@ -31,7 +31,12 @@ class PropertyAdd extends Component {
       message.success('Property has been successfully added!', 2);
       this.setState({ loading: false });
     };
-    submitNewBuilding(formValues, this.state.file, history, displayMsg);
+    submitNewBuilding(
+      formValues,
+      this.state.file,
+      { shouldRedirect: true, history },
+      displayMsg
+    );
   };
 
   renderPropertyImg() {

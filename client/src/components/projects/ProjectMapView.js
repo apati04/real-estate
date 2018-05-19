@@ -77,7 +77,7 @@ class ProjectMapView extends Component {
     );
   }
 }
-function mapStateToProps({ postsInProject, projects }, ownProps) {
+function mapStateToProps({ postsInProject, projects, mapData }, ownProps) {
   return {
     posts: postsInProject[ownProps.match.params._id] || {},
     project: projects[ownProps.match.params._id] || {}

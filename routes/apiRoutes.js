@@ -8,13 +8,7 @@ const Building = mongoose.model('Building');
 const xml2JsPromise = promisify(parseString);
 module.exports = app => {
   app.get('/api/zDeepSearchResults', async (req, res) => {
-    /**
-     *      address: '2750 Kelvin Ave',
-          citystatezip: 'Irvine, CA 92614'
-          business district
-     */
     const { address, citystatezip } = req.query;
-    console.log(address, citystatezip);
     const xml = await axios.get(
       'https://www.zillow.com/webservice/GetDeepSearchResults.htm?',
       {
@@ -60,7 +54,6 @@ module.exports = app => {
         }
       )
       .then(({ data }) => {
-        console.log('data: ', data);
         if (data.features.length > 0) {
           const features = data.features[0];
           const [address, city, statezip, country] = features.place_name.split(
@@ -173,14 +166,7 @@ module.exports = app => {
           zestimate: zd.zestimate,
           localRealEstate: zd.localRealEstate.region
         };
-        const building = new Building(finalObj);
-        try {
-          await building.save();
-          res.send(building);
-        } catch (error) {
-          res.status(400).send(error);
-        }
-        // res.send(finalObj);
+        res.send(finalObj);
       });
   });
 };
