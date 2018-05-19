@@ -24,7 +24,7 @@ import ProjectCreate from './projects/ProjectCreate';
 import PropertyAdd from './properties/PropertyAdd';
 import BuildingDash from './properties/PropertyDashboard';
 import PropertyView from './properties/PropertyView';
-
+import ProjectMapView from './projects/ProjectMapView';
 class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
@@ -67,6 +67,11 @@ class App extends Component {
                   exact
                   path="/projects/:_id/mapview"
                   component={ProjectMap}
+                />
+                <Route
+                  exact
+                  path="/projects/:_id/map"
+                  component={ProjectMapView}
                 />
                 <Route
                   exact

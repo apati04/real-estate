@@ -58,6 +58,12 @@ class ProjectList extends Component {
             >
               <i className="fas fa-map-marker-alt" /> MAPS
             </Link>
+            <Link
+              to={`/projects/${project._id}/map`}
+              className="btn btn-sm btn-outline-info"
+            >
+              <i className="fas fa-map-marker-alt" /> MAPS Beta v2
+            </Link>
             <button
               className="btn btn-sm btn-outline-danger"
               onClick={() => this.showDeleteModal(project, deleteProject)}

@@ -57,11 +57,16 @@ export const fetchImgData = zpid => async dispatch => {
 };
 
 export const fetchMapData = location => async dispatch => {
-  const request = await axios.get(
-    `https://cors-anywhere.herokuapp.com/${
-      keys.mapboxUrl
-    }/${location}.json?access_token=${keys.mapboxToken}`
-  );
+  // const request = await axios.get(
+  //   `https://cors-anywhere.herokuapp.com/${
+  //     keys.mapboxUrl
+  //   }/${location}.json?access_token=${keys.mapboxToken}`
+  // );
+  const request = await axios.get('/api/mapSearch/', {
+    params: {
+      location
+    }
+  });
   const { data } = request;
   dispatch({ type: FETCH_MAP_DATA, payload: data });
 };
