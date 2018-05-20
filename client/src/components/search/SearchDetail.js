@@ -31,41 +31,41 @@ class SearchDetail extends Component {
     const cardContent = {
       Location: (
         <Fragment>
-          <p className='card-title'>Address</p>
-          <p className='card-text'>{fullAddress}</p>
-          <p className='card-title'>Longitude</p>
-          <p className='card-text'>{address.longitude}</p>
-          <p className='card-title'>Latitude</p>
-          <p className='card-text'>{address.latitude}</p>
+          <p className='card-title lead'>Address</p>
+          <p className='card-text text-info'>{fullAddress}</p>
+          <p className='card-title lead'>Longitude</p>
+          <p className='card-text text-info'>{address.longitude}</p>
+          <p className='card-title lead'>Latitude</p>
+          <p className='card-text text-info'>{address.latitude}</p>
         </Fragment>
       ),
       About: (
         <Fragment>
-          <p className='card-title'>Type</p>
-          <p className='card-text'>{type}</p>
-          <p className='card-title'>Year Built</p>
-          <p className='card-text'>{yearBuilt}</p>
-          <p className='card-title'>Bedrooms</p>
-          <p className='card-text'>{rooms.bedrooms}</p>
-          <p className='card-title'>Bathrooms</p>
-          <p className='card-text'>{rooms.bathrooms}</p>
-          <p className='card-title'>Lot Size</p>
-          <p className='card-text'>{lotSize.value} SqFt</p>
+          <p className='card-title lead'>Type</p>
+          <p className='card-text text-info'>{type}</p>
+          <p className='card-title lead'>Year Built</p>
+          <p className='card-text text-info'>{yearBuilt}</p>
+          <p className='card-title lead'>Bedrooms</p>
+          <p className='card-text text-info'>{rooms.bedrooms}</p>
+          <p className='card-title lead'>Bathrooms</p>
+          <p className='card-text text-info'>{rooms.bathrooms}</p>
+          <p className='card-title lead'>Lot Size</p>
+          <p className='card-text text-info'>{lotSize.value} SqFt</p>
         </Fragment>
       ),
       TaxAssessment: (
         <Fragment>
-          <p className='card-title'>Tax Year</p>
-          <p className='card-text'>{_.isEmpty(taxAssessment) ? 'N/A' : taxAssessment.year}</p>
-          <p className='card-title'>Assessment Amount</p>
-          <p className='card-text'>{_.isEmpty(taxAssessment) ? 'N/A' : `$${Math.round(taxAssessment.amount).toLocaleString()}`}</p>
+          <p className='card-title lead'>Tax Year</p>
+          <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : taxAssessment.year}</p>
+          <p className='card-title lead'>Assessment Amount</p>
+          <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : `$${Math.round(taxAssessment.amount).toLocaleString()}`}</p>
         </Fragment>
       )
     };
 
     const style = {
       card: {
-        minHeight: '460px',
+        minHeight: '500px',
         marginTop: '20px',
         marginBottom: '20px'
       }
