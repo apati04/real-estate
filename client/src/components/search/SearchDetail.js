@@ -31,16 +31,27 @@ class SearchDetail extends Component {
     ];
 
     const cardContent = {
-      Location: '123 abc',
+      Location: (
+        <div>
+          <p>Address: {this.props.fullAddress}</p>
+          <p>Longitude: {this.props.address.longitude}</p>
+          <p>Latitude: {this.props.address.latitude}</p>
+        </div>
+      ),
       About: (
         <div>
-          <h1>test</h1>
+          <p>Type: {this.props.type}</p>
+          <p>Year Built: {this.props.yearBuilt}</p>
+          <p>Bedrooms: {this.props.rooms.bedrooms}</p>
+          <p>Bathrooms: {this.props.rooms.bathrooms}</p>
+          <p>Lot Size: {this.props.lotSize.value} SqFt</p>
         </div>
       ),
       LastTransaction: <div>hi</div>,
       TaxAssessment: (
         <div>
-          <h1>test</h1>
+          <p>Tax Year: {this.props.taxAssessment ? this.props.taxAssessment.year : 'N/A'}</p>
+          <p>Assessment Amount: {this.props.taxAssessment ? `$${Math.round(this.props.taxAssessment.amount)}` : 'N/A'}</p>
         </div>
       )
     };
