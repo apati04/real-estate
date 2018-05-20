@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Card } from 'antd';
-import AddToList from '../components/AddToList';
+
 class SearchDetail extends Component {
   state = {
     key: 'tab1',
@@ -10,7 +10,7 @@ class SearchDetail extends Component {
     this.setState({ [type]: key });
   };
   render() {
-    console.log('detail: ', this.props);
+    console.log(this.props);
     const tabList = [
       {
         key: 'Location',
@@ -31,21 +31,16 @@ class SearchDetail extends Component {
     ];
 
     const cardContent = {
-      Location: this.props.propData.locationData(),
+      Location: '123 abc',
       About: (
         <div>
-          {this.props.propData.yearBuiltData()}
-          {this.props.propData.sqftData()}
-          {this.props.propData.lotSizeData()}
-          {this.props.propData.bedroomData()}
-          {this.props.propData.bathroomData()}
+          <h1>test</h1>
         </div>
       ),
-      LastTransaction: <div>{this.props.propData.lastSoldData()}</div>,
+      LastTransaction: <div>hi</div>,
       TaxAssessment: (
         <div>
-          {this.props.propData.taxYearData()}
-          {this.props.propData.taxAssessData()}
+          <h1>test</h1>
         </div>
       )
     };
@@ -70,7 +65,6 @@ class SearchDetail extends Component {
         >
           {cardContent[this.state.noTitleKey]}
         </Card>
-        <AddToList />
       </Fragment>
     );
   }
