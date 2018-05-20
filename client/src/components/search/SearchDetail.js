@@ -30,20 +30,20 @@ class SearchDetail extends Component {
     const cardContent = {
       Location: (
         <div className='row'>
-          <div className='col-sm-3'>
+          <div className='col-sm-4'>
             {Array.isArray(image.url)
-              ? <Carousel>
+              ? <Carousel effect='fade'>
                 {image.url.map(img => {
                   return (
                     <div key={img}>
-                      <img src={img} className='img-fluid' alt='property' key={img} style={{ width: '100%', height: 300 }}/>
+                      <img src={img} className='img-fluid' alt='property' key={img} style={{ width: '100%', height: 400 }}/>
                     </div>
                   );
                 })}
-                </Carousel>
+              </Carousel>
               : <img src={image.url} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>}
           </div>
-          <div className='col-sm-9'>
+          <div className='col-sm-8'>
             <p className='card-title lead'>Address</p>
             <p className='card-text text-info'>{fullAddress}</p>
             <p className='card-title lead'>Longitude</p>
