@@ -41,7 +41,7 @@ class SearchDetail extends Component {
                   );
                 })}
               </Carousel>
-              : <img src={image.url} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>}
+              : <img src={image.url} className='img-fluid' alt='property' style={{ width: 480, height: 400 }}/>}
           </div>
           <div className='col-sm-8'>
             <p className='card-title lead'>Address</p>
@@ -79,7 +79,7 @@ class SearchDetail extends Component {
 
     const style = {
       card: {
-        minHeight: '500px',
+        minHeight: '510px',
         marginTop: '20px',
         marginBottom: '20px'
       }
