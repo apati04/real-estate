@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
-import { Card } from 'antd';
+import { Card, Carousel } from 'antd';
 
 class SearchDetail extends Component {
   state = {
@@ -12,26 +12,7 @@ class SearchDetail extends Component {
   };
   render() {
     const { fullAddress, address, type, yearBuilt, rooms, lotSize, image, financials: { taxAssessment } } = this.props;
-    const tabList = Array.isArray(image.url)
-      ? [
-        {
-          key: 'Location',
-          tab: 'Location'
-        },
-        {
-          key: 'About',
-          tab: 'About'
-        },
-        {
-          key: 'TaxAssessment',
-          tab: 'Tax Assessment'
-        },
-        {
-          key: 'AdditionalImages',
-          tab: 'Additional Images'
-        }
-      ]
-    : [
+    const tabList = [
       {
         key: 'Location',
         tab: 'Location'
@@ -44,14 +25,22 @@ class SearchDetail extends Component {
         key: 'TaxAssessment',
         tab: 'Tax Assessment'
       }
-    ]
+    ];
 
     const cardContent = {
       Location: (
         <div className='row'>
           <div className='col-sm-3'>
             {Array.isArray(image.url)
-              ? <img src={image.url[0]} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>
+              ? <Carousel>
+                {image.url.map(img => {
+                  return (
+                    <div key={img}>
+                      <img src={img} className='img-fluid' alt='property' key={img} style={{ width: '100%', height: 300 }}/>
+                    </div>
+                  );
+                })}
+                </Carousel>
               : <img src={image.url} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>}
           </div>
           <div className='col-sm-9'>
@@ -84,17 +73,6 @@ class SearchDetail extends Component {
           <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : taxAssessment.year}</p>
           <p className='card-title lead'>Assessment Amount</p>
           <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : `$${Math.round(taxAssessment.amount).toLocaleString()}`}</p>
-        </Fragment>
-      ),
-      AdditionalImages: (
-        <Fragment>
-          {Array.isArray(image.url)
-            ? image.url.map(img => {
-              return (
-                <img src={img} className='img-fluid' alt='property' key={img} style={{ width: 300, height: 300 }}/>
-              );
-            })
-            : <div />}
         </Fragment>
       )
     };
