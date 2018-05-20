@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import ContentLayout from '../layout/ContentLayout';
 import SearchForm from './forms/SearchForm';
-import SearchDisplay from './SearchDisplay';
+import SearchDetail from './SearchDetail';
 import AddToProject from '../AddToProject';
 import { fetchProjects } from '../../actions';
 class SearchDashboard extends Component {
@@ -21,7 +21,7 @@ class SearchDashboard extends Component {
     }
     return (
       <div>
-        <SearchDisplay {...data} />
+        <SearchDetail {...data} />
         <AddToProject projectList={this.props.projects} data={data} />
       </div>
     );

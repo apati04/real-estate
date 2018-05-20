@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Card } from 'antd';
-import AddToList from '../components/AddToList';
+
 class SearchDetail extends Component {
   state = {
     key: 'tab1',
@@ -10,7 +10,7 @@ class SearchDetail extends Component {
     this.setState({ [type]: key });
   };
   render() {
-    console.log('detail: ', this.props);
+    console.log(this.props);
     const tabList = [
       {
         key: 'Location',
@@ -31,21 +31,27 @@ class SearchDetail extends Component {
     ];
 
     const cardContent = {
-      Location: this.props.propData.locationData(),
-      About: (
+      Location: (
         <div>
-          {this.props.propData.yearBuiltData()}
-          {this.props.propData.sqftData()}
-          {this.props.propData.lotSizeData()}
-          {this.props.propData.bedroomData()}
-          {this.props.propData.bathroomData()}
+          <p>Address: {this.props.fullAddress}</p>
+          <p>Longitude: {this.props.address.longitude}</p>
+          <p>Latitude: {this.props.address.latitude}</p>
         </div>
       ),
-      LastTransaction: <div>{this.props.propData.lastSoldData()}</div>,
+      About: (
+        <div>
+          <p>Type: {this.props.type}</p>
+          <p>Year Built: {this.props.yearBuilt}</p>
+          <p>Bedrooms: {this.props.rooms.bedrooms}</p>
+          <p>Bathrooms: {this.props.rooms.bathrooms}</p>
+          <p>Lot Size: {this.props.lotSize.value} SqFt</p>
+        </div>
+      ),
+      LastTransaction: <div>hi</div>,
       TaxAssessment: (
         <div>
-          {this.props.propData.taxYearData()}
-          {this.props.propData.taxAssessData()}
+          <p>Tax Year: {this.props.taxAssessment ? this.props.taxAssessment.year : 'N/A'}</p>
+          <p>Assessment Amount: {this.props.taxAssessment ? `$${Math.round(this.props.taxAssessment.amount)}` : 'N/A'}</p>
         </div>
       )
     };
@@ -70,7 +76,6 @@ class SearchDetail extends Component {
         >
           {cardContent[this.state.noTitleKey]}
         </Card>
-        <AddToList />
       </Fragment>
     );
   }
