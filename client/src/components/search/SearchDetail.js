@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Card } from 'antd';
 
@@ -10,7 +11,7 @@ class SearchDetail extends Component {
     this.setState({ [type]: key });
   };
   render() {
-    const { fullAddress, address, type, yearBuilt, rooms, lotSize, financials } = this.props;
+    const { fullAddress, address, type, yearBuilt, rooms, lotSize, financials: { taxAssessment } } = this.props;
     console.log(this.props);
     const tabList = [
       {
@@ -55,9 +56,9 @@ class SearchDetail extends Component {
       TaxAssessment: (
         <Fragment>
           <p className='card-title'>Tax Year</p>
-          <p className='card-text'>{financials ? financials.taxAssessment.year : 'N/A'}</p>
+          <p className='card-text'>{_.isEmpty(taxAssessment) ? 'N/A' : taxAssessment.year}</p>
           <p className='card-title'>Assessment Amount</p>
-          <p className='card-text'>{financials ? `$${Math.round(financials.taxAssessment.amount).toLocaleString()}` : 'N/A'}</p>
+          <p className='card-text'>{_.isEmpty(taxAssessment) ? 'N/A' : `$${Math.round(taxAssessment.amount).toLocaleString()}`}</p>
         </Fragment>
       )
     };
