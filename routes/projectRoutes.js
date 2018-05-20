@@ -38,6 +38,7 @@ module.exports = app => {
       const removeProject = await Project.findByIdAndRemove({
         _id: projectId
       });
+      await Building.deleteMany({ _project: projectId });
       res.send(removeProject._id);
     } catch (error) {
       res.status(422).send(error);
