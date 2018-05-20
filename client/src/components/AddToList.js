@@ -1,12 +1,56 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Select } from 'antd';
-import { fetchProjects } from '../actions';
+import { Select, Modal, message } from 'antd';
+import { fetchProjects, submitNewBuilding } from '../actions';
 const Option = Select.Option;
 
 class AddToList extends Component {
   state = {
-    selected: null
+    selected: null,
+    ModalText: 'Add To Project',
+    visible: false,
+    confirmLoading: false
+  };
+  showModal = () => {
+    const { selected } = this.state;
+    const projectName = this.props.projectList[selected].title;
+    this.setState({
+      ModalText: `Add results to project ${projectName}?`,
+      visible: true
+    });
+  };
+  handleOk = async () => {
+    const { selected } = this.state;
+    const projectName = this.props.projectList[selected].title;
+    this.setState({
+      confirmLoading: true
+    });
+    const formValues = {
+      ...this.props.data,
+      _project: this.state.selected
+    };
+    try {
+      this.props.submitNewBuilding(
+        formValues,
+        null,
+        { shouldRedirect: false },
+        () => {
+          this.setState({ visible: false, confirmLoading: false });
+          message.success(
+            `Results have been added to Project ${projectName}`,
+            1
+          );
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  handleCancel = () => {
+    console.log('Clicked cancel button');
+    this.setState({
+      visible: false
+    });
   };
   renderOptions = () => {
     let options = [];
@@ -20,11 +64,11 @@ class AddToList extends Component {
         </Option>
       );
     }
-    console.log(options);
     return options;
   };
   render() {
-    console.log('render: ', this.props);
+    console.log('render: ', this.state);
+    const { visible, confirmLoading, ModalText } = this.state;
     return (
       <div className="text-right">
         <Select
@@ -34,15 +78,21 @@ class AddToList extends Component {
         >
           {this.renderOptions()}
         </Select>
-        <button
-          className="btn btn-outline-info ml-2"
-          onClick={() => console.log(this.state)}
-        >
+        <button className="btn btn-outline-info ml-2" onClick={this.showModal}>
           <i className="fas fa-plus-circle" /> SAVE
         </button>
+        <Modal
+          title="Add to project"
+          visible={visible}
+          onOk={this.handleOk}
+          confirmLoading={confirmLoading}
+          onCancel={this.handleCancel}
+        >
+          <p>{ModalText}</p>
+        </Modal>
       </div>
     );
   }
 }
 
-export default AddToList;
+export default connect(null, { submitNewBuilding })(AddToList);

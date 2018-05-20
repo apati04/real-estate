@@ -24,7 +24,7 @@ class SearchDashboard extends Component {
     return (
       <div>
         <SearchDisplay {...data} />
-        <AddToList projectList={this.props.projects} />
+        <AddToList projectList={this.props.projects} data={data} />
       </div>
     );
   };
