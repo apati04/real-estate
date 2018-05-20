@@ -11,8 +11,7 @@ class SearchDetail extends Component {
     this.setState({ [type]: key });
   };
   render() {
-    const { fullAddress, address, type, yearBuilt, rooms, lotSize, financials: { taxAssessment } } = this.props;
-    console.log(this.props);
+    const { fullAddress, address, type, yearBuilt, rooms, lotSize, image, financials: { taxAssessment } } = this.props;
     const tabList = [
       {
         key: 'Location',
@@ -25,19 +24,30 @@ class SearchDetail extends Component {
       {
         key: 'TaxAssessment',
         tab: 'Tax Assessment'
+      },
+      {
+        key: 'Image',
+        tab: 'Image'
       }
     ];
 
     const cardContent = {
       Location: (
-        <Fragment>
-          <p className='card-title lead'>Address</p>
-          <p className='card-text text-info'>{fullAddress}</p>
-          <p className='card-title lead'>Longitude</p>
-          <p className='card-text text-info'>{address.longitude}</p>
-          <p className='card-title lead'>Latitude</p>
-          <p className='card-text text-info'>{address.latitude}</p>
-        </Fragment>
+        <div className='row'>
+          <div className='col-sm-3'>
+            {Array.isArray(image.url)
+              ? <img src={image.url[0]} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>
+              : <img src={image.url} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>}
+          </div>
+          <div className='col-sm-9'>
+            <p className='card-title lead'>Address</p>
+            <p className='card-text text-info'>{fullAddress}</p>
+            <p className='card-title lead'>Longitude</p>
+            <p className='card-text text-info'>{address.longitude}</p>
+            <p className='card-title lead'>Latitude</p>
+            <p className='card-text text-info'>{address.latitude}</p>
+          </div>
+        </div>
       ),
       About: (
         <Fragment>
@@ -59,6 +69,17 @@ class SearchDetail extends Component {
           <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : taxAssessment.year}</p>
           <p className='card-title lead'>Assessment Amount</p>
           <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : `$${Math.round(taxAssessment.amount).toLocaleString()}`}</p>
+        </Fragment>
+      ),
+      Image: (
+        <Fragment>
+          {Array.isArray(image.url)
+            ? image.url.map(img => {
+              return (
+                <img src={img} className='img-fluid' alt='property' key={img} style={{ width: 300, height: 300 }}/>
+              );
+            })
+            : <img src={image.url} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>}
         </Fragment>
       )
     };
