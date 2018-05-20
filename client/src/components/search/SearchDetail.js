@@ -94,7 +94,7 @@ class SearchDetail extends Component {
                 <img src={img} className='img-fluid' alt='property' key={img} style={{ width: 300, height: 300 }}/>
               );
             })
-            : <img src={image.url} className='img-fluid' alt='property' style={{ width: 300, height: 300 }}/>}
+            : <div />}
         </Fragment>
       )
     };
