@@ -12,7 +12,26 @@ class SearchDetail extends Component {
   };
   render() {
     const { fullAddress, address, type, yearBuilt, rooms, lotSize, image, financials: { taxAssessment } } = this.props;
-    const tabList = [
+    const tabList = Array.isArray(image.url)
+      ? [
+        {
+          key: 'Location',
+          tab: 'Location'
+        },
+        {
+          key: 'About',
+          tab: 'About'
+        },
+        {
+          key: 'TaxAssessment',
+          tab: 'Tax Assessment'
+        },
+        {
+          key: 'AdditionalImages',
+          tab: 'Additional Images'
+        }
+      ]
+    : [
       {
         key: 'Location',
         tab: 'Location'
@@ -24,12 +43,8 @@ class SearchDetail extends Component {
       {
         key: 'TaxAssessment',
         tab: 'Tax Assessment'
-      },
-      {
-        key: 'Image',
-        tab: 'Image'
       }
-    ];
+    ]
 
     const cardContent = {
       Location: (
@@ -71,7 +86,7 @@ class SearchDetail extends Component {
           <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : `$${Math.round(taxAssessment.amount).toLocaleString()}`}</p>
         </Fragment>
       ),
-      Image: (
+      AdditionalImages: (
         <Fragment>
           {Array.isArray(image.url)
             ? image.url.map(img => {
