@@ -1,7 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import ProjectList from './ProjectList';
-import ProjectCreate from './ProjectCreate';
+import ProjectCreate from './ProjectForm/ProjectCreate';
 import ContentLayout from '../layout/ContentLayout';
 const ProjectDashboard = () => {
   return (

@@ -24,6 +24,7 @@ class UserSettings extends Component {
               <img
                 src="http://via.placeholder.com/220x220"
                 className="rounded-circle img-fluid d-block mx-auto"
+                alt="avatar"
               />
             </div>
             <div className="col-12 col-md-8">

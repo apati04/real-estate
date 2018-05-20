@@ -1,16 +1,8 @@
 import axios from 'axios';
-import convert from 'xml-js';
-
 import {
   FETCH_CURRENT_USER_DATA,
   FETCH_PROJECT,
   FETCH_PROJECTS,
-  FETCH_PROPERTY_DATA,
-  FETCH_PROPERTY_IMG,
-  LOADING_DATA,
-  RESET_PROP_DATA,
-  FETCH_USER_PROPERTIES,
-  FETCH_USER_PROPERTY,
   DELETE_SELECTED_PROPERTY,
   DELETE_PROJECT,
   REQUEST_PROJECT_POSTS,
@@ -19,7 +11,6 @@ import {
   RECEIVE_MAP_DATA,
   REQUEST_MAP_DATA
 } from './types';
-import keys from '../config/keys';
 
 export const fetchCurrentUserData = () => async dispatch => {
   const request = await axios.get('/api/current_user');
@@ -27,65 +18,10 @@ export const fetchCurrentUserData = () => async dispatch => {
   dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
 };
 
-export const fetchPropertyData = (address, citystatezip) => async dispatch => {
-  // const request = await axios.get(
-  //   `https://cors-anywhere.herokuapp.com/${keys.zillowUrl}?zws-id=${
-  //     keys.zillowKey
-  //   }&address=${address}&citystatezip=${citystatezip}`
-  // );
-  const request = await axios.get('/api/zDeepSearchResults/', {
-    params: {
-      address,
-      citystatezip
-    }
-  });
-  const { data } = request;
-  console.log('fetchZData: ', data);
-  // const result = JSON.parse(convert.xml2json(data, { compact: true }));
-
-  dispatch({ type: FETCH_PROPERTY_DATA, payload: data });
-};
-
-export const fetchImgData = zpid => async dispatch => {
-  const request = await axios.get(
-    `https://cors-anywhere.herokuapp.com/${keys.zillowImgUrl}?zws-id=${
-      keys.zillowKey
-    }&zpid=${zpid}`
-  );
-  const { data } = request;
-  const result = JSON.parse(convert.xml2json(data, { compact: true }));
-  dispatch({ type: FETCH_PROPERTY_IMG, payload: result });
-};
-
-export const loadingData = () => {
-  return {
-    type: LOADING_DATA,
-    payload: true
-  };
-};
-
-export const resetPropData = () => {
-  return {
-    type: RESET_PROP_DATA,
-    payload: {}
-  };
-};
-
-export const fetchUserProperties = _id => async dispatch => {
-  const response = await axios.get(`/api/projects/${_id}`);
-
-  dispatch({ type: FETCH_USER_PROPERTIES, payload: response.data });
-};
-
 // PROJECT ACTION CREATORS
 export const fetchProjects = () => async dispatch => {
   const projRes = await axios.get('/api/projects');
   dispatch({ type: FETCH_PROJECTS, payload: projRes.data });
-};
-
-export const fetchProject = id => async dispatch => {
-  const projRes = await axios.get(`/api/projects/${id}`);
-  dispatch({ type: FETCH_PROJECT, payload: projRes.data });
 };
 
 export const createNewProject = (values, callback) => async dispatch => {
@@ -121,7 +57,6 @@ export const fetchProjectPostsIfNeeded = projectId => (dispatch, getState) => {
     return dispatch(fetchProjectPosts(projectId));
   }
 };
-
 export const submitNewBuilding = (
   values,
   uploadFile,

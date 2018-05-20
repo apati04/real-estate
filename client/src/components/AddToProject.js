@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Select, Modal, message } from 'antd';
-import { fetchProjects, submitNewBuilding } from '../actions';
+import { submitNewBuilding } from '../actions';
 const Option = Select.Option;
 
-class AddToList extends Component {
+class AddToProject extends Component {
   state = {
     selected: null,
     ModalText: 'Add To Project',
@@ -54,7 +54,7 @@ class AddToList extends Component {
   };
   renderOptions = () => {
     let options = [];
-    if (Object.keys(this.props.projectList).length == 0) {
+    if (Object.keys(this.props.projectList).length === 0) {
       return;
     }
     for (const keys in this.props.projectList) {
@@ -95,4 +95,4 @@ class AddToList extends Component {
   }
 }
 
-export default connect(null, { submitNewBuilding })(AddToList);
+export default connect(null, { submitNewBuilding })(AddToProject);

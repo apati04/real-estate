@@ -3,11 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ContentLayout from '../layout/ContentLayout';
 import {
-  selectProjectItem,
   fetchProjectPostsIfNeeded,
   deleteSelectedProperty
 } from '../../actions';
-import { Avatar, Icon, List, Modal, message } from 'antd';
+import { Avatar, List, Modal, message } from 'antd';
 const { confirm } = Modal;
 class PropertyView extends Component {
   componentDidMount() {
@@ -40,7 +39,7 @@ class PropertyView extends Component {
     });
   };
   renderDetails() {
-    const { currentProject, isFetching, deleteSelectedProperty } = this.props;
+    const { currentProject, deleteSelectedProperty } = this.props;
     const postId = this.props.match.params.postId;
     if (currentProject.items.length > 0) {
       const post = currentProject.items.find(item => item._id === postId);
@@ -164,7 +163,7 @@ class PropertyView extends Component {
   }
 }
 function mapStateToProps({ postsInProject }, ownProps) {
-  const { _id, postId } = ownProps.match.params;
+  const { _id } = ownProps.match.params;
   const fetchedProject = postsInProject[_id] || { isFetching: true, items: [] };
   return { currentProject: fetchedProject };
 }

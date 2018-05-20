@@ -2,13 +2,12 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-antd';
-import { Button, Modal, Form } from 'antd';
-import ProjectField from './ProjectField';
-const FormItem = Form.Item;
+import { Modal, Form } from 'antd';
+
 const ProjectForm = Form.create()(
   class extends Component {
     render() {
-      const { visible, onCancel, onCreate, form, handleSubmit } = this.props;
+      const { visible, onCancel, handleSubmit } = this.props;
 
       return (
         <Form onSubmit={handleSubmit}>
