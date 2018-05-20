@@ -21,10 +21,6 @@ class SearchDetail extends Component {
         tab: 'About'
       },
       {
-        key: 'LastTransaction',
-        tab: 'Last Transaction'
-      },
-      {
         key: 'TaxAssessment',
         tab: 'Tax Assessment'
       }
@@ -32,27 +28,36 @@ class SearchDetail extends Component {
 
     const cardContent = {
       Location: (
-        <div>
-          <p>Address: {this.props.fullAddress}</p>
-          <p>Longitude: {this.props.address.longitude}</p>
-          <p>Latitude: {this.props.address.latitude}</p>
-        </div>
+        <Fragment>
+          <p className='card-title'>Address</p>
+          <p className='card-text'>{this.props.fullAddress}</p>
+          <p className='card-title'>Longitude</p>
+          <p className='card-text'>{this.props.address.longitude}</p>
+          <p className='card-title'>Latitude</p>
+          <p className='card-text'>{this.props.address.latitude}</p>
+        </Fragment>
       ),
       About: (
-        <div>
-          <p>Type: {this.props.type}</p>
-          <p>Year Built: {this.props.yearBuilt}</p>
-          <p>Bedrooms: {this.props.rooms.bedrooms}</p>
-          <p>Bathrooms: {this.props.rooms.bathrooms}</p>
-          <p>Lot Size: {this.props.lotSize.value} SqFt</p>
-        </div>
+        <Fragment>
+          <p className='card-title'>Type</p>
+          <p className='card-text'>{this.props.type}</p>
+          <p className='card-title'>Year Built</p>
+          <p className='card-text'>{this.props.yearBuilt}</p>
+          <p className='card-title'>Bedrooms</p>
+          <p className='card-text'>{this.props.rooms.bedrooms}</p>
+          <p className='card-title'>Bathrooms</p>
+          <p className='card-text'>{this.props.rooms.bathrooms}</p>
+          <p className='card-title'>Lot Size</p>
+          <p className='card-text'>{this.props.lotSize.value} SqFt</p>
+        </Fragment>
       ),
-      LastTransaction: <div>hi</div>,
       TaxAssessment: (
-        <div>
-          <p>Tax Year: {this.props.taxAssessment ? this.props.taxAssessment.year : 'N/A'}</p>
-          <p>Assessment Amount: {this.props.taxAssessment ? `$${Math.round(this.props.taxAssessment.amount)}` : 'N/A'}</p>
-        </div>
+        <Fragment>
+          <p className='card-title'>Tax Year</p>
+          <p className='card-text'>{this.props.financials ? this.props.financials.taxAssessment.year : 'N/A'}</p>
+          <p className='card-title'>Assessment Amount</p>
+          <p className='card-text'>{this.props.financials ? `$${Math.round(this.props.financials.taxAssessment.amount).toLocaleString()}` : 'N/A'}</p>
+        </Fragment>
       )
     };
 
