@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Modal, Input, Form, message } from 'antd';
+import { message } from 'antd';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../../actions';
 import ProjectForm from './ProjectForm';
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 class ProjectCreate extends Component {
   state = { visible: false };
   showModal = () => {

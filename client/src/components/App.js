@@ -9,17 +9,12 @@ import Sidebar from '../containers/Sidebar';
 import Navbar from '../containers/Navbar';
 import FooterNav from './FooterNav';
 import Login from '../containers/Login';
-import Map from '../containers/Map';
-import Dashboard from '../containers/Dashboard';
 import Landing from './Landing';
-import BuildingProfile from './BuildingProfile';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
-import EditProperty from './EditProperty';
 import UserSettings from './users/UserSettings';
 
 import ProjectDashboard from './projects/ProjectDashboard';
-import ProjectCreate from './projects/ProjectCreate';
 
 import PropertyAdd from './properties/PropertyAdd';
 import BuildingDash from './properties/PropertyDashboard';

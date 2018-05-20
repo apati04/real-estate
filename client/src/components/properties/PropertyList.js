@@ -1,9 +1,8 @@
-import map from 'lodash/map';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 class PropertyList extends Component {
   renderProperties() {
-    const { posts, deleteProperty } = this.props;
+    const { posts } = this.props;
     console.log('propertyList: ', posts);
     return posts.map((property, index) => {
       const [street, city, statezip] = property.fullAddress.split(', ');

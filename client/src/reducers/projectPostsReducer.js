@@ -1,4 +1,3 @@
-import omit from 'lodash/omit';
 import {
   REQUEST_PROJECT_POSTS,
   RECEIVE_PROJECT_POSTS,

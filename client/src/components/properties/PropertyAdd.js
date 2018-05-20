@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Input, message } from 'antd';
+import { Button, Card, message } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';

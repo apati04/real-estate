@@ -1,4 +1,3 @@
-import map from 'lodash/map';
 import React, { Component } from 'react';
 import ContentLayout from '../layout/ContentLayout';
 import { connect } from 'react-redux';
@@ -23,7 +22,7 @@ class PropertyDashboard extends Component {
     return <PropertyList projectId={projectId} posts={items} />;
   };
   render() {
-    const { isFetching, posts, project } = this.props;
+    const { posts, project } = this.props;
     return (
       <ContentLayout>
         {posts.isFetching === false ? (

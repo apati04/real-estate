@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Card } from 'antd';
 import AddToList from '../components/AddToList';
-class PropertyDetailCard extends Component {
+class SearchDetail extends Component {
   state = {
     key: 'tab1',
     noTitleKey: 'Location'
@@ -76,4 +76,4 @@ class PropertyDetailCard extends Component {
   }
 }
 
-export default PropertyDetailCard;
+export default SearchDetail;

@@ -1,194 +1,208 @@
-import _ from 'lodash';
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Layout, Menu, Icon, Card, Button } from 'antd';
-import * as actions from '../actions';
-import mapboxgl from 'mapbox-gl';
-import keys from '../config/keys';
-import ContentLayout from '../components/layout/ContentLayout';
-import { withRouter } from 'react-router-dom';
-const { Sider } = Layout;
+import React from 'react';
 
-mapboxgl.accessToken = keys.mapboxToken;
+const ProjectMap = () => {
+  return <div>projectmap</div>;
+};
 
-class ProjectMap extends Component {
-  state = {
-    collapsed: true,
-    address: '',
-    latitude: '',
-    longitude: ''
-  };
+export default ProjectMap;
+// import _ from 'lodash';
+// import React, { Component, Fragment } from 'react';
+// import { connect } from 'react-redux';
+// import { Layout, Menu, Icon, Card, Button } from 'antd';
+// import * as actions from '../actions';
+// import mapboxgl from 'mapbox-gl';
+// import ContentLayout from '../components/layout/ContentLayout';
+// import { withRouter } from 'react-router-dom';
+// const { Sider } = Layout;
 
-  async componentDidMount() {
-    this.props.fetchCurrentUserData();
-    await this.props.fetchUserProperties(this.props.match.params._id);
-    this.renderMap();
-  }
+// mapboxgl.accessToken = keys.mapboxToken;
 
-  open() {
-    this.setState({ collapsed: false });
-  }
+// class ProjectMap extends Component {
+//   state = {
+//     collapsed: true,
+//     address: '',
+//     latitude: '',
+//     longitude: ''
+//   };
 
-  close() {
-    this.setState({ collapsed: true });
-  }
+//   async componentDidMount() {
+//     this.props.fetchCurrentUserData();
+//     await this.props.fetchUserProperties(this.props.match.params._id);
+//     this.renderMap();
+//   }
 
-  renderMap() {
-    const { userProperties } = this.props;
-    const filterProps = _.map(userProperties, item => {
-      if (item._project === this.props.match.params._id) {
-        return item;
-      }
-    }).filter(item => item !== undefined);
-    if (filterProps.length !== 0) {
-      const propJson = filterProps.map(prop => {
-        return {
-          address: prop.address,
-          coordinates:
-            prop.longitude < 0
-              ? [prop.longitude, prop.latitude]
-              : [prop.latitude, prop.longitude]
-        };
-      });
-      const center = propJson.map(prop => prop.coordinates).reduce((acc, curr) => {
-        return [acc[0] + curr[0], acc[1] + curr[1]];
-      }).map(coord => coord / propJson.length);
+//   open() {
+//     this.setState({ collapsed: false });
+//   }
 
-      const map = new mapboxgl.Map({
-        container: 'mapbox',
-        style: 'mapbox://styles/mapbox/outdoors-v10',
-        center: [-95.712891, 37.09024],
-        zoom: 4
-      }).flyTo({ center: center,zoom: 10 }).addControl(new mapboxgl.NavigationControl());
+//   close() {
+//     this.setState({ collapsed: true });
+//   }
 
-      propJson.forEach(data => {
-        const marker = new mapboxgl.Marker()
-          .setLngLat(data.coordinates)
-          .addTo(map);
-        marker._element.addEventListener('click', () => {
-          this.open();
-          this.setState({
-            address: data.address,
-            latitude: data.coordinates[1],
-            longitude: data.coordinates[0]
-          });
-        });
-      });
-    } else {
-      return <div />
-    }
-  }
+//   renderMap() {
+//     const { userProperties } = this.props;
+//     const filterProps = _.map(userProperties, item => {
+//       if (item._project === this.props.match.params._id) {
+//         return item;
+//       }
+//     }).filter(item => item !== undefined);
+//     if (filterProps.length !== 0) {
+//       const propJson = filterProps.map(prop => {
+//         return {
+//           address: prop.address,
+//           coordinates:
+//             prop.longitude < 0
+//               ? [prop.longitude, prop.latitude]
+//               : [prop.latitude, prop.longitude]
+//         };
+//       });
+//       const center = propJson
+//         .map(prop => prop.coordinates)
+//         .reduce((acc, curr) => {
+//           return [acc[0] + curr[0], acc[1] + curr[1]];
+//         })
+//         .map(coord => coord / propJson.length);
 
-  renderSidebarContent() {
-    const splitAddress = this.state.address.split(' ');
-    const cityState = splitAddress[splitAddress.length - 2];
-    const zipcode = splitAddress[splitAddress.length - 1];
-    const street = splitAddress
-      .splice(splitAddress, splitAddress.length - 2)
-      .join(' ');
-    const style = {
-      closeBtn: {
-        position: 'absolute',
-        bottom: 0,
-        width: '100%'
-      },
-      card: {
-        backgroundColor: '#001529',
-        border: 'none'
-      },
-      icon: {
-        fontSize: '24px',
-        color: '#fff',
-        marginBottom: '10px'
-      }
-    };
-    if (!this.state.collapsed) {
-      return (
-        <Fragment>
-          <Card
-            cover={
-              <img
-                src="http://via.placeholder.com/150x150"
-                className="img-fluid"
-                alt="property"
-              />
-            }
-            style={style.card}
-          >
-            <div className="text-center">
-              <Icon type="home" style={style.icon} />
-            </div>
-            <div style={{ color: '#fff' }}>
-              <h6 className="lead">{street}</h6>
-              <h6 className="lead">{`${cityState}, ${zipcode}`}</h6>
-              <p className="small">{`Latitude: ${this.state.latitude}`}</p>
-              <p className="small">{`Longitude: ${this.state.longitude}`}</p>
-            </div>
-          </Card>
-          <Button
-            onClick={() => this.close()}
-            style={style.closeBtn}
-            className="btn-danger"
-          >
-            <Icon type="close" style={{ fontSize: '24px' }} />
-          </Button>
-        </Fragment>
-      );
-    } else {
-      return <Menu theme="dark" mode="inline" />;
-    }
-  }
+//       const map = new mapboxgl.Map({
+//         container: 'mapbox',
+//         style: 'mapbox://styles/mapbox/outdoors-v10',
+//         center: [-95.712891, 37.09024],
+//         zoom: 4
+//       })
+//         .flyTo({ center: center, zoom: 10 })
+//         .addControl(new mapboxgl.NavigationControl());
 
-  render() {
-    const { userProperties } = this.props;
-    const style = {
-      map: {
-        height: '80vh',
-        width: '100%'
-      },
-      button: {
-        marginBottom: '20px'
-      },
-      mapBox: {
-        display: 'flex',
-        width: '100%',
-        marginTop: '60px'
-      }
-    };
+//       propJson.forEach(data => {
+//         const marker = new mapboxgl.Marker()
+//           .setLngLat(data.coordinates)
+//           .addTo(map);
+//         marker._element.addEventListener('click', () => {
+//           this.open();
+//           this.setState({
+//             address: data.address,
+//             latitude: data.coordinates[1],
+//             longitude: data.coordinates[0]
+//           });
+//         });
+//       });
+//     } else {
+//       return <div />;
+//     }
+//   }
 
-    return (
-      <ContentLayout>
-        <button
-          onClick={() => this.props.history.goBack()}
-          className="btn btn-outline-danger float-right"
-          style={style.button}
-        >
-          <i className="fas fa-undo" /> BACK
-        </button>
-        <div style={style.mapBox}>
-          {_.isEmpty(userProperties)
-            ? <p className='display-4 text-danger'>No properties found in this project</p>
-            : <div id="mapbox" style={style.map} />}
-          <Sider
-            collapsible="collapsible"
-            collapsed={this.state.collapsed}
-            trigger={null}
-            id="mapsidebar"
-          >
-            {this.renderSidebarContent()}
-          </Sider>
-        </div>
-      </ContentLayout>
-    );
-  }
-}
+//   renderSidebarContent() {
+//     const splitAddress = this.state.address.split(' ');
+//     const cityState = splitAddress[splitAddress.length - 2];
+//     const zipcode = splitAddress[splitAddress.length - 1];
+//     const street = splitAddress
+//       .splice(splitAddress, splitAddress.length - 2)
+//       .join(' ');
+//     const style = {
+//       closeBtn: {
+//         position: 'absolute',
+//         bottom: 0,
+//         width: '100%'
+//       },
+//       card: {
+//         backgroundColor: '#001529',
+//         border: 'none'
+//       },
+//       icon: {
+//         fontSize: '24px',
+//         color: '#fff',
+//         marginBottom: '10px'
+//       }
+//     };
+//     if (!this.state.collapsed) {
+//       return (
+//         <Fragment>
+//           <Card
+//             cover={
+//               <img
+//                 src="http://via.placeholder.com/150x150"
+//                 className="img-fluid"
+//                 alt="property"
+//               />
+//             }
+//             style={style.card}
+//           >
+//             <div className="text-center">
+//               <Icon type="home" style={style.icon} />
+//             </div>
+//             <div style={{ color: '#fff' }}>
+//               <h6 className="lead">{street}</h6>
+//               <h6 className="lead">{`${cityState}, ${zipcode}`}</h6>
+//               <p className="small">{`Latitude: ${this.state.latitude}`}</p>
+//               <p className="small">{`Longitude: ${this.state.longitude}`}</p>
+//             </div>
+//           </Card>
+//           <Button
+//             onClick={() => this.close()}
+//             style={style.closeBtn}
+//             className="btn-danger"
+//           >
+//             <Icon type="close" style={{ fontSize: '24px' }} />
+//           </Button>
+//         </Fragment>
+//       );
+//     } else {
+//       return <Menu theme="dark" mode="inline" />;
+//     }
+//   }
 
-function mapStateToProps({ mapData: data, userProperties }) {
-  return {
-    data: data.data,
-    userProperties
-  };
-}
+//   render() {
+//     const { userProperties } = this.props;
+//     const style = {
+//       map: {
+//         height: '80vh',
+//         width: '100%'
+//       },
+//       button: {
+//         marginBottom: '20px'
+//       },
+//       mapBox: {
+//         display: 'flex',
+//         width: '100%',
+//         marginTop: '60px'
+//       }
+//     };
 
-export default withRouter(connect(mapStateToProps, actions)(ProjectMap));
+//     return (
+//       <ContentLayout>
+//         <button
+//           onClick={() => this.props.history.goBack()}
+//           className="btn btn-outline-danger float-right"
+//           style={style.button}
+//         >
+//           <i className="fas fa-undo" /> BACK
+//         </button>
+//         <div style={style.mapBox}>
+//           {_.isEmpty(userProperties) ? (
+//             <p className="display-4 text-danger">
+//               No properties found in this project
+//             </p>
+//           ) : (
+//             <div id="mapbox" style={style.map} />
+//           )}
+//           <Sider
+//             collapsible="collapsible"
+//             collapsed={this.state.collapsed}
+//             trigger={null}
+//             id="mapsidebar"
+//           >
+//             {this.renderSidebarContent()}
+//           </Sider>
+//         </div>
+//       </ContentLayout>
+//     );
+//   }
+// }
+
+// function mapStateToProps({ mapData: data, userProperties }) {
+//   return {
+//     data: data.data,
+//     userProperties
+//   };
+// }
+
+// export default withRouter(connect(mapStateToProps, actions)(ProjectMap));

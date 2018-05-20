@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Avatar, Dropdown, Card, Icon } from 'antd';
 const { Header } = Layout;
 
