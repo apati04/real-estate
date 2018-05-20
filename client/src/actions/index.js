@@ -125,7 +125,7 @@ export const fetchProjectPostsIfNeeded = projectId => (dispatch, getState) => {
 export const submitNewBuilding = (
   values,
   uploadFile,
-  history,
+  location,
   callback
 ) => async dispatch => {
   let userImage = {};
@@ -138,11 +138,17 @@ export const submitNewBuilding = (
   }
 
   const postBuilding = await axios.post('/api/building', {
-    ...values,
-    userImage
+    formValues: {
+      ...values,
+      userImage
+    }
   });
   callback();
-  history.push(`/projects/${values._project}/overview`);
+  if (location.shouldRedirect) {
+    location.history.push(`/projects/${values._project}/overview`);
+  }
+  console.log(postBuilding, 'post');
+  console.log(values, 'values');
   dispatch(fetchProjectPosts(values._project));
 };
 // ------

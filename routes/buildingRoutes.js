@@ -6,14 +6,11 @@ const Building = mongoose.model('Building');
 module.exports = app => {
   // save building data into db
   app.post('/api/building', requireAuth, async (req, res) => {
-    const { formValues, projectId, userImage } = req.body;
+    const { formValues } = req.body;
 
     const building = new Building({
       ...formValues,
-      userImage,
-      _project: projectId,
       _user: req.user.id,
-
       dateAdded: Date.now()
     });
     try {
