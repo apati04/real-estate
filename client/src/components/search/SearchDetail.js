@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
-import { Card } from 'antd';
-import AddToList from '../components/AddToList';
+import { Card, Carousel } from 'antd';
+
 class SearchDetail extends Component {
   state = {
     key: 'tab1',
@@ -10,7 +11,7 @@ class SearchDetail extends Component {
     this.setState({ [type]: key });
   };
   render() {
-    console.log('detail: ', this.props);
+    const { fullAddress, address, type, yearBuilt, rooms, lotSize, image, financials: { taxAssessment } } = this.props;
     const tabList = [
       {
         key: 'Location',
@@ -21,38 +22,64 @@ class SearchDetail extends Component {
         tab: 'About'
       },
       {
-        key: 'LastTransaction',
-        tab: 'Last Transaction'
-      },
-      {
         key: 'TaxAssessment',
         tab: 'Tax Assessment'
       }
     ];
 
     const cardContent = {
-      Location: this.props.propData.locationData(),
-      About: (
-        <div>
-          {this.props.propData.yearBuiltData()}
-          {this.props.propData.sqftData()}
-          {this.props.propData.lotSizeData()}
-          {this.props.propData.bedroomData()}
-          {this.props.propData.bathroomData()}
+      Location: (
+        <div className='row'>
+          <div className='col-sm-4'>
+            {Array.isArray(image.url)
+              ? <Carousel effect='fade'>
+                {image.url.map(img => {
+                  return (
+                    <div key={img}>
+                      <img src={img} className='img-fluid' alt='property' key={img} style={{ width: '100%', height: 400 }}/>
+                    </div>
+                  );
+                })}
+              </Carousel>
+              : <img src={image.url} className='img-fluid' alt='property' style={{ width: 480, height: 400 }}/>}
+          </div>
+          <div className='col-sm-8'>
+            <p className='card-title lead'>Address</p>
+            <p className='card-text text-info'>{fullAddress}</p>
+            <p className='card-title lead'>Longitude</p>
+            <p className='card-text text-info'>{address.longitude}</p>
+            <p className='card-title lead'>Latitude</p>
+            <p className='card-text text-info'>{address.latitude}</p>
+          </div>
         </div>
       ),
-      LastTransaction: <div>{this.props.propData.lastSoldData()}</div>,
+      About: (
+        <Fragment>
+          <p className='card-title lead'>Type</p>
+          <p className='card-text text-info'>{type}</p>
+          <p className='card-title lead'>Year Built</p>
+          <p className='card-text text-info'>{yearBuilt}</p>
+          <p className='card-title lead'>Bedrooms</p>
+          <p className='card-text text-info'>{rooms.bedrooms}</p>
+          <p className='card-title lead'>Bathrooms</p>
+          <p className='card-text text-info'>{rooms.bathrooms}</p>
+          <p className='card-title lead'>Lot Size</p>
+          <p className='card-text text-info'>{lotSize.value} SqFt</p>
+        </Fragment>
+      ),
       TaxAssessment: (
-        <div>
-          {this.props.propData.taxYearData()}
-          {this.props.propData.taxAssessData()}
-        </div>
+        <Fragment>
+          <p className='card-title lead'>Tax Year</p>
+          <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : taxAssessment.year}</p>
+          <p className='card-title lead'>Assessment Amount</p>
+          <p className='card-text text-info'>{_.isEmpty(taxAssessment) ? 'N/A' : `$${Math.round(taxAssessment.amount).toLocaleString()}`}</p>
+        </Fragment>
       )
     };
 
     const style = {
       card: {
-        minHeight: '460px',
+        minHeight: '510px',
         marginTop: '20px',
         marginBottom: '20px'
       }
@@ -70,7 +97,6 @@ class SearchDetail extends Component {
         >
           {cardContent[this.state.noTitleKey]}
         </Card>
-        <AddToList />
       </Fragment>
     );
   }
