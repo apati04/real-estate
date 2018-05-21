@@ -19,6 +19,9 @@ class SearchDashboard extends Component {
     if (Object.keys(data).length === 0) {
       return <div />;
     }
+    if (data.error) {
+      return <h1 className='display-4 text-danger'>{data.error.text}</h1>
+    }
     return (
       <div>
         <SearchDetail {...data} />
