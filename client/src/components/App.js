@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
+
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -21,6 +22,7 @@ import BuildingDash from './properties/PropertyDashboard';
 import PropertyView from './properties/PropertyView';
 import ProjectMapView from './projects/ProjectMapView';
 import SearchDashboard from './search/SearchDashboard';
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUserData();
