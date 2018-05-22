@@ -29,8 +29,10 @@ class Sidebar extends Component {
   render() {
     return (
       <Sider
-        breakpoint="lg"
+        collapsible
         collapsedWidth="0"
+        collapsed={this.state.collapsed}
+        onCollapse={this.onCollapse}
         style={
           this.props.currentUser
             ? { background: '#fff', minHeight: '100vh ' }
