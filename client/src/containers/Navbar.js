@@ -47,12 +47,15 @@ class Navbar extends Component {
     const style = {
       font: {
         color: 'white'
+      },
+      greet: {
+        marginLeft: '20px'
       }
     };
 
     if (this.props.currentUser) {
       return (
-        <Menu.Item>
+        <Menu.Item style={style.greet}>
           WELCOME, {this.props.currentUser.userName.toUpperCase()}
         </Menu.Item>
       );
