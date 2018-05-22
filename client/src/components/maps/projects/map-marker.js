@@ -10,7 +10,7 @@ const pinStyle = {
   stroke: 'none'
 };
 
-export default class CityPin extends Component {
+export default class MapMarker extends Component {
   render() {
     const { size = 20, onClick } = this.props;
 

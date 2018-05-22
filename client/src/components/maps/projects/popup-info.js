@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class PopupInfo extends Component {
   render() {
-    return <div>Popup info</div>;
+    console.log(this.props.info);
+    return <div>RenderPropertyInfohere</div>;
   }
 }
 

@@ -1,24 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { fetchProjectPostsIfNeeded } from '../../actions';
+import { Spin } from 'antd';
+import { fetchProjectPostsIfNeeded, fetchProjects } from '../../actions';
 import ContentLayout from '../layout/ContentLayout';
 import ProjectsMap from '../maps/projects/ProjectsMap';
 
 class ProjectMapView extends Component {
+  componentDidMount() {
+    this.props.fetchProjectPostsIfNeeded(this.props.match.params._id);
+    this.props.fetchProjects();
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.postsInProject !== this.props.postsInProject) {
+      this.props.fetchProjectPostsIfNeeded(nextProps.match.params._id);
+    }
+  }
+
+  renderMap = () => {
+    const {
+      posts,
+      projects: { title }
+    } = this.props;
+    if (Array.isArray(posts.items) && posts.items.length) {
+      return <ProjectsMap posts={posts} projectName={title} />;
+    }
+    return <Spin />;
+  };
   render() {
+    const { isFetching, posts } = this.props;
+    console.log(this.props.projects);
     return (
       <ContentLayout>
-        <ProjectsMap />
+        {isFetching ? <Spin /> : <Fragment>{this.renderMap()}</Fragment>}
       </ContentLayout>
     );
   }
 }
-function mapStateToProps({ postsInProject, projects, mapData }, ownProps) {
+function mapStateToProps({ postsInProject, projects }, ownProps) {
   return {
     posts: postsInProject[ownProps.match.params._id] || {},
-    project: projects[ownProps.match.params._id] || {}
+    projects: projects[ownProps.match.params._id] || {}
   };
 }
-export default connect(mapStateToProps, { fetchProjectPostsIfNeeded })(
-  ProjectMapView
-);
+export default connect(mapStateToProps, {
+  fetchProjectPostsIfNeeded,
+  fetchProjects
+})(ProjectMapView);

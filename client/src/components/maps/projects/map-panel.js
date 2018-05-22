@@ -1,33 +1,61 @@
 import React, { Component } from 'react';
-
+import { Menu, List } from 'antd';
 const defaultContainer = ({ children }) => (
   <div className="control-panel">{children}</div>
 );
 
 class MapPanel extends Component {
+  state = {
+    selected: {}
+  };
+  _renderButton = (item, index, originalArray) => {
+    // return (
+    //   <div key={`btn-${index}`} className="input">
+    //     <input
+    //       type="radio"
+    //       name="building"
+    //       id={`${item.zpid}-${index}`}
+    //       defaultChecked={item.fullAddress === originalArray[0].fullAddress}
+    //       onClick={() => this.props.onViewportChange(item)}
+    //     />
+    //     <label htmlFor={`${item.zpid}-${index}`}>{item.fullAddress}</label>
+    //   </div>
+    // );
+    return (
+      <Menu.Item
+        key={`btn-${index}`}
+        style={{ padding: '20px' }}
+        className="border rounded d-flex align-items-center"
+        onClick={() => {
+          this.props.onViewportChange(item);
+        }}
+      >
+        <div className="text-capitalize">
+          <span>
+            {`${item.address.street} ${item.address.city.toLowerCase()}, ${
+              item.address.state
+            } ${item.address.zipcode}`}
+          </span>
+        </div>
+      </Menu.Item>
+    );
+  };
+  toggleColor = () => {
+    this.setState({ selected: { backgroundColor: 'red' } });
+  };
   render() {
     const Container = this.props.containerComponent || defaultContainer;
-
     return (
       <Container>
-        <h3>Marker, Popup, and NavigationControl</h3>
-        <p>
-          Map showing top 20 most populated cities of the United States. Click
-          on a marker to learn more.
-        </p>
-        <p>
-          Data source:{' '}
-          <a href="https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population">
-            Wikipedia
-          </a>
-        </p>
-        <div className="source-link">
-          <a
-            href="https://github.com/uber/react-map-gl/tree/3.2-release/examples/controls"
-            target="_new"
-          >
-            View Code ↗
-          </a>
+        <div className="text-left">
+          <h4>Project {this.props.projectName}</h4>
+          {this.props.info.length ? (
+            <Menu className="border-right-0 w-100">
+              {this.props.info.map(this._renderButton)}
+            </Menu>
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
       </Container>
     );
