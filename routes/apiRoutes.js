@@ -164,7 +164,7 @@ module.exports = app => {
             }
           },
           zestimate: zd.zestimate,
-          localRealEstate: zd.localRealEstate.region
+          localRealEstate: zd.localRealEstate
         };
         res.send(finalObj);
       });

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Layout, Menu } from 'antd';
 const { Sider } = Layout;
@@ -14,6 +14,7 @@ class Sidebar extends Component {
   };
 
   defaultSelected() {
+    console.log(this.props);
     const { pathname } = window.location;
     if (pathname.includes('projects')) {
       return ['2'];
@@ -69,4 +70,4 @@ function mapStateToProps({ currentUser }) {
   return { currentUser };
 }
 
-export default connect(mapStateToProps)(Sidebar);
+export default withRouter(connect(mapStateToProps)(Sidebar));
