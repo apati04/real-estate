@@ -16,7 +16,7 @@ class SearchDashboard extends Component {
 
     if (isFetching) {
       return (
-        <div className='d-flex justify-content-center align-items-center mt-5'>
+        <div className='d-flex justify-content-center mt-5'>
           <Spin size='large' tip='Fetching property data...'/>
         </div>
       );
