@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { Spin } from 'antd';
 import ContentLayout from '../layout/ContentLayout';
 import SearchForm from './forms/SearchForm';
 import SearchDetail from './SearchDetail';
@@ -14,13 +15,17 @@ class SearchDashboard extends Component {
     const { isFetching, data } = this.props.mapData;
 
     if (isFetching) {
-      return <div>Getting search results...</div>;
+      return (
+        <div className='d-flex justify-content-center align-items-center mt-5'>
+          <Spin size='large' tip='Fetching property data...'/>
+        </div>
+      );
     }
     if (Object.keys(data).length === 0) {
       return <div />;
     }
     if (data.error) {
-      return <h1 className='display-4 text-danger'>{data.error.text}</h1>
+      return <h1 className='display-4 text-danger mt-5 text-center'>{data.error.text}</h1>
     }
     return (
       <div>
