@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import ProjectField from '../../projects/ProjectForm/ProjectField';
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-antd';
 import { Modal, Form } from 'antd';
@@ -22,13 +23,13 @@ const ProjectForm = Form.create()(
               label="Title"
               name="projectTitle"
               type="text"
-              component={TextField}
+              component={ProjectField}
             />
             <Field
+              label="Description"
               name="projectDescription"
               type="text"
-              component={TextField}
-              label="Description"
+              component={ProjectField}
             />
           </Modal>
         </Form>
