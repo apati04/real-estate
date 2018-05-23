@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ContentLayout from '../layout/ContentLayout';
 import { connect } from 'react-redux';
-import { TextField } from 'redux-form-antd';
+import TextField from '../forms/FormField';
 import { reduxForm, Field } from 'redux-form';
 import './styles.css';
 import * as actions from '../../actions';
