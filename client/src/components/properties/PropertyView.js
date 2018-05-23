@@ -6,7 +6,7 @@ import {
   fetchProjectPostsIfNeeded,
   deleteSelectedProperty
 } from '../../actions';
-import { Avatar, List, Modal, message, Carousel } from 'antd';
+import { Avatar, List, Modal, message, Carousel, Spin } from 'antd';
 const { confirm } = Modal;
 class PropertyView extends Component {
   componentDidMount() {
@@ -157,7 +157,11 @@ class PropertyView extends Component {
       );
     }
     // ------if still fetching data render loading...
-    return <div>Loading...</div>;
+    return (
+      <div className='d-flex justify-content-center mt-5'>
+        <Spin size='large' tip='Fetching property data...'/>
+      </div>
+    )
   }
 
   render() {
