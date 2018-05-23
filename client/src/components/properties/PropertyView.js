@@ -60,12 +60,12 @@ class PropertyView extends Component {
         { title: 'Year Built', content: post.yearBuilt, icon: 'calendar' },
         {
           title: 'Website',
-          content: post.website,
+          content: post.website || 'N/A',
           icon: 'export'
         },
         {
           title: 'Notes',
-          content: post.notes,
+          content: post.notes || 'N/A',
           icon: 'edit'
         }
       ];
@@ -73,23 +73,23 @@ class PropertyView extends Component {
       console.log(post);
       return (
         <div>
-          <div className="p-2">
+          <div>
             <div className="row">
-              <div className="col-sm-5">
+              <div className="col-sm-4">
                 {Array.isArray(post.image.url)
                   ? <Carousel effect='fade'>
                     {post.image.url.map(img => {
                       return (
                         <div key={img}>
-                          <img src={img} className='img-fluid' alt='property' key={img} style={{ width: '100%', height: 400, marginTop: '40px' }}/>
+                          <img src={img} className='img-fluid' alt='property' key={img} style={{ width: 480, height: 400, marginTop: '40px' }}/>
                         </div>
                       );
                     })}
                   </Carousel>
-                  : <img src={post.image.url} className='img-fluid' alt='property' style={{ width: 600, height: 500, marginTop: '40px' }} />}
+                  : <img src={post.image.url} className='img-fluid' alt='property' style={{ width: 480, height: 360, marginTop: '40px' }} />}
               </div>
-              <div className="col-sm-7">
-                <h2 className="my-4 display-4">{post.fullAddress}</h2>
+              <div className="col-sm-8">
+                <h2 className="my-4">{post.fullAddress}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
                     <h5>{`${post.rooms.bedrooms} bedrooms`}</h5>
@@ -104,7 +104,7 @@ class PropertyView extends Component {
                 <List
                   grid={{
                     gutter: 16,
-                    xs: 1,
+                    xs: 2,
                     sm: 2,
                     md: 2,
                     lg: 2,
