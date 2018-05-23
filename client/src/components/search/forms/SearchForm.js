@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { TextField } from 'redux-form-antd';
+import ProjectField from '../../projects/ProjectForm/ProjectField';
 import { fetchMapData } from '../../../actions';
 class SearchForm extends Component {
   submitForm = e => {
@@ -12,10 +13,10 @@ class SearchForm extends Component {
     const { error, handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit(this.submitForm)}>
-        <Field name="street" type="text" component={TextField} label="Street" />
-        <Field name="city" type="text" component={TextField} label="City" />
-        <Field name="state" type="text" component={TextField} label="State" />
-        <Field name="zip" type="text" component={TextField} label="Zipcode" />
+        <Field name="street" type="text" component={ProjectField} label="Street" />
+        <Field name="city" type="text" component={ProjectField} label="City" />
+        <Field name="state" type="text" component={ProjectField} label="State" />
+        <Field name="zip" type="text" component={ProjectField} label="Zipcode" />
         {error && <strong>{error}</strong>}
         <div>
           <button type="submit" disabled={submitting}>
