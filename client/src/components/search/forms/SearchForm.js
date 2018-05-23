@@ -35,6 +35,21 @@ class SearchForm extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+  if (!values.street) {
+    errors.street = 'Please enter the street';
+  }
+  if (!values.city) {
+    errors.city = 'Please enter the city';
+  }
+  if (!values.state) {
+    errors.state = 'Please enter the state';
+  }
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: 'searchProperty'
 })(connect(null, { fetchMapData })(SearchForm));
