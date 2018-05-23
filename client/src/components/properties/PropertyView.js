@@ -6,7 +6,7 @@ import {
   fetchProjectPostsIfNeeded,
   deleteSelectedProperty
 } from '../../actions';
-import { Avatar, List, Modal, message } from 'antd';
+import { Avatar, List, Modal, message, Carousel } from 'antd';
 const { confirm } = Modal;
 class PropertyView extends Component {
   componentDidMount() {
@@ -75,14 +75,20 @@ class PropertyView extends Component {
         <div>
           <div className="p-2">
             <div className="row">
-              <div className="col-sm-6">
-                {/* <img
-                  className="img-fluid"
-                  style={{ width: 800, height: 500, marginTop: '40px' }}
-                  src={post.userImage.url || post.image.url}
-                /> */}
+              <div className="col-sm-5">
+                {Array.isArray(post.image.url)
+                  ? <Carousel effect='fade'>
+                    {post.image.url.map(img => {
+                      return (
+                        <div key={img}>
+                          <img src={img} className='img-fluid' alt='property' key={img} style={{ width: '100%', height: 400, marginTop: '40px' }}/>
+                        </div>
+                      );
+                    })}
+                  </Carousel>
+                  : <img src={post.image.url} className='img-fluid' alt='property' style={{ width: 600, height: 500, marginTop: '40px' }} />}
               </div>
-              <div className="col-sm-6">
+              <div className="col-sm-7">
                 <h2 className="my-4 display-4">{post.fullAddress}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
