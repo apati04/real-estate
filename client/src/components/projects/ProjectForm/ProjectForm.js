@@ -43,11 +43,12 @@ const formFields = [
 ];
 function validate(values) {
   const errors = {};
-  _.each(formFields, ({ name }) => {
-    if (!values[name]) {
-      errors[name] = 'Enter a Value';
-    }
-  });
+  if (!values.projectTitle) {
+    errors.projectTitle = 'Please enter the title'
+  }
+  if (!values.projectDescription) {
+    errors.projectDescription = 'Please enter the description'
+  }
   return errors;
 }
 export default reduxForm({
