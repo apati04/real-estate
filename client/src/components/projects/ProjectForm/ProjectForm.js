@@ -1,8 +1,6 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import ProjectField from '../../projects/ProjectForm/ProjectField';
 import { Field, reduxForm } from 'redux-form';
-import { TextField } from 'redux-form-antd';
 import { Modal, Form } from 'antd';
 
 const ProjectForm = Form.create()(
@@ -37,17 +35,15 @@ const ProjectForm = Form.create()(
     }
   }
 );
-const formFields = [
-  { label: 'Title', name: 'projectTitle' },
-  { label: 'Description', name: 'projectDescription' }
-];
+
 function validate(values) {
   const errors = {};
-  _.each(formFields, ({ name }) => {
-    if (!values[name]) {
-      errors[name] = 'Enter a Value';
-    }
-  });
+  if (!values.projectTitle) {
+    errors.projectTitle = 'Please enter the title'
+  }
+  if (!values.projectDescription) {
+    errors.projectDescription = 'Please enter the description'
+  }
   return errors;
 }
 export default reduxForm({

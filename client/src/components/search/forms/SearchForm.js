@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { TextField } from 'redux-form-antd';
 import ProjectField from '../../projects/ProjectForm/ProjectField';
 import { fetchMapData } from '../../../actions';
 class SearchForm extends Component {
@@ -19,15 +18,16 @@ class SearchForm extends Component {
         <Field name="zip" type="text" component={ProjectField} label="Zipcode" />
         {error && <strong>{error}</strong>}
         <div>
-          <button type="submit" disabled={submitting}>
-            Search
+          <button className='btn btn-outline-info mr-2' type="submit" disabled={submitting}>
+            <i className="fas fa-search" /> Search
           </button>
           <button
             type="button"
+            className='btn btn-outline-danger'
             disabled={pristine || submitting}
             onClick={reset}
           >
-            Clear
+            <i className="fas fa-trash-alt" /> Clear
           </button>
         </div>
       </form>
@@ -35,6 +35,21 @@ class SearchForm extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+  if (!values.street) {
+    errors.street = 'Please enter the street';
+  }
+  if (!values.city) {
+    errors.city = 'Please enter the city';
+  }
+  if (!values.state) {
+    errors.state = 'Please enter the state';
+  }
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: 'searchProperty'
 })(connect(null, { fetchMapData })(SearchForm));
