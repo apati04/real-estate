@@ -1,8 +1,6 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import ProjectField from '../../projects/ProjectForm/ProjectField';
 import { Field, reduxForm } from 'redux-form';
-import { TextField } from 'redux-form-antd';
 import { Modal, Form } from 'antd';
 
 const ProjectForm = Form.create()(
@@ -37,10 +35,7 @@ const ProjectForm = Form.create()(
     }
   }
 );
-const formFields = [
-  { label: 'Title', name: 'projectTitle' },
-  { label: 'Description', name: 'projectDescription' }
-];
+
 function validate(values) {
   const errors = {};
   if (!values.projectTitle) {

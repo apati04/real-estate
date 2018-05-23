@@ -54,7 +54,7 @@ class PropertyView extends Component {
         { title: 'Type', content: 'Single Family', icon: 'home' },
         {
           title: 'Latitude, Longitude',
-          content: `${post.latitude}, ${post.longitude}`,
+          content: `${post.address.latitude}, ${post.address.longitude}`,
           icon: 'global'
         },
         { title: 'Year Built', content: post.yearBuilt, icon: 'calendar' },

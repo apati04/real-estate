@@ -27,7 +27,7 @@ class ProjectMapView extends Component {
     return <Spin />;
   };
   render() {
-    const { isFetching, posts } = this.props;
+    const { isFetching } = this.props;
     console.log(this.props.projects);
     return (
       <ContentLayout>

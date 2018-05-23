@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, List } from 'antd';
+import { Menu } from 'antd';
 const defaultContainer = ({ children }) => (
   <div className="control-panel">{children}</div>
 );

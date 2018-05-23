@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { TextField } from 'redux-form-antd';
 import ProjectField from '../../projects/ProjectForm/ProjectField';
 import { fetchMapData } from '../../../actions';
 class SearchForm extends Component {
