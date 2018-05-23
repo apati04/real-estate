@@ -18,15 +18,16 @@ class SearchForm extends Component {
         <Field name="zip" type="text" component={ProjectField} label="Zipcode" />
         {error && <strong>{error}</strong>}
         <div>
-          <button type="submit" disabled={submitting}>
-            Search
+          <button className='btn btn-outline-info mr-2' type="submit" disabled={submitting}>
+            <i className="fas fa-search" /> Search
           </button>
           <button
             type="button"
+            className='btn btn-outline-danger'
             disabled={pristine || submitting}
             onClick={reset}
           >
-            Clear
+            <i className="fas fa-trash-alt" /> Clear
           </button>
         </div>
       </form>
