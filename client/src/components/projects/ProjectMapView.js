@@ -24,7 +24,11 @@ class ProjectMapView extends Component {
     if (Array.isArray(posts.items) && posts.items.length) {
       return <ProjectsMap posts={posts} projectName={title} />;
     }
-    return <Spin />;
+    return (
+      <div className='d-flex justify-content-center mt-5'>
+        <Spin size='large' tip='Fetching map...'/>
+      </div>
+    );
   };
   render() {
     const { isFetching } = this.props;

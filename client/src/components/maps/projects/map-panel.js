@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'antd';
+import { Menu, Spin } from 'antd';
 const defaultContainer = ({ children }) => (
   <div className="control-panel">{children}</div>
 );
@@ -54,7 +54,9 @@ class MapPanel extends Component {
               {this.props.info.map(this._renderButton)}
             </Menu>
           ) : (
-            <div>Loading...</div>
+            <div className='d-flex justify-content-center mt-5'>
+              <Spin size='large' tip='Fetching list...'/>
+            </div>
           )}
         </div>
       </Container>
