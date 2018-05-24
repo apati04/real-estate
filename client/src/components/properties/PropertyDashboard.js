@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContentLayout from '../layout/ContentLayout';
 import { connect } from 'react-redux';
 import { fetchProjectPostsIfNeeded } from '../../actions';
+import { Spin } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import PropertyList from './PropertyList';
 class PropertyDashboard extends Component {
@@ -17,7 +18,7 @@ class PropertyDashboard extends Component {
     const { items } = this.props.posts;
     const projectId = this.props.match.params._id;
     if (items.length === 0) {
-      return <div>You have no posts.</div>;
+      return <h3 className='display-4 text-danger'>You have no posts.</h3>;
     }
     return <PropertyList projectId={projectId} posts={items} />;
   };
@@ -42,7 +43,9 @@ class PropertyDashboard extends Component {
             </div>
           </div>
         ) : (
-          <div>Loading...</div>
+          <div className='d-flex justify-content-center mt-5'>
+            <Spin size='large' tip='Fetching building list...'/>
+          </div>
         )}
       </ContentLayout>
     );
