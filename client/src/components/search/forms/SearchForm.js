@@ -17,7 +17,7 @@ class SearchForm extends Component {
         <Field name="state" type="text" component={ProjectField} label="State" />
         <Field name="zip" type="text" component={ProjectField} label="Zipcode" />
         {error && <strong>{error}</strong>}
-        <div>
+        <div className='mt-3'>
           <button className='btn btn-outline-info mr-2' type="submit" disabled={submitting}>
             <i className="fas fa-search" /> Search
           </button>
