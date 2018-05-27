@@ -24,6 +24,9 @@ class ProjectMapView extends Component {
     if (Array.isArray(posts.items) && posts.items.length) {
       return <ProjectsMap posts={posts} projectName={title} />;
     }
+    if (Array.isArray(posts.items) && posts.items.length === 0) {
+      return <h1 className='display-4 text-danger'>There are no properties to display in this project</h1>
+    }
     return (
       <div className='d-flex justify-content-center mt-5'>
         <Spin size='large' tip='Fetching map...'/>
@@ -31,8 +34,8 @@ class ProjectMapView extends Component {
     );
   };
   render() {
+    console.log(this.props.posts);
     const { isFetching } = this.props;
-    console.log(this.props.projects);
     return (
       <ContentLayout>
         {isFetching ? <Spin /> : <Fragment>{this.renderMap()}</Fragment>}

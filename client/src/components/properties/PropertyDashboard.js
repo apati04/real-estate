@@ -18,7 +18,7 @@ class PropertyDashboard extends Component {
     const { items } = this.props.posts;
     const projectId = this.props.match.params._id;
     if (items.length === 0) {
-      return <h3 className='display-4 text-danger'>You have no posts.</h3>;
+      return <h3 className='display-4 text-danger'>This project is empty</h3>;
     }
     return <PropertyList projectId={projectId} posts={items} />;
   };
