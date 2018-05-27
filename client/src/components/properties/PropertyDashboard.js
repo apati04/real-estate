@@ -17,9 +17,6 @@ class PropertyDashboard extends Component {
   renderPosts = () => {
     const { items } = this.props.posts;
     const projectId = this.props.match.params._id;
-    if (items.length === 0) {
-      return <h3 className='display-4 text-danger'>You have no posts.</h3>;
-    }
     return <PropertyList projectId={projectId} posts={items} />;
   };
   render() {
@@ -31,9 +28,14 @@ class PropertyDashboard extends Component {
             <h2>Project {project.title}</h2>
             {this.renderPosts()}
             <div>
-              <Link to="/projects" className="btn btn-outline-danger">
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => {
+                  this.props.history.goBack();
+                }}
+              >
                 <i className="fas fa-undo" /> BACK
-              </Link>
+              </button>
               <Link
                 className="btn btn-outline-info float-right"
                 to={`/projects/${this.props.match.params._id}/new`}

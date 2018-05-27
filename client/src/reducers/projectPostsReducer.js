@@ -1,6 +1,7 @@
 import {
   REQUEST_PROJECT_POSTS,
   RECEIVE_PROJECT_POSTS,
+  HANDLE_EMPTY_PROJECT_POSTS,
   DELETE_SELECTED_PROPERTY
 } from '../actions/types';
 
@@ -22,6 +23,11 @@ const posts = (state = INITIAL_STATE, action) => {
         items: action.payload,
         lastUpdated: action.receivedAt
       };
+    case HANDLE_EMPTY_PROJECT_POSTS:
+      return {
+        ...state,
+        items: action.payload
+      };
     case DELETE_SELECTED_PROPERTY:
       const newItems = state.items.filter(item => item._id !== action.postId);
       return {
@@ -38,6 +44,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_PROJECT_POSTS:
     case REQUEST_PROJECT_POSTS:
+    case HANDLE_EMPTY_PROJECT_POSTS:
     case DELETE_SELECTED_PROPERTY:
       return {
         ...state,

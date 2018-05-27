@@ -14,7 +14,6 @@ class Sidebar extends Component {
   };
 
   defaultSelected() {
-    console.log(this.props);
     const { pathname } = window.location;
     if (pathname.includes('projects')) {
       return ['2'];

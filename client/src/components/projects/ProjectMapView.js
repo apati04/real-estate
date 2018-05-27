@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import { fetchProjectPostsIfNeeded, fetchProjects } from '../../actions';
@@ -21,8 +22,11 @@ class ProjectMapView extends Component {
       posts,
       projects: { title }
     } = this.props;
-    if (Array.isArray(posts.items) && posts.items.length) {
+    if (Array.isArray(posts.items) && posts.items.length > 0) {
       return <ProjectsMap posts={posts} projectName={title} />;
+    }
+    if (!Array.isArray(posts.items)) {
+      return <h1 className='display-4 text-danger'>This project is empty</h1>
     }
     return (
       <div className='d-flex justify-content-center mt-5'>
@@ -32,9 +36,17 @@ class ProjectMapView extends Component {
   };
   render() {
     const { isFetching } = this.props;
-    console.log(this.props.projects);
     return (
       <ContentLayout>
+        <button
+          className='btn btn-outline-danger'
+          style={{ marginBottom: '10px' }}
+          onClick={() => {
+            this.props.history.goBack();
+          }}
+        >
+          <i className="fas fa-undo" /> BACK
+        </button>
         {isFetching ? <Spin /> : <Fragment>{this.renderMap()}</Fragment>}
       </ContentLayout>
     );
@@ -46,7 +58,8 @@ function mapStateToProps({ postsInProject, projects }, ownProps) {
     projects: projects[ownProps.match.params._id] || {}
   };
 }
-export default connect(mapStateToProps, {
+export default withRouter(
+  connect(mapStateToProps, {
   fetchProjectPostsIfNeeded,
   fetchProjects
-})(ProjectMapView);
+})(ProjectMapView));

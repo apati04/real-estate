@@ -7,6 +7,7 @@ import {
   DELETE_PROJECT,
   REQUEST_PROJECT_POSTS,
   RECEIVE_PROJECT_POSTS,
+  HANDLE_EMPTY_PROJECT_POSTS,
   SELECT_PROJECT_POST,
   RECEIVE_MAP_DATA,
   REQUEST_MAP_DATA
@@ -41,10 +42,20 @@ const receiveProjectPosts = (projectId, data) => ({
   receivedAt: Date.now()
 });
 
+const handleEmptyProjectPosts = projectId => ({
+  type: HANDLE_EMPTY_PROJECT_POSTS,
+  projectId,
+  payload: {}
+});
+
 const fetchProjectPosts = projectId => dispatch => {
   dispatch(requestProjectPosts(projectId));
   return axios.get(`/api/projects/${projectId}`).then(({ data }) => {
-    dispatch(receiveProjectPosts(projectId, data));
+    if (data.length === 0) {
+      dispatch(handleEmptyProjectPosts(projectId));
+    } else {
+      dispatch(receiveProjectPosts(projectId, data));
+    }
   });
 };
 const shouldFetchProjectPosts = (state, projectId) => {
