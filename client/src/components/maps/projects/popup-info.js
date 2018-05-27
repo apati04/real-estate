@@ -16,7 +16,7 @@ class PopupInfo extends Component {
             {Array.isArray(url)
               ? <img src={url[0]} alt='property' className='img-fluid' style={style.img}/>
               : <img src={url} alt='property' className='img-fluid' style={style.img}/>
-                }
+            }
           </div>
           <div className='col-sm-8'>
             <p>{fullAddress}</p>

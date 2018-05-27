@@ -26,7 +26,6 @@ const posts = (state = INITIAL_STATE, action) => {
     case HANDLE_EMPTY_PROJECT_POSTS:
       return {
         ...state,
-        isFetching: false,
         items: action.payload
       };
     case DELETE_SELECTED_PROPERTY:
