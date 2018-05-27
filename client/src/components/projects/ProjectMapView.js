@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import { fetchProjectPostsIfNeeded, fetchProjects } from '../../actions';
@@ -37,6 +38,15 @@ class ProjectMapView extends Component {
     const { isFetching } = this.props;
     return (
       <ContentLayout>
+        <button
+          className='btn btn-outline-danger'
+          style={{ marginBottom: '10px' }}
+          onClick={() => {
+            this.props.history.goBack();
+          }}
+        >
+          <i className="fas fa-undo" /> BACK
+        </button>
         {isFetching ? <Spin /> : <Fragment>{this.renderMap()}</Fragment>}
       </ContentLayout>
     );
@@ -48,7 +58,8 @@ function mapStateToProps({ postsInProject, projects }, ownProps) {
     projects: projects[ownProps.match.params._id] || {}
   };
 }
-export default connect(mapStateToProps, {
+export default withRouter(
+  connect(mapStateToProps, {
   fetchProjectPostsIfNeeded,
   fetchProjects
-})(ProjectMapView);
+})(ProjectMapView));
