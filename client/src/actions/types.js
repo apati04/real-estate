@@ -12,6 +12,7 @@ export const DELETE_PROJECT = 'delete_project';
 // Project Posts
 export const RECEIVE_PROJECT_POSTS = 'receive_project_posts';
 export const REQUEST_PROJECT_POSTS = 'request_project_posts';
+export const HANDLE_EMPTY_PROJECT_POSTS = 'handle_empty_project_posts';
 export const SELECT_PROJECT_POST = 'select_project_post';
 
 // MAP DATA

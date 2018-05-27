@@ -21,11 +21,11 @@ class ProjectMapView extends Component {
       posts,
       projects: { title }
     } = this.props;
-    if (Array.isArray(posts.items) && posts.items.length) {
+    if (Array.isArray(posts.items) && posts.items.length > 0) {
       return <ProjectsMap posts={posts} projectName={title} />;
     }
-    if (Array.isArray(posts.items) && posts.items.length === 0) {
-      return <h1 className='display-4 text-danger'>There are no properties to display in this project</h1>
+    if (!Array.isArray(posts.items)) {
+      return <h1 className='display-4 text-danger'>This project is empty</h1>
     }
     return (
       <div className='d-flex justify-content-center mt-5'>
@@ -34,7 +34,6 @@ class ProjectMapView extends Component {
     );
   };
   render() {
-    console.log(this.props.posts);
     const { isFetching } = this.props;
     return (
       <ContentLayout>
