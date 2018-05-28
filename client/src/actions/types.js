@@ -1,20 +1,20 @@
-export const FETCH_CURRENT_USER_DATA = 'FETCH_CURRENT_USER_DATA';
+export const AUTH_USER = 'AUTH_USER';
 
-export const FETCH_USER_PROPERTIES = 'fetch_user_properties';
-export const FETCH_PROJECT = 'fetch_project';
-export const FETCH_USER_PROPERTY = 'fetch_user_property';
-export const DELETE_SELECTED_PROPERTY = 'delete_selected_property';
+export const FETCH_USER_PROPERTIES = 'FETCH_USER_PROPERTIES';
+export const FETCH_PROJECT = 'FETCH_PROJECT';
+export const FETCH_USER_PROPERTY = 'FETCH_USER_PROPERTY';
+export const DELETE_SELECTED_PROPERTY = 'DELETE_SELECTED_PROPERTY';
 
 // PROJECTs
-export const FETCH_PROJECTS = 'fetch_projects';
-export const DELETE_PROJECT = 'delete_project';
+export const FETCH_PROJECTS = 'FETCH_PROJECTS';
+export const DELETE_PROJECT = 'DELETE_PROJECT';
 
 // Project Posts
-export const RECEIVE_PROJECT_POSTS = 'receive_project_posts';
-export const REQUEST_PROJECT_POSTS = 'request_project_posts';
-export const HANDLE_EMPTY_PROJECT_POSTS = 'handle_empty_project_posts';
-export const SELECT_PROJECT_POST = 'select_project_post';
+export const RECEIVE_PROJECT_POSTS = 'RECEIVE_PROJECT_POSTS';
+export const REQUEST_PROJECT_POSTS = 'REQUEST_PROJECT_POSTS';
+export const HANDLE_EMPTY_PROJECT_POSTS = 'HANDLE_EMPTY_PROJECT_POSTS';
+export const SELECT_PROJECT_POST = 'SELECT_PROJECT_POST';
 
 // MAP DATA
-export const RECEIVE_MAP_DATA = 'receive_map_data';
-export const REQUEST_MAP_DATA = 'request_map_data';
+export const RECEIVE_MAP_DATA = 'RECEIVE_MAP_DATA';
+export const REQUEST_MAP_DATA = 'REQUEST_MAP_DATA';

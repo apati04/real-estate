@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {
-  FETCH_CURRENT_USER_DATA,
   FETCH_PROJECT,
   FETCH_PROJECTS,
   DELETE_SELECTED_PROPERTY,
@@ -10,13 +9,14 @@ import {
   HANDLE_EMPTY_PROJECT_POSTS,
   SELECT_PROJECT_POST,
   RECEIVE_MAP_DATA,
-  REQUEST_MAP_DATA
+  REQUEST_MAP_DATA,
+  AUTH_USER
 } from './types';
 
 export const fetchCurrentUserData = () => async dispatch => {
   const request = await axios.get('/api/current_user');
   const { data } = request;
-  dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
+  dispatch({ type: AUTH_USER, payload: data });
 };
 
 // PROJECT ACTION CREATORS
