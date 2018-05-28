@@ -1,4 +1,4 @@
-import { AUTH_SUCCESS, AUTH_ERROR } from '../actions';
+import { AUTH_SUCCESS, AUTH_ERROR } from '../actions/types';
 const INITIAL_STATE = {
   authenticated: '',
   authError: ''

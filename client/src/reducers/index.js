@@ -6,7 +6,6 @@ import projectsReducer from './projects_reducer';
 import postsInProjectReducer from './projectPostsReducer';
 const rootReducer = combineReducers({
   auth,
-  currentUser: currentUserReducer,
   mapData: mapDataReducer,
   form: formReducer,
   projects: projectsReducer,
