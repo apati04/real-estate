@@ -1,5 +1,7 @@
-export const AUTH_USER = 'AUTH_USER';
-
+// -------authentication-----
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_ERROR = 'AUTH_ERROR';
+// -------authentication-----
 export const FETCH_USER_PROPERTIES = 'FETCH_USER_PROPERTIES';
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const FETCH_USER_PROPERTY = 'FETCH_USER_PROPERTY';
