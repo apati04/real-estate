@@ -37,13 +37,14 @@ exports.signin = function(req, res, next) {
   console.log('signin: ', req.user);
   res.send({ token: userToken(req.user) });
 };
-exports.current_user = (req, res) => {
-  res.json(req.user);
+exports.current_user = function(req, res) {
+  res.send(req.user);
 };
-exports.logout = (req, res) => {
+exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
 exports.googlesignin = function(req, res, next) {
+  console.log(req.user);
   res.redirect('/dashboard');
 };

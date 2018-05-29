@@ -35,6 +35,9 @@ class Signin extends Component {
         <div>
           Don't have an account? <Link to="/signup">Create a new account</Link>
         </div>
+        <div>
+          <a href="/auth/google">Or signin with google</a>
+        </div>
       </div>
     );
   }

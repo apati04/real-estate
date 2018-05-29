@@ -2,8 +2,7 @@ const keys = require('../config/keys');
 const axios = require('axios');
 const { parseString } = require('xml2js');
 const { promisify } = require('es6-promisify');
-const mongoose = require('mongoose');
-const Building = mongoose.model('Building');
+const Building = require('../models/Building');
 
 const xml2JsPromise = promisify(parseString);
 module.exports = app => {

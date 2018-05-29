@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const requireAuth = require('../middlewares/requireAuth');
 
-const Project = mongoose.model('Project');
-const Building = mongoose.model('Building');
+const Project = require('../models/Building');
+const Building = require('../models/Building');
 
 module.exports = app => {
   app.get('/api/projects', requireAuth, async (req, res, next) => {

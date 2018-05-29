@@ -22,8 +22,8 @@ const buildingSchema = new Schema({
   _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
-mongoose.model('Building', buildingSchema);
-
+const ModelClass = mongoose.model('building', buildingSchema);
+module.exports = ModelClass;
 /**
  *   
  * 

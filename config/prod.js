@@ -4,5 +4,6 @@ module.exports = {
   mongoURI: process.env.MONGO_URI,
   secretKey: process.env.SECRET_KEY,
   zillowKey: process.env.ZILLOW_KEY,
-  mapboxToken: process.env.MAPBOX_TOKEN
+  mapboxToken: process.env.MAPBOX_TOKEN,
+  cookieKey: process.env.COOKIE_KEY
 };

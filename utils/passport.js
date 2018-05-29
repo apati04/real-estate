@@ -7,7 +7,13 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
 const TwitterStrategy = require('passport-twitter');
-
+function userToken(user) {
+  console.log(user);
+  return jwt.encode(
+    { sub: user.id, iat: new Date().getTime() },
+    keys.secretKey
+  );
+}
 // ----------------Local Strategy------------------------------
 const localLogin = new LocalStrategy(
   { usernameField: 'email' },
@@ -51,6 +57,8 @@ const jwtLogin = new JwtStrategy(jwtOps, (payload, done) => {
 
 // ----------------Local Strategy------------------------------
 passport.serializeUser((user, done) => {
+  console.log('serial: ', user);
+
   done(null, user.id);
 });
 

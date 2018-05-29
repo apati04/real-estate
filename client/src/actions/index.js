@@ -3,22 +3,21 @@ import * as types from './types';
 
 export const fetchCurrentUserData = () => async dispatch => {
   const request = await axios.get('/api/current_user');
-  const { data } = request;
-  dispatch({ type: types.AUTH_SUCCESS, payload: data });
+  const {
+    data: { userName, email }
+  } = request;
+  dispatch({ type: types.AUTH_GOOGLE, payload: { userName, email } });
 };
-
 // PROJECT ACTION CREATORS
 export const fetchProjects = () => async dispatch => {
   const projRes = await axios.get('/api/projects');
   dispatch({ type: types.FETCH_PROJECTS, payload: projRes.data });
 };
-
 export const createNewProject = (values, callback) => async dispatch => {
   const response = await axios.post('/api/projects', values);
   callback();
   dispatch({ type: types.FETCH_PROJECT, payload: response.data });
 };
-
 const requestProjectPosts = projectId => ({
   type: types.REQUEST_PROJECT_POSTS,
   projectId
@@ -29,7 +28,6 @@ const receiveProjectPosts = (projectId, data) => ({
   payload: data,
   receivedAt: Date.now()
 });
-
 const handleEmptyProjectPosts = projectId => ({
   type: types.HANDLE_EMPTY_PROJECT_POSTS,
   projectId,

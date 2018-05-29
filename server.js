@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const cookieSession = require('cookie-session');
 const cors = require('cors');
 const http = require('http');
 const router = require('./routes/router');
@@ -17,11 +18,23 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 const app = express();
-app.use(cors());
 app.use(express.json());
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
 app.use(passport.initialize());
+app.use(passport.session());
+app.options('*', cors());
 
-router(app);
+require('./routes/twitter')(app);
+require('./routes/buildingRoutes')(app);
+require('./routes/projectRoutes')(app);
+require('./routes/awsRoutes')(app);
+require('./routes/apiRoutes')(app);
+require('./routes/router')(app);
 app.use((err, req, res, next) => {
   res.status(422).send({ error: err.message });
 });
