@@ -71,6 +71,7 @@ class Navbar extends Component {
   }
 
   render() {
+    console.log('header: ', this.props.auth);
     const style = {
       menu: {
         lineHeight: '64px'
@@ -89,8 +90,8 @@ class Navbar extends Component {
   }
 }
 
-function mapStateToProps({ currentUser }) {
-  return { currentUser };
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps, actions)(Navbar);

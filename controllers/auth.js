@@ -34,5 +34,16 @@ exports.signup = function(req, res, next) {
   });
 };
 exports.signin = function(req, res, next) {
+  console.log('signin: ', req.user);
   res.send({ token: userToken(req.user) });
+};
+exports.current_user = (req, res) => {
+  res.json(req.user);
+};
+exports.logout = (req, res) => {
+  req.logout();
+  res.redirect('/');
+};
+exports.googlesignin = function(req, res, next) {
+  res.redirect('/dashboard');
 };

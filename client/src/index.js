@@ -22,8 +22,8 @@ import BuildingDash from './components/properties/PropertyDashboard';
 import PropertyView from './components/properties/PropertyView';
 import ProjectMapView from './components/projects/ProjectMapView';
 import SearchDashboard from './components/search/SearchDashboard';
+import Signout from './components/auth/Signout';
 import './styles/sidebar.css';
-import './styles/navbar.css';
 import './styles/index.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -41,6 +41,7 @@ ReactDOM.render(
           <Route exact path="/projects" component={ProjectDashboard} />
           <Route exact path="/search" component={SearchDashboard} />
           <Route exact path="/signup" component={Signup} />
+          <Route path="/signout" component={Signout} />
           <Route exact path="/settings/profile" component={UserSettings} />
           <Route
             exact

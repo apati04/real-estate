@@ -7,9 +7,8 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
 const TwitterStrategy = require('passport-twitter');
-//---passport strategies----
-// ----------------Local Strategy------------------------------
 
+// ----------------Local Strategy------------------------------
 const localLogin = new LocalStrategy(
   { usernameField: 'email' },
   (email, password, done) => {
@@ -28,7 +27,6 @@ const localLogin = new LocalStrategy(
         if (!match) {
           return done(null, false);
         }
-        console.log('match!, ', user);
         return done(null, user);
       });
     });
@@ -50,41 +48,42 @@ const jwtLogin = new JwtStrategy(jwtOps, (payload, done) => {
     }
   });
 });
+
+// ----------------Local Strategy------------------------------
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback',
+      proxy: true
+    },
+    async (accesstoken, refreshToken, profile, done) => {
+      const currentUser = await User.findOne({ googleId: profile.id });
+      if (currentUser) {
+        return done(null, currentUser);
+      }
+      const user = await new User({
+        googleId: profile.id,
+        userName: profile.displayName,
+        email: profile.emails[0].value
+      }).save();
+      done(null, user);
+    }
+  )
+);
+
 passport.use(jwtLogin);
 passport.use(localLogin);
-// ----------------Local Strategy------------------------------
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser((id, done) => {
-//   User.findById(id).then(user => {
-//     done(null, user);
-//   });
-// });
-
-// passport.use(
-//   new GoogleStrategy(
-//     {
-//       clientID: keys.googleClientID,
-//       clientSecret: keys.googleClientSecret,
-//       callbackURL: '/auth/google/callback',
-//       proxy: true
-//     },
-//     async (accesstoken, refreshToken, profile, done) => {
-//       const currentUser = await User.findOne({ googleId: profile.id });
-//       if (currentUser) {
-//         return done(null, currentUser);
-//       }
-//       const user = await new User({
-//         googleId: profile.id,
-//         userName: profile.displayName,
-//         email: profile.email
-//       }).save();
-//       done(null, user);
-//     }
-//   )
-// );
 
 // passport.use(
 //   new TwitterStrategy(
