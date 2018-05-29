@@ -1,42 +1,90 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const TwitterStrategy = require('passport-twitter');
-const mongoose = require('mongoose');
 const keys = require('../config/keys');
 const User = require('../models/User');
-// sessions
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+//---passport strategies----
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local');
+const TwitterStrategy = require('passport-twitter');
+//---passport strategies----
+// ----------------Local Strategy------------------------------
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
-    done(null, user);
+const localLogin = new LocalStrategy(
+  { usernameField: 'email' },
+  (email, password, done) => {
+    User.findOne({ email: email }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+
+      user.comparePassword(password, (err, match) => {
+        if (err) {
+          return done(err);
+        }
+        if (!match) {
+          return done(null, false);
+        }
+        console.log('match!, ', user);
+        return done(null, user);
+      });
+    });
+  }
+);
+const jwtOps = {
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  secretOrKey: keys.secretKey
+};
+const jwtLogin = new JwtStrategy(jwtOps, (payload, done) => {
+  User.findById(payload.sub, (err, user) => {
+    if (err) {
+      return done(err, false);
+    }
+    if (user) {
+      done(null, user);
+    } else {
+      done(null, false);
+    }
   });
 });
+passport.use(jwtLogin);
+passport.use(localLogin);
+// ----------------Local Strategy------------------------------
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
-      proxy: true
-    },
-    async (accesstoken, refreshToken, profile, done) => {
-      const currentUser = await User.findOne({ googleId: profile.id });
-      if (currentUser) {
-        return done(null, currentUser);
-      }
-      const user = await new User({
-        googleId: profile.id,
-        userName: profile.displayName,
-        email: profile.email
-      }).save();
-      done(null, user);
-    }
-  )
-);
+// passport.deserializeUser((id, done) => {
+//   User.findById(id).then(user => {
+//     done(null, user);
+//   });
+// });
+
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: keys.googleClientID,
+//       clientSecret: keys.googleClientSecret,
+//       callbackURL: '/auth/google/callback',
+//       proxy: true
+//     },
+//     async (accesstoken, refreshToken, profile, done) => {
+//       const currentUser = await User.findOne({ googleId: profile.id });
+//       if (currentUser) {
+//         return done(null, currentUser);
+//       }
+//       const user = await new User({
+//         googleId: profile.id,
+//         userName: profile.displayName,
+//         email: profile.email
+//       }).save();
+//       done(null, user);
+//     }
+//   )
+// );
 
 // passport.use(
 //   new TwitterStrategy(

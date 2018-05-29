@@ -3,6 +3,7 @@ const keys = require('../config/keys');
 const User = require('../models/User');
 
 function userToken(user) {
+  console.log(user);
   return jwt.encode(
     { sub: user.id, iat: new Date().getTime() },
     keys.secretKey
@@ -16,7 +17,7 @@ exports.signup = function(req, res, next) {
       .status(422)
       .send({ error: 'Both email and password are needed' });
   }
-  User.fineOne({ email }, (err, dbUser) => {
+  User.findOne({ email }, function(err, dbUser) {
     if (err) {
       return next(err);
     }
@@ -28,7 +29,7 @@ exports.signup = function(req, res, next) {
       if (err) {
         return next(err);
       }
-      res.json({ token: userToken(user) });
+      res.json({ token: userToken(createUser) });
     });
   });
 };

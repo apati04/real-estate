@@ -10,12 +10,14 @@ const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String
 });
-userSchema.pre('save', next => {
-  bcrypt.genSalt(10, (err, salt) => {
+userSchema.pre('save', function(next) {
+  const user = this;
+
+  bcrypt.genSalt(10, function(err, salt) {
     if (err) {
       return next(err);
     }
-    bcrypt.hash(user.password, salt, null, (err, hash) => {
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
       if (err) {
         return next(err);
       }
@@ -24,12 +26,12 @@ userSchema.pre('save', next => {
     });
   });
 });
-userSchema.methods.comarePassword = function(currentPassword, cb) {
-  bcrypt.compare(currentPassword, this.password, (err, match) => {
+userSchema.methods.comparePassword = function(currentPassword, cb) {
+  bcrypt.compare(currentPassword, this.password, function(err, isMatch) {
     if (err) {
       return cb(err);
     }
-    cb(null, found);
+    cb(null, isMatch);
   });
 };
 const ModelClass = mongoose.model('user', userSchema);

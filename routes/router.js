@@ -8,6 +8,6 @@ module.exports = function(app) {
   app.get('/', jwtAuth, function(req, res) {
     res.send({ message: 'secret' });
   });
-  app.post('/signin', signin);
+  app.post('/signin', localAuth, signin);
   app.post('/signup', signup);
 };

@@ -18,9 +18,9 @@ const app = express();
 app.use(cors());
 app.use(express.json({ type: '*/*' }));
 router(app);
-app.use((err, req, res, next) => {
-  res.status(422).send({ error: err.message });
-});
+// app.use((err, req, res, next) => {
+//   res.status(422).send({ error: err.message });
+// });
 if (['production', 'ci'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
   const path = require('path');
