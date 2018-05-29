@@ -28,7 +28,7 @@ class Signup extends Component {
           <Field name="password" type="password" component="input" />
         </fieldset>
         <small>{this.props.authError}</small>
-        <button>Sign In</button>
+        <button>Sign up</button>
       </form>
     );
   }

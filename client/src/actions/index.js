@@ -143,3 +143,27 @@ export const fetchMapData = (location, resetForm) => dispatch => {
     })
     .catch(error => console.log(error));
 };
+
+export const signup = (formValues, callback) => async dispatch => {
+  try {
+    const response = await axios.post('/api/signup', formValues);
+    dispatch({ type: types.AUTH_SUCCESS, payload: response.data.token });
+    callback();
+  } catch (e) {
+    dispatch({ type: types.AUTH_ERROR, payload: 'Email is in use' });
+  }
+};
+export const signin = (formValues, callback) => async dispatch => {
+  try {
+    const response = await axios.post('/api/signin', formValues);
+    dispatch({ type: types.AUTH_SUCCESS, payload: response.data.token });
+    localStorage.setItem('token', response.data.token);
+    callback();
+  } catch (e) {
+    dispatch({ type: types.AUTH_ERROR, payload: 'Invalid credentials' });
+  }
+};
+export const signout = () => {
+  localStorage.removeItem('token');
+  return { type: types.AUTH_SUCCESS, payload: '' };
+};
