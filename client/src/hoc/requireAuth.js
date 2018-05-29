@@ -8,8 +8,14 @@ const requireAuth = WrappedComponent => {
       return <WrappedComponent {...this.props} />;
     }
   }
-  function mapStateToProps({})
-  return connect(mapStateToProps)(WrappedComponent);
+
+  function mapStateToProps({ auth }) {
+    return {
+      auth: auth.authenticated
+    };
+  }
+
+  return connect(mapStateToProps)(Auth);
 };
 
 export default requireAuth;

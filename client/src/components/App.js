@@ -8,7 +8,8 @@ import ScrollToTop from './ScrollToTop';
 import Sidebar from '../containers/Sidebar';
 import Navbar from '../containers/Navbar';
 import FooterNav from './FooterNav';
-import Login from '../containers/Login';
+import Signin from '../components/auth/SigninForm';
+import Signup from '../components/auth/SignupForm';
 import Landing from './Landing';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
@@ -78,7 +79,8 @@ class App extends Component {
                 <Route exact path="/projects" component={ProjectDashboard} />
 
                 <Route exact path="/search" component={SearchDashboard} />
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/login" component={Signin} />
                 <Route exact path="/" render={this.renderPage} />
                 <Route component={NotFound} />
               </Switch>
