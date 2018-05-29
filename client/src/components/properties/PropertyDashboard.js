@@ -23,7 +23,7 @@ class PropertyDashboard extends Component {
     const { posts, project } = this.props;
     return (
       <ContentLayout>
-        {posts.isFetching === false ? (
+        {posts.isFetching ? (
           <div>
             <h2>Project {project.title}</h2>
             {this.renderPosts()}
@@ -45,8 +45,8 @@ class PropertyDashboard extends Component {
             </div>
           </div>
         ) : (
-          <div className='d-flex justify-content-center mt-5'>
-            <Spin size='large' tip='Fetching building list...'/>
+          <div className="d-flex justify-content-center mt-5">
+            <Spin size="large" tip="Fetching building list..." />
           </div>
         )}
       </ContentLayout>
