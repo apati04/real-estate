@@ -24,6 +24,10 @@ class PropertyDashboard extends Component {
     return (
       <ContentLayout>
         {posts.isFetching ? (
+          <div className="d-flex justify-content-center mt-5">
+            <Spin size="large" tip="Fetching building list..." />
+          </div>
+        ) : (
           <div>
             <h2>Project {project.title}</h2>
             {this.renderPosts()}
@@ -44,10 +48,6 @@ class PropertyDashboard extends Component {
               </Link>
             </div>
           </div>
-        ) : (
-          <div className="d-flex justify-content-center mt-5">
-            <Spin size="large" tip="Fetching building list..." />
-          </div>
         )}
       </ContentLayout>
     );
@@ -55,7 +55,6 @@ class PropertyDashboard extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('posts: ', state);
   return {
     posts: state.postsInProject[ownProps.match.params._id] || {},
     project: state.projects[ownProps.match.params._id] || {}
