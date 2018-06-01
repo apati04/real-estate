@@ -38,6 +38,7 @@ class PropertyView extends Component {
       }
     });
   };
+
   renderDetails() {
     const { currentProject, deleteSelectedProperty } = this.props;
     const postId = this.props.match.params.postId;
@@ -54,10 +55,10 @@ class PropertyView extends Component {
         { title: 'Type', content: 'Single Family', icon: 'home' },
         {
           title: 'Latitude, Longitude',
-          content: `${post.address.latitude}, ${post.address.longitude}`,
+          content: post.address ? `${post.address.latitude}, ${post.address.longitude}` : 'N/A',
           icon: 'global'
         },
-        { title: 'Year Built', content: post.yearBuilt, icon: 'calendar' },
+        { title: 'Year Built', content: post.yearBuilt || 'N/A', icon: 'calendar' },
         {
           title: 'Website',
           content: post.website || 'N/A',
@@ -69,36 +70,47 @@ class PropertyView extends Component {
           icon: 'edit'
         }
       ];
+
+      const renderPropImg = () => {
+        if (!post.image) {
+          return <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/>
+        }
+
+        if (Array.isArray(post.image.url)) {
+          return (
+            <Carousel effect='fade'>
+              {post.image.url.map(img => {
+                return (
+                  <div key={img}>
+                    <img src={img} className='img-fluid' alt='property' key={img} style={{ width: 480, height: 400, marginTop: '40px' }}/>
+                  </div>
+                );
+              })}
+            </Carousel>
+          );
+        } else {
+          return <img src={post.image.url} className='img-fluid' alt='property' style={{ width: 480, height: 360, marginTop: '40px' }} />
+        }
+      }
       //------ this renders the view ---------------
-      console.log(post);
       return (
         <div>
           <div>
             <div className="row">
               <div className="col-sm-4">
-                {Array.isArray(post.image.url)
-                  ? <Carousel effect='fade'>
-                    {post.image.url.map(img => {
-                      return (
-                        <div key={img}>
-                          <img src={img} className='img-fluid' alt='property' key={img} style={{ width: 480, height: 400, marginTop: '40px' }}/>
-                        </div>
-                      );
-                    })}
-                  </Carousel>
-                  : <img src={post.image.url} className='img-fluid' alt='property' style={{ width: 480, height: 360, marginTop: '40px' }} />}
+                {renderPropImg()}
               </div>
               <div className="col-sm-8">
                 <h2 className="my-4">{post.fullAddress}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
-                    <h5>{`${post.rooms.bedrooms} bedrooms`}</h5>
+                    <h5>{post.rooms ? `- ${post.rooms.bedrooms} bedrooms` : '- Room information not available'}</h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5>{`- ${post.rooms.bathrooms} bathrooms`}</h5>
+                    <h5>{post.rooms ? `- ${post.rooms.bathrooms} bathrooms` : ''}</h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5>{`- ${post.finishedSize.value} sq.ft.`}</h5>
+                    <h5>{post.finishedSize ? `- ${post.finishedSize.value}` : '- SqFt not available'}</h5>
                   </li>
                 </ul>
                 <List

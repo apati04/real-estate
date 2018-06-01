@@ -65,10 +65,12 @@ class PropertyAdd extends Component {
       <ContentLayout>
         <div id="mapbox" />
         <div className="row">
-          <div className="col-md-3"><img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/></div>
+          <div className="col-md-3">
+            <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/>
+          </div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
-              <Field label="Street" name="fullAddress" component={FormField} />
+              <Field label="Full Address" name="fullAddress" component={FormField} />
               {/* <div className='row'>
                 <div className='col-md-6'>
                   <Field label="City" name="city" component={FormField} />

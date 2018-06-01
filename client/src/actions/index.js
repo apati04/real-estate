@@ -93,12 +93,11 @@ export const submitNewBuilding = (
       userImage
     }
   });
-  callback();
   if (location.shouldRedirect) {
     location.history.push(`/projects/${values._project}/overview`);
   }
-  console.log(postBuilding, 'post');
   console.log(values, 'values');
+  callback();
   dispatch(fetchProjectPosts(values._project));
 };
 
