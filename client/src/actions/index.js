@@ -35,6 +35,7 @@ const requestProjectPosts = projectId => ({
   type: REQUEST_PROJECT_POSTS,
   projectId
 });
+
 const receiveProjectPosts = (projectId, data) => ({
   type: RECEIVE_PROJECT_POSTS,
   projectId,
@@ -58,16 +59,19 @@ const fetchProjectPosts = projectId => dispatch => {
     }
   });
 };
+
 const shouldFetchProjectPosts = (state, projectId) => {
   const posts = state.postsInProject[projectId];
   if (!posts) return true;
   if (posts.isFetching) return false;
 };
+
 export const fetchProjectPostsIfNeeded = projectId => (dispatch, getState) => {
   if (shouldFetchProjectPosts(getState(), projectId)) {
     return dispatch(fetchProjectPosts(projectId));
   }
 };
+
 export const submitNewBuilding = (
   values,
   uploadFile,
@@ -97,7 +101,7 @@ export const submitNewBuilding = (
   console.log(values, 'values');
   dispatch(fetchProjectPosts(values._project));
 };
-// ------
+
 export const selectProjectPost = projectPost => ({
   type: SELECT_PROJECT_POST,
   projectPost

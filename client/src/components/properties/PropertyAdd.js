@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, message } from 'antd';
+import { Button, message } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
@@ -14,10 +14,6 @@ class PropertyAdd extends Component {
       this.props.fetchImgData(this.props.location.state.zpid);
     }
     this.props.fetchCurrentUserData();
-  }
-
-  componentWillUnmount() {
-    this.props.resetPropData();
   }
 
   formSubmit = values => {
@@ -39,37 +35,6 @@ class PropertyAdd extends Component {
     );
   };
 
-  renderPropertyImg() {
-    const data = this.props.img[Object.keys(this.props.img)[1]];
-    if (!data) {
-      return (
-        <Card loading style={{ width: 350, height: 350, border: 'none' }} />
-      );
-    } else if (!data.response) {
-      return (
-        <img
-          src="http://via.placeholder.com/350x350"
-          style={{ width: 350, height: 350 }}
-          className="img-fluid"
-          alt="placeholder"
-        />
-      );
-    } else {
-      const {
-        response: {
-          images: { image: url }
-        }
-      } = data;
-      return (
-        <img
-          src={url.url._text}
-          style={{ width: 350, height: 350 }}
-          className="img-fluid"
-          alt="placeholder"
-        />
-      );
-    }
-  }
   onFileUpload = e => {
     this.setState({ file: e.target.files[0] });
   };
@@ -100,22 +65,22 @@ class PropertyAdd extends Component {
       <ContentLayout>
         <div id="mapbox" />
         <div className="row">
-          <div className="col-md-3">{this.renderPropertyImg()}</div>
+          <div className="col-md-3"><img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/></div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
-              <Field label="Address" name="address" component={FormField} />
+              <Field label="Street" name="street" component={FormField} />
+              <div className='row'>
+                <div className='col-md-6'>
+                  <Field label="City" name="city" component={FormField} />
+                </div>
+                <div className='col-md-6'>
+                  <Field label="State & Zipcode" name="statezip" component={FormField} />
+                </div>
+              </div>
               <div className="row">
                 <div className="col-md-6">
-                  <Field
-                    label="Longitude"
-                    name="longitude"
-                    component={FormField}
-                  />
-                  <Field
-                    label="Latitude"
-                    name="latitude"
-                    component={FormField}
-                  />
+                  <Field label="Longitude" name="longitude" component={FormField} />
+                  <Field label="Latitude" name="latitude" component={FormField} />
                   <h5>Upload an Image</h5>
                   <input
                     onChange={this.onFileUpload}
@@ -125,11 +90,7 @@ class PropertyAdd extends Component {
                 </div>
                 <div className="col-md-6">
                   <Field label="Color RGB" name="color" component={FormField} />
-                  <Field
-                    label="Placemark Height"
-                    name="placemark"
-                    component={FormField}
-                  />
+                  <Field label="Placemark Height" name="placemark" component={FormField} />
                 </div>
               </div>
               <Link
@@ -143,35 +104,35 @@ class PropertyAdd extends Component {
             </form>
           </div>
         </div>
-        <div style={{ marginTop: '30px' }}>
+        {/* <div style={{ marginTop: '30px' }}>
           <h1 className="display-4">Building Profile</h1>
           <hr />
           <div className="row">
             <div className="col-md-5">
-              <Field
-                label="Rennovated"
-                name="renovated"
-                component={FormField}
-              />
-              <Field label="Owner" name="owner" component={FormField} />
-              <Field label="Built" name="built" component={FormField} />
-              <Field label="Website" name="website" component={FormField} />
+          <Field
+          label="Rennovated"
+          name="renovated"
+          component={FormField}
+          />
+          <Field label="Owner" name="owner" component={FormField} />
+          <Field label="Built" name="built" component={FormField} />
+          <Field label="Website" name="website" component={FormField} />
             </div>
             <div className="col-md-5 offset-md-1">
-              <Field
-                label="Previous Owner"
-                name="prevOwner"
-                component={FormField}
-              />
-              <Field label="Notes" name="notes" component={FormField} />
-              <Field
-                label="Commercial Real Estate Certifications"
-                name="certifications"
-                component={FormField}
-              />
+          <Field
+          label="Previous Owner"
+          name="prevOwner"
+          component={FormField}
+          />
+          <Field label="Notes" name="notes" component={FormField} />
+          <Field
+          label="Commercial Real Estate Certifications"
+          name="certifications"
+          component={FormField}
+          />
             </div>
           </div>
-        </div>
+        </div> */}
       </ContentLayout>
     );
   }
@@ -197,30 +158,30 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps({ imgData: img }, ownProps) {
-  if (ownProps.location.state) {
-    const { address, longitude, latitude } = ownProps.location.state;
-    return {
-      img: img.img,
-      initialValues: {
-        address: `${address}`,
-        longitude: `${longitude}`,
-        latitude: `${latitude}`
-      }
-    };
-  } else {
-    return {
-      img: img.img,
-      initialValues: {
-        address: '',
-        longitude: '',
-        latitude: ''
-      }
-    };
-  }
-}
+// function mapStateToProps({ imgData: img }, ownProps) {
+//   if (ownProps.location.state) {
+//     const { address, longitude, latitude } = ownProps.location.state;
+//     return {
+//       img: img.img,
+//       initialValues: {
+//         address: `${address}`,
+//         longitude: `${longitude}`,
+//         latitude: `${latitude}`
+//       }
+//     };
+//   } else {
+//     return {
+//       img: img.img,
+//       initialValues: {
+//         address: '',
+//         longitude: '',
+//         latitude: ''
+//       }
+//     };
+//   }
+// }
 
 export default reduxForm({
   form: 'propDetail',
   validate
-})(withRouter(connect(mapStateToProps, actions)(PropertyAdd)));
+})(withRouter(connect(null, actions)(PropertyAdd)));
