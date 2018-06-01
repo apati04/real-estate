@@ -1,50 +1,38 @@
 import axios from 'axios';
-import {
-  FETCH_CURRENT_USER_DATA,
-  FETCH_PROJECT,
-  FETCH_PROJECTS,
-  DELETE_SELECTED_PROPERTY,
-  DELETE_PROJECT,
-  REQUEST_PROJECT_POSTS,
-  RECEIVE_PROJECT_POSTS,
-  HANDLE_EMPTY_PROJECT_POSTS,
-  SELECT_PROJECT_POST,
-  RECEIVE_MAP_DATA,
-  REQUEST_MAP_DATA
-} from './types';
+import * as types from './types';
 
 export const fetchCurrentUserData = () => async dispatch => {
   const request = await axios.get('/api/current_user');
   const { data } = request;
-  dispatch({ type: FETCH_CURRENT_USER_DATA, payload: data });
+  dispatch({ type: types.FETCH_CURRENT_USER_DATA, payload: data });
 };
 
 // PROJECT ACTION CREATORS
 export const fetchProjects = () => async dispatch => {
   const projRes = await axios.get('/api/projects');
-  dispatch({ type: FETCH_PROJECTS, payload: projRes.data });
+  dispatch({ type: types.FETCH_PROJECTS, payload: projRes.data });
 };
 
 export const createNewProject = (values, callback) => async dispatch => {
   const response = await axios.post('/api/projects', values);
   callback();
-  dispatch({ type: FETCH_PROJECT, payload: response.data });
+  dispatch({ type: types.FETCH_PROJECT, payload: response.data });
 };
 
 const requestProjectPosts = projectId => ({
-  type: REQUEST_PROJECT_POSTS,
+  type: types.REQUEST_PROJECT_POSTS,
   projectId
 });
 
 const receiveProjectPosts = (projectId, data) => ({
-  type: RECEIVE_PROJECT_POSTS,
+  type: types.RECEIVE_PROJECT_POSTS,
   projectId,
   payload: data,
   receivedAt: Date.now()
 });
 
 const handleEmptyProjectPosts = projectId => ({
-  type: HANDLE_EMPTY_PROJECT_POSTS,
+  type: types.HANDLE_EMPTY_PROJECT_POSTS,
   projectId,
   payload: {}
 });
@@ -102,7 +90,7 @@ export const submitNewBuilding = (
 };
 
 export const selectProjectPost = projectPost => ({
-  type: SELECT_PROJECT_POST,
+  type: types.SELECT_PROJECT_POST,
   projectPost
 });
 
@@ -113,7 +101,7 @@ export const deleteProject = (projectId, message) => async dispatch => {
     }
   });
   if (res.data === projectId) {
-    dispatch({ type: DELETE_PROJECT, payload: res.data });
+    dispatch({ type: types.DELETE_PROJECT, payload: res.data });
     message();
   }
 };
@@ -129,7 +117,7 @@ export const deleteSelectedProperty = (
   if (postId === del.data._id) {
     history.push(`/projects/${projectId}/overview`);
     dispatch({
-      type: DELETE_SELECTED_PROPERTY,
+      type: types.DELETE_SELECTED_PROPERTY,
       projectId: del.data._project,
       postId: del.data._id
     });
@@ -138,10 +126,10 @@ export const deleteSelectedProperty = (
 };
 
 const requestMapData = () => ({
-  type: REQUEST_MAP_DATA
+  type: types.REQUEST_MAP_DATA
 });
 const receiveMapData = data => ({
-  type: RECEIVE_MAP_DATA,
+  type: types.RECEIVE_MAP_DATA,
   payload: data
 });
 export const fetchMapData = (location, resetForm) => dispatch => {
