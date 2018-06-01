@@ -29,6 +29,7 @@ class PropertyList extends Component {
     }
   }
   render() {
+    console.log(this.props.posts);
     return (
       <div>
         <h2>Building Profiles</h2>
