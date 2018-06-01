@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, message } from 'antd';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 import ContentLayout from '../layout/ContentLayout';
 import FormField from '../forms/FormField';
@@ -68,15 +68,15 @@ class PropertyAdd extends Component {
           <div className="col-md-3"><img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/></div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
-              <Field label="Street" name="street" component={FormField} />
-              <div className='row'>
+              <Field label="Street" name="fullAddress" component={FormField} />
+              {/* <div className='row'>
                 <div className='col-md-6'>
                   <Field label="City" name="city" component={FormField} />
                 </div>
                 <div className='col-md-6'>
                   <Field label="State & Zipcode" name="statezip" component={FormField} />
                 </div>
-              </div>
+              </div> */}
               <div className="row">
                 <div className="col-md-6">
                   <Field label="Latitude" name="latitude" component={FormField} />
@@ -91,13 +91,13 @@ class PropertyAdd extends Component {
                   <Field label="Longitude" name="longitude" component={FormField} />
                 </div>
               </div>
-              <Link
-                to={`/projects/${this.props.match.params._id}/overview`}
+              <button
                 className="btn btn-outline-danger float-right"
                 style={{ marginLeft: '30px ' }}
+                onClick={() => this.props.history.goBack()}
               >
                 <i className="fas fa-undo" /> BACK
-              </Link>
+              </button>
               {this.renderSaveBtn()}
             </form>
           </div>
