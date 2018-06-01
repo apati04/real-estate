@@ -79,7 +79,6 @@ class PropertyAdd extends Component {
               </div>
               <div className="row">
                 <div className="col-md-6">
-                  <Field label="Longitude" name="longitude" component={FormField} />
                   <Field label="Latitude" name="latitude" component={FormField} />
                   <h5>Upload an Image</h5>
                   <input
@@ -89,8 +88,7 @@ class PropertyAdd extends Component {
                   />
                 </div>
                 <div className="col-md-6">
-                  <Field label="Color RGB" name="color" component={FormField} />
-                  <Field label="Placemark Height" name="placemark" component={FormField} />
+                  <Field label="Longitude" name="longitude" component={FormField} />
                 </div>
               </div>
               <Link
@@ -140,8 +138,14 @@ class PropertyAdd extends Component {
 
 function validate(values) {
   const errors = {};
-  if (!values.address) {
-    errors.address = 'Please enter the address';
+  if (!values.street) {
+    errors.street = 'Please enter the street';
+  }
+  if (!values.city) {
+    errors.city = 'Please enter the city';
+  }
+  if (!values.statezip) {
+    errors.statezip = 'Please enter the state and zipcode';
   }
   if (!values.latitude) {
     errors.latitude = 'Please enter the latitude';
