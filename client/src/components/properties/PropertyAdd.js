@@ -21,12 +21,25 @@ class PropertyAdd extends Component {
     const { submitNewBuilding, history } = this.props;
     const formValues = {
       ...values,
+      fullAddress: `${values.street}, ${values.city}, ${values.state} ${values.zipcode}`,
+      address: {
+        street: values.street,
+        city: values.city,
+        state: values.state,
+        zipcode: values.zipcode
+      },
+      yearBuilt: values.yearBuilt,
+      rooms: {
+        bathrooms: values.bathrooms,
+        bedrooms: values.bedrooms
+      },
       _project: this.props.match.params._id
     };
     const displayMsg = () => {
       message.success('Property has been successfully added!', 2);
       this.setState({ loading: false });
     };
+    console.log(formValues);
     submitNewBuilding(
       formValues,
       this.state.file,
