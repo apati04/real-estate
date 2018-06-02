@@ -72,8 +72,12 @@ class PropertyView extends Component {
       ];
 
       const renderPropImg = () => {
+        if (post.userImage) {
+          return <img src={`https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${post.userImage.url}`} className='img-fluid' alt='property' style={{ width: 480, height: 400, marginTop: '40px' }}/>
+        }
+
         if (!post.image) {
-          return <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/>
+          return <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property' style={{ width: 480, height: 400, marginTop: '40px' }}/>
         }
 
         if (Array.isArray(post.image.url)) {
