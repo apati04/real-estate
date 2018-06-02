@@ -55,7 +55,7 @@ class PropertyView extends Component {
         { title: 'Type', content: 'Single Family', icon: 'home' },
         {
           title: 'Latitude, Longitude',
-          content: post.address ? `${post.address.latitude}, ${post.address.longitude}` : 'N/A',
+          content: post.address.latitude && post.address.longitude ? `${post.address.latitude}, ${post.address.longitude}` : 'N/A',
           icon: 'global'
         },
         { title: 'Year Built', content: post.yearBuilt || 'N/A', icon: 'calendar' },
@@ -110,7 +110,7 @@ class PropertyView extends Component {
                     <h5>{post.rooms ? `- ${post.rooms.bathrooms} bathrooms` : ''}</h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5>{post.finishedSize ? `- ${post.finishedSize.value}` : '- SqFt not available'}</h5>
+                    <h5>{post.finishedSize ? `- ${post.finishedSize.value} SqFt` : '- SqFt not available'}</h5>
                   </li>
                 </ul>
                 <List

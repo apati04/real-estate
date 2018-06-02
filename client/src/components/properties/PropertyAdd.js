@@ -33,6 +33,9 @@ class PropertyAdd extends Component {
         bathrooms: values.bathrooms,
         bedrooms: values.bedrooms
       },
+      finishedSize: {
+        value: values.finishedSize
+      },
       _project: this.props.match.params._id
     };
     const displayMsg = () => {
@@ -124,7 +127,7 @@ class PropertyAdd extends Component {
               <Field label="Year Built" name="yearBuilt" component={FormField} />
             </div>
             <div className="col-md-5 offset-md-1">
-              <Field label="Size (SqFt)" name="size" component={FormField} />
+              <Field label="Finished Size (SqFt)" name="finishedSize" component={FormField} />
               <Field label="Notes" name="notes" component={FormField} />
             </div>
           </div>
