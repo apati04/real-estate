@@ -7,9 +7,6 @@ import './styles.css';
 import * as actions from '../../actions';
 
 class UserSettings extends Component {
-  componentDidMount() {
-    this.props.getProjectsAndPosts('5af4eb627f419426380bde6e');
-  }
   render() {
     return (
       <ContentLayout>
