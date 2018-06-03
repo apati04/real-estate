@@ -44,12 +44,13 @@ class PropertyView extends Component {
     const postId = this.props.match.params.postId;
     if (currentProject.items.length > 0) {
       const post = currentProject.items.find(item => item._id === postId);
+      const [street, city, statezip] = post.fullAddress.split(', ');
       // ----------------------------------------
       // data array for property details,
       const data = [
         {
           title: 'Address',
-          content: post.fullAddress,
+          content: `${street}, ${city}, ${statezip}`,
           icon: 'environment-o'
         },
         { title: 'Type', content: 'Single Family', icon: 'home' },
@@ -105,7 +106,7 @@ class PropertyView extends Component {
                 {renderPropImg()}
               </div>
               <div className="col-sm-8 text-capitalize">
-                <h2 className="my-4">{post.fullAddress}</h2>
+                <h2 className="my-4">{`${street}, ${city}, ${statezip}`}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
                     <h5>{post.rooms ? `- ${post.rooms.bedrooms} bedrooms` : '- Room information not available'}</h5>
