@@ -10,6 +10,7 @@ class PopupInfo extends Component {
     }
     console.log(this.props.info);
     const { yearBuilt, finishedSize: { value }, image: { url }, fullAddress, rooms: { bedrooms, bathrooms } } = this.props.info;
+    const [street, city, statezip] = fullAddress.split(', ');
     return (
         <div className='row'>
           <div className='col-sm-4'>
@@ -19,7 +20,7 @@ class PopupInfo extends Component {
             }
           </div>
           <div className='col-sm-8'>
-            <p>{fullAddress}</p>
+            <p>{`${street}, ${city}, ${statezip}`}</p>
             <p>Size: {value} SqFt</p>
             <p>Year Built: {yearBuilt}</p>
             <p>Bedrooms: {bedrooms}</p>

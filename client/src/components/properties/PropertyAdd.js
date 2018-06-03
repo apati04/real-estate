@@ -21,12 +21,28 @@ class PropertyAdd extends Component {
     const { submitNewBuilding, history } = this.props;
     const formValues = {
       ...values,
+      fullAddress: `${values.street}, ${values.city}, ${values.state} ${values.zipcode}`,
+      address: {
+        street: values.street,
+        city: values.city,
+        state: values.state,
+        zipcode: values.zipcode
+      },
+      yearBuilt: values.yearBuilt,
+      rooms: {
+        bathrooms: values.bathrooms,
+        bedrooms: values.bedrooms
+      },
+      finishedSize: {
+        value: values.finishedSize
+      },
       _project: this.props.match.params._id
     };
     const displayMsg = () => {
       message.success('Property has been successfully added!', 2);
       this.setState({ loading: false });
     };
+    console.log(formValues);
     submitNewBuilding(
       formValues,
       this.state.file,
@@ -70,27 +86,24 @@ class PropertyAdd extends Component {
           </div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
-              <Field label="Full Address" name="fullAddress" component={FormField} />
-              {/* <div className='row'>
+              <Field label="Street" name="street" component={FormField} />
+              <div className='row'>
                 <div className='col-md-6'>
                   <Field label="City" name="city" component={FormField} />
                 </div>
                 <div className='col-md-6'>
-                  <Field label="State & Zipcode" name="statezip" component={FormField} />
+                  <Field label="State" name="state" component={FormField} />
                 </div>
-              </div> */}
+              </div>
               <div className="row">
                 <div className="col-md-6">
-                  <Field label="Latitude" name="latitude" component={FormField} />
+                  <Field label="Zipcode" name="zipcode" component={FormField} />
                   <h5>Upload an Image</h5>
                   <input
                     onChange={this.onFileUpload}
                     type="file"
                     accept="image/jpeg"
                   />
-                </div>
-                <div className="col-md-6">
-                  <Field label="Longitude" name="longitude" component={FormField} />
                 </div>
               </div>
               <button
@@ -104,35 +117,21 @@ class PropertyAdd extends Component {
             </form>
           </div>
         </div>
-        {/* <div style={{ marginTop: '30px' }}>
-          <h1 className="display-4">Building Profile</h1>
+        <div style={{ marginTop: '30px' }}>
+          <h1 className="display-4">Additional Information</h1>
           <hr />
           <div className="row">
             <div className="col-md-5">
-          <Field
-          label="Rennovated"
-          name="renovated"
-          component={FormField}
-          />
-          <Field label="Owner" name="owner" component={FormField} />
-          <Field label="Built" name="built" component={FormField} />
-          <Field label="Website" name="website" component={FormField} />
+              <Field label="# of Bedrooms" name="bedrooms" component={FormField} />
+              <Field label="# of Bathrooms" name="bathrooms" component={FormField} />
+              <Field label="Year Built" name="yearBuilt" component={FormField} />
             </div>
             <div className="col-md-5 offset-md-1">
-          <Field
-          label="Previous Owner"
-          name="prevOwner"
-          component={FormField}
-          />
-          <Field label="Notes" name="notes" component={FormField} />
-          <Field
-          label="Commercial Real Estate Certifications"
-          name="certifications"
-          component={FormField}
-          />
+              <Field label="Finished Size (SqFt)" name="finishedSize" component={FormField} />
+              <Field label="Notes" name="notes" component={FormField} />
             </div>
           </div>
-        </div> */}
+        </div>
       </ContentLayout>
     );
   }
@@ -146,20 +145,11 @@ function validate(values) {
   if (!values.city) {
     errors.city = 'Please enter the city';
   }
-  if (!values.statezip) {
-    errors.statezip = 'Please enter the state and zipcode';
+  if (!values.state) {
+    errors.state = 'Please enter the state';
   }
-  if (!values.latitude) {
-    errors.latitude = 'Please enter the latitude';
-  }
-  if (!values.longitude) {
-    errors.longitude = 'Please enter the longitude';
-  }
-  if (!values.color) {
-    errors.color = 'Please enter the color in RGB';
-  }
-  if (!values.placemark) {
-    errors.placemark = 'Please enter the placemark height in px';
+  if (!values.zipcode) {
+    errors.zipcode = 'Please enter the zipcode';
   }
   return errors;
 }

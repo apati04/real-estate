@@ -44,18 +44,19 @@ class PropertyView extends Component {
     const postId = this.props.match.params.postId;
     if (currentProject.items.length > 0) {
       const post = currentProject.items.find(item => item._id === postId);
+      const [street, city, statezip] = post.fullAddress.split(', ');
       // ----------------------------------------
       // data array for property details,
       const data = [
         {
           title: 'Address',
-          content: post.fullAddress,
+          content: `${street}, ${city}, ${statezip}`,
           icon: 'environment-o'
         },
         { title: 'Type', content: 'Single Family', icon: 'home' },
         {
           title: 'Latitude, Longitude',
-          content: post.address ? `${post.address.latitude}, ${post.address.longitude}` : 'N/A',
+          content: post.address.latitude && post.address.longitude ? `${post.address.latitude}, ${post.address.longitude}` : 'N/A',
           icon: 'global'
         },
         { title: 'Year Built', content: post.yearBuilt || 'N/A', icon: 'calendar' },
@@ -72,8 +73,12 @@ class PropertyView extends Component {
       ];
 
       const renderPropImg = () => {
+        if (post.userImage) {
+          return <img src={`https://s3-us-west-1.amazonaws.com/rem-bucket-9818/${post.userImage.url}`} className='img-fluid' alt='property' style={{ width: 480, height: 400, marginTop: '40px' }}/>
+        }
+
         if (!post.image) {
-          return <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/>
+          return <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property' style={{ width: 480, height: 400, marginTop: '40px' }}/>
         }
 
         if (Array.isArray(post.image.url)) {
@@ -100,8 +105,8 @@ class PropertyView extends Component {
               <div className="col-sm-4">
                 {renderPropImg()}
               </div>
-              <div className="col-sm-8">
-                <h2 className="my-4">{post.fullAddress}</h2>
+              <div className="col-sm-8 text-capitalize">
+                <h2 className="my-4">{`${street}, ${city}, ${statezip}`}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
                     <h5>{post.rooms ? `- ${post.rooms.bedrooms} bedrooms` : '- Room information not available'}</h5>
@@ -110,7 +115,7 @@ class PropertyView extends Component {
                     <h5>{post.rooms ? `- ${post.rooms.bathrooms} bathrooms` : ''}</h5>
                   </li>
                   <li className="list-inline-item">
-                    <h5>{post.finishedSize ? `- ${post.finishedSize.value}` : '- SqFt not available'}</h5>
+                    <h5>{post.finishedSize ? `- ${post.finishedSize.value} SqFt` : '- SqFt not available'}</h5>
                   </li>
                 </ul>
                 <List
