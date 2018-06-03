@@ -14,7 +14,7 @@ class PropertyList extends Component {
             className="d-flex justify-content-between align-items-center"
           >
             <input type="radio" style={{ marginLeft: '10px' }} name="option" />
-            <h6>{`${street}, ${city}, ${statezip}`}</h6>
+            <h6 className='text-capitalize'>{`${street}, ${city}, ${statezip}`}</h6>
             <div className="d-flex">
               <Link
                 to={`/projects/${this.props.projectId}/post/${property._id}`}

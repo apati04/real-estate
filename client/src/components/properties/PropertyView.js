@@ -104,7 +104,7 @@ class PropertyView extends Component {
               <div className="col-sm-4">
                 {renderPropImg()}
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 text-capitalize">
                 <h2 className="my-4">{post.fullAddress}</h2>
                 <ul className="my-4 list-inline">
                   <li className="list-unstyled list-inline-item">
