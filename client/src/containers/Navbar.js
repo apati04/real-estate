@@ -7,8 +7,8 @@ const { Header } = Layout;
 
 class Navbar extends Component {
   renderSignOut() {
-    if (this.props.currentUser) {
-      const firstName = this.props.currentUser.userName.split(' ')[0];
+    if (this.props.currentUser.auth) {
+      const firstName = this.props.currentUser.auth.userName.split(' ')[0];
       const menu = (
         <Menu>
           <Menu.Item className="m-0 p-0" key="1">
@@ -53,10 +53,10 @@ class Navbar extends Component {
       }
     };
 
-    if (this.props.currentUser) {
+    if (this.props.currentUser.auth) {
       return (
         <Menu.Item style={style.greet}>
-          WELCOME, {this.props.currentUser.userName.toUpperCase()}
+          WELCOME, {this.props.currentUser.auth.userName.toUpperCase()}
         </Menu.Item>
       );
     } else {

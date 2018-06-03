@@ -6,20 +6,19 @@ const requireAuth = WrappedComponent => {
     componentDidMount() {
       this.redirectUser();
     }
-    componentDidUpdate() {
-      this.redirectUser();
-    }
+    // componentDidUpdate() {
+    //   this.redirectUser();
+    // }
     redirectUser() {
-      if (!this.props.currentUser) {
-        this.props.history.push('/');
-      }
+      return;
     }
     render() {
       return <WrappedComponent {...this.props} />;
     }
   }
   function mapStateToProps({ currentUser }) {
-    return { auth: currentUser };
+    console.log(currentUser, ' :hoc');
+    return { auth: currentUser.auth };
   }
   return connect(mapStateToProps)(ComposedComponent);
 };
