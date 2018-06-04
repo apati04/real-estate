@@ -6,7 +6,6 @@ import * as actions from '../actions';
 
 import ScrollToTop from './ScrollToTop';
 import Sidebar from '../containers/Sidebar';
-import Navbar from '../containers/Navbar';
 import FooterNav from './FooterNav';
 import Login from '../containers/Login';
 import Landing from './Landing';
@@ -41,7 +40,6 @@ class App extends Component {
       <BrowserRouter>
         <ScrollToTop>
           <Layout>
-            <Navbar />
             <Layout>
               <Sidebar />
               <Switch>

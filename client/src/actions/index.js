@@ -2,9 +2,12 @@ import axios from 'axios';
 import * as types from './types';
 
 export const fetchCurrentUserData = () => async dispatch => {
-  const request = await axios.get('/api/current_user');
-  const { data } = request;
-  dispatch({ type: types.FETCH_CURRENT_USER_DATA, payload: data });
+  try {
+    const request = await axios.get('/api/current_user');
+    dispatch({ type: types.AUTH_USER, payload: request.data });
+  } catch (e) {
+    dispatch({ type: types.AUTH_ERROR, payload: 'Invalid login credentials' });
+  }
 };
 
 // PROJECT ACTION CREATORS
