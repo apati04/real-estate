@@ -2,7 +2,6 @@ import React from 'react';
 import ProjectList from './ProjectList';
 import ProjectCreate from './ProjectForm/ProjectCreate';
 import ContentLayout from '../layout/ContentLayout';
-import requireAuth from '../requireAuth';
 const ProjectDashboard = () => {
   return (
     <ContentLayout>
@@ -15,4 +14,4 @@ const ProjectDashboard = () => {
   );
 };
 
-export default requireAuth(ProjectDashboard);
+export default ProjectDashboard;

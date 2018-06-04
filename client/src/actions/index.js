@@ -1,7 +1,8 @@
 import axios from 'axios';
 import * as types from './types';
 
-export const fetchCurrentUserData = () => async dispatch => {
+export const fetchUser = () => async dispatch => {
+  dispatch({ type: types.REQUEST_AUTH, payload: true });
   try {
     const request = await axios.get('/api/current_user');
     dispatch({ type: types.AUTH_USER, payload: request.data });
