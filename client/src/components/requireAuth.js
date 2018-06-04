@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 const requireAuth = WrappedComponent => {
   class ComposedComponent extends Component {
     componentDidMount() {
+      console.log('didmoutn');
       this.redirectUser();
     }
     componentDidUpdate() {
+      console.log('didupdate');
       this.redirectUser();
     }
     redirectUser() {
       const {
         currentUser: { isFetching, auth }
       } = this.props;
-      if (!isFetching && typeof auth === 'string') {
-        console.log(this.props);
+      if (typeof auth === 'string') {
+        this.props.history.push('/');
       }
     }
     render() {
@@ -24,6 +26,6 @@ const requireAuth = WrappedComponent => {
   function mapStateToProps({ currentUser }) {
     return { currentUser };
   }
-  return connect(mapStateToProps)(ComposedComponent);
+  return withRouter(connect(mapStateToProps)(ComposedComponent));
 };
 export default requireAuth;
