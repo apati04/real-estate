@@ -55,6 +55,10 @@ class UserSettings extends Component {
 function mapStateToProps(state) {
   return { userState: state };
 }
+
 export default reduxForm({ form: 'userSettingsForm' })(
-  connect(mapStateToProps, actions)(UserSettings)
+  connect(
+    mapStateToProps,
+    actions
+  )(UserSettings)
 );

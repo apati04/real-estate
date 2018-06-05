@@ -19,6 +19,7 @@ import PropertyView from './properties/PropertyView';
 import ProjectMapView from './projects/ProjectMapView';
 import SearchDashboard from './search/SearchDashboard';
 import MainDashboard from './auth/dashboard';
+import requireAuth from './requireAuth';
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -38,39 +39,43 @@ class App extends Component {
                       <Route
                         exact
                         path="/settings/profile"
-                        component={UserSettings}
+                        component={requireAuth(UserSettings)}
                       />
                       <Route
                         exact
                         path="/projects/:_id/overview"
-                        component={BuildingDash}
+                        component={requireAuth(BuildingDash)}
                       />
                       <Route
                         exact
                         path="/projects/:_id/new"
-                        component={PropertyAdd}
+                        component={requireAuth(PropertyAdd)}
                       />
                       <Route
                         exact
                         path="/projects/:_id/mapview"
-                        component={ProjectMap}
+                        component={requireAuth(ProjectMap)}
                       />
                       <Route
                         exact
                         path="/projects/:_id/map"
-                        component={ProjectMapView}
+                        component={requireAuth(ProjectMapView)}
                       />
                       <Route
                         exact
                         path="/projects/:_id/post/:postId"
-                        component={PropertyView}
+                        component={requireAuth(PropertyView)}
                       />
                       <Route
                         exact
                         path="/projects"
-                        component={ProjectDashboard}
+                        component={requireAuth(ProjectDashboard)}
                       />
-                      <Route exact path="/search" component={SearchDashboard} />
+                      <Route
+                        exact
+                        path="/search"
+                        component={requireAuth(SearchDashboard)}
+                      />
 
                       <Route exact path="/login" component={Login} />
                       <Route
