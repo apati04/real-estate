@@ -13,7 +13,6 @@ class PropertyAdd extends Component {
     if (this.props.location.state) {
       this.props.fetchImgData(this.props.location.state.zpid);
     }
-    this.props.fetchCurrentUserData();
   }
 
   formSubmit = values => {
@@ -21,7 +20,9 @@ class PropertyAdd extends Component {
     const { submitNewBuilding, history } = this.props;
     const formValues = {
       ...values,
-      fullAddress: `${values.street}, ${values.city}, ${values.state} ${values.zipcode}`,
+      fullAddress: `${values.street}, ${values.city}, ${values.state} ${
+        values.zipcode
+      }`,
       address: {
         street: values.street,
         city: values.city,
@@ -82,16 +83,20 @@ class PropertyAdd extends Component {
         <div id="mapbox" />
         <div className="row">
           <div className="col-md-3">
-            <img src='http://via.placeholder.com/350x350' className='img-fluid' alt='property'/>
+            <img
+              src="http://via.placeholder.com/350x350"
+              className="img-fluid"
+              alt="property"
+            />
           </div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <Field label="Street" name="street" component={FormField} />
-              <div className='row'>
-                <div className='col-md-6'>
+              <div className="row">
+                <div className="col-md-6">
                   <Field label="City" name="city" component={FormField} />
                 </div>
-                <div className='col-md-6'>
+                <div className="col-md-6">
                   <Field label="State" name="state" component={FormField} />
                 </div>
               </div>
@@ -122,12 +127,28 @@ class PropertyAdd extends Component {
           <hr />
           <div className="row">
             <div className="col-md-5">
-              <Field label="# of Bedrooms" name="bedrooms" component={FormField} />
-              <Field label="# of Bathrooms" name="bathrooms" component={FormField} />
-              <Field label="Year Built" name="yearBuilt" component={FormField} />
+              <Field
+                label="# of Bedrooms"
+                name="bedrooms"
+                component={FormField}
+              />
+              <Field
+                label="# of Bathrooms"
+                name="bathrooms"
+                component={FormField}
+              />
+              <Field
+                label="Year Built"
+                name="yearBuilt"
+                component={FormField}
+              />
             </div>
             <div className="col-md-5 offset-md-1">
-              <Field label="Finished Size (SqFt)" name="finishedSize" component={FormField} />
+              <Field
+                label="Finished Size (SqFt)"
+                name="finishedSize"
+                component={FormField}
+              />
               <Field label="Notes" name="notes" component={FormField} />
             </div>
           </div>
@@ -180,4 +201,11 @@ function validate(values) {
 export default reduxForm({
   form: 'propDetail',
   validate
-})(withRouter(connect(null, actions)(PropertyAdd)));
+})(
+  withRouter(
+    connect(
+      null,
+      actions
+    )(PropertyAdd)
+  )
+);

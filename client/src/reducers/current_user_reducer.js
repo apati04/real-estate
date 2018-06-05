@@ -1,9 +1,17 @@
-import { FETCH_CURRENT_USER_DATA } from '../actions/types';
-
-function currentUserReducer(state = null, action) {
+import { AUTH_USER, AUTH_ERROR, REQUEST_AUTH } from '../actions/types';
+const INITIAL_STATE = {
+  auth: '',
+  errorMessage: '',
+  isFetching: false
+};
+function currentUserReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case FETCH_CURRENT_USER_DATA:
-      return action.payload || false;
+    case AUTH_USER:
+      return { ...state, auth: action.payload, isFetching: false };
+    case AUTH_ERROR:
+      return { ...state, errorMessage: action.payload, isFetching: false };
+    case REQUEST_AUTH:
+      return { ...state, isFetching: true };
     default:
       return state;
   }

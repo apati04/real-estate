@@ -8,7 +8,6 @@ import * as actions from '../actions';
 
 class EditProperty extends Component {
   componentDidMount() {
-    this.props.fetchCurrentUserData();
     this.props.fetchProperties();
   }
 
@@ -160,4 +159,11 @@ export default reduxForm({
   form: 'propDetail',
   enableReinitialize: true,
   validate
-})(withRouter(connect(mapStateToProps, actions)(EditProperty)));
+})(
+  withRouter(
+    connect(
+      mapStateToProps,
+      actions
+    )(EditProperty)
+  )
+);

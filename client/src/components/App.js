@@ -1,96 +1,114 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Layout } from 'antd';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import ScrollToTop from './ScrollToTop';
-import Sidebar from '../containers/Sidebar';
-import Navbar from '../containers/Navbar';
 import FooterNav from './FooterNav';
 import Login from '../containers/Login';
 import Landing from './Landing';
 import ProjectMap from '../containers/ProjectMap';
 import NotFound from './NotFound';
 import UserSettings from './users/UserSettings';
-
 import ProjectDashboard from './projects/ProjectDashboard';
-
+import Navbar from './Navbar';
 import PropertyAdd from './properties/PropertyAdd';
 import BuildingDash from './properties/PropertyDashboard';
 import PropertyView from './properties/PropertyView';
 import ProjectMapView from './projects/ProjectMapView';
 import SearchDashboard from './search/SearchDashboard';
-
+import MainDashboard from './auth/dashboard';
+import requireAuth from './requireAuth';
 class App extends Component {
   componentDidMount() {
-    this.props.fetchCurrentUserData();
+    this.props.fetchUser();
   }
-  renderPage = () => {
-    switch (this.props.currentUser) {
-      case null:
-        return <div />;
-      case false:
-        return <Landing />;
-      default:
-        return <Redirect to="/projects" />;
-    }
-  };
   render() {
+    const { currentUser } = this.props;
     return (
-      <BrowserRouter>
-        <ScrollToTop>
-          <Layout>
-            <Navbar />
-            <Layout>
-              <Sidebar />
-              <Switch>
-                <Route
-                  exact
-                  path="/settings/profile"
-                  component={UserSettings}
-                />
-                <Route
-                  exact
-                  path="/projects/:_id/overview"
-                  component={BuildingDash}
-                />
-                <Route
-                  exact
-                  path="/projects/:_id/new"
-                  component={PropertyAdd}
-                />
-                <Route
-                  exact
-                  path="/projects/:_id/mapview"
-                  component={ProjectMap}
-                />
-                <Route
-                  exact
-                  path="/projects/:_id/map"
-                  component={ProjectMapView}
-                />
-                <Route
-                  exact
-                  path="/projects/:_id/post/:postId"
-                  component={PropertyView}
-                />
-                <Route exact path="/projects" component={ProjectDashboard} />
+      <Fragment>
+        {currentUser.isFetching ? null : (
+          <BrowserRouter>
+            <ScrollToTop>
+              <Layout>
+                <Navbar currentUser={currentUser} />
+                <Layout>
+                  <MainDashboard>
+                    <Switch>
+                      <Route
+                        exact
+                        path="/settings/profile"
+                        component={requireAuth(UserSettings)}
+                      />
+                      <Route
+                        exact
+                        path="/projects/:_id/overview"
+                        component={requireAuth(BuildingDash)}
+                      />
+                      <Route
+                        exact
+                        path="/projects/:_id/new"
+                        component={requireAuth(PropertyAdd)}
+                      />
+                      <Route
+                        exact
+                        path="/projects/:_id/mapview"
+                        component={requireAuth(ProjectMap)}
+                      />
+                      <Route
+                        exact
+                        path="/projects/:_id/map"
+                        component={requireAuth(ProjectMapView)}
+                      />
+                      <Route
+                        exact
+                        path="/projects/:_id/post/:postId"
+                        component={requireAuth(PropertyView)}
+                      />
+                      <Route
+                        exact
+                        path="/projects"
+                        component={requireAuth(ProjectDashboard)}
+                      />
+                      <Route
+                        exact
+                        path="/search"
+                        component={requireAuth(SearchDashboard)}
+                      />
 
-                <Route exact path="/search" component={SearchDashboard} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/" render={this.renderPage} />
-                <Route component={NotFound} />
-              </Switch>
-            </Layout>
-            <FooterNav />
-          </Layout>
-        </ScrollToTop>
-      </BrowserRouter>
+                      <Route exact path="/login" component={Login} />
+                      <Route
+                        exact
+                        path="/"
+                        render={() => {
+                          const { isFetching, auth } = currentUser;
+                          if (isFetching) {
+                            return null;
+                          } else if (typeof auth === 'string') {
+                            return <Landing />;
+                          } else {
+                            return <Redirect to="/dashboard" />;
+                          }
+                        }}
+                      />
+                      <Route component={NotFound} />
+                    </Switch>
+                  </MainDashboard>
+                </Layout>
+                <FooterNav />
+              </Layout>
+            </ScrollToTop>
+          </BrowserRouter>
+        )}
+      </Fragment>
     );
   }
 }
 function mapStateToProps({ currentUser }) {
   return { currentUser };
 }
-export default connect(mapStateToProps, actions)(App);
+export default connect(
+  mapStateToProps,
+  actions
+)(App);

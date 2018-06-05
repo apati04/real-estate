@@ -1,4 +1,7 @@
-export const FETCH_CURRENT_USER_DATA = 'FETCH_CURRENT_USER_DATA';
+// AUTH
+export const AUTH_USER = 'auth_user';
+export const AUTH_ERROR = 'auth_error';
+export const REQUEST_AUTH = 'request_auth';
 
 export const FETCH_USER_PROPERTIES = 'fetch_user_properties';
 export const FETCH_PROJECT = 'fetch_project';

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Avatar, Dropdown, Card, Icon } from 'antd';
 const { Header } = Layout;
 
 class Navbar extends Component {
   renderSignOut() {
-    if (this.props.currentUser) {
-      const firstName = this.props.currentUser.userName.split(' ')[0];
+    const {
+      currentUser: { isFetching, auth }
+    } = this.props;
+    if (!isFetching && typeof auth === 'object') {
+      const firstName = auth.userName.split(' ')[0];
       const menu = (
         <Menu>
           <Menu.Item className="m-0 p-0" key="1">
@@ -39,11 +40,14 @@ class Navbar extends Component {
         </div>
       );
     } else {
-      return <div />;
+      return null;
     }
   }
 
   greetUser() {
+    const {
+      currentUser: { isFetching, auth }
+    } = this.props;
     const style = {
       font: {
         color: 'white'
@@ -52,11 +56,11 @@ class Navbar extends Component {
         marginLeft: '20px'
       }
     };
-
-    if (this.props.currentUser) {
+    console.log(this.props.currentUser);
+    if (!isFetching && typeof auth === 'object') {
       return (
         <Menu.Item style={style.greet}>
-          WELCOME, {this.props.currentUser.userName.toUpperCase()}
+          WELCOME, {auth.userName.toUpperCase()}
         </Menu.Item>
       );
     } else {
@@ -76,7 +80,6 @@ class Navbar extends Component {
         lineHeight: '64px'
       }
     };
-
     return (
       <Header>
         <div className="logo" />
@@ -89,8 +92,4 @@ class Navbar extends Component {
   }
 }
 
-function mapStateToProps({ currentUser }) {
-  return { currentUser };
-}
-
-export default connect(mapStateToProps, actions)(Navbar);
+export default Navbar;
