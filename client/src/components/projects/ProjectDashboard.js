@@ -8,7 +8,6 @@ const ProjectDashboard = () => {
       <div style={{ marginTop: '20px' }}>
         <ProjectList />
         <ProjectCreate />
-        <hr />
       </div>
     </ContentLayout>
   );
