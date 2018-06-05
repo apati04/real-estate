@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Select, Modal, message } from 'antd';
+import { Button, Select, Modal, message } from 'antd';
 import { submitNewBuilding } from '../actions';
 const Option = Select.Option;
 
@@ -78,9 +78,14 @@ class AddToProject extends Component {
         >
           {this.renderOptions()}
         </Select>
-        <button className="btn btn-outline-info ml-2" onClick={this.showModal}>
-          <i className="fas fa-plus-circle" /> SAVE
-        </button>
+        <Button
+          shape='circle'
+          icon='plus'
+          size='large'
+          className='btn-outline-info ml-2'
+          disabled={this.state.selected ? false : true}
+          onClick={this.showModal}
+        />
         <Modal
           title="Add to project"
           visible={visible}
