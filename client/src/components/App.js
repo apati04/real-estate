@@ -26,6 +26,7 @@ class App extends Component {
   }
   render() {
     const { currentUser } = this.props;
+
     return (
       <Fragment>
         {currentUser.isFetching ? null : (
