@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 import { Link } from 'react-router-dom';
+
 class PropertyList extends Component {
   renderProperties() {
     const { posts } = this.props;
@@ -18,9 +20,13 @@ class PropertyList extends Component {
             <div className="d-flex">
               <Link
                 to={`/projects/${this.props.projectId}/post/${property._id}`}
-                className="btn btn-sm btn-outline-primary"
               >
-                <i className="fas fa-edit" /> VIEW
+                <Button
+                  shape='circle'
+                  icon='profile'
+                  size='large'
+                  className='btn-outline-primary'
+                />
               </Link>
             </div>
           </li>
@@ -29,7 +35,6 @@ class PropertyList extends Component {
     }
   }
   render() {
-    console.log(this.props.posts);
     return (
       <div>
         <h2>Building Profiles</h2>
