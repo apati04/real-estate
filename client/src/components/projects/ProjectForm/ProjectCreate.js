@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { message } from 'antd';
+import { Button, message } from 'antd';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../../actions';
@@ -26,13 +26,13 @@ class ProjectCreate extends Component {
   render() {
     return (
       <div>
-        <button
-          className="btn btn-outline-primary"
-          style={{ marginTop: '10px' }}
+        <Button
+          shape='circle'
+          icon='plus'
+          size='large'
+          style={{ marginTop: '10px', marginLeft: '10px' }}
           onClick={this.showModal}
-        >
-          <i className="fas fa-plus-circle" /> New Project Collection
-        </button>
+        />
         <ProjectForm
           visible={this.state.visible}
           onCancel={this.handleCancel}
