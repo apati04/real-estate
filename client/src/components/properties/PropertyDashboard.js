@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContentLayout from '../layout/ContentLayout';
 import { connect } from 'react-redux';
 import { fetchProjectPostsIfNeeded } from '../../actions';
-import { Spin } from 'antd';
+import { Button, Spin } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import PropertyList from './PropertyList';
 class PropertyDashboard extends Component {
@@ -32,19 +32,24 @@ class PropertyDashboard extends Component {
             <h2>Project {project.title}</h2>
             {this.renderPosts()}
             <div>
-              <button
-                className="btn btn-outline-danger"
+              <Button
+                shape='circle'
+                icon='rollback'
+                size='large'
+                className='btn-outline-danger'
                 onClick={() => {
                   this.props.history.goBack();
                 }}
-              >
-                <i className="fas fa-undo" /> BACK
-              </button>
+              />
               <Link
-                className="btn btn-outline-info float-right"
                 to={`/projects/${this.props.match.params._id}/new`}
               >
-                <i className="fas fa-plus-circle" /> ADD PROPERTY
+                <Button
+                  shape='circle'
+                  icon='plus'
+                  size='large'
+                  className='btn-outline-info float-right'
+                />
               </Link>
             </div>
           </div>

@@ -6,7 +6,7 @@ import {
   fetchProjectPostsIfNeeded,
   deleteSelectedProperty
 } from '../../actions';
-import { Avatar, List, Modal, message, Carousel, Spin } from 'antd';
+import { Avatar, Button, List, Modal, message, Carousel, Spin } from 'antd';
 const { confirm } = Modal;
 class PropertyView extends Component {
   componentDidMount() {
@@ -145,29 +145,34 @@ class PropertyView extends Component {
           </div>
           <div className="d-flex my-4">
             <div className="mr-auto p-2">
-              <button
+              <Button
+                shape='circle'
+                icon='rollback'
+                size='large'
+                className='btn-outline-danger'
                 onClick={() => {
                   this.props.history.goBack();
                 }}
-                className="btn btn-outline-danger"
-              >
-                <i className="fas fa-undo" /> BACK
-              </button>
+              />
             </div>
             <div className=" p-2">
-              <button className="btn btn-outline-info">
-                <i className="fas fa-edit" /> Edit
-              </button>
+              <Button
+                shape='circle'
+                icon='edit'
+                size='large'
+                className='btn-outline-info'
+              />
             </div>
             <div className=" p-2">
-              <button
+              <Button
+                shape='circle'
+                icon='delete'
+                size='large'
+                className='btn-outline-danger'
                 onClick={() => {
                   this.showDeleteModal(currentProject, deleteSelectedProperty);
                 }}
-                className="btn btn-outline-danger"
-              >
-                <i className="fas fa-trash-alt" /> Delete
-              </button>
+              />
             </div>
           </div>
         </div>

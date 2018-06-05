@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from 'antd';
 import FormField from "../components/forms/FormField";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
@@ -64,13 +65,16 @@ class LoginForm extends Component {
               component={FormField}
             />
             <button type="submit" className="btn btn-primary">Sign Up</button>
-            <Link
-              to="/"
-              className="btn btn-danger"
-              style={{marginLeft: "10px"}}
-            >
-              Back
-            </Link>
+            <Button
+              shape='circle'
+              icon='rollback'
+              size='large'
+              className='btn-outline-danger'
+              style={{ marginLeft: '10px' }}
+              onClick={() => {
+                this.props.history.goBack();
+              }}
+            />
           </form>
         </div>
       </div>

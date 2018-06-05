@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import ProjectField from '../../projects/ProjectForm/ProjectField';
@@ -18,17 +19,23 @@ class SearchForm extends Component {
         <Field name="zip" type="text" component={ProjectField} label="Zipcode" />
         {error && <strong>{error}</strong>}
         <div className='mt-3'>
-          <button className='btn btn-outline-info mr-2' type="submit" disabled={submitting}>
-            <i className="fas fa-search" /> Search
-          </button>
-          <button
-            type="button"
-            className='btn btn-outline-danger'
+          <Button
+            shape='circle'
+            icon='search'
+            size='large'
+            htmlType='submit'
+            style={{ marginRight: '10px' }}
+            disabled={submitting}
+            className='btn-outline-info'
+          />
+          <Button
+            shape='circle'
+            icon='delete'
+            size='large'
             disabled={pristine || submitting}
             onClick={reset}
-          >
-            <i className="fas fa-trash-alt" /> Clear
-          </button>
+            className='btn-outline-danger'
+          />
         </div>
       </form>
     );

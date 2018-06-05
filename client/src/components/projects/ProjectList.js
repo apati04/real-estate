@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProjects, deleteProject } from '../../actions';
-import { Modal, message } from 'antd';
+import { Button, Modal, message } from 'antd';
 import map from 'lodash/map';
 
 class ProjectList extends Component {
@@ -46,25 +46,34 @@ class ProjectList extends Component {
           </h6>
           <div>
             <Link
-              className="btn btn-sm btn-outline-primary"
               style={{ marginRight: '10px' }}
               to={`/projects/${project._id}/overview`}
             >
-              <i className="fas fa-edit" /> VIEW
+              <Button
+                shape='circle'
+                icon='profile'
+                size='large'
+                className='btn-outline-primary'
+              />
             </Link>
             <Link
               to={`/projects/${project._id}/map`}
-              className="btn btn-sm btn-outline-info"
             >
-              <i className="fas fa-map-marker-alt" /> MAPS Beta v2
+              <Button
+                shape='circle'
+                icon='compass'
+                size='large'
+                className='btn-outline-info'
+              />
             </Link>
-            <button
-              className="btn btn-sm btn-outline-danger"
-              onClick={() => this.showDeleteModal(project, deleteProject)}
+            <Button
+              shape='circle'
+              icon='delete'
+              size='large'
+              className='btn-outline-danger'
               style={{ marginLeft: '10px' }}
-            >
-              <i className="fas fa-trash-alt" /> DELETE
-            </button>
+              onClick={() => this.showDeleteModal(project, deleteProject)}
+            />
           </div>
         </li>
       );

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Spin } from 'antd';
+import { Button, Spin } from 'antd';
 import { fetchProjectPostsIfNeeded, fetchProjects } from '../../actions';
 import ContentLayout from '../layout/ContentLayout';
 import ProjectsMap from '../maps/projects/ProjectsMap';
@@ -38,15 +38,15 @@ class ProjectMapView extends Component {
     const { isFetching } = this.props;
     return (
       <ContentLayout>
-        <button
-          className='btn btn-outline-danger'
-          style={{ marginBottom: '10px' }}
+        <Button
+          shape='circle'
+          icon='rollback'
+          size='large'
+          className='btn-outline-danger mb-2'
           onClick={() => {
             this.props.history.goBack();
           }}
-        >
-          <i className="fas fa-undo" /> BACK
-        </button>
+        />
         {isFetching ? <Spin /> : <Fragment>{this.renderMap()}</Fragment>}
       </ContentLayout>
     );
