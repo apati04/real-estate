@@ -30,6 +30,7 @@ class ProjectCreate extends Component {
           shape='circle'
           icon='plus'
           size='large'
+          className='btn-outline-info'
           style={{ marginTop: '10px', marginLeft: '10px' }}
           onClick={this.showModal}
         />
