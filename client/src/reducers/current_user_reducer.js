@@ -2,7 +2,7 @@ import { AUTH_USER, AUTH_ERROR, REQUEST_AUTH } from '../actions/types';
 const INITIAL_STATE = {
   auth: '',
   errorMessage: '',
-  isFetching: false
+  isFetching: null
 };
 function currentUserReducer(state = INITIAL_STATE, action) {
   switch (action.type) {

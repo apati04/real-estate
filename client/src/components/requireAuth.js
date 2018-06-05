@@ -4,18 +4,18 @@ import { withRouter } from 'react-router-dom';
 const requireAuth = WrappedComponent => {
   class ComposedComponent extends Component {
     componentDidMount() {
-      console.log('didmoutn');
       this.redirectUser();
     }
     componentDidUpdate() {
-      console.log('didupdate');
       this.redirectUser();
     }
     redirectUser() {
       const {
         currentUser: { isFetching, auth }
       } = this.props;
-      if (typeof auth === 'string') {
+      if (isFetching === null) return;
+      if (!isFetching && typeof auth !== 'object') {
+        console.log('kapa');
         this.props.history.push('/');
       }
     }

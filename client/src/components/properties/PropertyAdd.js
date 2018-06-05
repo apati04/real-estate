@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Button, message } from 'antd';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 import ContentLayout from '../layout/ContentLayout';
 import FormField from '../forms/FormField';
-
 class PropertyAdd extends Component {
   state = { file: null, loading: false };
   componentDidMount() {
@@ -15,41 +14,46 @@ class PropertyAdd extends Component {
     }
   }
 
-  formSubmit = values => {
+  formSubmit = async values => {
+    console.log('values: ', values);
+    let loc = `${values.street}, ${values.city}, ${values.state} ${
+      values.zipcode
+    }`;
+    const resp = await this.props.fetchMapData(loc);
+    console.log(resp);
     this.setState({ loading: true });
-    const { submitNewBuilding, history } = this.props;
-    const formValues = {
-      ...values,
-      fullAddress: `${values.street}, ${values.city}, ${values.state} ${
-        values.zipcode
-      }`,
-      address: {
-        street: values.street,
-        city: values.city,
-        state: values.state,
-        zipcode: values.zipcode
-      },
-      yearBuilt: values.yearBuilt,
-      rooms: {
-        bathrooms: values.bathrooms,
-        bedrooms: values.bedrooms
-      },
-      finishedSize: {
-        value: values.finishedSize
-      },
-      _project: this.props.match.params._id
-    };
-    const displayMsg = () => {
-      message.success('Property has been successfully added!', 2);
-      this.setState({ loading: false });
-    };
-    console.log(formValues);
-    submitNewBuilding(
-      formValues,
-      this.state.file,
-      { shouldRedirect: true, history },
-      displayMsg
-    );
+    // const { submitNewBuilding, history } = this.props;
+    // const formValues = {
+    //   ...values,
+    //   fullAddress: `${values.street}, ${values.city}, ${values.state} ${
+    //     values.zipcode
+    //   }`,
+    //   address: {
+    //     street: values.street,
+    //     city: values.city,
+    //     state: values.state,
+    //     zipcode: values.zipcode
+    //   },
+    //   yearBuilt: values.yearBuilt,
+    //   rooms: {
+    //     bathrooms: values.bathrooms,
+    //     bedrooms: values.bedrooms
+    //   },
+    //   finishedSize: {
+    //     value: values.finishedSize
+    //   },
+    //   _project: this.props.match.params._id
+    // };
+    // const displayMsg = () => {
+    //   message.success('Property has been successfully added!', 2);
+    //   this.setState({ loading: false });
+    // };
+    // submitNewBuilding(
+    //   formValues,
+    //   this.state.file,
+    //   { shouldRedirect: true, history },
+    //   displayMsg
+    // );
   };
 
   onFileUpload = e => {
