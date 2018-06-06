@@ -63,19 +63,25 @@ class PropertyAdd extends Component {
   renderSaveBtn() {
     if (this.state.loading) {
       return (
-        <Button loading className="float-right">
-          SAVING PROPERTY
-        </Button>
+        <Button
+          shape='circle'
+          icon='loading'
+          size='large'
+          disabled
+          style={{ marginBottom: '10px' }}
+          className='btn-outline-info float-right'
+        />
       );
     } else {
       return (
-        <button
-          className="btn btn-outline-info float-right"
+        <Button
+          shape='circle'
+          icon='plus'
+          size='large'
+          htmlType='submit'
           style={{ marginBottom: '10px' }}
-          type="submit"
-        >
-          <i className="fas fa-plus-circle" /> SAVE PROPERTY
-        </button>
+          className='btn-outline-info float-right'
+        />
       );
     }
   }
@@ -115,13 +121,16 @@ class PropertyAdd extends Component {
                   />
                 </div>
               </div>
-              <button
-                className="btn btn-outline-danger float-right"
+              <Button
+                shape='circle'
+                icon='rollback'
+                size='large'
+                className='btn-outline-danger float-right'
                 style={{ marginLeft: '30px ' }}
-                onClick={() => this.props.history.goBack()}
-              >
-                <i className="fas fa-undo" /> BACK
-              </button>
+                onClick={() => {
+                  this.props.history.goBack();
+                }}
+              />
               {this.renderSaveBtn()}
             </form>
           </div>
