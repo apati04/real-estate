@@ -24,8 +24,11 @@ class PropertyAdd extends Component {
     this.props.fetchMapData(loc);
     return sleep(1000).then(() => {
       throw new SubmissionError({
-        street: "Location could not be found",
-        _error: "Entry could not be added"
+        street: " ",
+        zipcode: " ",
+        city: " ",
+        state: " ",
+        _error: "Could not find location, please correct"
       });
     });
 
@@ -115,7 +118,6 @@ class PropertyAdd extends Component {
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <Field label="Street" name="street" component={FormField} />
-              {error && <strong>{error}</strong>}
               <div className="row">
                 <div className="col-md-6">
                   <Field label="City" name="city" component={FormField} />
@@ -134,6 +136,7 @@ class PropertyAdd extends Component {
                     accept="image/jpeg"
                   />
                 </div>
+                {error && <strong>{error}</strong>}
               </div>
               <Button
                 shape="circle"
