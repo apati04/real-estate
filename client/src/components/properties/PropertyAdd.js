@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { Button, message } from 'antd';
-import { connect } from 'react-redux';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { withRouter } from 'react-router-dom';
-import * as actions from '../../actions';
-import ContentLayout from '../layout/ContentLayout';
-import FormField from '../forms/FormField';
+import React, { Component } from "react";
+import { Button, message } from "antd";
+import { connect } from "react-redux";
+import { Field, reduxForm, SubmissionError } from "redux-form";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../actions";
+import ContentLayout from "../layout/ContentLayout";
+import FormField from "../forms/FormField";
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 class PropertyAdd extends Component {
   state = { file: null, loading: false };
   componentDidMount() {
@@ -14,14 +15,26 @@ class PropertyAdd extends Component {
     }
   }
 
-  formSubmit = async values => {
-    console.log('values: ', values);
+  formSubmit = values => {
+    console.log("values: ", values);
+    const { mapData } = this.props;
     let loc = `${values.street}, ${values.city}, ${values.state} ${
       values.zipcode
     }`;
-    const resp = await this.props.fetchMapData(loc);
-    console.log(resp);
-    this.setState({ loading: true });
+    this.props.fetchMapData(loc);
+    return sleep(1000).then(() => {
+      throw new SubmissionError({
+        street: "Location could not be found",
+        _error: "Entry could not be added"
+      });
+    });
+
+    // this.setState({ loading: true });
+    // if (resp.payload.error)
+    //   throw new SubmissionError({
+    //     address: "Address does not exit",
+    //     _error: "submit failed!"
+    //   });
     // const { submitNewBuilding, history } = this.props;
     // const formValues = {
     //   ...values,
@@ -64,30 +77,30 @@ class PropertyAdd extends Component {
     if (this.state.loading) {
       return (
         <Button
-          shape='circle'
-          icon='loading'
-          size='large'
+          shape="circle"
+          icon="loading"
+          size="large"
           disabled
-          style={{ marginBottom: '10px' }}
-          className='btn-outline-info float-right'
+          style={{ marginBottom: "10px" }}
+          className="btn-outline-info float-right"
         />
       );
     } else {
       return (
         <Button
-          shape='circle'
-          icon='plus'
-          size='large'
-          htmlType='submit'
-          style={{ marginBottom: '10px' }}
-          className='btn-outline-info float-right'
+          shape="circle"
+          icon="plus"
+          size="large"
+          htmlType="submit"
+          style={{ marginBottom: "10px" }}
+          className="btn-outline-info float-right"
         />
       );
     }
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, error } = this.props;
     return (
       <ContentLayout>
         <div id="mapbox" />
@@ -102,6 +115,7 @@ class PropertyAdd extends Component {
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <Field label="Street" name="street" component={FormField} />
+              {error && <strong>{error}</strong>}
               <div className="row">
                 <div className="col-md-6">
                   <Field label="City" name="city" component={FormField} />
@@ -122,11 +136,11 @@ class PropertyAdd extends Component {
                 </div>
               </div>
               <Button
-                shape='circle'
-                icon='rollback'
-                size='large'
-                className='btn-outline-danger float-right'
-                style={{ marginLeft: '30px ' }}
+                shape="circle"
+                icon="rollback"
+                size="large"
+                className="btn-outline-danger float-right"
+                style={{ marginLeft: "30px " }}
                 onClick={() => {
                   this.props.history.goBack();
                 }}
@@ -135,7 +149,7 @@ class PropertyAdd extends Component {
             </form>
           </div>
         </div>
-        <div style={{ marginTop: '30px' }}>
+        <div style={{ marginTop: "30px" }}>
           <h1 className="display-4">Additional Information</h1>
           <hr />
           <div className="row">
@@ -172,18 +186,19 @@ class PropertyAdd extends Component {
 }
 
 function validate(values) {
+  console.log("error vlaues: ", values);
   const errors = {};
   if (!values.street) {
-    errors.street = 'Please enter the street';
+    errors.street = "Please enter the street";
   }
   if (!values.city) {
-    errors.city = 'Please enter the city';
+    errors.city = "Please enter the city";
   }
   if (!values.state) {
-    errors.state = 'Please enter the state';
+    errors.state = "Please enter the state";
   }
   if (!values.zipcode) {
-    errors.zipcode = 'Please enter the zipcode';
+    errors.zipcode = "Please enter the zipcode";
   }
   return errors;
 }
@@ -210,14 +225,16 @@ function validate(values) {
 //     };
 //   }
 // }
-
+function mapStateToProps({ mapData }) {
+  return { mapData };
+}
 export default reduxForm({
-  form: 'propDetail',
+  form: "propDetail",
   validate
 })(
   withRouter(
     connect(
-      null,
+      mapStateToProps,
       actions
     )(PropertyAdd)
   )

@@ -1,26 +1,26 @@
-const keys = require('../config/keys');
-const axios = require('axios');
-const { parseString } = require('xml2js');
-const { promisify } = require('es6-promisify');
-const mongoose = require('mongoose');
-const Building = mongoose.model('Building');
+const keys = require("../config/keys");
+const axios = require("axios");
+const { parseString } = require("xml2js");
+const { promisify } = require("es6-promisify");
+const mongoose = require("mongoose");
+const Building = mongoose.model("Building");
 
 const xml2JsPromise = promisify(parseString);
 module.exports = app => {
-  app.get('/api/zDeepSearchResults', async (req, res) => {
+  app.get("/api/zDeepSearchResults", async (req, res) => {
     const { address, citystatezip } = req.query;
     const xml = await axios.get(
-      'https://www.zillow.com/webservice/GetDeepSearchResults.htm?',
+      "https://www.zillow.com/webservice/GetDeepSearchResults.htm?",
       {
         params: {
-          'zws-id': keys.zillowKey,
+          "zws-id": keys.zillowKey,
           address,
           citystatezip
         }
       }
     );
 
-    const { 'SearchResults:searchresults': zResult } = await xml2JsPromise(
+    const { "SearchResults:searchresults": zResult } = await xml2JsPromise(
       xml.data,
       {
         normalize: true,
@@ -33,14 +33,14 @@ module.exports = app => {
       }
     );
 
-    if (zResult.message.code !== '0') {
+    if (zResult.message.code !== "0") {
       return res.send(zResult.message.code);
     }
     const zObj = zResult.response.results.result;
     res.send(zObj);
   });
 
-  app.get('/api/mapSearch', (req, res) => {
+  app.get("/api/mapSearch", (req, res) => {
     const { location } = req.query;
     axios
       .get(
@@ -48,8 +48,8 @@ module.exports = app => {
         {
           params: {
             access_token: keys.mapboxToken,
-            country: 'us',
-            types: 'address'
+            country: "us",
+            types: "address"
           }
         }
       )
@@ -57,7 +57,7 @@ module.exports = app => {
         if (data.features.length > 0) {
           const features = data.features[0];
           const [address, city, statezip, country] = features.place_name.split(
-            ', '
+            ", "
           );
           return {
             status: 200,
@@ -66,26 +66,26 @@ module.exports = app => {
           };
         }
         return {
-          payload: { error: 'Location cannot be found' },
+          payload: { error: "Location cannot be found" },
           status: 404,
           features: []
         };
       })
       .then(async ({ status, payload, features }) => {
         if (status === 404) {
-          return res.send({ status, message: 'noob', payload });
+          return res.send({ status, message: "noob", payload });
         }
         const zillowRes = await axios.get(
-          'https://www.zillow.com/webservice/GetDeepSearchResults.htm',
+          "https://www.zillow.com/webservice/GetDeepSearchResults.htm",
           {
             params: {
-              'zws-id': keys.zillowKey,
+              "zws-id": keys.zillowKey,
               address: payload.address,
               citystatezip: payload.citystatezip
             }
           }
         );
-        const { 'SearchResults:searchresults': zResult } = await xml2JsPromise(
+        const { "SearchResults:searchresults": zResult } = await xml2JsPromise(
           zillowRes.data,
           {
             normalize: true,
@@ -98,20 +98,20 @@ module.exports = app => {
           }
         );
         if (parseInt(zResult.message.code) !== 0) {
-          return res.send({ error: zResult.message });
+          return res.send({ payload: { error: zResult.message } });
         }
         const zd = zResult.response.results.result;
         const updatedSearch = await axios.get(
-          'https://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm',
+          "https://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm",
           {
             params: {
-              'zws-id': keys.zillowKey,
+              "zws-id": keys.zillowKey,
               zpid: zd.zpid
             }
           }
         );
         const {
-          'UpdatedPropertyDetails:updatedPropertyDetails': isUpdated
+          "UpdatedPropertyDetails:updatedPropertyDetails": isUpdated
         } = await xml2JsPromise(updatedSearch.data, {
           normalize: true,
           noralizeTags: true,
@@ -129,7 +129,7 @@ module.exports = app => {
           image = isUpdated.response.images.image;
         } else {
           image = {
-            url: 'http://via.placeholder.com/300/4298f4/e7e7e7?text=No+Image'
+            url: "http://via.placeholder.com/300/4298f4/e7e7e7?text=No+Image"
           };
         }
         const finalObj = {
@@ -150,11 +150,11 @@ module.exports = app => {
           },
           lotSize: {
             value: zd.lotSizeSqFt,
-            unit: 'SqFt'
+            unit: "SqFt"
           },
           finishedSize: {
             value: zd.finishedSqFt,
-            unit: 'SqFt'
+            unit: "SqFt"
           },
           links: zd.links,
           financials: {

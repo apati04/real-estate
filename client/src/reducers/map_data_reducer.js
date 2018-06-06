@@ -1,4 +1,4 @@
-import { REQUEST_MAP_DATA, RECEIVE_MAP_DATA } from '../actions/types';
+import { REQUEST_MAP_DATA, RECEIVE_MAP_DATA } from "../actions/types";
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -12,7 +12,6 @@ function mapDataReducer(state = INITIAL_STATE, action) {
         isFetching: true
       };
     case RECEIVE_MAP_DATA:
-      console.log('payload: ', action.payload);
       return {
         ...state,
         isFetching: false,
