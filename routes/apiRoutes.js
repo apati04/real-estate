@@ -39,7 +39,42 @@ module.exports = app => {
     const zObj = zResult.response.results.result;
     res.send(zObj);
   });
-
+  app.get("/api/validateLocation", async (req, res, next) => {
+    const { street, citystatezip } = req.query;
+    const validateSearch = await axios.get(
+      "https://www.zillow.com/webservice/GetDeepSearchResults.htm",
+      {
+        params: {
+          "zws-id": keys.zillowKey,
+          address: street,
+          citystatezip
+        }
+      }
+    );
+    const { "SearchResults:searchresults": zResult } = await xml2JsPromise(
+      validateSearch.data,
+      {
+        normalize: true,
+        noralizeTags: true,
+        firstCharLowerCase: true,
+        stripPrefix: true,
+        explicitArray: false,
+        ignoreAttrs: true,
+        trim: true
+      }
+    );
+    console.log("serverResult: ", zResult);
+    if (Object.keys(zResult).includes("response")) {
+      const {
+        zpid,
+        address: { longitude, latitude }
+      } = zResult.response.results.result;
+      res.send({ zpid, longitude, latitude });
+    } else {
+      res.send(zResult.message);
+    }
+    next();
+  });
   app.get("/api/mapSearch", (req, res) => {
     const { location } = req.query;
     axios

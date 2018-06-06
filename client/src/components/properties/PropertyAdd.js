@@ -18,10 +18,9 @@ class PropertyAdd extends Component {
   formSubmit = values => {
     console.log("values: ", values);
     const { mapData } = this.props;
-    let loc = `${values.street}, ${values.city}, ${values.state} ${
-      values.zipcode
-    }`;
-    this.props.fetchMapData(loc);
+    const address = values.street;
+    const citystatezip = values.city + values.state + values.zipcode;
+    this.props.validateLocation(address, citystatezip);
     return sleep(1000).then(() => {
       throw new SubmissionError({
         street: " ",
