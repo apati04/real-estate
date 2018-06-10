@@ -1,24 +1,24 @@
-import axios from "axios";
-import * as types from "./types";
+import axios from 'axios';
+import * as types from './types';
 
 export const fetchUser = () => async dispatch => {
   dispatch({ type: types.REQUEST_AUTH, payload: true });
   try {
-    const request = await axios.get("/api/current_user");
+    const request = await axios.get('/api/current_user');
     dispatch({ type: types.AUTH_USER, payload: request.data });
   } catch (e) {
-    dispatch({ type: types.AUTH_ERROR, payload: "Invalid login credentials" });
+    dispatch({ type: types.AUTH_ERROR, payload: 'Invalid login credentials' });
   }
 };
 
 // PROJECT ACTION CREATORS
 export const fetchProjects = () => async dispatch => {
-  const projRes = await axios.get("/api/projects");
+  const projRes = await axios.get('/api/projects');
   dispatch({ type: types.FETCH_PROJECTS, payload: projRes.data });
 };
 
 export const createNewProject = (values, callback) => async dispatch => {
-  const response = await axios.post("/api/projects", values);
+  const response = await axios.post('/api/projects', values);
   callback();
   dispatch({ type: types.FETCH_PROJECT, payload: response.data });
 };
@@ -72,14 +72,14 @@ export const submitNewBuilding = (
 ) => async dispatch => {
   let userImage = {};
   if (uploadFile !== null) {
-    const awsConfig = await axios.get("/api/awsUpload");
+    const awsConfig = await axios.get('/api/awsUpload');
     await axios.put(awsConfig.data.url, uploadFile, {
-      headers: { "Content-Type": uploadFile.type }
+      headers: { 'Content-Type': uploadFile.type }
     });
     userImage.url = awsConfig.data.key;
   }
 
-  const postBuilding = await axios.post("/api/building", {
+  const postBuilding = await axios.post('/api/building', {
     formValues: {
       ...values,
       userImage
@@ -88,7 +88,7 @@ export const submitNewBuilding = (
   if (location.shouldRedirect) {
     location.history.push(`/projects/${values._project}/overview`);
   }
-  console.log(values, "values");
+  console.log(values, 'values');
   callback();
   dispatch(fetchProjectPosts(values._project));
 };
@@ -99,7 +99,7 @@ export const selectProjectPost = projectPost => ({
 });
 
 export const deleteProject = (projectId, message) => async dispatch => {
-  const res = await axios.delete("/api/projects", {
+  const res = await axios.delete('/api/projects', {
     params: {
       projectId
     }
@@ -115,7 +115,7 @@ export const deleteSelectedProperty = (
   history,
   message
 ) => async dispatch => {
-  const del = await axios.delete("/api/building/delete", {
+  const del = await axios.delete('/api/building/delete', {
     params: { id: postId }
   });
   if (postId === del.data._id) {
@@ -139,7 +139,7 @@ const receiveMapData = data => ({
 export const fetchMapData = (location, resetForm) => dispatch => {
   dispatch(requestMapData());
   return axios
-    .get("/api/mapSearch/", {
+    .get('/api/mapSearch/', {
       params: {
         location
       }
@@ -151,13 +151,20 @@ export const fetchMapData = (location, resetForm) => dispatch => {
     .catch(error => console.log(error));
 };
 
-export const validateLocation = (street, citystatezip) => async dispatch => {
-  console.log(street);
-  const validateLocation = await axios.get("/api/validateLocation", {
-    params: {
-      street,
-      citystatezip
-    }
-  });
-  console.log("validated action creator: ", validateLocation.data);
+const requestLocation = () => ({
+  type: types.REQUEST_LOCATION
+});
+export const validateLocation = (street, citystatezip) => dispatch => {
+  dispatch(requestLocation());
+  return axios
+    .get('/api/validateLocation', {
+      params: {
+        street,
+        citystatezip
+      }
+    })
+    .then(({ data }) => {
+      console.log('validateLocationData: ', data);
+    })
+    .catch(error => console.log(error));
 };
