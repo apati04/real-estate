@@ -1,15 +1,18 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import mapDataReducer from './map_data_reducer';
-import currentUserReducer from './current_user_reducer';
-import projectsReducer from './projects_reducer';
+import mapDataReducer from './mapDataReducer';
+import currentUserReducer from './currentUserReducer';
+import projectsReducer from './projectsReducer';
 import postsInProjectReducer from './projectPostsReducer';
+import validateLocationReducer from './validateLocationReducer';
+
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
   mapData: mapDataReducer,
   form: formReducer,
   projects: projectsReducer,
-  postsInProject: postsInProjectReducer
+  postsInProject: postsInProjectReducer,
+  validateLocation: validateLocationReducer
 });
 
 export default rootReducer;

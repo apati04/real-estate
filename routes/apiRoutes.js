@@ -7,38 +7,6 @@ const Building = mongoose.model("Building");
 
 const xml2JsPromise = promisify(parseString);
 module.exports = app => {
-  app.get("/api/zDeepSearchResults", async (req, res) => {
-    const { address, citystatezip } = req.query;
-    const xml = await axios.get(
-      "https://www.zillow.com/webservice/GetDeepSearchResults.htm?",
-      {
-        params: {
-          "zws-id": keys.zillowKey,
-          address,
-          citystatezip
-        }
-      }
-    );
-
-    const { "SearchResults:searchresults": zResult } = await xml2JsPromise(
-      xml.data,
-      {
-        normalize: true,
-        noralizeTags: true,
-        firstCharLowerCase: true,
-        stripPrefix: true,
-        explicitArray: false,
-        mergeAttrs: true,
-        trim: true
-      }
-    );
-
-    if (zResult.message.code !== "0") {
-      return res.send(zResult.message.code);
-    }
-    const zObj = zResult.response.results.result;
-    res.send(zObj);
-  });
   app.get("/api/validateLocation", async (req, res, next) => {
     const { street, citystatezip } = req.query;
     const validateSearch = await axios.get(
