@@ -4,15 +4,13 @@ import mapDataReducer from './mapDataReducer';
 import currentUserReducer from './currentUserReducer';
 import projectsReducer from './projectsReducer';
 import postsInProjectReducer from './projectPostsReducer';
-import validateLocationReducer from './validateLocationReducer';
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
   mapData: mapDataReducer,
   form: formReducer,
   projects: projectsReducer,
-  postsInProject: postsInProjectReducer,
-  validateLocation: validateLocationReducer
+  postsInProject: postsInProjectReducer
 });
 
 export default rootReducer;

@@ -23,6 +23,3 @@ export const RECEIVE_MAP_DATA = 'receive_map_data';
 export const REQUEST_MAP_DATA = 'request_map_data';
 
 // Validate user post;
-export const REQUEST_LOCATION = 'request_location';
-export const RECEIVE_LOCATION_SUCCESS = 'receive_location_success';
-export const RECEIVE_LOCATION_ERROR = 'receive_location_error';

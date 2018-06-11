@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 import ContentLayout from '../layout/ContentLayout';
 import FormField from '../forms/FormField';
+import axios from 'axios';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 class PropertyAdd extends Component {
   state = { file: null, loading: false };
@@ -16,19 +17,26 @@ class PropertyAdd extends Component {
   }
 
   formSubmit = values => {
-    console.log('values: ', values);
-    const { mapData } = this.props;
-
-    this.props.validateLocation(values);
-    return sleep(1000).then(() => {
-      throw new SubmissionError({
-        street: ' ',
-        zipcode: ' ',
-        city: ' ',
-        state: ' ',
-        _error: 'Could not find location, please correct'
+    const citystatezip = values.city + values.state + values.zipcode;
+    return axios
+      .get('/api/validateLocation', {
+        params: {
+          street: values.street,
+          citystatezip
+        }
+      })
+      .then(({ data }) => {
+        if (Object.keys(data).includes('text')) {
+          throw new SubmissionError({
+            street: ' ',
+            zipcode: ' ',
+            city: ' ',
+            state: ' ',
+            _error: data.text
+          });
+        }
+        console.log(data);
       });
-    });
 
     // this.setState({ loading: true });
     // if (resp.payload.error)
