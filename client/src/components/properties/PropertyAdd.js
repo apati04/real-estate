@@ -7,7 +7,6 @@ import * as actions from '../../actions';
 import ContentLayout from '../layout/ContentLayout';
 import FormField from '../forms/FormField';
 import axios from 'axios';
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 class PropertyAdd extends Component {
   state = { file: null };
   componentDidMount() {
