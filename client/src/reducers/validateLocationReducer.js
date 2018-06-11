@@ -13,7 +13,9 @@ const validateLocation = (state = INITIAL_STATE, action) => {
     case REQUEST_LOCATION:
       return { ...state, isFetching: true };
     case RECEIVE_LOCATION_SUCCESS:
+      return { ...state, isFetching: false, data: action.payload };
     case RECEIVE_LOCATION_ERROR:
+      return { ...state, isFetching: false, error: action.payload };
     default:
       return state;
   }

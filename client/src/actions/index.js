@@ -154,7 +154,9 @@ export const fetchMapData = (location, resetForm) => dispatch => {
 const requestLocation = () => ({
   type: types.REQUEST_LOCATION
 });
-export const validateLocation = (street, citystatezip) => dispatch => {
+export const validateLocation = values => dispatch => {
+  const address = values.street;
+  const citystatezip = values.city + values.state + values.zipcode;
   dispatch(requestLocation());
   return axios
     .get('/api/validateLocation', {
