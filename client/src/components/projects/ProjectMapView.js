@@ -11,7 +11,7 @@ class ProjectMapView extends Component {
     this.props.fetchProjectPostsIfNeeded(this.props.match.params._id);
     this.props.fetchProjects();
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.postsInProject !== this.props.postsInProject) {
       this.props.fetchProjectPostsIfNeeded(nextProps.match.params._id);
     }
