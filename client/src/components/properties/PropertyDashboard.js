@@ -9,7 +9,7 @@ class PropertyDashboard extends Component {
   componentDidMount() {
     this.props.fetchProjectPostsIfNeeded(this.props.match.params._id);
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.postsInProject !== this.props.postsInProject) {
       this.props.fetchProjectPostsIfNeeded(nextProps.match.params._id);
     }
@@ -33,22 +33,20 @@ class PropertyDashboard extends Component {
             {this.renderPosts()}
             <div>
               <Button
-                shape='circle'
-                icon='rollback'
-                size='large'
-                className='btn-outline-danger'
+                shape="circle"
+                icon="rollback"
+                size="large"
+                className="btn-outline-danger"
                 onClick={() => {
                   this.props.history.goBack();
                 }}
               />
-              <Link
-                to={`/projects/${this.props.match.params._id}/new`}
-              >
+              <Link to={`/projects/${this.props.match.params._id}/new`}>
                 <Button
-                  shape='circle'
-                  icon='plus'
-                  size='large'
-                  className='btn-outline-info float-right'
+                  shape="circle"
+                  icon="plus"
+                  size="large"
+                  className="btn-outline-info float-right"
                 />
               </Link>
             </div>
@@ -67,5 +65,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default withRouter(
-  connect(mapStateToProps, { fetchProjectPostsIfNeeded })(PropertyDashboard)
+  connect(
+    mapStateToProps,
+    { fetchProjectPostsIfNeeded }
+  )(PropertyDashboard)
 );

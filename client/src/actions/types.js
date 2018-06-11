@@ -21,3 +21,5 @@ export const SELECT_PROJECT_POST = 'select_project_post';
 // MAP DATA
 export const RECEIVE_MAP_DATA = 'receive_map_data';
 export const REQUEST_MAP_DATA = 'request_map_data';
+
+// Validate user post;

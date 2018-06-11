@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import ProjectField from '../../projects/ProjectForm/ProjectField';
-import { Field, reduxForm } from 'redux-form';
-import { Modal, Form } from 'antd';
+import React, { Component } from "react";
+import ProjectField from "../../projects/ProjectForm/ProjectField";
+import { Field, reduxForm } from "redux-form";
+import { Modal, Form } from "antd";
 
 const ProjectForm = Form.create()(
   class extends Component {
@@ -9,44 +9,39 @@ const ProjectForm = Form.create()(
       const { visible, onCancel, handleSubmit } = this.props;
 
       return (
-        <Form onSubmit={handleSubmit}>
-          <Modal
-            visible={visible}
-            title="Create a new project"
-            okText="Create"
-            onCancel={onCancel}
-            onOk={handleSubmit}
-          >
-            <Field
-              label="Title"
-              name="projectTitle"
-              type="text"
-              component={ProjectField}
-            />
+        <Modal
+          visible={visible}
+          title="Create a new project"
+          okText="Create"
+          onCancel={onCancel}
+          onOk={handleSubmit}
+        >
+          <Form onSubmit={handleSubmit}>
+            <Field label="Title" name="projectTitle" component={ProjectField} />
             <Field
               label="Description"
               name="projectDescription"
-              type="text"
               component={ProjectField}
             />
-          </Modal>
-        </Form>
+          </Form>
+        </Modal>
       );
     }
   }
 );
 
 function validate(values) {
-  const errors = {};
+  console.log("projectform: ", values);
+  let errors = {};
   if (!values.projectTitle) {
-    errors.projectTitle = 'Please enter the title'
+    errors.projectTitle = "Please enter the title";
   }
   if (!values.projectDescription) {
-    errors.projectDescription = 'Please enter the description'
+    errors.projectDescription = "Please enter the description";
   }
   return errors;
 }
 export default reduxForm({
-  validate,
-  form: 'projectForm'
+  form: "projectForm",
+  validate
 })(ProjectForm);

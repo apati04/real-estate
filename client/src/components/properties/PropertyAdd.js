@@ -6,88 +6,93 @@ import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 import ContentLayout from '../layout/ContentLayout';
 import FormField from '../forms/FormField';
+import axios from 'axios';
 class PropertyAdd extends Component {
-  state = { file: null, loading: false };
+  state = { file: null };
   componentDidMount() {
     if (this.props.location.state) {
       this.props.fetchImgData(this.props.location.state.zpid);
     }
   }
 
-  formSubmit = async values => {
-    console.log('values: ', values);
-    let loc = `${values.street}, ${values.city}, ${values.state} ${
-      values.zipcode
-    }`;
-    const resp = await this.props.fetchMapData(loc);
-    console.log(resp);
-    this.setState({ loading: true });
-    // const { submitNewBuilding, history } = this.props;
-    // const formValues = {
-    //   ...values,
-    //   fullAddress: `${values.street}, ${values.city}, ${values.state} ${
-    //     values.zipcode
-    //   }`,
-    //   address: {
-    //     street: values.street,
-    //     city: values.city,
-    //     state: values.state,
-    //     zipcode: values.zipcode
-    //   },
-    //   yearBuilt: values.yearBuilt,
-    //   rooms: {
-    //     bathrooms: values.bathrooms,
-    //     bedrooms: values.bedrooms
-    //   },
-    //   finishedSize: {
-    //     value: values.finishedSize
-    //   },
-    //   _project: this.props.match.params._id
-    // };
-    // const displayMsg = () => {
-    //   message.success('Property has been successfully added!', 2);
-    //   this.setState({ loading: false });
-    // };
-    // submitNewBuilding(
-    //   formValues,
-    //   this.state.file,
-    //   { shouldRedirect: true, history },
-    //   displayMsg
-    // );
+  formSubmit = (values, dispatch) => {
+    const citystatezip = values.city + values.state + values.zipcode;
+    return axios
+      .get('/api/validateLocation', {
+        params: {
+          street: values.street,
+          citystatezip
+        }
+      })
+      .then(({ data }) => {
+        if (Object.keys(data).includes('text')) {
+          throw new SubmissionError({
+            street: ' ',
+            zipcode: ' ',
+            city: ' ',
+            state: ' ',
+            _error: data.text
+          });
+        } else {
+          const { submitNewBuilding, history } = this.props;
+          const lat = parseFloat(data.latitude);
+          const lng = parseFloat(data.longitude);
+          const formValues = {
+            zpid: data.zpid,
+            type: values.type,
+            fullAddress: `${values.street}, ${values.city}, ${values.state} ${
+              values.zipcode
+            }`,
+            address: {
+              street: values.street,
+              city: values.city,
+              state: values.state,
+              zipcode: values.zipcode,
+              latitude: data.latitude,
+              longitude: data.longitude
+            },
+            location: {
+              center: [lng, lat],
+              geometry: {
+                type: 'Point',
+                coordinates: [lng, lat]
+              }
+            },
+            yearBuilt: values.yearBuilt || 'N/A',
+            rooms: {
+              bathrooms: values.bathrooms || 'N/A',
+              bedrooms: values.bedrooms || 'N/A'
+            },
+            lotSize: {
+              value: values.lotSize || 'N/A',
+              unit: 'SqFt'
+            },
+            finishedSize: {
+              value: values.finishedSize || 'N/A',
+              unit: 'SqFt'
+            },
+            links: values.links || {},
+            _project: this.props.match.params._id
+          };
+          const displayMsg = () => {
+            message.success('Property has been successfully added!', 2);
+          };
+          submitNewBuilding(
+            formValues,
+            this.state.file,
+            { shouldRedirect: true, history },
+            displayMsg
+          );
+        }
+      });
   };
 
   onFileUpload = e => {
     this.setState({ file: e.target.files[0] });
   };
 
-  renderSaveBtn() {
-    if (this.state.loading) {
-      return (
-        <Button
-          shape='circle'
-          icon='loading'
-          size='large'
-          disabled
-          style={{ marginBottom: '10px' }}
-          className='btn-outline-info float-right'
-        />
-      );
-    } else {
-      return (
-        <Button
-          shape='circle'
-          icon='plus'
-          size='large'
-          htmlType='submit'
-          style={{ marginBottom: '10px' }}
-          className='btn-outline-info float-right'
-        />
-      );
-    }
-  }
-
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, error, submitting, pristine } = this.props;
     return (
       <ContentLayout>
         <div id="mapbox" />
@@ -120,18 +125,29 @@ class PropertyAdd extends Component {
                     accept="image/jpeg"
                   />
                 </div>
+                {error && <strong>{error}</strong>}
               </div>
-              <Button
-                shape='circle'
-                icon='rollback'
-                size='large'
-                className='btn-outline-danger float-right'
-                style={{ marginLeft: '30px ' }}
-                onClick={() => {
-                  this.props.history.goBack();
-                }}
-              />
-              {this.renderSaveBtn()}
+              <div>
+                <Button
+                  shape="circle"
+                  icon="rollback"
+                  size="large"
+                  className="btn-outline-danger float-right"
+                  style={{ marginLeft: '30px ' }}
+                  onClick={() => {
+                    this.props.history.goBack();
+                  }}
+                />
+                <Button
+                  shape="circle"
+                  icon="plus"
+                  size="large"
+                  htmlType="submit"
+                  style={{ marginBottom: '10px' }}
+                  disabled={submitting || pristine}
+                  className="btn-outline-info float-right"
+                />
+              </div>
             </form>
           </div>
         </div>
@@ -184,6 +200,8 @@ function validate(values) {
   }
   if (!values.zipcode) {
     errors.zipcode = 'Please enter the zipcode';
+  } else if (isNaN(Number(values.zipcode))) {
+    errors.zipcode = 'Must be a number';
   }
   return errors;
 }
@@ -210,14 +228,16 @@ function validate(values) {
 //     };
 //   }
 // }
-
+function mapStateToProps({ mapData }) {
+  return { mapData };
+}
 export default reduxForm({
   form: 'propDetail',
   validate
 })(
   withRouter(
     connect(
-      null,
+      mapStateToProps,
       actions
     )(PropertyAdd)
   )
