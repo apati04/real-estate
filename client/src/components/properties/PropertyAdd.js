@@ -95,15 +95,7 @@ class PropertyAdd extends Component {
     const { handleSubmit, error, submitting, pristine } = this.props;
     return (
       <ContentLayout>
-        <div id="mapbox" />
         <div className="row">
-          <div className="col-md-3">
-            <img
-              src="http://via.placeholder.com/350x350"
-              className="img-fluid"
-              alt="property"
-            />
-          </div>
           <div className="col-md-8">
             <form onSubmit={handleSubmit(this.formSubmit)}>
               <Field label="Street" name="street" component={FormField} />
