@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Avatar, Dropdown, Card, Icon } from 'antd';
 const { Header } = Layout;
@@ -30,12 +31,17 @@ class Navbar extends Component {
           </Menu.Item>
         </Menu>
       );
+      console.log(this.props.currentUser);
       return (
         <div className="align-middle">
           <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']}>
-            <Avatar size="large" style={{ backgroundColor: '#26b2a4' }}>
-              {firstName.toUpperCase()}
-            </Avatar>
+            {auth.avatar.length > 0 ? (
+              <Avatar src={auth.avatar} size="large" />
+            ) : (
+              <Avatar size="large" style={{ backgroundColor: '#26b2a4' }}>
+                {firstName.toUpperCase()}
+              </Avatar>
+            )}
           </Dropdown>
         </div>
       );
