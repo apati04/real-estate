@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 const { Sider } = Layout;
 
 class Sidebar extends Component {
@@ -12,15 +12,16 @@ class Sidebar extends Component {
   onCollapse = collapsed => {
     this.setState({ collapsed });
   };
-
   defaultSelected() {
-    const { pathname } = window.location;
+    const { pathname } = this.props.location;
     if (pathname.includes('projects')) {
-      return ['2'];
+      return ['3'];
     } else if (pathname === '/dashboard') {
       return ['1'];
     } else if (pathname === '/search') {
-      return ['3'];
+      return ['4'];
+    } else if (pathname === '/settings/profile') {
+      return ['2'];
     } else {
       return ['1'];
     }
@@ -45,19 +46,25 @@ class Sidebar extends Component {
             <Menu mode="inline" defaultSelectedKeys={this.defaultSelected()}>
               <Menu.Item key="1">
                 <NavLink to="/dashboard">
-                  <i className="fas fa-tachometer-alt" />{' '}
+                  <Icon type="dashboard" />
                   <span className="nav-text">Dashboard</span>
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="2">
-                <NavLink to="/projects">
-                  <i className="fas fa-paperclip" />{' '}
-                  <span className="nav-text">Projects</span>
+                <NavLink to="/settings/profile">
+                  <Icon type="user" />
+                  <span className="nav-text">User Profile</span>
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="3">
+                <NavLink to="/projects">
+                  <Icon type="database" />
+                  <span className="nav-text">Projects</span>
+                </NavLink>
+              </Menu.Item>
+              <Menu.Item key="4">
                 <NavLink to="/search">
-                  <i className="fas fa-map-marker-alt" />{' '}
+                  <Icon type="environment-o" />
                   <span className="nav-text">Property Search</span>
                 </NavLink>
               </Menu.Item>
